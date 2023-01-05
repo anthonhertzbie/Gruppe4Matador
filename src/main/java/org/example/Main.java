@@ -7,6 +7,5 @@ public class Main {
         Helper helper = new Helper();
         helper.chancecardsPrint();
         helper.fieldsPrint();
-
     }
 }
