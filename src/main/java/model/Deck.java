@@ -1,6 +1,4 @@
-package org.example;
-
-import java.util.Random;
+package model;
 
 public class Deck {
 
