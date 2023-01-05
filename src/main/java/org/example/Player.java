@@ -36,7 +36,6 @@ public class Player {
             position += addPosition;
         }
     }
-    public void add
 
     public int getPosition(){
         return position;
