@@ -9,10 +9,10 @@ public class Helper {
     /**
      * Constructor for the Helper class that reads the txt and csv files in the resource folder
      */
-    public Helper() throws IOException {
-        csvReader();
-        txtReader();
-    }
+    public Helper() {
+            csvReader();
+            txtReader();
+        }
 
     private void txtReader(){
         try (InputStream in = getClass().getResourceAsStream("/chancecards.txt");
