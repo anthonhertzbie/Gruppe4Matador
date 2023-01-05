@@ -6,34 +6,31 @@ public class Helper {
     String[][] fieldData = new String[41][11];
     String[] chancecards = new String[45];
 
-    public void txtReader() throws IOException {
-        String[] txt = new String[45];
+    /**
+     * Constructor for the Helper class that reads the txt and csv files in the resource folder
+     */
+    public Helper() throws IOException {
+        csvReader();
+        txtReader();
+    }
+
+    private void txtReader(){
         try (InputStream in = getClass().getResourceAsStream("/chancecards.txt");
             BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
             for (int i = 0; i < 45; i++) {
-                txt[i] = reader.readLine();
+                chancecards[i] = reader.readLine();
             }
-            for (int i = 0; i < txt.length; i++) {
-                System.out.println(txt[i]);
+            for (int i = 0; i < chancecards.length; i++) {
+                System.out.println(chancecards[i]);
             }
             // Use resource
         } catch (IOException e){
             e.printStackTrace();
         }
-        /*
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("chancecards.txt"));
-            txt = reader.readLine();
-            reader.close();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-
-         */
 
 
     }
-    public void csvReader(){
+    private void csvReader(){
         //https://stackoverflow.com/questions/20389255/reading-a-resource-file-from-within-jar
         try (InputStream in = getClass().getResourceAsStream("/fields.csv");
              BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
@@ -46,27 +43,39 @@ public class Helper {
                 }
                 i++;
             }
-
-            // Use resource
         } catch (IOException e){
             e.printStackTrace();
         }
     }
 
+    public String getFieldData(int row, int colums) {
+        return fieldData[row][colums];
+    }
+
+    public String getChancecards(int lineNo){
+        return chancecards[lineNo];
+    }
+
+
     public static void main(String[] args) throws IOException {
         Helper helper = new Helper();
-        //helper.txtReader();
-        helper.csvReader();
-        helper.print();
+        helper.chancecardsPrint();
+        helper.fieldsPrint();
 
     }
 
-    public void print(){
+    public void fieldsPrint(){
         for (int i = 0; i < 41; i++) {
             for (int j = 0; j < 11; j++) {
                 System.out.print(fieldData[i][j] + ", ");
             }
             System.out.println();
+        }
+    }
+
+    public void chancecardsPrint(){
+        for (int i = 0; i < chancecards.length; i++) {
+            System.out.println(chancecards[i]);
         }
     }
 
