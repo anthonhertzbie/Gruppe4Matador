@@ -1,7 +1,12 @@
 package org.example;
 
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello world!");
+    public static void main(String[] args){
+        Helper helper = new Helper();
+        helper.chancecardsPrint();
+        helper.fieldsPrint();
+
     }
 }
