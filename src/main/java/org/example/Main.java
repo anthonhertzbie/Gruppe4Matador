@@ -6,8 +6,11 @@ public class Main {
     public static void main(String[] args){
         Helper helper = new Helper();
         Card card = new Card();
+        Deck deck = new Deck();
 
-        card.getCard(10);
+        deck.createDeck();
+
+
 
     }
 }

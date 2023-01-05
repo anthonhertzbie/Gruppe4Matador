@@ -3,11 +3,20 @@ package org.example;
 import java.util.Random;
 
 public class Deck {
-    private Card[] cards = new Card[45];
+
+    private Card[] deck = new Card[45];
+    private Helper helper = new Helper();
+    private Object[][] cards = new Object[45][2];
+    Card card = new Card();
+
 
     public void createDeck() {
-
+        for(int i = 0; i<45; i++){
+            cards[i] = card.getCard(i);
+        }
     }
+
+    /*
     public Card getFirstCard(){
         return cards[0];
     }
@@ -26,4 +35,6 @@ public class Deck {
             cards[b] = savedcard;
         }
     }
+
+     */
 }
