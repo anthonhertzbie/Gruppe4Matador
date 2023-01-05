@@ -12,7 +12,7 @@ public class Helper {
     public Helper() {
             csvReader();
             txtReader();
-        }
+    }
 
     public void txtReader(){
         try (InputStream in = getClass().getResourceAsStream("/chancecards.txt");
