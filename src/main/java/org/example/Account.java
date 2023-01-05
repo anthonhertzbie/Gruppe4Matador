@@ -1,25 +1,25 @@
 package org.example;
 
 public class Account {
-    private int playerBallance = 0;
-    private int playerTotalAssets = 0;
+    private int Balance = 0;
+    private int AssetsValue = 0;
 
-    public int getPlayerBallance(){
-        return this.playerBallance;
+    public int getBalance(){
+        return this.Balance;
     }
-    public void setPlayerBallance(int newPlayerBallance){
-        this.playerBallance = newPlayerBallance;
+    public void setBalance(int newPlayerBallance){
+        this.Balance = newPlayerBallance;
     }
-    public void addPlayerbalance(int ammount){
-        this.playerBallance += ammount;
+    public void addBalance(int amount){
+        this.Balance += amount;
     }
-    public int getPlayerTotalAssets(){
-        return this.playerTotalAssets;
+    public int getAssetsValue(){
+        return this.AssetsValue;
     }
-    public void setPlayerTotalAssets(int newTotalAssets){
-        this.playerTotalAssets = newTotalAssets;
+    public void setAssetsValue(int newTotalAssets){
+        this.AssetsValue = newTotalAssets;
     }
-    public void addPlayerTotalAssets(int ammount){
-        this.playerTotalAssets += ammount;
+    public void addAssetsValue(int amount){
+        this.AssetsValue += amount;
     }
 }
