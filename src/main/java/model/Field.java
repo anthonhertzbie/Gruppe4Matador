@@ -1,6 +1,8 @@
 package org.example;
 
 public class Field {
+
+    /*
     String field;
 
     Helper helper = new Helper();
@@ -9,4 +11,6 @@ public class Field {
         field = helper.(File, lineNo);
         return field;
     }
+
+     */
 }

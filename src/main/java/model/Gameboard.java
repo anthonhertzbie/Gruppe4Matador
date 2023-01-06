@@ -1,6 +1,7 @@
 package org.example;
 
 public class Gameboard {
+    /*
     Field field = new Field();
 
     String [] fields = new String[40];
@@ -14,4 +15,5 @@ public class Gameboard {
             fields[i] = field.getField("_Fields", i);
         }
     }
+     */
 }

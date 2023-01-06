@@ -5,8 +5,8 @@ import controller.Notifier;
 import gui_codebehind.GUI_FieldFactory;
 import gui_fields.*;
 import gui_main.GUI;
-import MockUp.*;
 import model.Helper;
+import model.Model;
 
 import java.awt.*;
 
@@ -98,7 +98,10 @@ public class View extends Notifier {
     }
 
     public void setGui_start(){
+
+        gui = new GUI();
         gui_board = new GUI_Board(gameBoardFields(),Color.ORANGE);
+
     }
 
     public void setGui_close(){
@@ -145,6 +148,11 @@ public class View extends Notifier {
         gui_fields[model.getPlayer().getPosition()].setCar(gui_players[model.getPreviousTurn()], false);
         gui_fields[model.getPlayer().getPosition()].setCar(gui_players[model.getCurrentTurn()], true);
     }
+
+    public void showMessage(Model model){
+        gui.getUserButtonPressed(model.showMessage());
+    }
+
 /*
     public void showChanceCard(Model model){
         gui.displayChanceCard(model.getDeck().getLastCard());
@@ -159,7 +167,6 @@ public class View extends Notifier {
     }
 
     public void createButton(String message, String ... options){
-
     }
 
     public void setDices(Cup cup){

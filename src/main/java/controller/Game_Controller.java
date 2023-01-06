@@ -17,4 +17,14 @@ public class Game_Controller {
         notifier.notifyChanges(model);
     }
 
+    public void startGame(){
+
+        model.setTextInput("Test");
+        model.showMessage();
+    }
+
+    public void game(){
+
+    }
+
 }

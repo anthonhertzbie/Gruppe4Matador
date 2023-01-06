@@ -6,6 +6,8 @@ public class Model {
     private int totalPlayers;
     private Player[] players = new Player[totalPlayers];
     private Deck deck = new Deck();
+    private Cup cup = new Cup();
+    private String textInput;
 
 
     public void turn(){
@@ -26,6 +28,16 @@ public class Model {
     public Deck getDeck(){
         return deck;
     }
+    public Cup getCup(){return cup;}
+
+    public void setTextInput(String textInput){
+        this.textInput = textInput;
+    }
+
+    public String showMessage(){
+        return textInput;
+    }
+
 
     public void setAccountBalance(int in){
         getPlayer().setPlayerBalance(in);
