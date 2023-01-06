@@ -1,4 +1,6 @@
-package org.example;
+package model;
+
+import model.Field;
 
 public class Gameboard {
     Field field = new Field();

@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3882975f-24fd-476e-a6ee-3b471989e11b" name="Changes" comment="GUI - Added gameBoardFields and setGUI_start">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/Game_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/Game_Controller.java" afterDir="false" />
+    <list default="true" id="3882975f-24fd-476e-a6ee-3b471989e11b" name="Changes" comment="Updated gamebord2">
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Field.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Field.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Gameboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Gameboard.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +23,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="GUI" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -40,24 +40,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/GitHub/dd&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/GitHub/dd",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "configurable.group.editor"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources" />
@@ -66,7 +66,7 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.Unnamed">
-    <configuration name="Helper" type="Application" factoryName="Application" nameIsGenerated="true">
+    <configuration name="Helper" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.Helper" />
       <module name="Gruppe4Matador" />
       <extension name="coverage">
@@ -92,6 +92,7 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Helper" />
         <item itemvalue="Application.Helper" />
       </list>
     </recent_temporary>
@@ -134,7 +135,21 @@
       <option name="project" value="LOCAL" />
       <updated>1672961212094</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Updated gamebord">
+      <created>1672995974833</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1672995974833</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Updated gamebord2">
+      <created>1672996017671</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1672996017671</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -156,6 +171,8 @@
     <MESSAGE value="Somewhat working file readers, for csv and txt files." />
     <MESSAGE value="POM-file.." />
     <MESSAGE value="GUI - Added gameBoardFields and setGUI_start" />
-    <option name="LAST_COMMIT_MESSAGE" value="GUI - Added gameBoardFields and setGUI_start" />
+    <MESSAGE value="Updated gamebord" />
+    <MESSAGE value="Updated gamebord2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated gamebord2" />
   </component>
 </project>
