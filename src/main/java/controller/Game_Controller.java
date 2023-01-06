@@ -3,12 +3,12 @@ package controller;
 import model.Model;
 
 public class Game_Controller {
-    private Model model;
+    private final Model model;
     private final Notifier notifier;
 
-    public Game_Controller(){
-        this.model = new Model();
+    public Game_Controller(Notifier notifier){
         this.notifier = notifier;
+        this.model = new Model();
     }
 
     public void movePlayer(){
