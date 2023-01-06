@@ -5,7 +5,8 @@ import controller.Notifier;
 import gui_codebehind.GUI_FieldFactory;
 import gui_fields.*;
 import gui_main.GUI;
-import model.*;
+import MockUp.*;
+import model.Helper;
 
 import java.awt.*;
 
@@ -35,6 +36,7 @@ public class View extends Notifier {
         setGuiTotalPlayers(model);
         setGui_start();
         createGUI_player(model);
+        notifyChanges(model);
     }
 
     @Override
@@ -141,6 +143,7 @@ public class View extends Notifier {
         gui_cars[model.getCurrentTurn()].setPrimaryColor(colors[model.getCurrentTurn()]);
         // Places car on board
         gui_fields[model.getCurrentTurn()].setCar(gui_players[model.getCurrentTurn()], true);
+        gui_board.addPlayer(gui_players[model.getCurrentTurn()]);
     }
     public void movePlayer(Model model){
         gui_fields[model.getPlayer().getPosition()].setCar(gui_players[model.getPreviousTurn()], false);

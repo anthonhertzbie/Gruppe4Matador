@@ -1,7 +1,7 @@
 package controller;
 
-import model.Model;
 import model.Player;
+import MockUp.Model;
 
 public abstract class Notifier {
     public abstract void notifyChanges(Model model);
