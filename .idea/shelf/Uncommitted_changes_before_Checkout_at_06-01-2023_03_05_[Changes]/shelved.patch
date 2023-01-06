@@ -1,0 +1,18 @@
+Index: src/main/java/org/example/Helper.java
+===================================================================
+diff --git a/src/main/java/org/example/Helper.java b/src/main/java/org/example/Helper.java
+--- a/src/main/java/org/example/Helper.java	
++++ b/src/main/java/org/example/Helper.java	
+@@ -10,9 +10,9 @@
+      * Constructor for the Helper class that reads the txt and csv files in the resource folder
+      */
+     public Helper() {
+-            csvReader();
+-            txtReader();
+-        }
++        csvReader();
++        txtReader();
++    }
+ 
+     private void txtReader(){
+         try (InputStream in = getClass().getResourceAsStream("/chancecards.txt");

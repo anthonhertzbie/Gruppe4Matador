@@ -1,5 +1,7 @@
 package model;
 
+import controller.Notifier;
+
 public class Model {
     private int currentTurn;
     private int previousTurn;
@@ -8,6 +10,9 @@ public class Model {
     private Deck deck = new Deck();
     private Cup cup = new Cup();
     private String textInput;
+
+    private Notifier notifier;
+
 
 
     public void turn(){
@@ -35,6 +40,7 @@ public class Model {
     }
 
     public String showMessage(){
+
         return textInput;
     }
 
@@ -42,6 +48,7 @@ public class Model {
     public void setAccountBalance(int in){
         getPlayer().setPlayerBalance(in);
     }
+
 
 
 }

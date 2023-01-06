@@ -8,6 +8,7 @@ public class Model {
     private int totalPlayers = 1;
     private player[] players = new player[4];
     private int playerTurnTest = 0;
+    private String text = "hej";
 
 
 
@@ -34,6 +35,8 @@ public class Model {
     public void startGame(){
 
     }
+
+    public void showMessages(String ){}
 
 }
 
