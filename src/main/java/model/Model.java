@@ -27,5 +27,9 @@ public class Model {
         return deck;
     }
 
+    public void setAccountBalance(int in){
+        getPlayer().setPlayerBalance(in);
+    }
+
 
 }
