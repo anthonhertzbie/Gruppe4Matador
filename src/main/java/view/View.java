@@ -31,7 +31,7 @@ public class View extends Notifier {
     Helper helper = new Helper();
 
     @Override
-    public void startGame(Model model) {
+    public void notifyChanges(Model model) {
         gameBoardFields();
         setGuiTotalPlayers(model);
         setGui_start();
@@ -39,10 +39,6 @@ public class View extends Notifier {
         notifyChanges(model);
     }
 
-    @Override
-    public void notifyChanges(Model model) {
-
-    }
 
     Object[] sdsa = new Object[]{Color.BLACK, Color.RED};
     public void setGui_streets(){

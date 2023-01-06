@@ -1,11 +1,14 @@
 package MockUp;
 
 
+
 public class Model {
     private int currentTurn = 0;
     private int previousTurn = 0;
     private int totalPlayers = 1;
-    private player players = new player();
+    private player[] players = new player[4];
+    private int playerTurnTest = 0;
+
 
 
     public void turn() {
@@ -25,7 +28,12 @@ public class Model {
     }
 
     public player getPlayer() {
-        return players;
+        return players[this.playerTurnTest];
     }
+
+    public void startGame(){
+
+    }
+
 }
 
