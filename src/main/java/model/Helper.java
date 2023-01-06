@@ -1,4 +1,4 @@
-package org.example;
+package model;
 
 import java.io.*;
 
@@ -12,17 +12,19 @@ public class Helper {
     public Helper() {
             csvReader();
             txtReader();
-        }
+    }
 
-    private void txtReader(){
+    public void txtReader(){
         try (InputStream in = getClass().getResourceAsStream("/chancecards.txt");
             BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
             for (int i = 0; i < 45; i++) {
                 chancecards[i] = reader.readLine();
             }
+            /*
             for (int i = 0; i < chancecards.length; i++) {
                 System.out.println(chancecards[i]);
             }
+             */
             // Use resource
         } catch (IOException e){
             e.printStackTrace();
