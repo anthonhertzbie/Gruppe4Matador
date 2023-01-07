@@ -7,8 +7,8 @@ import gui_fields.*;
 import gui_main.GUI;
 import model.Helper;
 import model.Model;
-
 import java.awt.*;
+
 
 public class View extends Notifier {
     // Loading relevant classes from GUI
@@ -30,16 +30,21 @@ public class View extends Notifier {
 
     @Override
     public void notifyChanges(Model model) {
-        gameBoardFields();
+        setGui_start();
         setGuiTotalPlayers(model);
-        setGui_start(model);
-        createGUI_player(model);
+        setGuiTotalPlayers(model);
+        createGUI_player();
     }
 
     @Override
     public void updateMessage(Model updateMessages) {
-        gui.showMessage(updateMessages.getShowMessage());
+        gui.showMessage(updateMessages.getShowMessage("Hej"));
     }
+
+    public String getUserString(Model updateMessages){
+        return gui.getUserString("Hej");
+    }
+
 
 
     Object[] sdsa = new Object[]{Color.BLACK, Color.RED};
@@ -98,30 +103,15 @@ public class View extends Notifier {
 
         return gui_fields;
     }
-
-    public String[] setGui_start(Model model){
-        Integer playerAmount;
-        String playerAmountString;
-        String[] playerNames;
+    public void setGui_start(){
         gui = new GUI(gameBoardFields(), Color.ORANGE);
-        playerAmountString = gui.getUserSelection("Vælg antal af spillere : ", "3", "4", "5", "6");
-        playerAmount = Integer.parseInt(playerAmountString);
-        gui_players = new GUI_Player[playerAmount];
-        guiSetPlayerNames(playerAmount);
-        playerNames = new String[4];
-        return playerNames;
-
-
     }
-
-
-
 
     public String[] guiSetPlayerNames(Integer playerAmount){
         String[] playerNames = new String[playerAmount];
-
         for (int i = 0; i < playerAmount; i++){
-            playerNames[i] = gui.getUserString("Enter name of player " + i + 1 + " : ");
+            int player = i + 1;
+            playerNames[i] = gui.getUserString("Enter name of player " + player + " : ");
         }
         return playerNames;
     }
@@ -136,6 +126,10 @@ public class View extends Notifier {
         // Sets the number of cars and players participating in the game.
         gui_players = new GUI_Player[model.getTotalPlayers()];
         gui_cars = new GUI_Car[model.getTotalPlayers()];
+    }
+
+    public String getTotalPlayers(){
+        return gui.getUserSelection("Choose amount of players : ", "3", "4", "5", "6");
     }
 
     public void createGUI_player(Model model) {

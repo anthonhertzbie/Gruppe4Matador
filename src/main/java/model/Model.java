@@ -39,8 +39,7 @@ public class Model {
         this.textInput = textInput;
     }
 
-    public String getShowMessage(){
-
+    public String getShowMessage(String textInput){
         return textInput;
     }
     public void setShowMessages(String text){
@@ -53,6 +52,14 @@ public class Model {
 
     public void setAccountBalance(int in){
         getPlayer().setPlayerBalance(in);
+    }
+
+    public void setTotalPlayers(int players){
+        this.totalPlayers = players;
+    }
+
+    public void setPlayerName(String playerName, int index){
+        players[index].setName(playerName);
     }
 
 

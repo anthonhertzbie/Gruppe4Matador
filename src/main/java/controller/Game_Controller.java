@@ -1,6 +1,7 @@
 package controller;
 
 import model.Model;
+import view.View;
 
 public class Game_Controller {
     private final Model model;
@@ -18,24 +19,33 @@ public class Game_Controller {
     }
 
     public void startGame(){
-        model.setTextInput("Hello");
-        model.addPlayer();
         notifier.notifyChanges(model);
-
-        model.setTextInput("Test");
-        model.setShowMessages("Test");
     }
 
     public void takeTurn(){
         model.turn();
     }
 
+
     public void game(){
         startGame();
-        setPlayerAmount();
+
+
+        /*
         setPlayerNames(String playerNmes);
         createPlayerCars();
         createPlayerUI();
+         */
     }
+
+    public int setTotalPlayers(View view){
+        int amount = Integer.parseInt(view.getTotalPlayers());
+        model.setTotalPlayers(amount);
+    }
+
+    public void setPlayerName(String playerName, int playerAmount){
+        model.setPlayerName(playerName, playerAmount);
+    }
+
 
 }
