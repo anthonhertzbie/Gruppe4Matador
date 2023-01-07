@@ -18,13 +18,24 @@ public class Game_Controller {
     }
 
     public void startGame(){
+        model.setTextInput("Hello");
+        model.addPlayer();
+        notifier.notifyChanges(model);
 
         model.setTextInput("Test");
-        model.showMessage();
+        model.setShowMessages("Test");
+    }
+
+    public void takeTurn(){
+        model.turn();
     }
 
     public void game(){
-
+        startGame();
+        setPlayerAmount();
+        setPlayerNames(String playerNmes);
+        createPlayerCars();
+        createPlayerUI();
     }
 
 }

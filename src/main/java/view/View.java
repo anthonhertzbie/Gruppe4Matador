@@ -26,17 +26,19 @@ public class View extends Notifier {
     GUI_Start gui_start;
     GUI_Brewery gui_brewery;
     GUI_Board gui_board;
-
-    GUI_Field[] fields = GUI_FieldFactory.makeFields();
     Helper helper = new Helper();
 
     @Override
     public void notifyChanges(Model model) {
         gameBoardFields();
         setGuiTotalPlayers(model);
-        setGui_start();
+        setGui_start(model);
         createGUI_player(model);
-        notifyChanges(model);
+    }
+
+    @Override
+    public void updateMessage(Model updateMessages) {
+        gui.showMessage(updateMessages.getShowMessage());
     }
 
 
@@ -97,34 +99,38 @@ public class View extends Notifier {
         return gui_fields;
     }
 
-    public void setGui_start(){
+    public String[] setGui_start(Model model){
+        Integer playerAmount;
+        String playerAmountString;
+        String[] playerNames;
+        gui = new GUI(gameBoardFields(), Color.ORANGE);
+        playerAmountString = gui.getUserSelection("Vælg antal af spillere : ", "3", "4", "5", "6");
+        playerAmount = Integer.parseInt(playerAmountString);
+        gui_players = new GUI_Player[playerAmount];
+        guiSetPlayerNames(playerAmount);
+        playerNames = new String[4];
+        return playerNames;
 
-        gui = new GUI();
-        gui_board = new GUI_Board(gameBoardFields(),Color.ORANGE);
 
     }
+
+
+
+
+    public String[] guiSetPlayerNames(Integer playerAmount){
+        String[] playerNames = new String[playerAmount];
+
+        for (int i = 0; i < playerAmount; i++){
+            playerNames[i] = gui.getUserString("Enter name of player " + i + 1 + " : ");
+        }
+        return playerNames;
+    }
+
 
     public void setGui_close(){
         gui.close();
     }
 
-
-
-    public void test(){
-
-
-        gui_fields[0] = new GUI_Start("Start", "$$$$$", "Recieve much gold if you pass", Color.RED, Color.BLACK);
-        gui_fields[1] = new GUI_Street("sda","dwa","aa","20",Color.BLUE,Color.black);
-        gui_fields[2] = new GUI_Refuge();
-        gui_fields[2].setTitle("Hi");
-        gui_fields[2].setSubText("Hi");
-
-        gui_fields[3] = new GUI_Brewery("default","st","d","","20",Color.getColor("fds"),Color.black);
-        gui_fields[4] = new GUI_Brewery("default","st","d","","20",Color.BLUE,Color.black);
-
-
-        setGui_start();
-    }
 
     public void setGuiTotalPlayers(Model model){
         // Sets the number of cars and players participating in the game.
@@ -144,14 +150,11 @@ public class View extends Notifier {
         gui_fields[model.getCurrentTurn()].setCar(gui_players[model.getCurrentTurn()], true);
         gui_board.addPlayer(gui_players[model.getCurrentTurn()]);
     }
-    public void movePlayer(Model model){
+    public void setPlayerPosition(Model model){
         gui_fields[model.getPlayer().getPosition()].setCar(gui_players[model.getPreviousTurn()], false);
         gui_fields[model.getPlayer().getPosition()].setCar(gui_players[model.getCurrentTurn()], true);
     }
 
-    public void showMessage(Model model){
-        gui.getUserButtonPressed(model.showMessage());
-    }
 
 /*
     public void showChanceCard(Model model){

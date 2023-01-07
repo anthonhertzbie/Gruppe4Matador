@@ -4,12 +4,12 @@ import java.util.Arrays;
 
 public class Player {
     private String name;
-    private int position;
+    private int position = 0;
     private boolean[] ownerOf = new boolean[40];
 
     private int valueOfAllAssets;
-    private boolean inJail;
-    private boolean hasJailCard;
+    private boolean inJail = false;
+    private boolean hasJailCard = false;
 
     private Account account = new Account();
 

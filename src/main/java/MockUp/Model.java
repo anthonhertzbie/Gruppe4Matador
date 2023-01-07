@@ -1,6 +1,7 @@
 package MockUp;
 
 
+import controller.Notifier;
 
 public class Model {
     private int currentTurn = 0;
@@ -8,8 +9,8 @@ public class Model {
     private int totalPlayers = 1;
     private player[] players = new player[4];
     private int playerTurnTest = 0;
-    private String text = "hej";
-
+    private String[] userButton;
+    Notifier notifier;
 
 
     public void turn() {
@@ -36,7 +37,16 @@ public class Model {
 
     }
 
-    public void showMessages(String ){}
+    public void setShowMessage(String text){
+        this.showMessage = text;
+    }
+
+    public String getShowMessage(){
+        return this.showMessage;
+    }
+    public void setUserButton(String text, String ... options){
+        this.userButton[0] = text;
+    }
 
 }
 

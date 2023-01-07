@@ -5,7 +5,7 @@ import controller.Notifier;
 public class Model {
     private int currentTurn;
     private int previousTurn;
-    private int totalPlayers;
+    private int totalPlayers = 1;
     private Player[] players = new Player[totalPlayers];
     private Deck deck = new Deck();
     private Cup cup = new Cup();
@@ -39,11 +39,17 @@ public class Model {
         this.textInput = textInput;
     }
 
-    public String showMessage(){
+    public String getShowMessage(){
 
         return textInput;
     }
+    public void setShowMessages(String text){
+        this.textInput = text;
+    }
 
+    public void addPlayer(int i, String name){
+        players[i].setName(name);
+    }
 
     public void setAccountBalance(int in){
         getPlayer().setPlayerBalance(in);
