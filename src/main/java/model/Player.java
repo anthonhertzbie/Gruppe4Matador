@@ -34,9 +34,11 @@ public class Player {
         if(position + addPosition > 39){
             position -= 39;
             position += addPosition;
+            addPlayerBalance(4000);
         } else {
             position += addPosition;
         }
+
     }
     public int getPreviousPosition(){
         return previousPosition;
