@@ -46,6 +46,7 @@ public class View extends Notifier {
             }
 
         }else if (model.getNormalTurn() == true){
+            setDice(model);
             moveCar(model);
             updateAccounts(model);
         }
@@ -61,7 +62,6 @@ public class View extends Notifier {
     }
 
     public void moveCar(Model model){
-        gui.showMessage("Press ok to roll the dices : ");
         gui_fields[model.getPlayerCurrentTurn().getPreviousPosition()].setCar(gui_players[model.getCurrentTurn()], false);
         gui_fields[model.getPlayerCurrentTurn().getPosition()].setCar(gui_players[model.getCurrentTurn()], true);
     }
@@ -116,6 +116,11 @@ public class View extends Notifier {
         gui = new GUI(gameBoardFields(), Color.ORANGE);
     }
 
+    public void setDice(Model model){
+        gui.showMessage("Press ok to roll the dices : ");
+        gui.setDice(model.getCup().getDice1(), model.getCup().getDice2());
+
+    }
 
     public void makePlayers(int index, Model model){
         System.out.println(index);
