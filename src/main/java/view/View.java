@@ -47,7 +47,6 @@ public class View extends Notifier {
 
         }else if (model.getNormalTurn() == true){
             moveCar(model);
-
         }
     }
 
@@ -57,8 +56,8 @@ public class View extends Notifier {
 
     public void moveCar(Model model){
         gui.showMessage("Press ok to roll the dices : ");
-        gui_fields[model.getPreviousPosition()].setCar(gui_players[model.getCurrentTurn()], false);
-        gui_fields[model.getCurrentPosition()].setCar(gui_players[model.getCurrentTurn()], true);
+        gui_fields[model.getPlayerCurrentTurn().getPosition()].setCar(gui_players[model.getCurrentTurn()], false);
+        gui_fields[model.getPlayerCurrentTurn().getPosition()].setCar(gui_players[model.getCurrentTurn()], true);
     }
 
     Object[] sdsa = new Object[]{Color.BLACK, Color.RED};

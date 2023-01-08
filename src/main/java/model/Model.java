@@ -1,15 +1,11 @@
 package model;
 
-import controller.Notifier;
-
 public class Model {
     private int currentTurn;
     private int totalPlayerCount = 1;
     private Player[] players;
     private Deck deck = new Deck();
     private Cup cup = new Cup();
-    private String textInput;
-    private Notifier notifier;
     private boolean startGUI, normalTurn;
 
     public void setStartGUI(boolean startGUI){
@@ -21,13 +17,6 @@ public class Model {
         players[currentTurn].addPosition(diceThrow);
     }
 
-    public int getCurrentPosition(){
-        return players[currentTurn].getPosition();
-    }
-
-    public int getPreviousPosition(){
-        return  players[currentTurn].getPreviousPosition();
-    }
 
     public boolean getStartGUI(){
         return startGUI;
@@ -35,6 +24,10 @@ public class Model {
 
     public int getCurrentTurn(){
         return this.currentTurn;
+    }
+
+    public Player getPlayerCurrentTurn(){
+        return players[currentTurn];
     }
 
     public void changeTurn(){
@@ -50,8 +43,8 @@ public class Model {
         return players[i].getPlayerBalance();
     }
 
-    public void setPlayerBalance(int i, int playerBalance){
-        players[i].setPlayerBalance(playerBalance);
+    public void setPlayerBalance(int index, int playerBalance){
+        players[index].setPlayerBalance(playerBalance);
     }
 
     public void setTotalPlayerCount(int playerCount){
@@ -61,13 +54,7 @@ public class Model {
     public int getTotalPlayerCount(){
         return totalPlayerCount;
     }
-    public Player getPlayer(){
-        return players[currentTurn];
-    }
 
-    public String getShowMessage(){
-        return textInput;
-    }
 
     public void setPlayerName(int index, String names){
         players[index] = new Player();
@@ -79,7 +66,7 @@ public class Model {
         return normalTurn;
     }
 
-    public String getPlayerNames(int index){
+    public String getPlayerName(int index){
         return players[index].getName();
     }
 
@@ -91,7 +78,4 @@ public class Model {
         return cup;
     }
 
-    public void setCup(Cup cup) {
-        this.cup = cup;
-    }
 }
