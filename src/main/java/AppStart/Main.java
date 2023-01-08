@@ -13,8 +13,8 @@ public class Main {
 
 
     public static void main(String[] args){
-        Game_Controller gameController = new Game_Controller(new View());
-        gameController.startGame();
+        Game_Controller gameController = new Game_Controller();
+        gameController.startGame(new View(gameController));
 
     }
 }

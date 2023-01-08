@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class Player {
     private String name;
     private int position = 0;
+    private int previousPosition = 0;
     private boolean[] ownerOf = new boolean[40];
 
     private int valueOfAllAssets;
@@ -29,6 +30,7 @@ public class Player {
         this.position = position;
     }
     public void addPosition(int addPosition){
+        previousPosition = position;
         if(position + addPosition > 39){
             position -= 39;
             position += addPosition;
@@ -36,7 +38,9 @@ public class Player {
             position += addPosition;
         }
     }
-
+    public int getPreviousPosition(){
+        return previousPosition;
+    }
     public int getPosition(){
         return position;
     }

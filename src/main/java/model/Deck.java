@@ -5,7 +5,7 @@ public class Deck {
     private Card[] deck = new Card[45];
     private Helper helper = new Helper();
     private Object[][] cards = new Object[45][2];
-    Card card = new Card();
+    private Card card = new Card();
 
 
     public void createDeck() {

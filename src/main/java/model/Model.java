@@ -4,64 +4,94 @@ import controller.Notifier;
 
 public class Model {
     private int currentTurn;
-    private int previousTurn;
-    private int totalPlayers = 1;
-    private Player[] players = new Player[totalPlayers];
+    private int totalPlayerCount = 1;
+    private Player[] players;
     private Deck deck = new Deck();
     private Cup cup = new Cup();
     private String textInput;
-
     private Notifier notifier;
+    private boolean startGUI, normalTurn;
 
-
-
-    public void turn(){
-        currentTurn += 1;
+    public void setStartGUI(boolean startGUI){
+        this.startGUI = startGUI;
     }
+
+
+    public void setPlayerPosition(int diceThrow){
+        players[currentTurn].addPosition(diceThrow);
+    }
+
+    public int getCurrentPosition(){
+        return players[currentTurn].getPosition();
+    }
+
+    public int getPreviousPosition(){
+        return  players[currentTurn].getPreviousPosition();
+    }
+
+    public boolean getStartGUI(){
+        return startGUI;
+    }
+
     public int getCurrentTurn(){
-        return currentTurn;
+        return this.currentTurn;
     }
-    public int getPreviousTurn(){
-        return previousTurn;
+
+    public void changeTurn(){
+        System.out.println(currentTurn);
+        if (currentTurn < totalPlayerCount - 1) {
+            currentTurn += 1;
+        } else{
+            currentTurn = totalPlayerCount - currentTurn - 1;
+        }
     }
-    public int getTotalPlayers(){
-        return totalPlayers;
+
+    public int getPlayerBalance(int i){
+        return players[i].getPlayerBalance();
+    }
+
+    public void setPlayerBalance(int i, int playerBalance){
+        players[i].setPlayerBalance(playerBalance);
+    }
+
+    public void setTotalPlayerCount(int playerCount){
+        totalPlayerCount = playerCount;
+        players = new Player[totalPlayerCount];
+    }
+    public int getTotalPlayerCount(){
+        return totalPlayerCount;
     }
     public Player getPlayer(){
         return players[currentTurn];
     }
-    public Deck getDeck(){
-        return deck;
-    }
-    public Cup getCup(){return cup;}
 
-    public void setTextInput(String textInput){
-        this.textInput = textInput;
-    }
-
-    public String getShowMessage(String textInput){
+    public String getShowMessage(){
         return textInput;
     }
-    public void setShowMessages(String text){
-        this.textInput = text;
-    }
 
-    public void addPlayer(int i, String name){
-        players[i].setName(name);
-    }
-
-    public void setAccountBalance(int in){
-        getPlayer().setPlayerBalance(in);
-    }
-
-    public void setTotalPlayers(int players){
-        this.totalPlayers = players;
-    }
-
-    public void setPlayerName(String playerName, int index){
-        players[index].setName(playerName);
+    public void setPlayerName(int index, String names){
+        players[index] = new Player();
+        players[index].setName(names);
     }
 
 
+    public boolean getNormalTurn() {
+        return normalTurn;
+    }
 
+    public String getPlayerNames(int index){
+        return players[index].getName();
+    }
+
+    public void setNormalTurn(boolean normalTurn) {
+        this.normalTurn = normalTurn;
+    }
+
+    public Cup getCup() {
+        return cup;
+    }
+
+    public void setCup(Cup cup) {
+        this.cup = cup;
+    }
 }

@@ -18,7 +18,7 @@ public class Controller {
     public void test(){
 
 
-        notifier.notifyChanges(model);
+        notifier.startGame(model);
     }
 
 }

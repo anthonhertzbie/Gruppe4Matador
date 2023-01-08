@@ -2,7 +2,6 @@ package view;
 
 import controller.Game_Controller;
 import controller.Notifier;
-import gui_codebehind.GUI_FieldFactory;
 import gui_fields.*;
 import gui_main.GUI;
 import model.Helper;
@@ -27,34 +26,42 @@ public class View extends Notifier {
     GUI_Brewery gui_brewery;
     GUI_Board gui_board;
     Helper helper = new Helper();
+    private Notifier notifier;
+    private Game_Controller gameController;
+    public View(Game_Controller gameController){
+        this.gameController = gameController;
+    }
+
+
 
     @Override
-    public void notifyChanges(Model model) {
-        setGui_start();
-        setGuiTotalPlayers(model);
-        setGuiTotalPlayers(model);
-        createGUI_player();
+    public void startGame(Model model) {
+        System.out.println(model.getStartGUI());
+        if (model.getStartGUI() == true){
+            setGui_start();
+            gameController.setTotalPlayerCount(setTotalPlayers());
+            setGuiTotalPlayers(model);
+            for (int i = 0; i < model.getTotalPlayerCount(); i++){
+                makePlayers(i, model);
+            }
+
+        }else if (model.getNormalTurn() == true){
+            moveCar(model);
+
+        }
     }
 
     @Override
     public void updateMessage(Model updateMessages) {
-        gui.showMessage(updateMessages.getShowMessage("Hej"));
     }
 
-    public String getUserString(Model updateMessages){
-        return gui.getUserString("Hej");
+    public void moveCar(Model model){
+        gui.showMessage("Press ok to roll the dices : ");
+        gui_fields[model.getPreviousPosition()].setCar(gui_players[model.getCurrentTurn()], false);
+        gui_fields[model.getCurrentPosition()].setCar(gui_players[model.getCurrentTurn()], true);
     }
-
-
 
     Object[] sdsa = new Object[]{Color.BLACK, Color.RED};
-    public void setGui_streets(){
-
-    }
-
-    // Maybe?
-    public void updateRent(int index){
-    }
 
 
     public GUI_Field[] gameBoardFields(){
@@ -107,14 +114,19 @@ public class View extends Notifier {
         gui = new GUI(gameBoardFields(), Color.ORANGE);
     }
 
-    public String[] guiSetPlayerNames(Integer playerAmount){
-        String[] playerNames = new String[playerAmount];
-        for (int i = 0; i < playerAmount; i++){
-            int player = i + 1;
-            playerNames[i] = gui.getUserString("Enter name of player " + player + " : ");
-        }
-        return playerNames;
+
+    public void makePlayers(int index, Model model){
+        System.out.println(index);
+        int player = index + 1;
+        String playerName = gui.getUserString("Enter name of player " + player + " : ");
+        Color[] colors = {Color.RED, Color.BLUE, Color.YELLOW, Color.ORANGE, Color.GRAY, Color.magenta};
+        gameController.setName(index, playerName);
+        gui_cars[index] = new GUI_Car();
+        gui_players[index] = new GUI_Player(playerName, model.getPlayerBalance(index), gui_cars[index]);
+        gui.addPlayer(gui_players[index]);
+        gui_fields[0].setCar(gui_players[index], true);
     }
+
 
 
     public void setGui_close(){
@@ -124,59 +136,12 @@ public class View extends Notifier {
 
     public void setGuiTotalPlayers(Model model){
         // Sets the number of cars and players participating in the game.
-        gui_players = new GUI_Player[model.getTotalPlayers()];
-        gui_cars = new GUI_Car[model.getTotalPlayers()];
+        gui_players = new GUI_Player[model.getTotalPlayerCount()];
+        gui_cars = new GUI_Car[model.getTotalPlayerCount()];
     }
 
-    public String getTotalPlayers(){
+
+    public String setTotalPlayers(){
         return gui.getUserSelection("Choose amount of players : ", "3", "4", "5", "6");
     }
-
-    public void createGUI_player(Model model) {
-        Color[] colors = {Color.BLUE, Color.PINK, Color.DARK_GRAY, Color.magenta, Color.YELLOW, Color.ORANGE};
-        // Creates car. Must be done before player.
-        gui_cars[model.getCurrentTurn()] = new GUI_Car();
-        // Creates the player
-        gui_players[model.getCurrentTurn()] = new GUI_Player(model.getPlayer().getName(), model.getPlayer().getPlayerBalance(), gui_cars[model.getCurrentTurn()]);
-        // Assigns a color to the player
-        gui_cars[model.getCurrentTurn()].setPrimaryColor(colors[model.getCurrentTurn()]);
-        // Places car on board
-        gui_fields[model.getCurrentTurn()].setCar(gui_players[model.getCurrentTurn()], true);
-        gui_board.addPlayer(gui_players[model.getCurrentTurn()]);
-    }
-    public void setPlayerPosition(Model model){
-        gui_fields[model.getPlayer().getPosition()].setCar(gui_players[model.getPreviousTurn()], false);
-        gui_fields[model.getPlayer().getPosition()].setCar(gui_players[model.getCurrentTurn()], true);
-    }
-
-
-/*
-    public void showChanceCard(Model model){
-        gui.displayChanceCard(model.getDeck().getLastCard());
-    }
-
-    public void showMessage(String message){
-        gui.showMessage(message);
-    }
-
-    public void getUserTextInput(String text){
-        gui.getUserString(text);
-    }
-
-    public void createButton(String message, String ... options){
-    }
-
-    public void setDices(Cup cup){
-        gui.setDice(cup.getDices[0], cup.getDices[1]);
-    }
-
-    public void updateAccountBalance(Model model) {
-        gui_players[model.getCurrentTurn()].setBalance(model.getPlayer().getPlayerBalance());
-    }
-
-*/
-
-
-
-
 }
