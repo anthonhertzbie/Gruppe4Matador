@@ -37,7 +37,7 @@ public class View extends Notifier {
     @Override
     public void startGame(Model model) {
         System.out.println(model.getStartGUI());
-        if (model.getStartGUI() == true){
+        if (model.getStartGUI()){
             setGui_start();
             gameController.setTotalPlayerCount(setTotalPlayers());
             setGuiTotalPlayers(model);

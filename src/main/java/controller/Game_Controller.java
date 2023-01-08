@@ -6,6 +6,8 @@ import view.View;
 public class Game_Controller {
     private final Model model;
     private Notifier notifier;
+
+    private Fieldlogic_Controller fieldlogic;
     public Game_Controller(){
         this.model = new Model();
     }

@@ -12,6 +12,9 @@ public class Card {
         this.cardDescription = helper.getChancecards(lineNo);
         this.lineNo = lineNo;
     }
+    public int getIndex(){
+        return lineNo;
+    }
 
     public String toString() {
         StringBuilder card = new StringBuilder();

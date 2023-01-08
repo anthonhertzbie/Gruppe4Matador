@@ -35,6 +35,8 @@ public class Player {
             position -= 39;
             position += addPosition;
             addPlayerBalance(4000);
+        } else if (position + addPosition < 0) {
+            position = addPosition + 40;
         } else {
             position += addPosition;
         }
