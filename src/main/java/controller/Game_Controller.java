@@ -19,6 +19,7 @@ public class Game_Controller {
 
         while (true){
             diceRoll();
+            checkForNormalTurn();
             notifier.startGame(model);
             model.changeTurn();
 

@@ -5,12 +5,18 @@ public class Card {
     private String cardDescription;
     private Helper helper = new Helper();
 
-    private Object[] card;
 
 
 
-    public Object[] getCard(int lineNo) {
-        card = new Object[]{lineNo, helper.getChancecards(lineNo)};
-        return card;
+    public Card(int lineNo) {
+        this.cardDescription = helper.getChancecards(lineNo);
+        this.lineNo = lineNo;
+    }
+
+    public String toString() {
+        StringBuilder card = new StringBuilder();
+        card.append(lineNo + ". ");
+        card.append(cardDescription);
+        return card.toString();
     }
 }

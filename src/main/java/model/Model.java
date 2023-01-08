@@ -6,7 +6,7 @@ public class Model {
     private Player[] players;
     private Deck deck = new Deck();
     private Cup cup = new Cup();
-    private boolean startGUI, normalTurn, isChanceCard, isPrison, isShipping, isBrewery, isParking, isFerry, isTax;
+    private boolean startGUI, normalTurn, isChanceCard, isPrison, isShipping, isBrewery, isParking, isTax;
 
     public void setStartGUI(boolean startGUI){
         this.startGUI = startGUI;
@@ -52,7 +52,6 @@ public class Model {
         isShipping = false;
         isBrewery = false;
         isParking = false;
-        isFerry = false;
         isTax = false;
     }
 
@@ -120,6 +119,9 @@ public class Model {
     public Cup getCup() {
         return cup;
     }
+    public Deck getDeck(){
+        return this.deck;
+    }
     public boolean isStartGUI() {
         return startGUI;
     }
@@ -168,13 +170,6 @@ public class Model {
         isParking = parking;
     }
 
-    public boolean isFerry() {
-        return isFerry;
-    }
-
-    public void setFerry(boolean ferry) {
-        isFerry = ferry;
-    }
 
     public boolean isTax() {
         return isTax;

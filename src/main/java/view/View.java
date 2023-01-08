@@ -45,11 +45,40 @@ public class View extends Notifier {
                 makePlayers(i, model);
             }
 
-        }else if (model.getNormalTurn() == true){
+        }else if (model.getNormalTurn()){
+            setDice(model);
+            moveCar(model);
+            updateAccounts(model);
+        }else if (model.isChanceCard()){
+            setDice(model);
+            moveCar(model);
+            showChancecard(model);
+            updateAccounts(model);
+        }else if (model.isBrewery()){
+            setDice(model);
+            moveCar(model);
+            updateAccounts(model);
+        }else if (model.isPrison()){
+            setDice(model);
+            moveCar(model);
+            updateAccounts(model);
+        }else if (model.isTax()){
+            setDice(model);
+            moveCar(model);
+            updateAccounts(model);
+        }else if (model.isShipping()){
+            setDice(model);
+            moveCar(model);
+            updateAccounts(model);
+        }else if (model.isParking()){
             setDice(model);
             moveCar(model);
             updateAccounts(model);
         }
+    }
+    private void showChancecard(Model model){
+        gui.setChanceCard(model.getDeck().drawCard().toString());
+        gui.displayChanceCard();
     }
 
     @Override
