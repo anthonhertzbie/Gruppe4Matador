@@ -86,8 +86,9 @@ public class View extends Notifier {
     }
 
     public void updateAccounts(Model model){
-        int turn = model.getCurrentTurn();
-        gui_players[turn].setBalance(model.getPlayerBalance(turn));
+        for(int i  = 0; i < model.getTotalPlayerCount(); i++){
+            gui_players[i].setBalance(model.getPlayerBalance(i));
+        }
     }
 
     public void moveCar(Model model){

@@ -20,7 +20,7 @@ public class Deck {
     }
 
     public Card getLastCard(){
-        return deck[45];
+        return deck[44];
     }
     public Card drawCard(){
         Card lastCard = getFirstCard();

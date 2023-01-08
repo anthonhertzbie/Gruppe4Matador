@@ -10,6 +10,7 @@ public class Game_Controller {
     private Fieldlogic_Controller fieldlogic;
     public Game_Controller(){
         this.model = new Model();
+        this.fieldlogic = new Fieldlogic_Controller(model);
     }
 
     public void startGame(Notifier notifier){
@@ -22,6 +23,8 @@ public class Game_Controller {
         while (true){
             diceRoll();
             checkForNormalTurn();
+            notifier.startGame(model);
+            fieldlogic.specialField();
             notifier.startGame(model);
             model.changeTurn();
 
