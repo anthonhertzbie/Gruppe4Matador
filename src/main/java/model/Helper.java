@@ -39,15 +39,17 @@ public class Helper {
             String line;
             int i = 0;
             while((line = reader.readLine()) != null){
-                String[] datastoreage = line.split(",");
-                for (int j = 0; j < datastoreage.length ; j++) {
-                    fieldData[i][j] = datastoreage[j];
+                String[] dataStoreage = line.split(",");
+                for (int j = 0; j < dataStoreage.length ; j++) {
+                    fieldData[i][j] = dataStoreage[j];
                 }
+
                 i++;
             }
         } catch (IOException e){
             e.printStackTrace();
         }
+
     }
 
     public String getFieldData(int row, int colums) {
