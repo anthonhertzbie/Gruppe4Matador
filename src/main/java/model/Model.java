@@ -30,6 +30,10 @@ public class Model {
         return players[currentTurn];
     }
 
+    public Player getPlayerByIndex(int index){
+        return players[index];
+    }
+
     public void changeTurn(){
         System.out.println(currentTurn);
         if (currentTurn < totalPlayerCount - 1) {

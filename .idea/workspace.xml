@@ -4,17 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3882975f-24fd-476e-a6ee-3b471989e11b" name="Changes" comment="Added a mock-up model for future development..">
+    <list default="true" id="3882975f-24fd-476e-a6ee-3b471989e11b" name="Changes" comment="Cleaning up unused methods.&#10;It is now possible to move around the board.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AppStart/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AppStart/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MockUp/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MockUp/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/Game_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/Game_Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/Notifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/Notifier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Deck.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/viewMessages.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +106,21 @@
       <option name="project" value="LOCAL" />
       <updated>1673046842448</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Structure, Game_Controller and GUI updates...&#10;MVC is quite tricky, but we think it is done right now.">
+      <created>1673146782331</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1673146782331</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Cleaning up unused methods.&#10;It is now possible to move around the board.">
+      <created>1673147294809</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1673147294809</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -133,7 +141,9 @@
     <MESSAGE value="Initial Commit" />
     <MESSAGE value="Somewhat working file readers, for csv and txt files." />
     <MESSAGE value="Added a mock-up model for future development.." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added a mock-up model for future development.." />
+    <MESSAGE value="Structure, Game_Controller and GUI updates...&#10;MVC is quite tricky, but we think it is done right now." />
+    <MESSAGE value="Cleaning up unused methods.&#10;It is now possible to move around the board." />
+    <option name="LAST_COMMIT_MESSAGE" value="Cleaning up unused methods.&#10;It is now possible to move around the board." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

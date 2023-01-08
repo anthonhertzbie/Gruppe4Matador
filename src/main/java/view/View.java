@@ -62,7 +62,6 @@ public class View extends Notifier {
 
     Object[] sdsa = new Object[]{Color.BLACK, Color.RED};
 
-
     public GUI_Field[] gameBoardFields(){
         helper.getFieldData(0,0);
 

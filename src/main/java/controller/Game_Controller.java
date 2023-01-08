@@ -15,15 +15,15 @@ public class Game_Controller {
         model.setStartGUI(true);
         notifier.startGame(model);
         model.setStartGUI(false);
+        model.setNormalTurn(true);
 
         while (true){
             diceRoll();
-            model.setNormalTurn(true);
             notifier.startGame(model);
             model.changeTurn();
+
+
         }
-
-
     }
 
     public void setTotalPlayerCount(String totalPlayerCount){
