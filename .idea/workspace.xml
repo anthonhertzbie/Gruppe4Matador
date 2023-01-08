@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3882975f-24fd-476e-a6ee-3b471989e11b" name="Changes" comment="moveCar fix and addition of money you get from &quot;start&quot;">
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/View.java" afterDir="false" />
+    <list default="true" id="3882975f-24fd-476e-a6ee-3b471989e11b" name="Changes" comment="Dices added">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/Game_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/Game_Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Model.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +129,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673192034050</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Dices added">
+      <created>1673193075460</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1673193075460</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -151,7 +160,8 @@
     <MESSAGE value="Structure, Game_Controller and GUI updates...&#10;MVC is quite tricky, but we think it is done right now." />
     <MESSAGE value="Cleaning up unused methods.&#10;It is now possible to move around the board." />
     <MESSAGE value="moveCar fix and addition of money you get from &quot;start&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="moveCar fix and addition of money you get from &quot;start&quot;" />
+    <MESSAGE value="Dices added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dices added" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

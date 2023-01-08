@@ -26,6 +26,12 @@ public class Game_Controller {
         }
     }
 
+    public void checkForNormalTurn(){
+        model.resetBooleans();
+        model.setBooleans();
+    }
+
+
     public void setTotalPlayerCount(String totalPlayerCount){
         model.setTotalPlayerCount(Integer.parseInt(totalPlayerCount));
     }
