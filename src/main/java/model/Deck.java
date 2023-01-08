@@ -9,7 +9,7 @@ public class Deck {
 
 
 
-    public void createDeck() {
+    public Deck() {
         for(int i = 0; i<45; i++){
             deck[i] = new Card(i);
         }
@@ -24,7 +24,7 @@ public class Deck {
     }
     public Card drawCard(){
         Card lastCard = getFirstCard();
-        for (int i = 0; i < deck.length; i++) {
+        for (int i = 0; i < deck.length - 1; i++) {
             deck[i] = deck[i+1];
         }
         deck[deck.length - 1] = lastCard;

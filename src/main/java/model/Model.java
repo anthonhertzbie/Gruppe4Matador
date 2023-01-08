@@ -120,7 +120,7 @@ public class Model {
         return cup;
     }
     public Deck getDeck(){
-        return this.deck;
+        return deck;
     }
     public boolean isStartGUI() {
         return startGUI;
