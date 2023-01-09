@@ -14,7 +14,8 @@ public class Main {
 
     public static void main(String[] args){
         Game_Controller gameController = new Game_Controller();
-        gameController.startGame(new View(gameController));
+        gameController.addNotifier(new View(gameController));
+        gameController.startGame();
 
     }
 }

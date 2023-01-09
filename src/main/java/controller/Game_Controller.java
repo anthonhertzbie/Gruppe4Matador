@@ -3,9 +3,12 @@ package controller;
 import model.Model;
 import view.View;
 
+import java.util.ArrayList;
+
 public class Game_Controller {
     private final Model model;
     private Notifier notifier;
+    private final ArrayList<Notifier> notifiers = new ArrayList<>();
 
     private Fieldlogic_Controller fieldlogic;
     public Game_Controller(){
@@ -13,10 +16,20 @@ public class Game_Controller {
         this.fieldlogic = new Fieldlogic_Controller(model);
     }
 
-    public void startGame(Notifier notifier){
-        this.notifier = notifier;
+    public void addNotifier(Notifier notifier){
+        this.notifiers.add(notifier);
+    }
+
+    public void notifyEverything(){
+        for (Notifier n:notifiers) {
+            n.startGame(model);
+        }
+    }
+
+    public void startGame(){
+
         model.setStartGUI(true);
-        notifier.startGame(model);
+        notifyEverything();
         model.setStartGUI(false);
         model.setNormalTurn(true);
 
@@ -25,7 +38,7 @@ public class Game_Controller {
             diceRoll();
             checkForNormalTurn();
             fieldlogic.specialField();
-            notifier.startGame(model);
+            notifyEverything();
             model.changeTurn();
 
 
