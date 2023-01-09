@@ -66,7 +66,13 @@ public class Helper {
 
          */
         Gameboard gameboard = new Gameboard();
-        int i = 1;
+        int i = 39;
+        System.out.println(gameboard.getFieldCurrentRent(i));
+        gameboard.rentIncrease(i);
+        System.out.println(gameboard.getFieldCurrentRent(i));
+        gameboard.rentIncrease(i);
+        System.out.println(gameboard.getFieldCurrentRent(i));
+        gameboard.rentIncrease(i);
         System.out.println(gameboard.getFieldCurrentRent(i));
         gameboard.rentIncrease(i);
         System.out.println(gameboard.getFieldCurrentRent(i));

@@ -14,16 +14,12 @@ public class Gameboard {
 
 
     public void rentIncrease(int fieldIndex){
-        if(fields[fieldIndex].getPropertyValue() == 0){
-
-        } else{
-            for (int i = 2; i < 8; i++) {
+            for (int i = 2; i < 7; i++) {
                 if (fields[fieldIndex].getCurrentRent() == prices[fieldIndex][i]) {
                     fields[fieldIndex].setCurrentRent(prices[fieldIndex][i + 1]);
                     return;
                 }
             }
-        }
     }
     private void initHousePrice(){
         for (int i = 0; i < fields.length - 1; i++) {
