@@ -66,6 +66,12 @@ public class Helper {
 
          */
         Gameboard gameboard = new Gameboard();
+        int i = 1;
+        System.out.println(gameboard.getFieldCurrentRent(i));
+        gameboard.rentIncrease(i);
+        System.out.println(gameboard.getFieldCurrentRent(i));
+        gameboard.rentIncrease(i);
+        System.out.println(gameboard.getFieldCurrentRent(i));
     }
 
     public void fieldsPrint(){

@@ -9,15 +9,20 @@ public class Gameboard {
         copyFieldInformation();
         initFieldPrice();
         initHousePrice();
-
+        initRent();
     }
 
 
     public void rentIncrease(int fieldIndex){
         if(fields[fieldIndex].getPropertyValue() == 0){
-            return;
-        } else{
 
+        } else{
+            for (int i = 2; i < 8; i++) {
+                if (fields[fieldIndex].getCurrentRent() == prices[fieldIndex][i]) {
+                    fields[fieldIndex].setCurrentRent(prices[fieldIndex][i + 1]);
+                    return;
+                }
+            }
         }
     }
     private void initHousePrice(){
@@ -36,6 +41,15 @@ public class Gameboard {
         for (int i = 0; i < fields.length - 1; i++) {
             fields[i].setPropertyValue(prices[i][0]);
         }
+    }
+    public String getFieldName(int fieldIndex){
+        return fields[fieldIndex].getTitleOf();
+    }
+    public int getFieldCurrentRent(int fieldIndex){
+        return fields[fieldIndex].getCurrentRent();
+    }
+    public int getSpecificPrice(int fieldIndex, int priceNo){
+        return prices[fieldIndex][priceNo];
     }
     private void copyFieldInformation(){
         copyTitels();
