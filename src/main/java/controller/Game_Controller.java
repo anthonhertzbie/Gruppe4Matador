@@ -21,9 +21,9 @@ public class Game_Controller {
         model.setNormalTurn(true);
 
         while (true){
+            model.resetBooleans();
             diceRoll();
             checkForNormalTurn();
-            notifier.startGame(model);
             fieldlogic.specialField();
             notifier.startGame(model);
             model.changeTurn();
