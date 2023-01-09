@@ -17,7 +17,6 @@ public class Player {
 
 
     public Player(){
-        this.account.setBalance(0);
         Arrays.fill(ownerOf, false);
 
     }

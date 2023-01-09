@@ -66,6 +66,7 @@ public class View extends Notifier {
         }else if (model.isTax()){
             setDice(model);
             moveCar(model);
+            showTax(model);
             updateAccounts(model);
         }else if (model.isShipping()){
             setDice(model);
@@ -125,13 +126,31 @@ public class View extends Notifier {
         }
     }
 
+
     private void showChancecard(Model model){
         gui.setChanceCard(model.getDeck().drawCard().toString());
         gui.displayChanceCard();
     }
 
-    @Override
-    public void updateMessage(Model updateMessages) {
+    public void showTax(Model model) {
+        Player currentPlayer = model.getPlayerCurrentTurn();
+        if (currentPlayer.getPosition() == 4) {
+            String[] options = {"10%", "4000$"};
+            String option = gui.getUserButtonPressed("Income tax: Pay 10% of your total assets or 4000$", "10%", "4000$");
+            System.out.println(option.equals(options[0]));
+            if (option.equals(options[0])){
+                int tempBalance = (int) Math.round(currentPlayer.getValueOfAllAssets() * 0.9);
+                tempBalance = tempBalance - (tempBalance % 100);
+                System.out.println(tempBalance + " this is temp balance");
+                currentPlayer.setPlayerBalance(tempBalance);
+            }
+            else {
+                currentPlayer.addPlayerBalance(-4000);
+                gui.showMessage("You have paid 4000$");
+            }
+
+        }else { gui.showMessage("Special-tax, press OK to pay 2000$");
+        }
     }
 
     public void updateAccounts(Model model){

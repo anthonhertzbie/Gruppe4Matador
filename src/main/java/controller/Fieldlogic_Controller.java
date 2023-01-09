@@ -16,6 +16,8 @@ public class Fieldlogic_Controller {
         }
         else if (model.isPrison()){
             jailField(model);
+        } else if(model.isTax()){
+
         }
     }
 
@@ -35,7 +37,6 @@ public class Fieldlogic_Controller {
     }
 
     private void chanceCardField(Model model){
-        System.out.println("fdsfdsfgdsssss");
         Player currentplayer = model.getPlayerCurrentTurn();
         switch(model.getDeck().getFirstCard().getIndex() + 1){
             case 1:
@@ -155,6 +156,11 @@ public class Fieldlogic_Controller {
                 currentplayer.setInJail(true);
         }
     }
+
+    public void taxField(Model model){
+
+    }
+
     private void taxField(){
 
     }
