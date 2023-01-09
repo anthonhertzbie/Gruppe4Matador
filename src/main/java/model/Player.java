@@ -10,7 +10,7 @@ public class Player {
 
     private int valueOfAllAssets;
     private boolean inJail = false;
-    private boolean hasJailCard = true;
+    private boolean hasJailCard = false;
     private int inJailTurn;
 
     private Account account = new Account();
