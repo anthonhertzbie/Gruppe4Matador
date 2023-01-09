@@ -18,7 +18,7 @@ public class Fieldlogic_Controller {
     private void chanceCardField(Model model){
         System.out.println("fdsfdsfgdsssss");
         Player currentplayer = model.getPlayerCurrentTurn();
-        switch(model.getDeck().getLastCard().getIndex()){
+        switch(model.getDeck().getFirstCard().getIndex() + 1){
             case 1:
                 return;
             case 2:
