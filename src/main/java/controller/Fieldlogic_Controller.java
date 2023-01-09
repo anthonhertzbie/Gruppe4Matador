@@ -21,6 +21,7 @@ public class Fieldlogic_Controller {
 
     public void jailField(Model model){
         Player currentPlayer = model.getPlayerCurrentTurn();
+        System.out.println();
         if (currentPlayer.getPosition() == 10 && currentPlayer.getInJail() && currentPlayer.getInJailTurn() < 3){
             currentPlayer.setInJailTurn(currentPlayer.getInJailTurn() + 1);
         } else if (currentPlayer.getPosition() == 10 && currentPlayer.getInJailTurn() == 2){

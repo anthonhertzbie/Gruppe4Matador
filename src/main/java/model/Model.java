@@ -16,6 +16,14 @@ public class Model {
     public void setPlayerPosition(int diceThrow) {
         players[currentTurn].addPosition(diceThrow);
     }
+
+    public void addCurrentTurn(int plusminus){
+        if (this.currentTurn + plusminus < 0){
+            this.currentTurn = totalPlayerCount;
+        }
+       this.currentTurn += plusminus;
+    }
+
     public void setBooleans(){
         int position = players[currentTurn].getPosition();
         if (position == 2 || position == 7 || position == 17 || position == 22 || position == 33 || position == 36) {

@@ -38,10 +38,8 @@ public class View extends Notifier {
 
     @Override
     public void startGame(Model model) {
-        System.out.println(model.getStartGUI());
         if (model.getStartGUI()){
             setGui_start();
-            System.out.println(gui.getUserButtonPressed("fds","fds","fdsaa"));
             gameController.setTotalPlayerCount(setTotalPlayers());
             setGuiTotalPlayers(model);
             for (int i = 0; i < model.getTotalPlayerCount(); i++){
@@ -62,8 +60,7 @@ public class View extends Notifier {
             moveCar(model);
             updateAccounts(model);
         }else if (model.isPrison()){
-            setDice(model);
-            gui.showMessage("You have been put in jail!");
+            prison(model);
             moveCar(model);
             updateAccounts(model);
         }else if (model.isTax()){
@@ -83,17 +80,48 @@ public class View extends Notifier {
 
     public void prison(Model model){
         Player currentPlayer = model.getPlayerCurrentTurn();
+
+
         if (currentPlayer.getInJail() == true && currentPlayer.getInJailTurn() == 0){
-            setDice(model);
+            // Doing a little trickery here to circumvent the fact that the model knows you are in jail before the view does.
+            gui.showMessage(currentPlayer.getName() + " Press OK to roll the dices : ");
+            gui_fields[model.getPlayerCurrentTurn().getPreviousPosition()].setCar(gui_players[model.getCurrentTurn()], false);
+            gui_fields[30].setCar(gui_players[model.getCurrentTurn()], true);
             gui.showMessage("You have been put in jail!");
-            moveCar(model);
-            updateAccounts(model);
+            gui_fields[30].setCar(gui_players[model.getCurrentTurn()], false);
         }
         else if (currentPlayer.getInJail() == true && currentPlayer.getInJailTurn() < 2){
-            gui.getUserSelection("You are still in jail.", "Pay to get out", "Roll the dices", "Use get outta jail card");
+            String options[] = {"Pay 1000$ to get out", "Roll the dices", "Use get outta jail card"};
+            String option;
+
+            if (currentPlayer.getHasJailCard()){
+                option = gui.getUserButtonPressed(currentPlayer.getName() + " you are still in jail.", "Pay 1000$ to get out", "Roll the dices", "Use get outta jail card");
+            } else{
+                option = gui.getUserButtonPressed(currentPlayer.getName() + " you are still in jail.", "Pay 1000$ to get out", "Roll the dices");}
+
+
+            if (option.equals(options[0])){
+                gui.showMessage("You have paid 1000$ to get out. ");
+                gameController.addPlayerBalance(-1000);
+                gameController.setJailFalseCurrentTurn();
+                gameController.editTurn(-1);
+            }else if (option == options[1]){
+                gameController.diceRoll();
+                if (model.getCup().getDice1() == model.getCup().getDice2()){
+                    gui.showMessage("You are free!");
+                    gameController.setJailFalseCurrentTurn();
+                    gameController.editTurn(-1);
+                }
+            }else if (option == options[2]){
+                gui.showMessage("You used teh good card :(");
+                gameController.setJailFalseCurrentTurn();
+                gameController.editTurn(-1);
+            }
         }
         else if(currentPlayer.getInJail() == true && currentPlayer.getInJailTurn() == 2){
-            gui.showMessage("You're free... For now... Did you know 85% of prisoners return to prison?");
+            gui.showMessage("You're free... For now...");
+            gameController.setJailFalseCurrentTurn();
+            gameController.gameTurn();
         }
     }
 
@@ -174,7 +202,6 @@ public class View extends Notifier {
     }
 
     public void makePlayers(int index, Model model){
-        System.out.println(index);
         int player = index + 1;
         String playerName = gui.getUserString("Enter name of player " + player + " : ");
         Color[] colors = {Color.RED, Color.BLUE, Color.YELLOW, Color.ORANGE, Color.GRAY, Color.magenta};

@@ -10,7 +10,7 @@ public class Player {
 
     private int valueOfAllAssets;
     private boolean inJail = false;
-    private boolean hasJailCard = false;
+    private boolean hasJailCard = true;
     private int inJailTurn;
 
     private Account account = new Account();
@@ -87,6 +87,7 @@ public class Player {
     }
 
     public void setInJailTurn(int inJailTurn) {
+        System.out.println("injailTurn is : " + this.inJailTurn + " inJailTurn sat to : " + inJailTurn);
         this.inJailTurn = inJailTurn;
     }
 }
