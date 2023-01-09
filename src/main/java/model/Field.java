@@ -1,6 +1,29 @@
 package model;
 
 public class Field {
+    private String titleOf;
+    private int currentRent;
+    private int propertyValue;
+
+    private int housePrice;
+    private int numOfHouses;
+    public Field(String titleOf){
+        this.titleOf = titleOf;
+    }
+    public int getHousePrice() {
+        return housePrice;
+    }
+
+    public void setHousePrice(int housePrice) {
+        this.housePrice = housePrice;
+    }
+    public int getPropertyValue() {
+        return propertyValue;
+    }
+
+    public void setPropertyValue(int proppertyValue) {
+        this.propertyValue = proppertyValue;
+    }
     public String getTitleOf() {
         return titleOf;
     }
@@ -9,12 +32,8 @@ public class Field {
         this.titleOf = titleOf;
     }
 
-    private String titleOf;
-    private int currentRent;
-    private int numOfHouses;
-    public Field(String titleOf){
-        this.titleOf = titleOf;
-    }
+
+
 
     public int getCurrentRent() {
         return currentRent;
