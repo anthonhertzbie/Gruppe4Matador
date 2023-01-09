@@ -6,6 +6,8 @@ import gui_fields.*;
 import gui_main.GUI;
 import model.Helper;
 import model.Model;
+import model.Player;
+
 import java.awt.*;
 
 
@@ -36,7 +38,6 @@ public class View extends Notifier {
 
     @Override
     public void startGame(Model model) {
-        System.out.println(model.getStartGUI());
         if (model.getStartGUI()){
             setGui_start();
             gameController.setTotalPlayerCount(setTotalPlayers());
@@ -59,7 +60,7 @@ public class View extends Notifier {
             moveCar(model);
             updateAccounts(model);
         }else if (model.isPrison()){
-            setDice(model);
+            prison(model);
             moveCar(model);
             updateAccounts(model);
         }else if (model.isTax()){
@@ -76,6 +77,54 @@ public class View extends Notifier {
             updateAccounts(model);
         }
     }
+
+    public void prison(Model model){
+        Player currentPlayer = model.getPlayerCurrentTurn();
+
+
+        if (currentPlayer.getInJail() == true && currentPlayer.getInJailTurn() == 0){
+            // Doing a little trickery here to circumvent the fact that the model knows you are in jail before the view does.
+            gui.showMessage(currentPlayer.getName() + " Press OK to roll the dices : ");
+            gui_fields[model.getPlayerCurrentTurn().getPreviousPosition()].setCar(gui_players[model.getCurrentTurn()], false);
+            gui_fields[30].setCar(gui_players[model.getCurrentTurn()], true);
+            gui.showMessage("You have been put in jail!");
+            gui_fields[30].setCar(gui_players[model.getCurrentTurn()], false);
+        }
+        else if (currentPlayer.getInJail() == true && currentPlayer.getInJailTurn() < 2){
+            String options[] = {"Pay 1000$ to get out", "Roll the dices", "Use get outta jail card"};
+            String option;
+
+            if (currentPlayer.getHasJailCard()){
+                option = gui.getUserButtonPressed(currentPlayer.getName() + " you are still in jail.", "Pay 1000$ to get out", "Roll the dices", "Use get outta jail card");
+            } else{
+                option = gui.getUserButtonPressed(currentPlayer.getName() + " you are still in jail.", "Pay 1000$ to get out", "Roll the dices");}
+
+
+            if (option.equals(options[0])){
+                gui.showMessage("You have paid 1000$ to get out. ");
+                gameController.addPlayerBalance(-1000);
+                gameController.setJailFalseCurrentTurn();
+                gameController.editTurn(-1);
+            }else if (option == options[1]){
+                gameController.diceRoll();
+                if (model.getCup().getDice1() == model.getCup().getDice2()){
+                    gui.showMessage("You are free!");
+                    gameController.setJailFalseCurrentTurn();
+                    gameController.editTurn(-1);
+                }
+            }else if (option == options[2]){
+                gui.showMessage("You used teh good card :(");
+                gameController.setJailFalseCurrentTurn();
+                gameController.editTurn(-1);
+            }
+        }
+        else if(currentPlayer.getInJail() == true && currentPlayer.getInJailTurn() == 2){
+            gui.showMessage("You're free... For now...");
+            gameController.setJailFalseCurrentTurn();
+            gameController.gameTurn();
+        }
+    }
+
     private void showChancecard(Model model){
         gui.setChanceCard(model.getDeck().drawCard().toString());
         gui.displayChanceCard();
@@ -100,7 +149,7 @@ public class View extends Notifier {
         helper.getFieldData(0,0);
 
         gui_fields[0] = new GUI_Start("Start", "$$$$$", "Recieve much gold if you pass", Color.RED, Color.BLACK);
-        gui_fields[1] = new GUI_Street("Rødovrevej","","","20",Color.BLUE,Color.black);
+        gui_fields[1] = new GUI_Street("Rødovrevej","","","2000",Color.BLUE,Color.black);
         gui_fields[2] = new GUI_Chance();gui_fields[2].setSubText("Chance card");
         gui_fields[3] = new GUI_Street("Hvidovrevej","st","d","20",Color.BLUE,Color.black);
         gui_fields[4] = new GUI_Tax();gui_fields[4].setTitle("Tax!");gui_fields[4].setSubText("Pay up!");gui_fields[4].setDescription("Choose to either pay 4.000$ or 10% of your total assets.");
@@ -153,7 +202,6 @@ public class View extends Notifier {
     }
 
     public void makePlayers(int index, Model model){
-        System.out.println(index);
         int player = index + 1;
         String playerName = gui.getUserString("Enter name of player " + player + " : ");
         Color[] colors = {Color.RED, Color.BLUE, Color.YELLOW, Color.ORANGE, Color.GRAY, Color.magenta};
