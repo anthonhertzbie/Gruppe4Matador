@@ -1,19 +1,42 @@
-package org.example;
+package model;
 
 public class Gameboard {
-    /*
-    Field field = new Field();
+    private Helper helper = new Helper();
+    private Field[] fields = new Field[41];
+    private int[][] prices = new int[41][8];
 
-    String [] fields = new String[40];
-
-    public String [] getFields() {
-        return fields;
+    public Gameboard(){
+        copyFieldInformation();
     }
 
-    public void createGameboard (){
-        for (int i = 0; i < field.length; i++) {
-            fields[i] = field.getField("_Fields", i);
+
+
+
+    private void copyFieldInformation(){
+        copyTitels();
+        copyNumbers();
+
+
+        for (int i = 0; i < 40; i++) {
+            System.out.print(fields[i].getTitleOf());
+            for (int j = 0; j < 8; j++) {
+                System.out.print(" " + prices[i][j]);
+            }
+            System.out.println();
         }
     }
-     */
+    private void copyTitels(){
+        for (int i = 0; i < 40; i++) {
+            fields[i] = new Field(helper.getFieldData(i + 1, 0));
+            System.out.println(helper.getFieldData(i + 1, 0));
+        }
+    }
+    private void copyNumbers(){
+        for (int i = 0; i < 40; i++) {
+            for (int j = 0; j < 8; j++) {
+                prices[i][j] = Integer.parseInt(helper.getFieldData(i + 1, j + 3));
+                System.out.println(helper.getFieldData(i + 1, j + 3));
+            }
+        }
+    }
 }

@@ -60,10 +60,12 @@ public class Helper {
 
 
     public static void main(String[] args) throws IOException {
-        Helper helper = new Helper();
+        /*Helper helper = new Helper();
         helper.chancecardsPrint();
         helper.fieldsPrint();
 
+         */
+        Gameboard gameboard = new Gameboard();
     }
 
     public void fieldsPrint(){
