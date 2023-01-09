@@ -11,8 +11,10 @@ public class Player {
     private int valueOfAllAssets;
     private boolean inJail = false;
     private boolean hasJailCard = false;
+    private int inJailTurn;
 
     private Account account = new Account();
+
 
     public Player(){
         this.account.setBalance(0);
@@ -80,4 +82,11 @@ public class Player {
 
     }
 
+    public int getInJailTurn() {
+        return inJailTurn;
+    }
+
+    public void setInJailTurn(int inJailTurn) {
+        this.inJailTurn = inJailTurn;
+    }
 }

@@ -34,12 +34,25 @@ public class Game_Controller {
         model.setNormalTurn(true);
 
         while (true){
-            model.resetBooleans();
-            diceRoll();
-            checkForNormalTurn();
-            fieldlogic.specialField();
-            notifyEverything();
-            model.changeTurn();
+
+            if (model.getPlayerCurrentTurn().getInJail() == false) {
+
+                model.resetBooleans();
+                diceRoll();
+                checkForNormalTurn();
+                fieldlogic.specialField();
+                notifyEverything();
+                model.changeTurn();
+
+            }
+            else{
+                model.resetBooleans();
+                diceRoll();
+                checkForNormalTurn();
+                fieldlogic.specialField();
+                notifyEverything();
+                model.changeTurn();
+            }
 
 
         }

@@ -14,7 +14,24 @@ public class Fieldlogic_Controller {
         if(model.isChanceCard()){
             chanceCardField(model);
         }
+        else if (model.isPrison()){
+            jailField(model);
+        }
     }
+
+    public void jailField(Model model){
+        Player currentPlayer = model.getPlayerCurrentTurn();
+        if (currentPlayer.getPosition() == 10 && currentPlayer.getInJail() && currentPlayer.getInJailTurn() < 3){
+            currentPlayer.setInJailTurn(currentPlayer.getInJailTurn() + 1);
+        } else if (currentPlayer.getPosition() == 10 && currentPlayer.getInJailTurn() == 3){
+            currentPlayer.setInJail(false);
+            currentPlayer.setInJailTurn(0);
+        } else if (currentPlayer.getPosition() == 30){
+            currentPlayer.setPosition(10);
+            currentPlayer.setInJailTurn(0);
+        }
+    }
+
     private void chanceCardField(Model model){
         System.out.println("fdsfdsfgdsssss");
         Player currentplayer = model.getPlayerCurrentTurn();
