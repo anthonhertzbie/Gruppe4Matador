@@ -46,9 +46,6 @@ public class Game_Controller {
 
             }
             else{
-                model.resetBooleans();
-                diceRoll();
-                checkForNormalTurn();
                 fieldlogic.specialField();
                 notifyEverything();
                 model.changeTurn();

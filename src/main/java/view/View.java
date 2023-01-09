@@ -6,6 +6,8 @@ import gui_fields.*;
 import gui_main.GUI;
 import model.Helper;
 import model.Model;
+import model.Player;
+
 import java.awt.*;
 
 
@@ -39,6 +41,7 @@ public class View extends Notifier {
         System.out.println(model.getStartGUI());
         if (model.getStartGUI()){
             setGui_start();
+            System.out.println(gui.getUserButtonPressed("fds","fds","fdsaa"));
             gameController.setTotalPlayerCount(setTotalPlayers());
             setGuiTotalPlayers(model);
             for (int i = 0; i < model.getTotalPlayerCount(); i++){
@@ -60,6 +63,7 @@ public class View extends Notifier {
             updateAccounts(model);
         }else if (model.isPrison()){
             setDice(model);
+            gui.showMessage("You have been put in jail!");
             moveCar(model);
             updateAccounts(model);
         }else if (model.isTax()){
@@ -76,6 +80,23 @@ public class View extends Notifier {
             updateAccounts(model);
         }
     }
+
+    public void prison(Model model){
+        Player currentPlayer = model.getPlayerCurrentTurn();
+        if (currentPlayer.getInJail() == true && currentPlayer.getInJailTurn() == 0){
+            setDice(model);
+            gui.showMessage("You have been put in jail!");
+            moveCar(model);
+            updateAccounts(model);
+        }
+        else if (currentPlayer.getInJail() == true && currentPlayer.getInJailTurn() < 2){
+            gui.getUserSelection("You are still in jail.", "Pay to get out", "Roll the dices", "Use get outta jail card");
+        }
+        else if(currentPlayer.getInJail() == true && currentPlayer.getInJailTurn() == 2){
+            gui.showMessage("You're free... For now... Did you know 85% of prisoners return to prison?");
+        }
+    }
+
     private void showChancecard(Model model){
         gui.setChanceCard(model.getDeck().drawCard().toString());
         gui.displayChanceCard();
@@ -100,7 +121,7 @@ public class View extends Notifier {
         helper.getFieldData(0,0);
 
         gui_fields[0] = new GUI_Start("Start", "$$$$$", "Recieve much gold if you pass", Color.RED, Color.BLACK);
-        gui_fields[1] = new GUI_Street("Rødovrevej","","","20",Color.BLUE,Color.black);
+        gui_fields[1] = new GUI_Street("Rødovrevej","","","2000",Color.BLUE,Color.black);
         gui_fields[2] = new GUI_Chance();gui_fields[2].setSubText("Chance card");
         gui_fields[3] = new GUI_Street("Hvidovrevej","st","d","20",Color.BLUE,Color.black);
         gui_fields[4] = new GUI_Tax();gui_fields[4].setTitle("Tax!");gui_fields[4].setSubText("Pay up!");gui_fields[4].setDescription("Choose to either pay 4.000$ or 10% of your total assets.");

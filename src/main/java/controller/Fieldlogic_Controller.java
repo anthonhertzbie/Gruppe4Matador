@@ -23,11 +23,12 @@ public class Fieldlogic_Controller {
         Player currentPlayer = model.getPlayerCurrentTurn();
         if (currentPlayer.getPosition() == 10 && currentPlayer.getInJail() && currentPlayer.getInJailTurn() < 3){
             currentPlayer.setInJailTurn(currentPlayer.getInJailTurn() + 1);
-        } else if (currentPlayer.getPosition() == 10 && currentPlayer.getInJailTurn() == 3){
+        } else if (currentPlayer.getPosition() == 10 && currentPlayer.getInJailTurn() == 2){
             currentPlayer.setInJail(false);
             currentPlayer.setInJailTurn(0);
         } else if (currentPlayer.getPosition() == 30){
             currentPlayer.setPosition(10);
+            currentPlayer.setInJail(true);
             currentPlayer.setInJailTurn(0);
         }
     }
