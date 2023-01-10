@@ -62,6 +62,7 @@ public class View extends Notifier {
             setDice(model);
             showChancecard(model);
             if (model.getDeck().getFirstCard().getIndex() == 43 || model.getDeck().getFirstCard().getIndex() == 44){
+                gui_fields[model.getPlayerCurrentTurn().getPreviousPosition()].setCar(gui_players[model.getCurrentTurn()], false);
                 gui_fields[model.getPlayerCurrentTurn().getPreviousPositionChanceCard()].setCar(gui_players[model.getCurrentTurn()], true);
                 gui.showMessage("You have been put in jail :(");
                 gui_fields[model.getPlayerCurrentTurn().getPreviousPositionChanceCard()].setCar(gui_players[model.getCurrentTurn()], false);
