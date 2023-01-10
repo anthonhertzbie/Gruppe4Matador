@@ -47,8 +47,10 @@ public class View extends Notifier {
                 makePlayers(i, model);
             }
 
-            updateView(model);
+
+
         }
+        updateView(model);
     }
     public void updateView(Model model) {
         if (model.getNormalTurn()) {
