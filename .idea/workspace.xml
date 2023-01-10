@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3882975f-24fd-476e-a6ee-3b471989e11b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/model/AccountTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/model/PlayerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_09_01_2023__09_42__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_09_01_2023__09_42__Changes_.xml" afterDir="false" />
+    <list default="true" id="3882975f-24fd-476e-a6ee-3b471989e11b" name="Changes" comment="New Test branch&#10;New player constructor in Player class&#10;if-statement in Account class&#10;.gitignore shelf and workspace.xml&#10;Tests Account class&#10;Tests Player class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/PlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/model/PlayerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,7 +225,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673342533353</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="New Test branch&#10;New player constructor in Player class&#10;if-statement in Account class&#10;.gitignore shelf and workspace.xml&#10;Tests Account class&#10;Tests Player class">
+      <created>1673355598895</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1673355598895</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -286,7 +289,8 @@
     <MESSAGE value="Cleaning up unused methods.&#10;It is now possible to move around the board." />
     <MESSAGE value="Fixing minor bugs kinda all over... Go to jail card works now, however the UI updates instantly" />
     <MESSAGE value="Revert &quot;Minor changes&quot;&#10;&#10;This reverts commit e4a4d82f" />
-    <option name="LAST_COMMIT_MESSAGE" value="Revert &quot;Minor changes&quot;&#10;&#10;This reverts commit e4a4d82f" />
+    <MESSAGE value="New Test branch&#10;New player constructor in Player class&#10;if-statement in Account class&#10;.gitignore shelf and workspace.xml&#10;Tests Account class&#10;Tests Player class" />
+    <option name="LAST_COMMIT_MESSAGE" value="New Test branch&#10;New player constructor in Player class&#10;if-statement in Account class&#10;.gitignore shelf and workspace.xml&#10;Tests Account class&#10;Tests Player class" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

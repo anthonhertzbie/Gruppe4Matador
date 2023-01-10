@@ -32,6 +32,7 @@ public class Player {
     public String getName(){
         return this.name;
     }
+
     public void setPosition(int position){
         this.previousPositionChanceCard = this.position;
         System.out.println(previousPosition + "This is the previous position after setPosition");
@@ -59,6 +60,7 @@ public class Player {
     public int getPosition(){
         return position;
     }
+
     public void setInJail(boolean isInJail){
         this.inJail = isInJail;
     }

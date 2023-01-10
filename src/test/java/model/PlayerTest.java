@@ -32,6 +32,14 @@ class PlayerTest {
         assertEquals(true, player.getInJail());
     }
 
+    @Test
+    @DisplayName("Player position is moved the number of eyes on the dices")
+    void playerPositionIsCorrect(){
+        Player player = new Player();
+        player.setPosition(0);
+
+    }
+
     //ask about this
     @Test
     void thatEverythingWork() {
