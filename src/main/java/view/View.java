@@ -79,10 +79,13 @@ public class View extends Notifier {
         }
     }
 
+    public void chanceCardGoToPrison(Model model){
+
+    }
+
     public void prison(Model model){
         Player currentPlayer = model.getPlayerCurrentTurn();
-
-
+        System.out.println("Am i running?");
         if (currentPlayer.getInJail() == true && currentPlayer.getInJailTurn() == 0){
             // Doing a little trickery here to circumvent the fact that the model knows you are in jail before the view does.
             gui.showMessage(currentPlayer.getName() + " Press OK to roll the dices : ");
@@ -137,12 +140,11 @@ public class View extends Notifier {
         if (currentPlayer.getPosition() == 4) {
             String[] options = {"10%", "4000$"};
             String option = gui.getUserButtonPressed("Income tax: Pay 10% of your total assets or 4000$", "10%", "4000$");
-            System.out.println(option.equals(options[0]));
             if (option.equals(options[0])){
                 int tempBalance = (int) Math.round(currentPlayer.getValueOfAllAssets() * 0.9);
                 tempBalance = tempBalance - (tempBalance % 100);
-                System.out.println(tempBalance + " this is temp balance");
-                currentPlayer.setPlayerBalance(tempBalance);
+                currentPlayer.addPlayerBalance(tempBalance - currentPlayer.getValueOfAllAssets());
+
             }
             else {
                 currentPlayer.addPlayerBalance(-4000);
@@ -215,7 +217,7 @@ public class View extends Notifier {
     }
 
     public void setDice(Model model){
-        gui.showMessage("Press ok to roll the dices : ");
+        gui.showMessage(model.getPlayerCurrentTurn().getName() + " press ok to roll the dices : ");
         gui.setDice(model.getCup().getDice1(), model.getCup().getDice2());
 
     }

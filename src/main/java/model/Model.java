@@ -93,9 +93,7 @@ public class Model {
         return players[i].getPlayerBalance();
     }
 
-    public void setPlayerBalance(int index, int playerBalance){
-        players[index].setPlayerBalance(playerBalance);
-    }
+
 
     public void setTotalPlayerCount(int playerCount){
         totalPlayerCount = playerCount;

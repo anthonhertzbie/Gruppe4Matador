@@ -12,6 +12,7 @@ public class Account {
     }
     public void addBalance(int amount){
         this.Balance += amount;
+        this.AssetsValue += amount;
     }
     public int getAssetsValue(){
         return this.AssetsValue;

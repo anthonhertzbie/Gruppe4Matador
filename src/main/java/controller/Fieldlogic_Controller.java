@@ -154,6 +154,8 @@ public class Fieldlogic_Controller {
             case 44:
             case 45:
                 currentplayer.setInJail(true);
+                currentplayer.setPosition(10);
+                currentplayer.setInJailTurn(0);
         }
     }
 

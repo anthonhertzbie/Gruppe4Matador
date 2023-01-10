@@ -7,8 +7,6 @@ public class Player {
     private int position = 0;
     private int previousPosition = 0;
     private boolean[] ownerOf = new boolean[40];
-
-    private int valueOfAllAssets;
     private boolean inJail = false;
     private boolean hasJailCard = false;
     private int inJailTurn;
@@ -61,16 +59,10 @@ public class Player {
     public boolean getHasJailCard(){
         return this.hasJailCard;
     }
-    //Account getters and setters
-    private void updateTotalAssets(){
-        valueOfAllAssets = account.getAssetsValue() + account.getBalance();
-    }
     public int getValueOfAllAssets(){
-        return valueOfAllAssets;
+        return account.getAssetsValue();
     }
-    public void setPlayerBalance(int newPlayerBalance){
-        account.setBalance(newPlayerBalance);
-    }
+
     public int getPlayerBalance(){
         return account.getBalance();
     }
