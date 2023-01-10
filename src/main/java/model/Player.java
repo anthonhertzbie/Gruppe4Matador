@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Arrays;
-
 public class Player {
     private String name;
     private int position = 0;
@@ -50,7 +48,7 @@ public class Player {
     public void setInJail(boolean isInJail){
         this.inJail = isInJail;
     }
-    public boolean getInJail(){
+    public boolean isInJail(){
         return this.inJail;
     }
     public void setHasJailCard(boolean hasJailCard){

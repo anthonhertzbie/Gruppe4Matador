@@ -4,6 +4,7 @@ import controller.Game_Controller;
 import controller.Notifier;
 import gui_fields.*;
 import gui_main.GUI;
+import model.Cup;
 import model.Helper;
 import model.Model;
 import model.Player;
@@ -57,19 +58,18 @@ public class View extends Notifier {
     }
 
     public void updateView(Model model) {
+        // gui.showMessage(model.getPlayerCurrentTurn().getName() + " press ok to roll the dices : ");
+        setDice(model.getCup());
+        moveCar(model);
+        updateAccounts(model);
         if (model.getNormalTurn()) {
             System.out.println("Normal view");
-            setDice(model);
-            moveCar(model);
-            updateAccounts(model);
         } else if (model.isPrison()) {
             System.out.println("Prison view");
+            // TODO setDice
             prison(model);
-            moveCar(model);
-            updateAccounts(model);
         } else if (model.isChanceCard()) {
             System.out.println("Chance card view");
-            setDice(model);
             showChancecard(model);
             if (model.getDeck().getFirstCard().getIndex() == 43 || model.getDeck().getFirstCard().getIndex() == 44) {
                 gui_fields[model.getPlayerCurrentTurn().getPreviousPosition()].setCar(gui_players[model.getCurrentTurn()], false);
@@ -77,26 +77,11 @@ public class View extends Notifier {
                 gui.showMessage("You have been put in jail :(");
                 gui_fields[model.getPlayerCurrentTurn().getPreviousPositionChanceCard()].setCar(gui_players[model.getCurrentTurn()], false);
             }
-
-            moveCar(model);
-            updateAccounts(model);
         } else if (model.isBrewery()) {
-            setDice(model);
-            moveCar(model);
-            updateAccounts(model);
         } else if (model.isTax()) {
-            setDice(model);
-            moveCar(model);
             showTax(model);
-            updateAccounts(model);
         } else if (model.isShipping()) {
-            setDice(model);
-            moveCar(model);
-            updateAccounts(model);
         } else if (model.isParking()) {
-            setDice(model);
-            moveCar(model);
-            updateAccounts(model);
         }
     }
 
@@ -107,7 +92,7 @@ public class View extends Notifier {
     public void prison(Model model){
         Player currentPlayer = model.getPlayerCurrentTurn();
         System.out.println("Am i running?");
-        if (currentPlayer.getInJail() && currentPlayer.getInJailTurn() == 0){
+        if (currentPlayer.isInJail() && currentPlayer.getInJailTurn() == 0){
             // Doing a little trickery here to circumvent the fact that the model knows you are in jail before the view does.
             gui.showMessage(currentPlayer.getName() + " Press OK to roll the dices : ");
             gui_fields[model.getPlayerCurrentTurn().getPreviousPosition()].setCar(gui_players[model.getCurrentTurn()], false);
@@ -115,7 +100,7 @@ public class View extends Notifier {
             gui.showMessage("You have been put in jail!");
             gui_fields[30].setCar(gui_players[model.getCurrentTurn()], false);
         }
-        else if (currentPlayer.getInJail() && currentPlayer.getInJailTurn() < 2){
+        else if (currentPlayer.isInJail() && currentPlayer.getInJailTurn() < 2){
             String options[] = {"Pay 1000$ to get out", "Roll the dices", "Use get outta jail card"};
             String option;
 
@@ -143,7 +128,7 @@ public class View extends Notifier {
                 gameController.editTurn(-1);
             }
         }
-        else if(currentPlayer.getInJail() && currentPlayer.getInJailTurn() == 2){
+        else if(currentPlayer.isInJail() && currentPlayer.getInJailTurn() == 2){
             gui.showMessage("You're free... For now...");
             gameController.setJailFalseCurrentTurn();
             gameController.gameTurn();
@@ -235,10 +220,8 @@ public class View extends Notifier {
         gui = new GUI(gameBoardFields(), Color.ORANGE);
     }
 
-    public void setDice(Model model){
-        gui.showMessage(model.getPlayerCurrentTurn().getName() + " press ok to roll the dices : ");
-        gui.setDice(model.getCup().getDice1(), model.getCup().getDice2());
-
+    public void setDice(Cup cup){
+        gui.setDice(cup.getDice1(), cup.getDice2());
     }
 
     public void makePlayers(int index, Model model){

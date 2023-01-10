@@ -5,6 +5,7 @@ import model.Player;
 
 public class Fieldlogic_Controller {
     private Model model;
+    private UserIO userIO;
 
     public Fieldlogic_Controller(Model model){
         this.model = model;
@@ -23,13 +24,29 @@ public class Fieldlogic_Controller {
 
     public void jailField(Model model){
         Player currentPlayer = model.getPlayerCurrentTurn();
-        System.out.println();
-        if (currentPlayer.getPosition() == 10 && currentPlayer.getInJail() && currentPlayer.getInJailTurn() < 3){
+        int position = currentPlayer.getPosition();
+        int jailTurn = currentPlayer.getInJailTurn();
+        String output;
+        // the case when you've sat in prison for 2 rounds
+        if (position == 10 && currentPlayer.isInJail() && jailTurn < 2) {
+            if (currentPlayer.getHasJailCard()) {
+                output = userIO.getUserButtonPressed(currentPlayer.getName() + " you are still in jail.", "Pay 1000$ to get out", "Roll the dices", "Use get outta jail card");
+            } else {
+                output = userIO.getUserButtonPressed(currentPlayer.getName() + " you are still in jail.", "Pay 1000$ to get out", "Roll the dices");
+            }
+
+            if(output.equals("Pay 1000$ to get out")){
+                currentPlayer.addPlayerBalance(-1000);
+            } else if(output.equals("Roll the dices")){
+            } else if(output.equals("Use get outta jail card")){
+
+            }
+
             currentPlayer.setInJailTurn(currentPlayer.getInJailTurn() + 1);
-        } else if (currentPlayer.getPosition() == 10 && currentPlayer.getInJailTurn() == 2){
+        } else if (position == 10 && jailTurn == 2){
             currentPlayer.setInJail(false);
             currentPlayer.setInJailTurn(0);
-        } else if (currentPlayer.getPosition() == 30){
+        } else if (position == 30){
             currentPlayer.setPosition(10);
             currentPlayer.setInJail(true);
             currentPlayer.setInJailTurn(0);
@@ -163,7 +180,6 @@ public class Fieldlogic_Controller {
     }
 
     public void taxField(Model model){
-
         model.getPlayerCurrentTurn().addPlayerBalance(-4000);
     }
 

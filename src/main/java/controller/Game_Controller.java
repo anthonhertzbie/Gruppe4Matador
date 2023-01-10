@@ -6,13 +6,18 @@ import java.util.ArrayList;
 
 public class Game_Controller {
     private final Model model;
-    private Notifier notifier;
+    private UserIO userIO;
     private final ArrayList<Notifier> notifiers = new ArrayList<>();
 
     private Fieldlogic_Controller fieldlogic;
-    public Game_Controller(){
+    public Game_Controller(UserIO userIO){
+        this.userIO = userIO;
         this.model = new Model();
         this.fieldlogic = new Fieldlogic_Controller(model);
+    }
+
+    public void setUserIO(UserIO userIO) {
+        this.userIO = userIO;
     }
 
     public void addNotifier(Notifier notifier){
@@ -35,23 +40,27 @@ public class Game_Controller {
 
     public void gameTurn(){
         while (true){
-
-            if (model.getPlayerCurrentTurn().getInJail() == false) {
+            String currentName = model.getPlayerCurrentTurn().getName();
+            if (model.getPlayerCurrentTurn().isInJail() == false) {
                 playerOutOfGame();
-                model.resetBooleans();
-                diceRoll();
-                model.setPlayerPosition(model.getCup().getSum());
+                userIO.waitForUserInput(currentName + "'s turn: Press ok to roll dice");
+                playerMoves();
+                booleanReset();
                 loseCondition();
-                notifierWithLogic();
+            } else{
+
             }
-            else{
-                notifierWithLogic();
-            }
+            notifierWithLogic();
+
         }
+    }
+    public void playerMoves(){
+        diceRoll();
+        notifyEverything();
+        model.setPlayerPosition(model.getCup().getSum());
     }
 
     public void notifierWithLogic(){
-        BooleanReset();
         fieldlogic.specialField();
         notifyEverything();
         model.changeTurn();
@@ -61,7 +70,10 @@ public class Game_Controller {
         model.getPlayerCurrentTurn().setInJail(false);
     }
 
-    public void BooleanReset(){
+    /**
+     * This only needs to be called !!FIRST THIG!! after the current player has moved.
+     */
+    public void booleanReset(){
         model.resetBooleans();
         model.setBooleans();
     }
