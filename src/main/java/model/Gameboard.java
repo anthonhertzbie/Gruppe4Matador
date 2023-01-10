@@ -2,8 +2,8 @@ package model;
 
 public class Gameboard {
     private Helper helper = new Helper();
-    private Field[] fields = new Field[41];
-    private int[][] prices = new int[41][8];
+    private Field[] fields = new Field[40];
+    private int[][] prices = new int[40][8];
 
     public Gameboard(){
         copyFieldInformation();

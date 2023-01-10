@@ -41,9 +41,7 @@ public class Game_Controller {
 
         while (true){
 
-            if (model.getPlayerCurrentTurn().getInJail() == false) {
-
-                System.out.println("Controller How the fuq?" + " " + model.getPlayerCurrentTurn().getInJailTurn() + " more dfq? " + model.getPlayerCurrentTurn().getInJailTurn());
+            if (!model.getPlayerCurrentTurn().getInJail()) {
                 model.resetBooleans();
                 diceRoll();
                 model.setPlayerPosition(model.getCup().getSum());
@@ -59,7 +57,7 @@ public class Game_Controller {
 
 
     public void notifierWithLogic(){
-        BooleanReset();
+        booleanReset();
         fieldlogic.specialField();
         notifyEverything();
         model.changeTurn();
@@ -70,7 +68,7 @@ public class Game_Controller {
         model.getPlayerCurrentTurn().setInJail(false);
     }
 
-    public void BooleanReset(){
+    public void booleanReset(){
         model.resetBooleans();
         model.setBooleans();
     }

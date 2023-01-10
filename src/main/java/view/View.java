@@ -38,30 +38,34 @@ public class View extends Notifier {
 
     @Override
     public void startGame(Model model) {
-        if (model.getStartGUI()){
+        if (model.getStartGUI()) {
 
             setGui_start();
             gameController.setTotalPlayerCount(setTotalPlayers());
             setGuiTotalPlayers(model);
-            for (int i = 0; i < model.getTotalPlayerCount(); i++){
+            for (int i = 0; i < model.getTotalPlayerCount(); i++) {
                 makePlayers(i, model);
             }
 
-        }else if (model.getNormalTurn()){
+            updateView(model);
+        }
+    }
+    public void updateView(Model model) {
+        if (model.getNormalTurn()) {
             System.out.println("Normal view");
             setDice(model);
             moveCar(model);
             updateAccounts(model);
-        }else if (model.isPrison()){
+        } else if (model.isPrison()) {
             System.out.println("Prison view");
             prison(model);
             moveCar(model);
             updateAccounts(model);
-        }else if (model.isChanceCard()){
+        } else if (model.isChanceCard()) {
             System.out.println("Chance card view");
             setDice(model);
             showChancecard(model);
-            if (model.getDeck().getFirstCard().getIndex() == 43 || model.getDeck().getFirstCard().getIndex() == 44){
+            if (model.getDeck().getFirstCard().getIndex() == 43 || model.getDeck().getFirstCard().getIndex() == 44) {
                 gui_fields[model.getPlayerCurrentTurn().getPreviousPosition()].setCar(gui_players[model.getCurrentTurn()], false);
                 gui_fields[model.getPlayerCurrentTurn().getPreviousPositionChanceCard()].setCar(gui_players[model.getCurrentTurn()], true);
                 gui.showMessage("You have been put in jail :(");
@@ -70,20 +74,20 @@ public class View extends Notifier {
 
             moveCar(model);
             updateAccounts(model);
-        }else if (model.isBrewery()){
+        } else if (model.isBrewery()) {
             setDice(model);
             moveCar(model);
             updateAccounts(model);
-        }else if (model.isTax()){
+        } else if (model.isTax()) {
             setDice(model);
             moveCar(model);
             showTax(model);
             updateAccounts(model);
-        }else if (model.isShipping()){
+        } else if (model.isShipping()) {
             setDice(model);
             moveCar(model);
             updateAccounts(model);
-        }else if (model.isParking()){
+        } else if (model.isParking()) {
             setDice(model);
             moveCar(model);
             updateAccounts(model);
@@ -97,7 +101,7 @@ public class View extends Notifier {
     public void prison(Model model){
         Player currentPlayer = model.getPlayerCurrentTurn();
         System.out.println("Am i running?");
-        if (currentPlayer.getInJail() == true && currentPlayer.getInJailTurn() == 0){
+        if (currentPlayer.getInJail() && currentPlayer.getInJailTurn() == 0){
             // Doing a little trickery here to circumvent the fact that the model knows you are in jail before the view does.
             gui.showMessage(currentPlayer.getName() + " Press OK to roll the dices : ");
             gui_fields[model.getPlayerCurrentTurn().getPreviousPosition()].setCar(gui_players[model.getCurrentTurn()], false);
@@ -105,7 +109,7 @@ public class View extends Notifier {
             gui.showMessage("You have been put in jail!");
             gui_fields[30].setCar(gui_players[model.getCurrentTurn()], false);
         }
-        else if (currentPlayer.getInJail() == true && currentPlayer.getInJailTurn() < 2){
+        else if (currentPlayer.getInJail() && currentPlayer.getInJailTurn() < 2){
             String options[] = {"Pay 1000$ to get out", "Roll the dices", "Use get outta jail card"};
             String option;
 
@@ -120,20 +124,20 @@ public class View extends Notifier {
                 gameController.addPlayerBalance(-1000);
                 gameController.setJailFalseCurrentTurn();
                 gameController.editTurn(-1);
-            }else if (option == options[1]){
+            }else if (option.equals(options[1])){
                 gameController.diceRoll();
                 if (model.getCup().getDice1() == model.getCup().getDice2()){
                     gui.showMessage("You are free!");
                     gameController.setJailFalseCurrentTurn();
                     gameController.editTurn(-1);
                 }
-            }else if (option == options[2]){
+            }else if (option.equals(options[2])){
                 gui.showMessage("You used teh good card :(");
                 gameController.setJailFalseCurrentTurn();
                 gameController.editTurn(-1);
             }
         }
-        else if(currentPlayer.getInJail() == true && currentPlayer.getInJailTurn() == 2){
+        else if(currentPlayer.getInJail() && currentPlayer.getInJailTurn() == 2){
             gui.showMessage("You're free... For now...");
             gameController.setJailFalseCurrentTurn();
             gameController.gameTurn();
