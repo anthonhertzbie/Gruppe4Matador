@@ -17,7 +17,7 @@ public class Deck {
     }
 
     public Card getFirstCard(){
-        return deck[0];
+        return deck[44];
     }
 
     public Card getLastCard(){
@@ -25,17 +25,20 @@ public class Deck {
     }
     public Card drawCard(){
         Card lastCard = getFirstCard();
-
+/*
         for (int i = 0; i < deck.length - 1; i++) {
             deck[i] = deck[i+1];
         }
         deck[deck.length - 1] = lastCard;
+
+ */
 
 
         return lastCard;
     }
 
     public void shuffle() {
+        /*
         Random random = new Random();
         for (int i = 0; i < 10000; i++) {
             int a = random.nextInt(0, 45);
@@ -44,6 +47,8 @@ public class Deck {
             deck[a] = deck[b];
             deck[b] = savedcard;
         }
+
+         */
     }
 
 

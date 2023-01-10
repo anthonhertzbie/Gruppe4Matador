@@ -35,5 +35,9 @@ public class ViewUserIO extends UserIO {
         view.gui.getUserSelection(message, userOptions);
     }
 
+    public void showChanceCard(String description){
+        view.gui.displayChanceCard(description);
+    }
+
 
 }

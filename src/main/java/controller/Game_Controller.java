@@ -51,10 +51,11 @@ public class Game_Controller {
                 playerMoves();
                 booleanReset();
                 loseCondition();
+                notifierWithLogic();
             } else{
-
+                booleanReset();
+                notifierWithLogic();
             }
-            notifierWithLogic();
 
         }
     }

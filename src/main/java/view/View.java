@@ -68,7 +68,6 @@ public class View extends Notifier {
         } else if (model.isPrison()) {
             System.out.println("Prison view");
             // TODO setDice
-            prison(model);
         } else if (model.isChanceCard()) {
             System.out.println("Chance card view");
             showChancecard(model);
@@ -80,26 +79,18 @@ public class View extends Notifier {
             }
         } else if (model.isBrewery()) {
         } else if (model.isTax()) {
-            showTax(model);
         } else if (model.isShipping()) {
         } else if (model.isParking()) {
         }
     }
 
-    public void chanceCardGoToPrison(Model model){
-
-    }
-
-    public void prison(Model model){
-
-    }
 
 
     private void showChancecard(Model model){
         gui.setChanceCard(model.getDeck().drawCard().toString());
         gui.displayChanceCard();
     }
-
+/*
     public void showTax(Model model) {
         Player currentPlayer = model.getPlayerCurrentTurn();
         if (currentPlayer.getPosition() == 4) {
@@ -117,6 +108,8 @@ public class View extends Notifier {
         }else { gui.showMessage("Special-tax, press OK to pay 2000$");
         }
     }
+
+ */
 
     public void updateAccounts(Model model){
         for(int i  = 0; i < model.getTotalPlayerCount(); i++){
