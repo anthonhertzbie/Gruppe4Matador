@@ -58,9 +58,10 @@ public class View extends Notifier {
     }
 
     public void updateView(Model model) {
+        Player currentPlayer = model.getPlayerCurrentTurn();
         // gui.showMessage(model.getPlayerCurrentTurn().getName() + " press ok to roll the dices : ");
         setDice(model.getCup());
-        moveCar(model);
+        moveCar(currentPlayer.getPreviousPosition(), currentPlayer.getPosition(), model.getCurrentTurn());
         updateAccounts(model);
         if (model.getNormalTurn()) {
             System.out.println("Normal view");
@@ -123,9 +124,9 @@ public class View extends Notifier {
         }
     }
 
-    public void moveCar(Model model){
-        gui_fields[model.getPlayerCurrentTurn().getPreviousPosition()].setCar(gui_players[model.getCurrentTurn()], false);
-        gui_fields[model.getPlayerCurrentTurn().getPosition()].setCar(gui_players[model.getCurrentTurn()], true);
+    public void moveCar(int oldPosition, int newPosition, int currentTurn){
+        gui_fields[oldPosition].setCar(gui_players[currentTurn], false);
+        gui_fields[newPosition].setCar(gui_players[currentTurn], true);
     }
 
     public GUI_Field[] gameBoardFields(){

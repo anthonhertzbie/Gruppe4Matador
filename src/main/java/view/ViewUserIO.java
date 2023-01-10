@@ -1,7 +1,6 @@
 package view;
 
 import controller.UserIO;
-import model.Model;
 
 public class ViewUserIO extends UserIO {
     private final View view;
@@ -25,6 +24,16 @@ public class ViewUserIO extends UserIO {
         view.gui.showMessage(message);
     }
 
+    @Override
+    public void moveCar(int oldPosition, int newPosition, int currentTurn) {
+        view.moveCar(oldPosition, newPosition, currentTurn);
+    }
+
+
+    @Override
+    public void getUserSelection(String message, String... userOptions) {
+        view.gui.getUserSelection(message, userOptions);
+    }
 
 
 }

@@ -10,9 +10,8 @@ public abstract class UserIO {
 
     public abstract void showMessage(String Message);
 
-    public abstract void moveCar();
-
-    public abstract void getUsrStringSelection(String message, String ... userOptions);
+    public abstract void moveCar(int oldPosition, int newPosition, int currentTurn);
 
 
+    public abstract void getUserSelection(String message, String... userOptions);
 }
