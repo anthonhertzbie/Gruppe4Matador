@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3882975f-24fd-476e-a6ee-3b471989e11b" name="Changes" comment="merge">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/Game_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/Game_Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/View.java" afterDir="false" />
-    </list>
+    <list default="true" id="0ae92808-c275-4e49-940b-f794bd0d6f9b" name="Changes" comment="Accept Tests branch" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,7 +22,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="GUI" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -214,7 +209,8 @@
     <MESSAGE value="Structure, Game_Controller and GUI updates...&#10;MVC is quite tricky, but we think it is done right now." />
     <MESSAGE value="Cleaning up unused methods.&#10;It is now possible to move around the board." />
     <MESSAGE value="Fixing minor bugs kinda all over... Go to jail card works now, however the UI updates instantly" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixing minor bugs kinda all over... Go to jail card works now, however the UI updates instantly" />
+    <MESSAGE value="Accept Tests branch" />
+    <option name="LAST_COMMIT_MESSAGE" value="Accept Tests branch" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
