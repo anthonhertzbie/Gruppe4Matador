@@ -11,6 +11,7 @@ public class Player {
     private boolean inJail = false;
     private boolean hasJailCard = false;
     private int inJailTurn;
+    private boolean hasLost = false;
 
     private Account account = new Account();
 
@@ -75,9 +76,6 @@ public class Player {
     public void addPlayerBalance(int amount){
         account.addBalance(amount);
     }
-    public void set(){
-
-    }
 
     public int getInJailTurn() {
         return inJailTurn;
@@ -86,5 +84,13 @@ public class Player {
     public void setInJailTurn(int inJailTurn) {
         System.out.println("injailTurn is : " + this.inJailTurn + " inJailTurn sat to : " + inJailTurn);
         this.inJailTurn = inJailTurn;
+    }
+
+    public boolean getHasLost() {
+        return hasLost;
+    }
+
+    public void setHasLost(boolean hasLost) {
+        this.hasLost = hasLost;
     }
 }

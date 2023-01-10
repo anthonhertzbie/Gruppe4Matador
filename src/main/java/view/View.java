@@ -46,12 +46,16 @@ public class View extends Notifier {
             for (int i = 0; i < model.getTotalPlayerCount(); i++) {
                 makePlayers(i, model);
             }
-
-
-
         }
         updateView(model);
     }
+
+    public void removePlayerLost(Model model){
+        if (model.getPlayerCurrentTurn().getHasLost()) {
+            gui.addPlayer(gui_players[model.getCurrentTurn()]);
+        }
+    }
+
     public void updateView(Model model) {
         if (model.getNormalTurn()) {
             System.out.println("Normal view");
@@ -161,13 +165,11 @@ public class View extends Notifier {
                 int tempBalance = (int) Math.round(currentPlayer.getValueOfAllAssets() * 0.9);
                 tempBalance = tempBalance - (tempBalance % 100);
                 currentPlayer.addPlayerBalance(tempBalance - currentPlayer.getValueOfAllAssets());
-
             }
             else {
                 currentPlayer.addPlayerBalance(-4000);
                 gui.showMessage("You have paid 4000$");
             }
-
         }else { gui.showMessage("Special-tax, press OK to pay 2000$");
         }
     }
