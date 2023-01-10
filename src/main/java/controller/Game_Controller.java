@@ -47,7 +47,6 @@ public class Game_Controller {
             String currentName = model.getPlayerCurrentTurn().getName();
             if (model.getPlayerCurrentTurn().isInJail() == false) {
                 playerOutOfGame();
-                System.out.println("UserIO is working?!??!?");
                 userIO.waitForUserInput(currentName + "'s turn: Press ok to roll dice");
                 playerMoves();
                 booleanReset();
