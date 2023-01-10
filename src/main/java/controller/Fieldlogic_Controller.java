@@ -3,9 +3,8 @@ package controller;
 import model.Model;
 import model.Player;
 
-public class Fieldlogic_Controller {
+public class Fieldlogic_Controller extends Game_Controller {
     private Model model;
-    private UserIO userIO;
 
     public Fieldlogic_Controller(Model model){
         this.model = model;
@@ -30,26 +29,46 @@ public class Fieldlogic_Controller {
         // the case when you've sat in prison for 2 rounds
         if (position == 10 && currentPlayer.isInJail() && jailTurn < 2) {
             if (currentPlayer.getHasJailCard()) {
-                output = userIO.getUserButtonPressed(currentPlayer.getName() + " you are still in jail.", "Pay 1000$ to get out", "Roll the dices", "Use get outta jail card");
+                //output = userIO.getUserButtonPressed(currentPlayer.getName() + " you are still in jail.", "Pay 1000$ to get out", "Roll the dices", "Use get outta jail card");
             } else {
-                output = userIO.getUserButtonPressed(currentPlayer.getName() + " you are still in jail.", "Pay 1000$ to get out", "Roll the dices");
+                //output = userIO.getUserButtonPressed(currentPlayer.getName() + " you are still in jail.", "Pay 1000$ to get out", "Roll the dices");
+            }
+/*
+            switch (output) {
+                case "Pay 1000$ to get out":
+                    currentPlayer.setInJail(false);
+                    currentPlayer.addPlayerBalance(-1000);
+                    model.addCurrentTurn(-1);
+                    break;
+                case "Roll the dices":
+                    diceRoll();
+                    notifyEverything();
+                    if(model.getCup().getDice1() == model.getCup().getDice2()) {
+                        //userIO.waitForUserInput("Tillykke du er fri");
+                        currentPlayer.setInJail(false);
+                    } else{
+                        //userIO.waitForUserInput("too bad... du slog ikke to ens ");
+                        setPlayerFreeFromJail();
+                    }
+                    break;
+                case "Use get outta jail card":
+                    currentPlayer.setInJail(false);
+                    model.addCurrentTurn(-1);
+                    break;
             }
 
-            if(output.equals("Pay 1000$ to get out")){
-                currentPlayer.addPlayerBalance(-1000);
-            } else if(output.equals("Roll the dices")){
-            } else if(output.equals("Use get outta jail card")){
-
-            }
+ */
 
             currentPlayer.setInJailTurn(currentPlayer.getInJailTurn() + 1);
         } else if (position == 10 && jailTurn == 2){
             currentPlayer.setInJail(false);
             currentPlayer.setInJailTurn(0);
+            //userIO.showMessage("Du slap ud af fængsel");
         } else if (position == 30){
             currentPlayer.setPosition(10);
             currentPlayer.setInJail(true);
             currentPlayer.setInJailTurn(0);
+            getUserButtonPressed("Du er røget i fængsel", "ok");
         }
     }
 

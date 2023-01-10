@@ -5,14 +5,17 @@ import model.Model;
 import java.util.ArrayList;
 
 public class Game_Controller {
-    private final Model model;
+    private final Model model = new Model();
     private UserIO userIO;
     private final ArrayList<Notifier> notifiers = new ArrayList<>();
 
     private Fieldlogic_Controller fieldlogic;
     public Game_Controller(UserIO userIO){
         this.userIO = userIO;
-        this.model = new Model();
+        this.fieldlogic = new Fieldlogic_Controller(model);
+    }
+
+    public Game_Controller() {
         this.fieldlogic = new Fieldlogic_Controller(model);
     }
 
@@ -28,6 +31,9 @@ public class Game_Controller {
         for (Notifier n:notifiers) {
             n.startGame(model);
         }
+    }
+    public void getUserButtonPressed(String message, String ... userOptions){
+        userIO.getUserButtonPressed(message, userOptions);
     }
 
     public void startGame(){
@@ -66,7 +72,7 @@ public class Game_Controller {
         model.changeTurn();
     }
 
-    public void setJailFalseCurrentTurn(){
+    public void setPlayerFreeFromJail(){
         model.getPlayerCurrentTurn().setInJail(false);
     }
 

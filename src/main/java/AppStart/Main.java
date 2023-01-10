@@ -15,6 +15,7 @@ public class Main {
 
 
     public static void main(String[] args){
+
         Game_Controller gameController = new Game_Controller(null);
         View view = new View(gameController);
         gameController.addNotifier(view);
