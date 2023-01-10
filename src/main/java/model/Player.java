@@ -7,19 +7,12 @@ public class Player {
     private int position = 0;
     private int previousPosition = 0;
     private int previousPositionChanceCard;
-    private boolean[] ownerOf = new boolean[40];
     private boolean inJail = false;
     private boolean hasJailCard = false;
     private int inJailTurn;
     private boolean hasLost = false;
 
     private Account account = new Account();
-
-
-    public Player(){
-        Arrays.fill(ownerOf, false);
-
-    }
 
     public void setName(String playerName){
         this.name = playerName;

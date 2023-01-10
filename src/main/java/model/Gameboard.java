@@ -4,12 +4,69 @@ public class Gameboard {
     private Helper helper = new Helper();
     private Field[] fields = new Field[41];
     private int[][] prices = new int[41][8];
+    private boolean[][] ownerTable = new boolean[40][6];
 
     public Gameboard(){
         copyFieldInformation();
         initFieldPrice();
         initHousePrice();
         initRent();
+        initOwner();
+    }
+
+    /**
+     * Sells all property
+     */
+    private void initOwner(){
+        for (int i = 0; i < 40; i++) {
+            for (int j = 0; j < 6; j++) {
+                ownerTable[i][j] = false;
+            }
+        }
+    }
+
+    public boolean ownerOfAll(int playerIndex){
+        if(ownerTable[1][playerIndex] && ownerTable[3][playerIndex]) {
+            return true;
+        } else if(ownerTable[6][playerIndex] && ownerTable[8][playerIndex] && ownerTable[9][playerIndex]){
+            return true;
+        } else if(ownerTable[11][playerIndex] && ownerTable[13][playerIndex] && ownerTable[14][playerIndex]){
+            return true;
+        } else if(ownerTable[16][playerIndex] && ownerTable[18][playerIndex] && ownerTable[19][playerIndex]){
+            return true;
+        } else if(ownerTable[21][playerIndex] && ownerTable[23][playerIndex] && ownerTable[24][playerIndex]){
+            return true;
+        } else if(ownerTable[26][playerIndex] && ownerTable[27][playerIndex] && ownerTable[29][playerIndex]){
+            return true;
+        } else if(ownerTable[31][playerIndex] && ownerTable[32][playerIndex] && ownerTable[34][playerIndex]){
+            return true;
+        } else if(ownerTable[37][playerIndex] && ownerTable[39][playerIndex]){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    /*
+    blue = 1,3
+    yellow = 6, 8, 9
+    other yellow = 11, 13, 14
+    gray = 16, 18, 19
+    red = 21, 23, 24
+    light gray = 26, 27, 29
+    yellow = 31, 32, 34
+    purple = 37, 39
+     */
+
+
+
+    public boolean isOwned(int fieldIndex, int playerIndex){
+        return ownerTable[fieldIndex][playerIndex];
+    }
+    public void buyField(int fieldIndex, int playerIndex){
+        ownerTable[fieldIndex][playerIndex] = true;
+    }
+    public void sellField(int fieldIndex, int playerIndex){
+        ownerTable[fieldIndex][playerIndex] = false;
     }
 
 
