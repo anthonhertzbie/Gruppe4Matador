@@ -134,6 +134,8 @@
       <list>
         <item itemvalue="JUnit.AccountTest.negativebalance" />
         <item itemvalue="Application.Helper" />
+        <item itemvalue="JUnit.AccountTest.negativebalance" />
+        <item itemvalue="Application.Helper" />
       </list>
     </recent_temporary>
   </component>
