@@ -6,6 +6,7 @@ public class Player {
     private String name;
     private int position = 0;
     private int previousPosition = 0;
+    private int previousPositionChanceCard;
     private boolean[] ownerOf = new boolean[40];
     private boolean inJail = false;
     private boolean hasJailCard = false;
@@ -26,7 +27,12 @@ public class Player {
         return this.name;
     }
     public void setPosition(int position){
+        this.previousPositionChanceCard = this.position;
+        System.out.println(previousPosition + "This is the previous position after setPosition");
         this.position = position;
+    }
+    public int getPreviousPositionChanceCard(){
+        return previousPositionChanceCard;
     }
     public void addPosition(int addPosition){
         previousPosition = position;

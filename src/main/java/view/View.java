@@ -39,6 +39,7 @@ public class View extends Notifier {
     @Override
     public void startGame(Model model) {
         if (model.getStartGUI()){
+
             setGui_start();
             gameController.setTotalPlayerCount(setTotalPlayers());
             setGuiTotalPlayers(model);
@@ -47,20 +48,29 @@ public class View extends Notifier {
             }
 
         }else if (model.getNormalTurn()){
-            setDice(model);
-            moveCar(model);
-            updateAccounts(model);
-        }else if (model.isChanceCard()){
-            setDice(model);
-            moveCar(model);
-            showChancecard(model);
-            updateAccounts(model);
-        }else if (model.isBrewery()){
+            System.out.println("Normal view");
             setDice(model);
             moveCar(model);
             updateAccounts(model);
         }else if (model.isPrison()){
+            System.out.println("Prison view");
             prison(model);
+            moveCar(model);
+            updateAccounts(model);
+        }else if (model.isChanceCard()){
+            System.out.println("Chance card view");
+            setDice(model);
+            showChancecard(model);
+            if (model.getDeck().getFirstCard().getIndex() == 43 || model.getDeck().getFirstCard().getIndex() == 44){
+                gui_fields[model.getPlayerCurrentTurn().getPreviousPositionChanceCard()].setCar(gui_players[model.getCurrentTurn()], true);
+                gui.showMessage("You have been put in jail :(");
+                gui_fields[model.getPlayerCurrentTurn().getPreviousPositionChanceCard()].setCar(gui_players[model.getCurrentTurn()], false);
+            }
+
+            moveCar(model);
+            updateAccounts(model);
+        }else if (model.isBrewery()){
+            setDice(model);
             moveCar(model);
             updateAccounts(model);
         }else if (model.isTax()){
