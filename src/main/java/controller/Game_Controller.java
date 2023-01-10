@@ -12,15 +12,13 @@ public class Game_Controller {
     private Fieldlogic_Controller fieldlogic;
     public Game_Controller(UserIO userIO){
         this.userIO = userIO;
-        this.fieldlogic = new Fieldlogic_Controller(model);
+        this.fieldlogic = new Fieldlogic_Controller(model, userIO);
     }
 
-    public Game_Controller() {
-        this.fieldlogic = new Fieldlogic_Controller(model);
-    }
 
     public void setUserIO(UserIO userIO) {
         this.userIO = userIO;
+        fieldlogic = new Fieldlogic_Controller(model, userIO);
     }
 
     public void addNotifier(Notifier notifier){
@@ -49,6 +47,7 @@ public class Game_Controller {
             String currentName = model.getPlayerCurrentTurn().getName();
             if (model.getPlayerCurrentTurn().isInJail() == false) {
                 playerOutOfGame();
+                System.out.println("UserIO is working?!??!?");
                 userIO.waitForUserInput(currentName + "'s turn: Press ok to roll dice");
                 playerMoves();
                 booleanReset();

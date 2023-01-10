@@ -3,11 +3,13 @@ package controller;
 import model.Model;
 import model.Player;
 
-public class Fieldlogic_Controller extends Game_Controller {
+public class Fieldlogic_Controller {
     private Model model;
+    private UserIO userIO;
 
-    public Fieldlogic_Controller(Model model){
+    public Fieldlogic_Controller(Model model, UserIO userIO){
         this.model = model;
+        this.userIO = userIO;
     }
 
     public void specialField(){
@@ -68,7 +70,6 @@ public class Fieldlogic_Controller extends Game_Controller {
             currentPlayer.setPosition(10);
             currentPlayer.setInJail(true);
             currentPlayer.setInJailTurn(0);
-            getUserButtonPressed("Du er røget i fængsel", "ok");
         }
     }
 
