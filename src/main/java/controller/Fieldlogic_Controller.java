@@ -17,7 +17,7 @@ public class Fieldlogic_Controller {
         else if (model.isPrison()){
             jailField(model);
         } else if(model.isTax()){
-
+            taxField(model);
         }
     }
 
@@ -164,6 +164,7 @@ public class Fieldlogic_Controller {
 
     public void taxField(Model model){
 
+        model.getPlayerCurrentTurn().addPlayerBalance(-4000);
     }
 
     private void taxField(){
