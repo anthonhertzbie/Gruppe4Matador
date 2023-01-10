@@ -7,24 +7,12 @@ public class Player {
     private int position = 0;
     private int previousPosition = 0;
     private int previousPositionChanceCard;
-    private boolean[] ownerOf = new boolean[40];
     private boolean inJail = false;
     private boolean hasJailCard = false;
     private int inJailTurn;
+    private boolean hasLost = false;
 
-    private final Account account;
-
-
-    public Player(){
-        this(new Account());
-
-    }
-
-    //Makes sure that player takes an account as an input//
-    public Player(Account account){
-        this.account = account;
-        Arrays.fill(ownerOf, false);
-    }
+    private Account account = new Account();
 
     public void setName(String playerName){
         this.name = playerName;
@@ -32,7 +20,6 @@ public class Player {
     public String getName(){
         return this.name;
     }
-
     public void setPosition(int position){
         this.previousPositionChanceCard = this.position;
         System.out.println(previousPosition + "This is the previous position after setPosition");
@@ -60,7 +47,6 @@ public class Player {
     public int getPosition(){
         return position;
     }
-
     public void setInJail(boolean isInJail){
         this.inJail = isInJail;
     }
@@ -83,9 +69,6 @@ public class Player {
     public void addPlayerBalance(int amount){
         account.addBalance(amount);
     }
-    public void set(){
-
-    }
 
     public int getInJailTurn() {
         return inJailTurn;
@@ -94,5 +77,13 @@ public class Player {
     public void setInJailTurn(int inJailTurn) {
         System.out.println("injailTurn is : " + this.inJailTurn + " inJailTurn sat to : " + inJailTurn);
         this.inJailTurn = inJailTurn;
+    }
+
+    public boolean getHasLost() {
+        return hasLost;
+    }
+
+    public void setHasLost(boolean hasLost) {
+        this.hasLost = hasLost;
     }
 }

@@ -26,27 +26,22 @@ public class Game_Controller {
     }
 
     public void startGame(){
-
         model.setStartGUI(true);
         notifyEverything();
         model.setStartGUI(false);
         model.setNormalTurn(true);
         gameTurn();
-
-
     }
 
     public void gameTurn(){
-
-
         while (true){
 
             if (model.getPlayerCurrentTurn().getInJail() == false) {
-
-                System.out.println("Controller How the fuq?" + " " + model.getPlayerCurrentTurn().getInJailTurn() + " more dfq? " + model.getPlayerCurrentTurn().getInJailTurn());
+                playerOutOfGame();
                 model.resetBooleans();
                 diceRoll();
                 model.setPlayerPosition(model.getCup().getSum());
+                loseCondition();
                 notifierWithLogic();
             }
             else{
@@ -55,16 +50,12 @@ public class Game_Controller {
         }
     }
 
-
-
-
     public void notifierWithLogic(){
         BooleanReset();
         fieldlogic.specialField();
         notifyEverything();
         model.changeTurn();
     }
-
 
     public void setJailFalseCurrentTurn(){
         model.getPlayerCurrentTurn().setInJail(false);
@@ -75,6 +66,19 @@ public class Game_Controller {
         model.setBooleans();
     }
 
+    public void loseCondition(){
+        for (int i = 0; i < model.getTotalPlayerCount(); i++){
+            if (model.getPlayerByIndex(i).getValueOfAllAssets() < 0){
+                model.getPlayerByIndex(i).setHasLost(true);
+            }
+        }
+    }
+
+    public void playerOutOfGame(){
+        if (model.getPlayerCurrentTurn().getHasLost() == true){
+            model.changeTurn();
+        }
+    }
 
     public void editTurn(int number){
         model.addCurrentTurn(number);

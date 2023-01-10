@@ -36,6 +36,8 @@ public class Fieldlogic_Controller {
         }
     }
 
+
+
     private void chanceCardField(Model model){
         Player currentplayer = model.getPlayerCurrentTurn();
         switch(model.getDeck().getFirstCard().getIndex() + 1){
