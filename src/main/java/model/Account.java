@@ -7,9 +7,13 @@ public class Account {
     public int getBalance(){
         return this.Balance;
     }
-    public void setBalance(int newPlayerBallance){
-        this.Balance = newPlayerBallance;
+    public void setBalance(int newPlayerBalance){
+        if (newPlayerBalance < 0) {
+            throw new UnsupportedOperationException("Expected the new balance to be positive");
+        }
+        this.Balance = newPlayerBalance;
     }
+
     public void addBalance(int amount){
         this.Balance += amount;
         this.AssetsValue += amount;

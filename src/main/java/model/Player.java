@@ -12,12 +12,18 @@ public class Player {
     private boolean hasJailCard = false;
     private int inJailTurn;
 
-    private Account account = new Account();
+    private final Account account;
 
 
     public Player(){
-        Arrays.fill(ownerOf, false);
+        this(new Account());
 
+    }
+
+    //Makes sure that player takes an account as an input//
+    public Player(Account account){
+        this.account = account;
+        Arrays.fill(ownerOf, false);
     }
 
     public void setName(String playerName){
