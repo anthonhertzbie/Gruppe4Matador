@@ -13,11 +13,10 @@ public class Deck {
         for(int i = 0; i<45; i++){
             deck[i] = new Card(i);
         }
-        shuffle();
     }
 
     public Card getFirstCard(){
-        return deck[0];
+        return deck[44];
     }
 
     public Card getLastCard(){
@@ -25,13 +24,13 @@ public class Deck {
     }
     public Card drawCard(){
         Card lastCard = getFirstCard();
-
+        /*
         for (int i = 0; i < deck.length - 1; i++) {
             deck[i] = deck[i+1];
         }
         deck[deck.length - 1] = lastCard;
 
-
+         */
         return lastCard;
     }
 
