@@ -26,8 +26,8 @@ public class ViewUserIO extends UserIO {
     }
 
     @Override
-    public void moveCar(int oldPosition, int newPosition, int currentTurn) {
-        view.moveCar(oldPosition, newPosition, currentTurn);
+    public void moveCar(Model model) {
+        view.moveCar(model);
     }
 
 

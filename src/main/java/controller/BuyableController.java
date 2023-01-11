@@ -19,7 +19,7 @@ public class BuyableController {
         int currenPosition = model.getPlayerCurrentTurn().getPosition();
         int previousPosition = model.getPlayerCurrentTurn().getPreviousPosition();
         if(!model.gameBoard().isOwned(currenPosition, currentPlayer)){
-            userIO.moveCar(previousPosition, currenPosition, currentPlayer);
+            userIO.moveCar(model);
             String userInput = userIO.getUserButtonPressed("Vil du købe dette felt", "ja", "nej");
             switch (userInput){
                 case "ja":

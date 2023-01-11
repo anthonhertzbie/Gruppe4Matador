@@ -11,7 +11,7 @@ public abstract class UserIO {
 
     public abstract void showMessage(String Message);
 
-    public abstract void moveCar(int oldPosition, int newPosition, int currentTurn);
+    public abstract void moveCar(Model model);
     public abstract void showChanceCard(String description);
 
     public abstract void getUserSelection(String message, String... userOptions);

@@ -70,12 +70,13 @@ public class Game_Controller {
             model.getPlayerCurrentTurn().addDoubleTurn(1);
             model.addCurrentTurn(-1);
         } else if (model.getCup().getDice1() == model.getCup().getDice2() && model.getPlayerCurrentTurn().getDoubleTurn() == 2){
-            userIO.moveCar(model.getPlayerCurrentTurn().getPosition(), 10, model.getCurrentTurn());
+            userIO.moveCar(model);
             userIO.showMessage("You're too lucky with the dices... 3rd double in a row... You have been put in jail!");
             model.setPrison(true);
             model.getPlayerCurrentTurn().setPosition(10);
-            userIO.moveCar(model.getPlayerCurrentTurn().getPreviousPosition(), model.getPlayerCurrentTurn().getPosition(), model.getCurrentTurn());
+            userIO.moveCar(model);
             model.getPlayerCurrentTurn().setDoubleTurn(0);
+
 
         }
     }

@@ -63,7 +63,7 @@ public class View extends Notifier {
         }
         Player currentPlayer = model.getPlayerCurrentTurn();
         setDice(model.getCup());
-        moveCar(currentPlayer.getPreviousPosition(), currentPlayer.getPosition(), model.getCurrentTurn());
+        moveCar(model);
         updateAccounts(model);
     }
 
@@ -73,9 +73,27 @@ public class View extends Notifier {
         }
     }
 
-    public void moveCar(int oldPosition, int newPosition, int currentTurn){
+    public void moveCar(Model model){
+        for(int i = 0; i < 40; i++){
+            if (gui_fields[i].hasCar(gui_players[model.getCurrentTurn()])){
+                gui_fields[i].setCar(gui_players[model.getCurrentTurn()], false);
+            }
+        }
+
+        gui_fields[model.getPlayerCurrentTurn().getPosition()].setCar(gui_players[model.getCurrentTurn()], true);
+
+
+
+        /*
         gui_fields[oldPosition].setCar(gui_players[currentTurn], false);
         gui_fields[newPosition].setCar(gui_players[currentTurn], true);
+
+
+        /*
+        gui_fields[oldPosition].setCar(gui_players[currentTurn], false);
+        gui_fields[newPosition].setCar(gui_players[currentTurn], true);
+
+         */
     }
 
     public GUI_Field[] gameBoardFields(){
