@@ -31,11 +31,10 @@ public class BuyableController {
         purchaseField(model, userIO);
     }
     private void purchaseField(Model model, UserIO userIO){
+        int currentPlayer = model.getCurrentTurn();
+        int currenPosition = model.getPlayerCurrentTurn().getPosition();
         if (fieldAcceptTest(model)) {
-            int currentPlayer = model.getCurrentTurn();
-            int currenPosition = model.getPlayerCurrentTurn().getPosition();
-            int previousPosition = model.getPlayerCurrentTurn().getPreviousPosition();
-            if (!model.gameBoard().isOwned(currenPosition, currentPlayer)) {
+            if (!model.gameBoard().isOwned(currenPosition)) {
                 userIO.moveCar(model);
                 String userInput = userIO.getUserButtonPressed("Vil du købe dette felt", "ja", "nej");
                 switch (userInput) {
@@ -50,7 +49,7 @@ public class BuyableController {
                 }
             }
         } else {
-            payrent(currentPosition);
+            payrent(currenPosition);
         }
     }
     private void payrent(int currentPosition){
