@@ -155,17 +155,21 @@ public class Fieldlogic_Controller {
             case 30:
                 currentplayer.setPosition(0);
                 currentplayer.addPlayerBalance(4000);
+                userIO.moveCar(currentplayer.getPreviousPositionChanceCard(), currentplayer.getPosition(), model.getCurrentTurn());
                 return;
             case 31:
                 currentplayer.addPosition(3);
+                userIO.moveCar(currentplayer.getPreviousPositionChanceCard(), currentplayer.getPosition(), model.getCurrentTurn());
             case 32:
             case 33:
                 currentplayer.addPosition(-3);
+                userIO.moveCar(currentplayer.getPreviousPositionChanceCard(), currentplayer.getPosition(), model.getCurrentTurn());
             case 34:
                 if(currentplayer.getPosition() > 11){
                     currentplayer.addPlayerBalance(4000);
                 }
                 currentplayer.setPosition(11);
+                userIO.moveCar(currentplayer.getPreviousPositionChanceCard(), currentplayer.getPosition(), model.getCurrentTurn());
             case 35:
             case 36:
                 return;
@@ -174,18 +178,21 @@ public class Fieldlogic_Controller {
                     currentplayer.addPlayerBalance(4000);
                 }
                 currentplayer.setPosition(15);
+                userIO.moveCar(currentplayer.getPreviousPositionChanceCard(), currentplayer.getPosition(), model.getCurrentTurn());
                 return;
             case 38:
                 if(currentplayer.getPosition() > 24){
                     currentplayer.addPlayerBalance(4000);
                 }
                 currentplayer.setPosition(24);
+                userIO.moveCar(currentplayer.getPreviousPositionChanceCard(), currentplayer.getPosition(), model.getCurrentTurn());
                 return;
             case 39:
                 if(currentplayer.getPosition() > 32){
                     currentplayer.addPlayerBalance(4000);
                 }
                 currentplayer.setPosition(32);
+                userIO.moveCar(currentplayer.getPreviousPositionChanceCard(), currentplayer.getPosition(), model.getCurrentTurn());
                 return;
             case 40:
                 if(currentplayer.getPosition() > 35){
@@ -198,15 +205,18 @@ public class Fieldlogic_Controller {
                 }else{
                     currentplayer.setPosition(35);
                 }
+                userIO.moveCar(currentplayer.getPreviousPositionChanceCard(), currentplayer.getPosition(), model.getCurrentTurn());
                 return;
             case 41:
                 if(currentplayer.getPosition() > 19){
                     currentplayer.addPlayerBalance(4000);
                 }
                 currentplayer.setPosition(19);
+                userIO.moveCar(currentplayer.getPreviousPositionChanceCard(), currentplayer.getPosition(), model.getCurrentTurn());
                 return;
             case 42:
                 currentplayer.setPosition(39);
+                userIO.moveCar(currentplayer.getPreviousPositionChanceCard(), currentplayer.getPosition(), model.getCurrentTurn());
                 return;
             case 43:
                 currentplayer.setHasJailCard(true);

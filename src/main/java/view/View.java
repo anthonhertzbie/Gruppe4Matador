@@ -59,57 +59,10 @@ public class View extends Notifier {
 
     public void updateView(Model model) {
         Player currentPlayer = model.getPlayerCurrentTurn();
-        // gui.showMessage(model.getPlayerCurrentTurn().getName() + " press ok to roll the dices : ");
         setDice(model.getCup());
         moveCar(currentPlayer.getPreviousPosition(), currentPlayer.getPosition(), model.getCurrentTurn());
         updateAccounts(model);
-        if (model.getNormalTurn()) {
-            System.out.println("Normal view");
-        } else if (model.isPrison()) {
-            System.out.println("Prison view");
-            // TODO setDice
-        } else if (model.isChanceCard()) {
-            System.out.println("Chance card view");
-            showChancecard(model);
-            if (model.getDeck().getFirstCard().getIndex() == 43 || model.getDeck().getFirstCard().getIndex() == 44) {
-                gui_fields[model.getPlayerCurrentTurn().getPreviousPosition()].setCar(gui_players[model.getCurrentTurn()], false);
-                gui_fields[model.getPlayerCurrentTurn().getPreviousPositionChanceCard()].setCar(gui_players[model.getCurrentTurn()], true);
-                gui.showMessage("You have been put in jail :(");
-                gui_fields[model.getPlayerCurrentTurn().getPreviousPositionChanceCard()].setCar(gui_players[model.getCurrentTurn()], false);
-            }
-        } else if (model.isBrewery()) {
-        } else if (model.isTax()) {
-        } else if (model.isShipping()) {
-        } else if (model.isParking()) {
-        }
     }
-
-
-
-    private void showChancecard(Model model){
-        gui.setChanceCard(model.getDeck().drawCard().toString());
-        gui.displayChanceCard();
-    }
-/*
-    public void showTax(Model model) {
-        Player currentPlayer = model.getPlayerCurrentTurn();
-        if (currentPlayer.getPosition() == 4) {
-            String[] options = {"10%", "4000$"};
-            String option = gui.getUserButtonPressed("Income tax: Pay 10% of your total assets or 4000$", "10%", "4000$");
-            if (option.equals(options[0])){
-                int tempBalance = (int) Math.round(currentPlayer.getValueOfAllAssets() * 0.9);
-                tempBalance = tempBalance - (tempBalance % 100);
-                currentPlayer.addPlayerBalance(tempBalance - currentPlayer.getValueOfAllAssets());
-            }
-            else {
-                currentPlayer.addPlayerBalance(-4000);
-                gui.showMessage("You have paid 4000$");
-            }
-        }else { gui.showMessage("Special-tax, press OK to pay 2000$");
-        }
-    }
-
- */
 
     public void updateAccounts(Model model){
         for(int i  = 0; i < model.getTotalPlayerCount(); i++){
