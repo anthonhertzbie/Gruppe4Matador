@@ -1,5 +1,6 @@
 package controller;
 
+
 import model.Model;
 
 public abstract class UserIO {
@@ -14,4 +15,6 @@ public abstract class UserIO {
     public abstract void showChanceCard(String description);
 
     public abstract void getUserSelection(String message, String... userOptions);
+
+    public abstract void removePlayerLost(Model model);
 }

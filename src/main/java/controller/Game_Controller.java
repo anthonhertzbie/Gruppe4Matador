@@ -45,12 +45,11 @@ public class Game_Controller {
     public void gameTurn(){
         while (true){
             String currentName = model.getPlayerCurrentTurn().getName();
+            playerOutOfGame();
             if (model.getPlayerCurrentTurn().isInJail() == false) {
-                playerOutOfGame();
                 userIO.waitForUserInput(currentName + "'s turn: Press ok to roll dice");
                 playerMoves();
                 booleanReset();
-                loseCondition();
                 notifierWithLogic();
             } else{
                 booleanReset();
@@ -68,6 +67,7 @@ public class Game_Controller {
     public void notifierWithLogic(){
         fieldlogic.specialField();
         notifyEverything();
+        loseCondition();
         model.changeTurn();
     }
 
@@ -87,6 +87,8 @@ public class Game_Controller {
         for (int i = 0; i < model.getTotalPlayerCount(); i++){
             if (model.getPlayerByIndex(i).getValueOfAllAssets() < 0){
                 model.getPlayerByIndex(i).setHasLost(true);
+                model.getPlayerByIndex(i).getAccount().setBalance(0);
+                userIO.removePlayerLost(model);
             }
         }
     }

@@ -1,6 +1,7 @@
 package view;
 
 import controller.UserIO;
+import model.Model;
 
 public class ViewUserIO extends UserIO {
     private final View view;
@@ -33,6 +34,11 @@ public class ViewUserIO extends UserIO {
     @Override
     public void getUserSelection(String message, String... userOptions) {
         view.gui.getUserSelection(message, userOptions);
+    }
+
+    @Override
+    public void removePlayerLost(Model model) {
+        view.removePlayerLost(model);
     }
 
     public void showChanceCard(String description){

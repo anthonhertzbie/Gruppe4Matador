@@ -52,9 +52,10 @@ public class View extends Notifier {
     }
 
     public void removePlayerLost(Model model){
-        if (model.getPlayerCurrentTurn().getHasLost()) {
-            gui.addPlayer(gui_players[model.getCurrentTurn()]);
-        }
+        gui_players[model.getCurrentTurn()].setName(model.getPlayerCurrentTurn().getName() + " has lost");
+        gui_players[model.getCurrentTurn()].setBalance(model.getPlayerCurrentTurn().getPlayerBalance());
+        System.out.println(model.getPlayerCurrentTurn().getPosition() + " is position when lost");
+        gui_fields[model.getPlayerCurrentTurn().getPosition()].setCar(gui_players[model.getCurrentTurn()], false);
     }
 
     public void updateView(Model model) {

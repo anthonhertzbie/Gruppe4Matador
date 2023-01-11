@@ -1,14 +1,15 @@
 package model;
 
 public class Account {
-    private int Balance = 4000;
-    private int AssetsValue = 4000;
+    private int Balance = 3000;
+    private int AssetsValue = 3000;
 
     public int getBalance(){
         return this.Balance;
     }
     public void setBalance(int newPlayerBallance){
         this.Balance = newPlayerBallance;
+        this.AssetsValue = newPlayerBallance;
     }
     public void addBalance(int amount){
         this.Balance += amount;

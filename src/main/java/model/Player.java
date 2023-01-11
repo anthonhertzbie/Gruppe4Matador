@@ -23,6 +23,11 @@ public class Player {
         System.out.println(previousPosition + "This is the previous position after setPosition");
         this.position = position;
     }
+
+    public Account getAccount() {
+        return account;
+    }
+
     public int getPreviousPositionChanceCard(){
         return previousPositionChanceCard;
     }
