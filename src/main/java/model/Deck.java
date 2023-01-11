@@ -17,7 +17,7 @@ public class Deck {
     }
 
     public Card getFirstCard(){
-        return deck[40];
+        return deck[0];
     }
 
     public Card getLastCard(){
@@ -30,9 +30,6 @@ public class Deck {
             deck[i] = deck[i+1];
         }
         deck[deck.length - 1] = lastCard;
-
-
-
 
         return lastCard;
     }
