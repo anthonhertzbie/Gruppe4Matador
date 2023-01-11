@@ -50,7 +50,6 @@ public class View extends Notifier {
         }
         updateView(model);
     }
-
     public void removePlayerLost(Model model){
         gui_players[model.getCurrentTurn()].setName(model.getPlayerCurrentTurn().getName() + " has lost");
         gui_players[model.getCurrentTurn()].setBalance(model.getPlayerCurrentTurn().getPlayerBalance());
@@ -59,6 +58,10 @@ public class View extends Notifier {
     }
 
     public void updateView(Model model) {
+        if (model.isGameIsOver())
+        {
+            gui.close();
+        }
         Player currentPlayer = model.getPlayerCurrentTurn();
         setDice(model.getCup());
         moveCar(currentPlayer.getPreviousPosition(), currentPlayer.getPosition(), model.getCurrentTurn());

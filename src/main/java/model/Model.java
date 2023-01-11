@@ -6,11 +6,12 @@ public class Model {
     private Player[] players;
     private Deck deck = new Deck();
     private Cup cup = new Cup();
-    private boolean startGUI, normalTurn, isChanceCard, isPrison, isShipping, isBrewery, isParking, isTax;
+    private boolean startGUI, normalTurn, isChanceCard, isPrison, isShipping, isBrewery, isParking, isTax, gameIsOver;
 
     public void setStartGUI(boolean startGUI){
         this.startGUI = startGUI;
     }
+
 
 
     public void setPlayerPosition(int diceThrow) {
@@ -185,4 +186,11 @@ public class Model {
         isTax = tax;
     }
 
+    public boolean isGameIsOver() {
+        return gameIsOver;
+    }
+
+    public void setGameIsOver(boolean gameIsOver) {
+        this.gameIsOver = gameIsOver;
+    }
 }

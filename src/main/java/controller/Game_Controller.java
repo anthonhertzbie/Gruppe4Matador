@@ -86,12 +86,30 @@ public class Game_Controller {
     }
 
     public void loseCondition(){
+        int playerInGame = 0;
+        String winner = "";
         for (int i = 0; i < model.getTotalPlayerCount(); i++){
             if (model.getPlayerByIndex(i).getValueOfAllAssets() < 0){
                 model.getPlayerByIndex(i).setHasLost(true);
                 model.getPlayerByIndex(i).getAccount().setBalance(0);
+                userIO.showMessage("You have lost :(. You will be removed.");
                 userIO.removePlayerLost(model);
             }
+        }
+        System.out.println("Im working here");
+        for (int i = 0; i < model.getTotalPlayerCount(); i++){
+            System.out.println("Im working here 2");
+            if (model.getPlayerByIndex(i).getHasLost() == false){
+                playerInGame += 1;
+                System.out.println("Checking if game is over" + " " + playerInGame);
+                winner = model.getPlayerByIndex(i).getName();
+            }
+        }
+        if (playerInGame == 1){
+            System.out.println("Nobody is winning?");
+            userIO.waitForUserInput("Game is over. " + winner + " has won!");
+            model.setGameIsOver(true);
+            notifyEverything();
         }
     }
 
