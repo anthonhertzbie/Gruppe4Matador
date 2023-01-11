@@ -52,7 +52,7 @@ public class Game_Controller {
             if (model.getPlayerCurrentTurn().getHasLost()){
                 model.changeTurn();
             }
-            else if (model.getPlayerCurrentTurn().isInJail() == false) {
+            else if (!model.getPlayerCurrentTurn().isInJail()) {
                 userIO.waitForUserInput(currentName + "'s turn: Press ok to roll dice");
                 playerMoves();
                 booleanReset();
@@ -88,6 +88,7 @@ public class Game_Controller {
     }
 
     public void notifierWithLogic(){
+        buyableLogic.buyableLogic(model, userIO);
         fieldlogic.specialField();
         notifyEverything();
         loseCondition();
