@@ -6,12 +6,17 @@ public class Model {
     private Player[] players;
     private Deck deck = new Deck();
     private Cup cup = new Cup();
+    private Gameboard gameboard = new Gameboard();
     private boolean startGUI, normalTurn, isChanceCard, isPrison, isShipping, isBrewery, isParking, isTax, gameIsOver;
 
     public void setStartGUI(boolean startGUI){
         this.startGUI = startGUI;
     }
 
+
+    public Gameboard gameBoard(){
+        return this.gameBoard();
+    }
 
 
     public void setPlayerPosition(int diceThrow) {
