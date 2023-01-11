@@ -60,6 +60,16 @@ public class Game_Controller {
 
         }
     }
+
+    public void ekstraTurn(){
+        if (model.getCup().getDice1() == model.getCup().getDice2() && model.getPlayerCurrentTurn().getDoubleTurn() < 2){
+            userIO.showMessage("Congrats, you get another turn. Roll the dices again!");
+            model.addCurrentTurn(-1);
+        } else{
+            userIO.showMessage("You're too lucky with the dices... 3rd double in a row... You have been put in jail!");
+        }
+    }
+
     public void playerMoves(){
         diceRoll();
         notifyEverything();

@@ -5,6 +5,7 @@ public class Player {
     private int position = 0;
     private int previousPosition = 0;
     private int previousPositionChanceCard;
+    private int doubleTurn = 0;
     private boolean inJail = false;
     private boolean hasJailCard = false;
     private int inJailTurn;
@@ -89,5 +90,13 @@ public class Player {
     public void setHasLost(boolean hasLost) {
         System.out.println(getName() + " has lost");
         this.hasLost = hasLost;
+    }
+
+    public int getDoubleTurn() {
+        return doubleTurn;
+    }
+
+    public void setDoubleTurn(int doubleTurn) {
+        this.doubleTurn = doubleTurn;
     }
 }
