@@ -4,12 +4,14 @@ import controller.Game_Controller;
 import controller.Notifier;
 import gui_fields.*;
 import gui_main.GUI;
+import gui_tests.ImageFrame;
 import model.Cup;
 import model.Helper;
 import model.Model;
 import model.Player;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 
 public class View extends Notifier {
@@ -28,7 +30,10 @@ public class View extends Notifier {
     GUI_Start gui_start;
     GUI_Brewery gui_brewery;
     GUI_Board gui_board;
+    BufferedImage buffIMG;
+    ImageFrame imageFrame;
     Helper helper = new Helper();
+    private ImageLoader imageLoader = new ImageLoader();
     private Notifier notifier;
     private Game_Controller gameController;
     public View(Game_Controller gameController){
@@ -48,6 +53,14 @@ public class View extends Notifier {
                 makePlayers(i, model);
             }
         }
+        imageLoader = new ImageLoader();
+        buffIMG = imageLoader.getBufferedImage();
+        imageFrame = new ImageFrame(buffIMG);
+        imageFrame.setX(0);
+        imageFrame.setY(0);
+        imageFrame.setTitle("fds");
+        imageFrame.display();
+        System.out.println(imageFrame + "Hidsadaeeewwww");
         updateView(model);
     }
     public void removePlayerLost(Model model){
@@ -100,12 +113,12 @@ public class View extends Notifier {
         helper.getFieldData(0,0);
 
         gui_fields[0] = new GUI_Start("Start", "$$$$$", "Recieve much gold if you pass", Color.RED, Color.BLACK);
-        gui_fields[1] = new GUI_Street("Rødovrevej","Buy 1200","","",Color.BLUE,Color.black);
+        gui_fields[1] = new GUI_Street("Rødovrevej","Køb 1200","","",Color.BLUE,Color.black);
         gui_fields[2] = new GUI_Chance();gui_fields[2].setSubText("Chance card");
-        gui_fields[3] = new GUI_Street("Hvidovrevej","Buy 1200","d","",Color.BLUE,Color.black);
-        gui_fields[4] = new GUI_Tax();gui_fields[4].setTitle("Tax!");gui_fields[4].setSubText("Pay up!");gui_fields[4].setDescription("Choose to either pay 4.000$ or 10% of your total assets.");
-        gui_fields[5] = new GUI_Shipping("default","Helsingør","d","","",Color.BLUE,Color.black);
-        gui_fields[6] = new GUI_Street("Roskildevej","st","d","20",Color.ORANGE,Color.black);
+        gui_fields[3] = new GUI_Street("Hvidovrevej","Køb 1200","","",Color.BLUE,Color.black);
+        gui_fields[4] = new GUI_Tax();gui_fields[4].setTitle("Skat!");gui_fields[4].setSubText("Betal skat");gui_fields[4].setDescription("Betal enten 4.000 kr til banken, eller 10% af din totale værdi.");
+        gui_fields[5] = new GUI_Shipping("default","Helsingør","","","",Color.BLUE,Color.black);
+        gui_fields[6] = new GUI_Street("Roskildevej","Buy 2000","d","20",Color.ORANGE,Color.black);
         gui_fields[7] = new GUI_Chance();gui_fields[7].setSubText("Chance card");
         gui_fields[8] = new GUI_Street("Valby Langgade","st","d","20",Color.ORANGE,Color.black);
         gui_fields[9] = new GUI_Street("Allégade","st","d","20",Color.ORANGE,Color.black);
