@@ -100,11 +100,11 @@ public class View extends Notifier {
         helper.getFieldData(0,0);
 
         gui_fields[0] = new GUI_Start("Start", "$$$$$", "Recieve much gold if you pass", Color.RED, Color.BLACK);
-        gui_fields[1] = new GUI_Street("Rødovrevej","","","2000",Color.BLUE,Color.black);
+        gui_fields[1] = new GUI_Street("Rødovrevej","Buy 1200","","",Color.BLUE,Color.black);
         gui_fields[2] = new GUI_Chance();gui_fields[2].setSubText("Chance card");
-        gui_fields[3] = new GUI_Street("Hvidovrevej","st","d","20",Color.BLUE,Color.black);
+        gui_fields[3] = new GUI_Street("Hvidovrevej","Buy 1200","d","",Color.BLUE,Color.black);
         gui_fields[4] = new GUI_Tax();gui_fields[4].setTitle("Tax!");gui_fields[4].setSubText("Pay up!");gui_fields[4].setDescription("Choose to either pay 4.000$ or 10% of your total assets.");
-        gui_fields[5] = new GUI_Shipping("default","Helsingør","d","","20",Color.BLUE,Color.black);
+        gui_fields[5] = new GUI_Shipping("default","Helsingør","d","","",Color.BLUE,Color.black);
         gui_fields[6] = new GUI_Street("Roskildevej","st","d","20",Color.ORANGE,Color.black);
         gui_fields[7] = new GUI_Chance();gui_fields[7].setSubText("Chance card");
         gui_fields[8] = new GUI_Street("Valby Langgade","st","d","20",Color.ORANGE,Color.black);
