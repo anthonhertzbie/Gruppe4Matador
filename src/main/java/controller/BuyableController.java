@@ -48,8 +48,9 @@ public class BuyableController {
                     case "nej":
                 }
             }
-        } else {
-            payrent(currenPosition);
+         else {
+                payrent(currenPosition);
+            }
         }
     }
     private void payrent(int currentPosition){

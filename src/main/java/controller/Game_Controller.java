@@ -84,7 +84,6 @@ public class Game_Controller {
 
     public void playerMoves(){
         diceRoll();
-        notifyEverything();
         model.setPlayerPosition(model.getCup().getSum());
     }
 

@@ -95,10 +95,10 @@ public class Fieldlogic_Controller {
     private void chanceCardField(Model model){
         Player currentplayer = model.getPlayerCurrentTurn();
         userIO.moveCar(model);
-        userIO.showChanceCard(model.getDeck().getFirstCard().toString());
+        userIO.showChanceCard(model.getDeck().drawCard().toString());
         userIO.showMessage("You have drawn a chance card!");
 
-        switch(model.getDeck().getFirstCard().getIndex() + 1){
+        switch(model.getDeck().getLastCard().getIndex() + 1){
             case 1:
                 return;
             case 2:
