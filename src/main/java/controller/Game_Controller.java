@@ -45,8 +45,10 @@ public class Game_Controller {
     public void gameTurn(){
         while (true){
             String currentName = model.getPlayerCurrentTurn().getName();
-            playerOutOfGame();
-            if (model.getPlayerCurrentTurn().isInJail() == false) {
+            if (model.getPlayerCurrentTurn().getHasLost()){
+                model.changeTurn();
+            }
+            else if (model.getPlayerCurrentTurn().isInJail() == false) {
                 userIO.waitForUserInput(currentName + "'s turn: Press ok to roll dice");
                 playerMoves();
                 booleanReset();

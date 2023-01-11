@@ -87,6 +87,7 @@ public class Player {
     }
 
     public void setHasLost(boolean hasLost) {
+        System.out.println(getName() + " has lost");
         this.hasLost = hasLost;
     }
 }
