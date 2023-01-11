@@ -5,6 +5,7 @@ import java.io.*;
 public class Helper {
     String[][] fieldData = new String[41][11];
     String[] chancecards = new String[45];
+    String[][] carColour = new String[7][3];
 
     /**
      * Constructor for the Helper class that reads the txt and csv files in the resource folder
@@ -12,6 +13,7 @@ public class Helper {
     public Helper() {
             csvReader();
             txtReader();
+            carColourReader();
     }
 
     public void txtReader(){
@@ -49,6 +51,23 @@ public class Helper {
             e.printStackTrace();
         }
     }
+    private void carColourReader(){
+        //https://stackoverflow.com/questions/20389255/reading-a-resource-file-from-within-jar
+        try (InputStream in = getClass().getResourceAsStream("/Car-colour.csv");
+             BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
+            String line;
+            int i = 0;
+            while((line = reader.readLine()) != null){
+                String[] datastoreage = line.split("/");
+                for (int j = 0; j < datastoreage.length ; j++) {
+                    carColour[i][j] = datastoreage[j];
+                }
+                i++;
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 
     public String getFieldData(int row, int colums) {
         return fieldData[row][colums];
@@ -61,9 +80,13 @@ public class Helper {
 
     public static void main(String[] args) throws IOException {
         Gameboard gameboard = new Gameboard();
+        Helper helper = new Helper();
+        helper.carColourPrint();
+
         /*Helper helper = new Helper();
         helper.chancecardsPrint();
         helper.fieldsPrint();
+        helper.carColourPrint();
 
 
 
@@ -101,6 +124,14 @@ public class Helper {
     public void chancecardsPrint(){
         for (int i = 0; i < chancecards.length; i++) {
             System.out.println(chancecards[i]);
+        }
+    }
+    public void carColourPrint(){
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 3; j++) {
+                System.out.print(carColour[i][j] + ", ");
+            }
+            System.out.println();
         }
     }
 
