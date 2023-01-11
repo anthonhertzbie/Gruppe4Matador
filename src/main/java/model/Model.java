@@ -87,7 +87,6 @@ public class Model {
     }
 
     public void changeTurn(){
-        System.out.println(currentTurn);
         if (currentTurn < totalPlayerCount - 1) {
             currentTurn += 1;
         } else{

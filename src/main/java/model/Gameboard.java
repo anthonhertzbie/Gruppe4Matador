@@ -40,6 +40,7 @@ public class Gameboard {
                 ownerOfAll = ownerTable[11][playerIndex] && ownerTable[13][playerIndex] && ownerTable[14][playerIndex];
                 return ownerOfAll;
             }
+
             case 16, 18, 19 -> {
                 ownerOfAll = ownerTable[16][playerIndex] && ownerTable[18][playerIndex] && ownerTable[19][playerIndex];
                 return ownerOfAll;
