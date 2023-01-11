@@ -10,14 +10,18 @@ public class Game_Controller {
     private final ArrayList<Notifier> notifiers = new ArrayList<>();
 
     private Fieldlogic_Controller fieldlogic;
+
+    private BuyableController buyableLogic;
     public Game_Controller(UserIO userIO){
         this.userIO = userIO;
-        this.fieldlogic = new Fieldlogic_Controller(model, userIO);
+        fieldlogic = new Fieldlogic_Controller(model, userIO);
+        buyableLogic = new BuyableController(model, userIO);
     }
 
     public void setUserIO(UserIO userIO) {
         this.userIO = userIO;
         fieldlogic = new Fieldlogic_Controller(model, userIO);
+        buyableLogic = new BuyableController(model, userIO);
     }
 
     public void addNotifier(Notifier notifier){
@@ -47,7 +51,7 @@ public class Game_Controller {
             if (model.getPlayerCurrentTurn().getHasLost()){
                 model.changeTurn();
             }
-            else if (model.getPlayerCurrentTurn().isInJail() == false) {
+            else if (!model.getPlayerCurrentTurn().isInJail()) {
                 userIO.waitForUserInput(currentName + "'s turn: Press ok to roll dice");
                 playerMoves();
                 booleanReset();
@@ -83,6 +87,7 @@ public class Game_Controller {
     }
 
     public void notifierWithLogic(){
+        buyableLogic.buyableLogic(model, userIO);
         fieldlogic.specialField();
         notifyEverything();
         loseCondition();
@@ -95,7 +100,7 @@ public class Game_Controller {
     }
 
     /**
-     * This only needs to be called !!FIRST THIG!! after the current player has moved.
+     * This only needs to be called !!FIRST THING!! after the current player has moved.
      */
     public void booleanReset(){
         model.resetBooleans();
