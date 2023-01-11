@@ -61,7 +61,7 @@ public class Helper {
 
     public static void main(String[] args) throws IOException {
         Gameboard gameboard = new Gameboard();
-        /*Helper helper = new Helper();
+        /* Helper helper = new Helper();
         helper.chancecardsPrint();
         helper.fieldsPrint();
 

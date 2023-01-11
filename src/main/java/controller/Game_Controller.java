@@ -15,7 +15,6 @@ public class Game_Controller {
         this.fieldlogic = new Fieldlogic_Controller(model, userIO);
     }
 
-
     public void setUserIO(UserIO userIO) {
         this.userIO = userIO;
         fieldlogic = new Fieldlogic_Controller(model, userIO);
