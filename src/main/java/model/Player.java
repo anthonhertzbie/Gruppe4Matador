@@ -96,7 +96,11 @@ public class Player {
         return doubleTurn;
     }
 
-    public void setDoubleTurn(int doubleTurn) {
+    public void addDoubleTurn(int doubleTurn) {
+        this.doubleTurn += doubleTurn;
+    }
+
+    public void setDoubleTurn(int doubleTurn){
         this.doubleTurn = doubleTurn;
     }
 }

@@ -65,12 +65,21 @@ public class Game_Controller {
         }
     }
 
-    public void ekstraTurn(){
+    public void checkForDoubleDices(){
         if (model.getCup().getDice1() == model.getCup().getDice2() && model.getPlayerCurrentTurn().getDoubleTurn() < 2){
-            userIO.showMessage("Congrats, you get another turn. Roll the dices again!");
+            userIO.showMessage("Congrats, you get another turn!");
+            model.getPlayerCurrentTurn().addDoubleTurn(1);
             model.addCurrentTurn(-1);
         } else{
+            userIO.moveCar(model.getPlayerCurrentTurn().getPosition(), 10, model.getCurrentTurn());
+            System.out.println("This is the position when going to jail : " + model.getPlayerCurrentTurn().getPosition() + " OLD POSITION IS " + model.getPlayerCurrentTurn().getPreviousPosition());
             userIO.showMessage("You're too lucky with the dices... 3rd double in a row... You have been put in jail!");
+            model.setPrison(true);
+            model.getPlayerCurrentTurn().setPosition(10);
+            System.out.println("This is the position when going to jail221 : " + model.getPlayerCurrentTurn().getPosition() + " OLD POSITION IS " + model.getPlayerCurrentTurn().getPreviousPosition());
+            userIO.moveCar(model.getPlayerCurrentTurn().getPreviousPosition(), model.getPlayerCurrentTurn().getPosition(), model.getCurrentTurn());
+            model.getPlayerCurrentTurn().setDoubleTurn(0);
+
         }
     }
 
@@ -84,6 +93,7 @@ public class Game_Controller {
         fieldlogic.specialField();
         notifyEverything();
         loseCondition();
+        checkForDoubleDices();
         model.changeTurn();
     }
 
