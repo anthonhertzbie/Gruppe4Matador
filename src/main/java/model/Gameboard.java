@@ -5,6 +5,7 @@ public class Gameboard {
     private Field[] fields = new Field[40];
     private int[][] prices = new int[40][8];
     private boolean[][] ownerTable = new boolean[40][6];
+    private String[] fieldType = new String[40];
 
     public Gameboard(){
         copyFieldInformation();
@@ -125,12 +126,20 @@ public class Gameboard {
     private void copyFieldInformation(){
         copyTitels();
         copyNumbers();
+        copyFieldType();
     }
     private void copyTitels(){
         for (int i = 0; i < 40; i++) {
             fields[i] = new Field(helper.getFieldData(i + 1, 0));
         }
     }
+    private void copyFieldType(){
+        for (int i = 0; i < 40; i++) {
+            fieldType[i] = helper.getFieldData(i + 1, 2);
+            System.out.println(fieldType[i]);
+        }
+    }
+
     private void copyNumbers(){
         for (int i = 0; i < 40; i++) {
             for (int j = 0; j < 8; j++) {
@@ -138,4 +147,10 @@ public class Gameboard {
             }
         }
     }
+
+    public String getFieldType(int index){
+        return fieldType[index].strip();
+    }
+
+
 }
