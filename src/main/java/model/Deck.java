@@ -31,11 +31,11 @@ public class Deck {
         }
         deck[deck.length - 1] = lastCard;
 
-
         return lastCard;
     }
 
     public void shuffle() {
+
         Random random = new Random();
         for (int i = 0; i < 10000; i++) {
             int a = random.nextInt(0, 45);

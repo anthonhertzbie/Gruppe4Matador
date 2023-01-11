@@ -6,10 +6,16 @@ public class Model {
     private Player[] players;
     private Deck deck = new Deck();
     private Cup cup = new Cup();
-    private boolean startGUI, normalTurn, isChanceCard, isPrison, isShipping, isBrewery, isParking, isTax;
+    private Gameboard gameboard = new Gameboard();
+    private boolean startGUI, normalTurn, isChanceCard, isPrison, isShipping, isBrewery, isParking, isTax, gameIsOver;
 
     public void setStartGUI(boolean startGUI){
         this.startGUI = startGUI;
+    }
+
+
+    public Gameboard gameBoard(){
+        return this.gameBoard();
     }
 
 
@@ -81,7 +87,6 @@ public class Model {
     }
 
     public void changeTurn(){
-        System.out.println(currentTurn);
         if (currentTurn < totalPlayerCount - 1) {
             currentTurn += 1;
         } else{
@@ -185,4 +190,11 @@ public class Model {
         isTax = tax;
     }
 
+    public boolean isGameIsOver() {
+        return gameIsOver;
+    }
+
+    public void setGameIsOver(boolean gameIsOver) {
+        this.gameIsOver = gameIsOver;
+    }
 }
