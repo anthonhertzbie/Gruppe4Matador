@@ -16,23 +16,31 @@ public class BuyableController {
     }
     private void purchaseField(Model model, UserIO userIO){
         int currentPlayer = model.getCurrentTurn();
-        int currenPosition = model.getPlayerCurrentTurn().getPosition();
+        int currentPosition = model.getPlayerCurrentTurn().getPosition();
         int previousPosition = model.getPlayerCurrentTurn().getPreviousPosition();
-        if(!model.gameBoard().isOwned(currenPosition, currentPlayer)){
-            userIO.moveCar(previousPosition, currenPosition, currentPlayer);
+        if(!model.gameBoard().isOwned(currentPosition)){
+            userIO.moveCar(previousPosition, currentPosition, currentPlayer);
             String userInput = userIO.getUserButtonPressed("Vil du købe dette felt", "ja", "nej");
             switch (userInput){
                 case "ja":
                     //the amount that needs to be added.
-                    int price = model.gameBoard().getSpecificPrice(currenPosition, 0);
-                    model.gameBoard().buyField(currenPosition, currentPlayer);
+                    int price = model.gameBoard().getSpecificPrice(currentPosition, 0);
+                    model.gameBoard().buyField(currentPosition, currentPlayer);
                     model.getPlayerCurrentTurn().addPlayerBalance(-price);
-
                     return;
                 case "nej":
             }
+        } else {
+            payrent(currentPosition);
         }
     }
+    private void payrent(int currentPosition){
+        userIO.showMessage(model.getPlayerCurrentTurn().getName() + "! DU skal sgu betale rente kammerat!");
+        int rentToPay = model.gameBoard().getFieldCurrentRent(currentPosition);
+        model.getPlayerCurrentTurn().addPlayerBalance(-rentToPay);
+
+    }
+
     private void purchaseHouse(){
 
     }

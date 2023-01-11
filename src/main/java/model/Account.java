@@ -1,20 +1,33 @@
 package model;
 
 public class Account {
-    private int Balance = 3000;
-    private int AssetsValue = 3000;
+    private int Balance = 30000;
+    private int AssetsValue = 30000;
 
     public int getBalance(){
         return this.Balance;
     }
+
+    // only for test/game start
     public void setBalance(int newPlayerBallance){
         this.Balance = newPlayerBallance;
         this.AssetsValue = newPlayerBallance;
     }
+    // works when you buy a field or pays rent
     public void addBalance(int amount){
         this.Balance += amount;
         this.AssetsValue += amount;
     }
+
+    public void payForHouse(int houseCost){
+        this.Balance -= houseCost;
+        this.AssetsValue += houseCost;
+    }
+
+
+
+
+
     public int getAssetsValue(){
         return this.AssetsValue;
     }

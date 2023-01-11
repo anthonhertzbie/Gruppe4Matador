@@ -6,7 +6,7 @@ public class Gameboard {
     private int[][] prices = new int[40][8];
     private boolean[][] ownerTable = new boolean[40][6];
 
-    public Gameboard(){
+    public Gameboard() {
         copyFieldInformation();
         initFieldPrice();
         initHousePrice();
@@ -17,7 +17,7 @@ public class Gameboard {
     /**
      * Sells all property
      */
-    private void initOwner(){
+    private void initOwner() {
         for (int i = 0; i < 40; i++) {
             for (int j = 0; j < 6; j++) {
                 ownerTable[i][j] = false;
@@ -25,7 +25,7 @@ public class Gameboard {
         }
     }
 
-    public boolean ownerOfAll(int playerIndex, int field){
+    public boolean ownerOfAll(int playerIndex, int field) {
         boolean ownerOfAll = false;
         switch (field) {
             case 1, 3 -> {
@@ -76,66 +76,85 @@ public class Gameboard {
      */
 
 
-
-    public boolean isOwned(int fieldIndex, int playerIndex){
-        return ownerTable[fieldIndex][playerIndex];
+    public boolean isOwned(int fieldIndex) {
+        boolean isOwned = false;
+        for (int i = 0; i < 6; i++) {
+            if (ownerTable[fieldIndex][i]) {
+                isOwned = ownerTable[fieldIndex][i];
+                break;
+            }
+        }
+        return isOwned;
     }
-    public void buyField(int fieldIndex, int playerIndex){
-        ownerTable[fieldIndex][playerIndex] = true;
-    }
-    public void sellField(int fieldIndex, int playerIndex){
-        ownerTable[fieldIndex][playerIndex] = false;
+    public int whoOwnsThis(int fieldIndex){
+        int playerIndex = 0;
+        for (int i = 0; i < 6; i++) {
+            if(ownerTable[fieldIndex][i]){
+                playerIndex = i;
+            }
+        }
+        return playerIndex;
     }
 
 
-    public void rentIncrease(int fieldIndex){
+        public void buyField ( int fieldIndex, int playerIndex){
+            System.out.println(ownerTable[fieldIndex][playerIndex]);
+            ownerTable[fieldIndex][playerIndex] = true;
+            System.out.println(ownerTable[fieldIndex][playerIndex]);
+        }
+        public void sellField ( int fieldIndex, int playerIndex){
+            ownerTable[fieldIndex][playerIndex] = false;
+        }
+
+
+        public void rentIncrease ( int fieldIndex){
             for (int i = 2; i < 7; i++) {
                 if (fields[fieldIndex].getCurrentRent() == prices[fieldIndex][i]) {
                     fields[fieldIndex].setCurrentRent(prices[fieldIndex][i + 1]);
                     return;
                 }
             }
-    }
-    private void initHousePrice(){
-        for (int i = 0; i < fields.length - 1; i++) {
-            fields[i].setPropertyValue(prices[i][1]);
         }
-    }
-    private void initRent(){
-        for (int i = 0; i < fields.length - 1; i++) {
-            if (fields[i].getPropertyValue() != 0) {
-                fields[i].setCurrentRent(prices[i][2]);
+        private void initHousePrice () {
+            for (int i = 0; i < fields.length - 1; i++) {
+                fields[i].setPropertyValue(prices[i][1]);
+            }
+        }
+        private void initRent () {
+            for (int i = 0; i < fields.length - 1; i++) {
+                if (fields[i].getPropertyValue() != 0) {
+                    fields[i].setCurrentRent(prices[i][2]);
+                }
+            }
+        }
+        private void initFieldPrice () {
+            for (int i = 0; i < fields.length - 1; i++) {
+                fields[i].setPropertyValue(prices[i][0]);
+            }
+        }
+        public String getFieldName ( int fieldIndex){
+            return fields[fieldIndex].getTitleOf();
+        }
+        public int getFieldCurrentRent ( int fieldIndex){
+            return fields[fieldIndex].getCurrentRent();
+        }
+        public int getSpecificPrice ( int fieldIndex, int priceNo){
+            return prices[fieldIndex][priceNo];
+        }
+        private void copyFieldInformation () {
+            copyTitels();
+            copyNumbers();
+        }
+        private void copyTitels () {
+            for (int i = 0; i < 40; i++) {
+                fields[i] = new Field(helper.getFieldData(i + 1, 0));
+            }
+        }
+        private void copyNumbers () {
+            for (int i = 0; i < 40; i++) {
+                for (int j = 0; j < 8; j++) {
+                    prices[i][j] = Integer.parseInt(helper.getFieldData(i + 1, j + 3));
+                }
             }
         }
     }
-    private void initFieldPrice(){
-        for (int i = 0; i < fields.length - 1; i++) {
-            fields[i].setPropertyValue(prices[i][0]);
-        }
-    }
-    public String getFieldName(int fieldIndex){
-        return fields[fieldIndex].getTitleOf();
-    }
-    public int getFieldCurrentRent(int fieldIndex){
-        return fields[fieldIndex].getCurrentRent();
-    }
-    public int getSpecificPrice(int fieldIndex, int priceNo){
-        return prices[fieldIndex][priceNo];
-    }
-    private void copyFieldInformation(){
-        copyTitels();
-        copyNumbers();
-    }
-    private void copyTitels(){
-        for (int i = 0; i < 40; i++) {
-            fields[i] = new Field(helper.getFieldData(i + 1, 0));
-        }
-    }
-    private void copyNumbers(){
-        for (int i = 0; i < 40; i++) {
-            for (int j = 0; j < 8; j++) {
-                prices[i][j] = Integer.parseInt(helper.getFieldData(i + 1, j + 3));
-            }
-        }
-    }
-}
