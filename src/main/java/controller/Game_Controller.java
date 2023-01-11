@@ -55,6 +55,7 @@ public class Game_Controller {
                 userIO.waitForUserInput(currentName + "'s turn: Press ok to roll dice");
                 playerMoves();
                 booleanReset();
+                userIO.moveCar(model);
                 notifierWithLogic();
             } else{
                 booleanReset();
