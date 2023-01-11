@@ -56,7 +56,7 @@ public class View extends Notifier {
         imageLoader = new ImageLoader();
         buffIMG = imageLoader.getBufferedImage();
         imageFrame = new ImageFrame(buffIMG);
-        imageFrame.setX(0);
+        imageFrame.setX(100);
         imageFrame.setY(0);
         imageFrame.setTitle("fds");
         imageFrame.display();
