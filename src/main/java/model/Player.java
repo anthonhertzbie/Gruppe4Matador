@@ -21,7 +21,6 @@ public class Player {
     }
     public void setPosition(int position){
         this.previousPositionChanceCard = this.position;
-        System.out.println(previousPosition + "This is the previous position after setPosition");
         this.position = position;
     }
 
@@ -79,7 +78,6 @@ public class Player {
     }
 
     public void setInJailTurn(int inJailTurn) {
-        System.out.println("injailTurn is : " + this.inJailTurn + " inJailTurn sat to : " + inJailTurn);
         this.inJailTurn = inJailTurn;
     }
 
@@ -88,7 +86,6 @@ public class Player {
     }
 
     public void setHasLost(boolean hasLost) {
-        System.out.println(getName() + " has lost");
         this.hasLost = hasLost;
     }
 

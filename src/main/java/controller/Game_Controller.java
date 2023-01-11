@@ -66,13 +66,11 @@ public class Game_Controller {
             userIO.showMessage("Congrats, you get another turn!");
             model.getPlayerCurrentTurn().addDoubleTurn(1);
             model.addCurrentTurn(-1);
-        } else{
+        } else if (model.getCup().getDice1() == model.getCup().getDice2() && model.getPlayerCurrentTurn().getDoubleTurn() == 2){
             userIO.moveCar(model.getPlayerCurrentTurn().getPosition(), 10, model.getCurrentTurn());
-            System.out.println("This is the position when going to jail : " + model.getPlayerCurrentTurn().getPosition() + " OLD POSITION IS " + model.getPlayerCurrentTurn().getPreviousPosition());
             userIO.showMessage("You're too lucky with the dices... 3rd double in a row... You have been put in jail!");
             model.setPrison(true);
             model.getPlayerCurrentTurn().setPosition(10);
-            System.out.println("This is the position when going to jail221 : " + model.getPlayerCurrentTurn().getPosition() + " OLD POSITION IS " + model.getPlayerCurrentTurn().getPreviousPosition());
             userIO.moveCar(model.getPlayerCurrentTurn().getPreviousPosition(), model.getPlayerCurrentTurn().getPosition(), model.getCurrentTurn());
             model.getPlayerCurrentTurn().setDoubleTurn(0);
 
@@ -116,17 +114,13 @@ public class Game_Controller {
                 userIO.removePlayerLost(model);
             }
         }
-        System.out.println("Im working here");
         for (int i = 0; i < model.getTotalPlayerCount(); i++){
-            System.out.println("Im working here 2");
             if (model.getPlayerByIndex(i).getHasLost() == false){
                 playerInGame += 1;
-                System.out.println("Checking if game is over" + " " + playerInGame);
                 winner = model.getPlayerByIndex(i).getName();
             }
         }
         if (playerInGame == 1){
-            System.out.println("Nobody is winning?");
             userIO.waitForUserInput("Game is over. " + winner + " has won!");
             model.setGameIsOver(true);
             notifyEverything();
