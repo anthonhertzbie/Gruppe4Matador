@@ -60,12 +60,13 @@ public class Helper {
 
 
     public static void main(String[] args) throws IOException {
+        Gameboard gameboard = new Gameboard();
         /*Helper helper = new Helper();
         helper.chancecardsPrint();
         helper.fieldsPrint();
 
-         */
-        Gameboard gameboard = new Gameboard();
+
+
         int i = 39;
         System.out.println(gameboard.getFieldCurrentRent(i));
         gameboard.rentIncrease(i);
@@ -78,6 +79,14 @@ public class Helper {
         System.out.println(gameboard.getFieldCurrentRent(i));
         gameboard.rentIncrease(i);
         System.out.println(gameboard.getFieldCurrentRent(i));
+        */
+        gameboard.buyField(1, 1);
+        gameboard.buyField(3, 1);
+
+        if(gameboard.ownerOfAll(1,3)){
+            System.out.println("true");
+        }
+
     }
 
     public void fieldsPrint(){
