@@ -7,7 +7,7 @@ public class Player {
     private int previousPositionChanceCard;
     private int doubleTurn = 0;
     private boolean inJail = false;
-    private boolean hasJailCard = false;
+    private boolean hasJailCard = true;
     private int inJailTurn;
     private boolean hasLost = false;
 
