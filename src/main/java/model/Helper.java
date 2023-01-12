@@ -68,6 +68,7 @@ public class Helper {
             e.printStackTrace();
         }
     }
+    public int getCarColour(int row, int colums) {return Integer.parseInt(carColour[row][colums]);}
 
     public String getFieldData(int row, int colums) {
         return fieldData[row][colums];
@@ -80,8 +81,7 @@ public class Helper {
 
     public static void main(String[] args) throws IOException {
         Gameboard gameboard = new Gameboard();
-        Helper helper = new Helper();
-        helper.carColourPrint();
+
 
         /*Helper helper = new Helper();
         helper.chancecardsPrint();
