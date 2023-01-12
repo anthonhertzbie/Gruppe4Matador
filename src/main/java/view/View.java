@@ -10,6 +10,7 @@ import model.Model;
 import model.Player;
 
 import java.awt.*;
+import java.util.Objects;
 
 
 public class View extends Notifier {
@@ -21,7 +22,7 @@ public class View extends Notifier {
     GUI_Car[] gui_cars;
     // Gameboard
     GUI_Field[] gui_fields = new GUI_Field[40];
-    GUI_Street[] gui_streets = new GUI_Street[5];
+    GUI_Ownable[] gui_ownables = new GUI_Street[40];
     GUI_Jail gui_jail;
     GUI_Chance gui_chance;
     GUI_Tax gui_taxes;
@@ -40,7 +41,6 @@ public class View extends Notifier {
     @Override
     public void startGame(Model model) {
         if (model.getStartGUI()) {
-
             setGui_start();
             gameController.setTotalPlayerCount(setTotalPlayers());
             setGuiTotalPlayers(model);
@@ -97,7 +97,6 @@ public class View extends Notifier {
     }
 
     public GUI_Field[] gameBoardFields(){
-        helper.getFieldData(0,0);
 
         gui_fields[0] = new GUI_Start("Start", "$$$$$", "Recieve much gold if you pass", Color.RED, Color.BLACK);
         gui_fields[1] = new GUI_Street("Rødovrevej",helper.getFieldData(2,3) + "kr","","",new Color(114,109,232),Color.black);
@@ -142,6 +141,26 @@ public class View extends Notifier {
 
         return gui_fields;
     }
+
+    public void setBorder(int index,int player){
+        int red = helper.getCarColour(player, 2);
+        int green = helper.getCarColour(player, 3);
+        int blue = helper.getCarColour(player, 4);
+        GUI_Field f = gui.getFields()[index];
+        if(f instanceof GUI_Ownable){
+            GUI_Ownable o = (GUI_Ownable) f;
+            o.setBorder(new Color(red, green, blue));
+        }
+    }
+    public void resetBorder(int index){
+        GUI_Field f = gui.getFields()[index];
+        if(f instanceof GUI_Ownable){
+            GUI_Ownable o = (GUI_Ownable) f;
+            o.setBorder(new Color(0,0,0));
+        }
+    }
+
+
     public void setGui_start(){
         gui = new GUI(gameBoardFields(), Color.ORANGE);
     }
