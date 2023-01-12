@@ -19,6 +19,9 @@ public abstract class UserIO {
     public abstract void removePlayerLost(Model model);
 
     public abstract void setOwnerBorder(int index, int player);
+    public abstract void setHouses(int fieldIndex, int houses);
 
-    //public abstract void setHouses(int houses);
+    public abstract void updateView(Model model);
+
+
 }

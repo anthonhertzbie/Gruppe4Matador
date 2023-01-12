@@ -96,6 +96,14 @@ public class View extends Notifier {
          */
     }
 
+    public void setHouses(int fieldIndex, int numberOfHouses){
+        GUI_Field f = gui.getFields()[fieldIndex];
+        if(f instanceof GUI_Ownable){
+            GUI_Street s = (GUI_Street) f;
+            s.setHouses(numberOfHouses);
+        }
+    }
+
     public GUI_Field[] gameBoardFields(){
 
         gui_fields[0] = new GUI_Start(helper.getFieldData(1,0), "$$$$$", "Recieve much gold if you pass", Color.RED, Color.BLACK);

@@ -47,35 +47,32 @@ public class Game_Controller {
 
     public void gameTurn(){
         while (true){
-            int currentPosition = model.getPlayerCurrentTurn().getPosition();
-            String currentName = model.getPlayerCurrentTurn().getName();
-            int player = model.getCurrentTurn();
             if (model.getPlayerCurrentTurn().getHasLost()){
                 model.changeTurn();
             } else if (!model.getPlayerCurrentTurn().isInJail()) {
-
-                // Coming up....?
-                if (model.gameBoard().whoOwnsThis(currentPosition) != model.getCurrentTurn() && !model.gameBoard().ownerOfAll(model.gameBoard().whoOwnsThis(currentPosition), currentPosition)){
-                    String choice = userIO.getUserButtonPressed(currentName + "'s tur.", "Rull med tærningerne", "Byg huse");
-                    switch(choice){
-                        case "Rull med tærningerne":
-                            break;
-                        case "Byg huse":
-                            buyableLogic.purchaseHouse();
-                            break;
-                    }
-                }
-                userIO.waitForUserInput(currentName + "'s turn: Press ok to roll dice");
-                playerMoves();
-                booleanReset();
-                userIO.moveCar(model);
-                notifierWithLogic();
-            } else{
-                booleanReset();
-                notifierWithLogic();
+                normalTurn();
             }
+            booleanReset();
+            notifierWithLogic();
 
         }
+    }
+    private void normalTurn(){
+        int currentPosition = model.getPlayerCurrentTurn().getPosition();
+        String currentName = model.getPlayerCurrentTurn().getName();
+        if (model.gameBoard().whoOwnsThis(currentPosition) != model.getCurrentTurn() && !model.gameBoard().ownerOfAll(model.gameBoard().whoOwnsThis(currentPosition), currentPosition)){
+            String choice = userIO.getUserButtonPressed(currentName + "'s tur.", "Rull med tærningerne", "Byg huse");
+            switch(choice){
+                case "Rull med tærningerne":
+                    break;
+                case "Byg huse":
+                    buyableLogic.purchaseHouse();
+                    break;
+            }
+        }
+        userIO.waitForUserInput(currentName + "'s turn: Press ok to roll dice");
+        userIO.updateView(model);
+        playerMoves();
     }
 
     public void checkForDoubleDices(){
@@ -99,6 +96,7 @@ public class Game_Controller {
     }
 
     public void notifierWithLogic(){
+        userIO.moveCar(model);
         fieldlogic.specialField();
         buyableLogic.buyableLogic(model, userIO);
         notifyEverything();

@@ -3,6 +3,8 @@ package controller;
 import model.Model;
 import model.Player;
 
+import java.util.ArrayList;
+
 public class BuyableController {
     private Model model;
     private UserIO userIO;
@@ -36,6 +38,7 @@ public class BuyableController {
         if (fieldAcceptTest(model)) {
             if (!model.gameBoard().isOwned(currenPosition)) {
                 userIO.moveCar(model);
+                userIO.updateView(model);
                 String userInput = userIO.getUserButtonPressed("Vil du købe dette felt", "ja", "nej");
                 switch (userInput) {
                     case "ja":
@@ -69,7 +72,12 @@ public class BuyableController {
     }
 
     public void purchaseHouse(){
+        for (int i = 0; i < 40; i++) {
+            if(model.gameBoard().whoOwnsThis(i) == model.getCurrentTurn()){
 
+            }
+
+        }
     }
 
 

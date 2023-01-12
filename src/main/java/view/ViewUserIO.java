@@ -48,12 +48,16 @@ public class ViewUserIO extends UserIO {
     public void setOwnerBorder(int index, int player){
         view.setBorder(index, player);
     }
-    /*
-    public void setHouses(int houses){
-        view.setHouses();
+
+    @Override
+    public void updateView(Model model) {
+        view.updateView(model);
+        view.moveCar(model);
+    }
+    public void setHouses(int fieldIndex, int houses){
+        view.setHouses(fieldIndex, houses);
     }
 
-     */
 
 
 }
