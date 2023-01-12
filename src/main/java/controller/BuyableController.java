@@ -68,7 +68,8 @@ public class BuyableController {
         }
     }
 
-    private void purchaseHouse(){
+    public void purchaseHouse(){
+
     }
 
 

@@ -138,7 +138,6 @@ public class View extends Notifier {
         gui_fields[37] = new GUI_Street("t",helper.getFieldData(38,3) + "kr","d","20",new Color(171,52,175),Color.black);
         gui_fields[38] = new GUI_Tax();gui_fields[38].setTitle("Tax!");gui_fields[38].setSubText("Pay up!");gui_fields[38].setDescription("Pay  2000$");
         gui_fields[39] = new GUI_Street("t",helper.getFieldData(40,3) + "kr","d","20",new Color(171,52,175),Color.black);
-
         return gui_fields;
     }
 
@@ -152,17 +151,20 @@ public class View extends Notifier {
             o.setBorder(new Color(red, green, blue));
         }
     }
-    public void resetBorder(int index){
-        GUI_Field f = gui.getFields()[index];
-        if(f instanceof GUI_Ownable){
-            GUI_Ownable o = (GUI_Ownable) f;
-            o.setBorder(new Color(0,0,0));
+    public void startBorder(){
+        for (int i = 0; i < gui_fields.length - 1; i++) {
+            GUI_Field f = gui.getFields()[i];
+            if(f instanceof GUI_Ownable){
+                GUI_Ownable o = (GUI_Ownable) f;
+                o.setBorder(new Color(0,0,0), new Color(255,255,255));
+            }
         }
     }
 
 
     public void setGui_start(){
         gui = new GUI(gameBoardFields(), Color.ORANGE);
+        startBorder();
     }
 
     public void setDice(Cup cup){

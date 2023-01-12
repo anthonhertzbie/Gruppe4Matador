@@ -56,7 +56,14 @@ public class Game_Controller {
 
                 // Coming up....?
                 if (model.gameBoard().whoOwnsThis(currentPosition) != model.getCurrentTurn() && !model.gameBoard().ownerOfAll(model.gameBoard().whoOwnsThis(currentPosition), currentPosition)){
-                    userIO.getUserButtonPressed(currentName + "'s tur.", "Roll the dices", "Build houses");
+                    String choice = userIO.getUserButtonPressed(currentName + "'s tur.", "Rull med tærningerne", "Byg huse");
+                    switch(choice){
+                        case "Rull med tærningerne":
+                            return;
+                        case "Byg huse":
+                            buyableLogic.purchaseHouse();
+                            return;
+                    }
                 }
 
 
