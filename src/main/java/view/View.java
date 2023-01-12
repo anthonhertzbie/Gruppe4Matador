@@ -160,7 +160,7 @@ public class View extends Notifier {
         }
     }
     public void startBorder(){
-        for (int i = 0; i < gui_fields.length - 1; i++) {
+        for (int i = 0; i < gui_fields.length; i++) {
             GUI_Field f = gui.getFields()[i];
             if(f instanceof GUI_Ownable){
                 GUI_Ownable o = (GUI_Ownable) f;

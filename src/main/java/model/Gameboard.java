@@ -14,6 +14,9 @@ public class Gameboard {
         initRent();
         initOwner();
     }
+    public Field getField(int index){
+        return fields[index];
+    }
 
     /**
      * Sells all property
