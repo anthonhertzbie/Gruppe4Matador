@@ -81,17 +81,16 @@ public class Helper {
 
     public static void main(String[] args) throws IOException {
         Gameboard gameboard = new Gameboard();
+
+
+
         Helper helper = new Helper();
-        helper.carColourPrint();
-        System.out.println(helper.getCarColour(0,2));
-        System.out.println(helper.getCarColour(0,4));
-
-
-        /*Helper helper = new Helper();
-        helper.chancecardsPrint();
+        //helper.chancecardsPrint();
         helper.fieldsPrint();
-        helper.carColourPrint();
-
+        System.out.println(helper.getFieldData(40,3));
+        System.out.println(helper.getFieldData(2,3));
+        //helper.carColourPrint();
+/*
 
 
         int i = 39;

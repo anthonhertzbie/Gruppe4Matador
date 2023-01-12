@@ -51,8 +51,7 @@ public class Game_Controller {
             String currentName = model.getPlayerCurrentTurn().getName();
             if (model.getPlayerCurrentTurn().getHasLost()){
                 model.changeTurn();
-            }
-            else if (!model.getPlayerCurrentTurn().isInJail()) {
+            } else if (!model.getPlayerCurrentTurn().isInJail()) {
                 /*
                 // Coming up....?
                 if (model.gameBoard().whoOwnsThis(currentPosition) != model.getCurrentTurn() && !model.gameBoard().ownerOfAll(model.gameBoard().whoOwnsThis(currentPosition), currentPosition)){
