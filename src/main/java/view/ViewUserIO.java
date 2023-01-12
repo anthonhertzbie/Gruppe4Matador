@@ -45,5 +45,9 @@ public class ViewUserIO extends UserIO {
         view.gui.displayChanceCard(description);
     }
 
+    public void setOwnerBorder(int index, int player){
+        view.setBorder(index, player);
+    }
+
 
 }

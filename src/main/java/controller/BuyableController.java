@@ -43,7 +43,7 @@ public class BuyableController {
                         int price = model.gameBoard().getSpecificPrice(currenPosition, 0);
                         model.gameBoard().buyField(currenPosition, currentPlayer);
                         model.getPlayerCurrentTurn().addPlayerBalance(-price);
-
+                        userIO.setOwnerBorder(currenPosition,currentPlayer);
                         return;
                     case "nej":
                 }

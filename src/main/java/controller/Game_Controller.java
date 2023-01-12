@@ -49,16 +49,17 @@ public class Game_Controller {
         while (true){
             int currentPosition = model.getPlayerCurrentTurn().getPosition();
             String currentName = model.getPlayerCurrentTurn().getName();
+            int player = model.getCurrentTurn();
             if (model.getPlayerCurrentTurn().getHasLost()){
                 model.changeTurn();
             } else if (!model.getPlayerCurrentTurn().isInJail()) {
-                /*
+
                 // Coming up....?
                 if (model.gameBoard().whoOwnsThis(currentPosition) != model.getCurrentTurn() && !model.gameBoard().ownerOfAll(model.gameBoard().whoOwnsThis(currentPosition), currentPosition)){
                     userIO.getUserButtonPressed(currentName + "'s tur.", "Roll the dices", "Build houses");
                 }
 
-                 */
+
                 userIO.waitForUserInput(currentName + "'s turn: Press ok to roll dice");
                 playerMoves();
                 booleanReset();

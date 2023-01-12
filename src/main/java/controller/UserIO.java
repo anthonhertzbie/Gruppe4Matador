@@ -17,4 +17,6 @@ public abstract class UserIO {
     public abstract void getUserSelection(String message, String... userOptions);
 
     public abstract void removePlayerLost(Model model);
+
+    public abstract void setOwnerBorder(int index, int player);
 }
