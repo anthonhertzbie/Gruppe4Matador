@@ -77,8 +77,6 @@ public class Game_Controller {
             model.getPlayerCurrentTurn().setPosition(10);
             userIO.moveCar(model);
             model.getPlayerCurrentTurn().setDoubleTurn(0);
-
-
         }
     }
 
@@ -88,8 +86,8 @@ public class Game_Controller {
     }
 
     public void notifierWithLogic(){
-        buyableLogic.buyableLogic(model, userIO);
         fieldlogic.specialField();
+        buyableLogic.buyableLogic(model, userIO);
         notifyEverything();
         loseCondition();
         checkForDoubleDices();

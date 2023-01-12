@@ -53,10 +53,19 @@ public class BuyableController {
             }
         }
     }
+
+
+
     private void payrent(int currentPosition){
-        userIO.showMessage(model.getPlayerCurrentTurn().getName() + "! DU skal sgu betale rente kammerat!");
         int rentToPay = model.gameBoard().getFieldCurrentRent(currentPosition);
-        model.getPlayerCurrentTurn().addPlayerBalance(-rentToPay);
+        if (model.gameBoard().whoOwnsThis(currentPosition) != model.getCurrentTurn() && !model.gameBoard().ownerOfAll(model.gameBoard().whoOwnsThis(currentPosition), currentPosition)) {
+            userIO.showMessage(model.getPlayerCurrentTurn().getName() + "! DU skal sgu betale rente kammerat!");
+            model.getPlayerCurrentTurn().addPlayerBalance(-rentToPay);
+        }
+        else if(model.gameBoard().ownerOfAll(model.gameBoard().whoOwnsThis(currentPosition), currentPosition)){
+            userIO.showMessage(model.getPlayerCurrentTurn().getName() + "! DU skal sgu betale DOBBELT rente kammerat!");
+            model.getPlayerCurrentTurn().addPlayerBalance(-rentToPay*2);
+        }
 
     }
 
