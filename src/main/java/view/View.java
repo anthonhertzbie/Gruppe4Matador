@@ -156,26 +156,10 @@ public class View extends Notifier {
         Color[] colors = {Color.RED, Color.BLUE, Color.YELLOW, Color.ORANGE, Color.GRAY, Color.magenta};
         gameController.setName(index, playerName);
         gui_cars[index] = new GUI_Car();
-        switch(index) {
-            case 0:
-                gui_cars[index].setPrimaryColor(Color.blue);
-                return;
-            case 1:
-                gui_cars[index].setPrimaryColor(Color.blue);
-                return;
-            case 2:
-                gui_cars[index].setPrimaryColor(Color.blue);
-                return;
-            case 3:
-                gui_cars[index].setPrimaryColor(Color.blue);
-                return;
-            case 4:
-                gui_cars[index].setPrimaryColor(Color.blue);
-                return;
-            case 5:
-                gui_cars[index].setPrimaryColor(Color.blue);
-
-        }
+        int red = helper.getCarColour(index, 2);
+        int green = helper.getCarColour(index, 3);
+        int blue = helper.getCarColour(index, 4);
+        gui_cars[index].setPrimaryColor(new Color(red, green, blue));
         gui_players[index] = new GUI_Player(playerName, model.getPlayerBalance(index), gui_cars[index]);
         gui.addPlayer(gui_players[index]);
         gui_fields[0].setCar(gui_players[index], true);

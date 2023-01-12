@@ -5,7 +5,7 @@ import java.io.*;
 public class Helper {
     String[][] fieldData = new String[41][11];
     String[] chancecards = new String[45];
-    String[][] carColour = new String[7][3];
+    String[][] carColour = new String[6][5];
 
     /**
      * Constructor for the Helper class that reads the txt and csv files in the resource folder
@@ -81,6 +81,10 @@ public class Helper {
 
     public static void main(String[] args) throws IOException {
         Gameboard gameboard = new Gameboard();
+        Helper helper = new Helper();
+        helper.carColourPrint();
+        System.out.println(helper.getCarColour(0,2));
+        System.out.println(helper.getCarColour(0,4));
 
 
         /*Helper helper = new Helper();
@@ -108,6 +112,7 @@ public class Helper {
 
          */
 
+
         if(gameboard.ownerOfAll(1,3)){
             System.out.println("true");
         }
@@ -129,8 +134,8 @@ public class Helper {
         }
     }
     public void carColourPrint(){
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 5; j++) {
                 System.out.print(carColour[i][j] + ", ");
             }
             System.out.println();

@@ -1,7 +1,6 @@
-Piece/colour/RGB value
-Car 1/pale green/153,255,153
-Car 2/salmon/255,140,98
-Car 3/purple/196,0,255
-Car 4/light blue/102,255,255
-Car 5/White/255,255,255
-Car 6/black/0,0,0
+Car 1/pale green/153/255/153
+Car 2/salmon/255/140/98
+Car 3/purple/196/0/255
+Car 4/light blue/102/255/255
+Car 5/White/255/255/255
+Car 6/black/0/0/0
