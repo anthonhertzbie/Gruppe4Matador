@@ -59,14 +59,12 @@ public class Game_Controller {
                     String choice = userIO.getUserButtonPressed(currentName + "'s tur.", "Rull med tærningerne", "Byg huse");
                     switch(choice){
                         case "Rull med tærningerne":
-                            return;
+                            break;
                         case "Byg huse":
                             buyableLogic.purchaseHouse();
-                            return;
+                            break;
                     }
                 }
-
-
                 userIO.waitForUserInput(currentName + "'s turn: Press ok to roll dice");
                 playerMoves();
                 booleanReset();
