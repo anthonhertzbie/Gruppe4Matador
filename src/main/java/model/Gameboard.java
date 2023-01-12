@@ -104,6 +104,7 @@ public class Gameboard {
     }
 
 
+
     public void rentIncrease(int fieldIndex){
             for (int i = 2; i < 7; i++) {
                 if (fields[fieldIndex].getCurrentRent() == prices[fieldIndex][i]) {

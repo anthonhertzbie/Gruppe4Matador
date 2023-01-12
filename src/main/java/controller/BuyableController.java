@@ -66,7 +66,6 @@ public class BuyableController {
             userIO.showMessage(model.getPlayerCurrentTurn().getName() + "! DU skal sgu betale DOBBELT rente kammerat!");
             model.getPlayerCurrentTurn().addPlayerBalance(-rentToPay*2);
         }
-
     }
 
     private void purchaseHouse(){
