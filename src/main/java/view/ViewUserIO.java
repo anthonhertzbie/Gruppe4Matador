@@ -48,6 +48,12 @@ public class ViewUserIO extends UserIO {
     public void setOwnerBorder(int index, int player){
         view.setBorder(index, player);
     }
+    /*
+    public void setHouses(int houses){
+        view.setHouses();
+    }
+
+     */
 
 
 }

@@ -27,7 +27,7 @@ public class Model {
         if (this.currentTurn + plusminus < 0){
             this.currentTurn = totalPlayerCount;
         }
-       this.currentTurn += plusminus;
+        this.currentTurn += plusminus;
     }
 
     public void setBooleans(){
