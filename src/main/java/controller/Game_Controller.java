@@ -62,7 +62,7 @@ public class Game_Controller {
                             break;
                         case "Byg huse":
                             buyableLogic.purchaseHouse();
-                            return;
+                            break;
                     }
                 }
                 userIO.waitForUserInput(currentName + "'s turn: Press ok to roll dice");
