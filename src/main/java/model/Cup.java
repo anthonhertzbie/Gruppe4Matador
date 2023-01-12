@@ -15,16 +15,16 @@ public class Cup {
     }
 
     public int getDice1() {
-        return 1;
+        return dice1.getFace();
     }
 
     public int getDice2() {
-        return 2;
+        return dice2.getFace();
     }
 
     public int getSum() {
         int sum = getDice2() + getDice1();
-        return 40;
+        return sum;
 
     }
 }
