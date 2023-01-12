@@ -63,18 +63,18 @@ public class Fieldlogic_Controller {
             currentPlayer.setInJailTurn(0);
             userIO.showMessage("Du slap ud af fængsel");
         } else if (position == 30){
-            userIO.moveCar(currentPlayer.getPreviousPosition(),30,model.getCurrentTurn());
+            userIO.moveCar(model);
             userIO.showMessage("You have been put in jail :(");
             currentPlayer.setPosition(10);
             currentPlayer.setInJail(true);
             currentPlayer.setInJailTurn(0);
-            userIO.moveCar(30,10,model.getCurrentTurn());
+            userIO.moveCar(model);
         }
     }
 
     public void taxFields(Model model) {
         Player currentPlayer = model.getPlayerCurrentTurn();
-        userIO.moveCar(currentPlayer.getPreviousPositionChanceCard(),currentPlayer.getPosition(),model.getCurrentTurn());
+        userIO.moveCar(model);
         if (currentPlayer.getPosition() == 4) {
             String[] options = {"10%", "4000$"};
             String option = userIO.getUserButtonPressed("Income tax: Pay 10% of your total assets or 4000$", "10%", "4000$");
@@ -94,11 +94,11 @@ public class Fieldlogic_Controller {
 
     private void chanceCardField(Model model){
         Player currentplayer = model.getPlayerCurrentTurn();
-        userIO.moveCar(currentplayer.getPreviousPosition(), currentplayer.getPosition(), model.getCurrentTurn());
-        userIO.showChanceCard(model.getDeck().getFirstCard().toString());
+        userIO.moveCar(model);
+        userIO.showChanceCard(model.getDeck().drawCard().toString());
         userIO.showMessage("You have drawn a chance card!");
 
-        switch(model.getDeck().getFirstCard().getIndex() + 1){
+        switch(model.getDeck().getLastCard().getIndex() + 1){
             case 1:
                 return;
             case 2:
@@ -155,21 +155,21 @@ public class Fieldlogic_Controller {
             case 30:
                 currentplayer.setPosition(0);
                 currentplayer.addPlayerBalance(4000);
-                userIO.moveCar(currentplayer.getPreviousPositionChanceCard(), currentplayer.getPosition(), model.getCurrentTurn());
+                userIO.moveCar(model);
                 return;
             case 31:
                 currentplayer.addPosition(3);
-                userIO.moveCar(currentplayer.getPreviousPositionChanceCard(), currentplayer.getPosition(), model.getCurrentTurn());
+                userIO.moveCar(model);
             case 32:
             case 33:
                 currentplayer.addPosition(-3);
-                userIO.moveCar(currentplayer.getPreviousPositionChanceCard(), currentplayer.getPosition(), model.getCurrentTurn());
+                userIO.moveCar(model);
             case 34:
                 if(currentplayer.getPosition() > 11){
                     currentplayer.addPlayerBalance(4000);
                 }
                 currentplayer.setPosition(11);
-                userIO.moveCar(currentplayer.getPreviousPositionChanceCard(), currentplayer.getPosition(), model.getCurrentTurn());
+                userIO.moveCar(model);
             case 35:
             case 36:
                 return;
@@ -178,21 +178,21 @@ public class Fieldlogic_Controller {
                     currentplayer.addPlayerBalance(4000);
                 }
                 currentplayer.setPosition(15);
-                userIO.moveCar(currentplayer.getPreviousPositionChanceCard(), currentplayer.getPosition(), model.getCurrentTurn());
+                userIO.moveCar(model);
                 return;
             case 38:
                 if(currentplayer.getPosition() > 24){
                     currentplayer.addPlayerBalance(4000);
                 }
                 currentplayer.setPosition(24);
-                userIO.moveCar(currentplayer.getPreviousPositionChanceCard(), currentplayer.getPosition(), model.getCurrentTurn());
+                userIO.moveCar(model);
                 return;
             case 39:
                 if(currentplayer.getPosition() > 32){
                     currentplayer.addPlayerBalance(4000);
                 }
                 currentplayer.setPosition(32);
-                userIO.moveCar(currentplayer.getPreviousPositionChanceCard(), currentplayer.getPosition(), model.getCurrentTurn());
+                userIO.moveCar(model);
                 return;
             case 40:
                 if(currentplayer.getPosition() > 35){
@@ -205,18 +205,18 @@ public class Fieldlogic_Controller {
                 }else{
                     currentplayer.setPosition(35);
                 }
-                userIO.moveCar(currentplayer.getPreviousPositionChanceCard(), currentplayer.getPosition(), model.getCurrentTurn());
+                userIO.moveCar(model);
                 return;
             case 41:
                 if(currentplayer.getPosition() > 19){
                     currentplayer.addPlayerBalance(4000);
                 }
                 currentplayer.setPosition(19);
-                userIO.moveCar(currentplayer.getPreviousPositionChanceCard(), currentplayer.getPosition(), model.getCurrentTurn());
+                userIO.moveCar(model);
                 return;
             case 42:
                 currentplayer.setPosition(39);
-                userIO.moveCar(currentplayer.getPreviousPositionChanceCard(), currentplayer.getPosition(), model.getCurrentTurn());
+                userIO.moveCar(model);
                 return;
             case 43:
                 currentplayer.setHasJailCard(true);
@@ -226,7 +226,7 @@ public class Fieldlogic_Controller {
                 currentplayer.setInJail(true);
                 currentplayer.setPosition(10);
                 currentplayer.setInJailTurn(0);
-                userIO.moveCar(currentplayer.getPreviousPositionChanceCard(), currentplayer.getPosition(), model.getCurrentTurn());
+                userIO.moveCar(model);
         }
     }
 

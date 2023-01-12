@@ -18,7 +18,6 @@ public class Game_Controller {
         buyableLogic = new BuyableController(model, userIO);
     }
 
-
     public void setUserIO(UserIO userIO) {
         this.userIO = userIO;
         fieldlogic = new Fieldlogic_Controller(model, userIO);
@@ -48,14 +47,23 @@ public class Game_Controller {
 
     public void gameTurn(){
         while (true){
+            int currentPosition = model.getPlayerCurrentTurn().getPosition();
             String currentName = model.getPlayerCurrentTurn().getName();
             if (model.getPlayerCurrentTurn().getHasLost()){
                 model.changeTurn();
             }
-            else if (model.getPlayerCurrentTurn().isInJail() == false) {
+            else if (!model.getPlayerCurrentTurn().isInJail()) {
+                /*
+                // Coming up....?
+                if (model.gameBoard().whoOwnsThis(currentPosition) != model.getCurrentTurn() && !model.gameBoard().ownerOfAll(model.gameBoard().whoOwnsThis(currentPosition), currentPosition)){
+                    userIO.getUserButtonPressed(currentName + "'s tur.", "Roll the dices", "Build houses");
+                }
+
+                 */
                 userIO.waitForUserInput(currentName + "'s turn: Press ok to roll dice");
                 playerMoves();
                 booleanReset();
+                userIO.moveCar(model);
                 notifierWithLogic();
             } else{
                 booleanReset();
@@ -71,24 +79,23 @@ public class Game_Controller {
             model.getPlayerCurrentTurn().addDoubleTurn(1);
             model.addCurrentTurn(-1);
         } else if (model.getCup().getDice1() == model.getCup().getDice2() && model.getPlayerCurrentTurn().getDoubleTurn() == 2){
-            userIO.moveCar(model.getPlayerCurrentTurn().getPosition(), 10, model.getCurrentTurn());
+            userIO.moveCar(model);
             userIO.showMessage("You're too lucky with the dices... 3rd double in a row... You have been put in jail!");
             model.setPrison(true);
             model.getPlayerCurrentTurn().setPosition(10);
-            userIO.moveCar(model.getPlayerCurrentTurn().getPreviousPosition(), model.getPlayerCurrentTurn().getPosition(), model.getCurrentTurn());
+            userIO.moveCar(model);
             model.getPlayerCurrentTurn().setDoubleTurn(0);
-
         }
     }
 
     public void playerMoves(){
         diceRoll();
-        notifyEverything();
         model.setPlayerPosition(model.getCup().getSum());
     }
 
     public void notifierWithLogic(){
         fieldlogic.specialField();
+        buyableLogic.buyableLogic(model, userIO);
         notifyEverything();
         loseCondition();
         checkForDoubleDices();
