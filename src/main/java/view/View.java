@@ -104,10 +104,10 @@ public class View extends Notifier {
         gui_fields[3] = new GUI_Street("Hvidovrevej",helper.getFieldData(4,3) + "kr","d","",new Color(114,109,232),Color.black);
         gui_fields[4] = new GUI_Tax();gui_fields[4].setTitle("Tax!");gui_fields[4].setSubText("Pay up!");gui_fields[4].setDescription("Choose to either pay 4.000$ or 10% of your total assets.");
         gui_fields[5] = new GUI_Shipping("default","Helsingør","d","","",new Color(107,251,255),Color.black);
-        gui_fields[6] = new GUI_Street("Roskildevej",helper.getFieldData(7,3) + "kr","d","20",new Color(150,90,0),Color.black);
+        gui_fields[6] = new GUI_Street("Roskildevej",helper.getFieldData(7,3) + "kr","d","20",new Color(120,80,50),Color.black);
         gui_fields[7] = new GUI_Chance();gui_fields[7].setSubText("Chance card");
-        gui_fields[8] = new GUI_Street("Valby Langgade",helper.getFieldData(9,3) + "kr","d","20",new Color(150,90,0),Color.black);
-        gui_fields[9] = new GUI_Street("Allégade",helper.getFieldData(10,3) + "kr","d","20",new Color(150,90,0),Color.black);
+        gui_fields[8] = new GUI_Street("Valby Langgade",helper.getFieldData(9,3) + "kr","d","20",new Color(120,80,50),Color.black);
+        gui_fields[9] = new GUI_Street("Allégade",helper.getFieldData(10,3) + "kr","d","20",new Color(120,80,50),Color.black);
         gui_fields[10] = new GUI_Jail();gui_fields[10].setSubText("Visiting");
         gui_fields[11] = new GUI_Street("Frederiksberg Allé",helper.getFieldData(12,3) + "kr","d","20",Color.YELLOW,Color.black);
         gui_fields[12] = new GUI_Brewery("default",helper.getFieldData(13,3) + "kr","d","","20",Color.lightGray,Color.BLACK);
@@ -119,10 +119,10 @@ public class View extends Notifier {
         gui_fields[18] = new GUI_Street("t",helper.getFieldData(19,3) + "kr","d","20",Color.GRAY,Color.black);
         gui_fields[19] = new GUI_Street("t",helper.getFieldData(20,3) + "kr","d","20",Color.GRAY,Color.black);
         gui_fields[20] = new GUI_Refuge();gui_fields[20].setSubText("Free parking");
-        gui_fields[21] = new GUI_Street("t",helper.getFieldData(22,3) + "kr","d","20",Color.RED,Color.black);
+        gui_fields[21] = new GUI_Street("t",helper.getFieldData(22,3) + "kr","d","20",new Color(255,43,43),Color.black);
         gui_fields[22] = new GUI_Chance();gui_fields[22].setSubText("Chance card");
-        gui_fields[23] = new GUI_Street("t",helper.getFieldData(24,3) + "kr","d","20",Color.RED,Color.black);
-        gui_fields[24] = new GUI_Street("t",helper.getFieldData(25,3) + "kr","d","20",Color.RED,Color.black);
+        gui_fields[23] = new GUI_Street("t",helper.getFieldData(24,3) + "kr","d","20",new Color(255,43,43),Color.black);
+        gui_fields[24] = new GUI_Street("t",helper.getFieldData(25,3) + "kr","d","20",new Color(255,43,43),Color.black);
         gui_fields[25] = new GUI_Shipping("default",helper.getFieldData(26,3) + "kr","d","","20",new Color(107,251,255),Color.BLACK);
         gui_fields[26] = new GUI_Street("t",helper.getFieldData(27,3) + "kr","d","20",new Color(255,135,244),Color.black);
         gui_fields[27] = new GUI_Street("t",helper.getFieldData(28,3) + "kr","d","20",new Color(255,135,244),Color.black);
