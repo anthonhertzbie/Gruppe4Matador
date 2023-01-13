@@ -4,6 +4,8 @@ import model.Model;
 import model.Player;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class BuyableController {
     private Model model;
@@ -14,6 +16,8 @@ public class BuyableController {
         this.model = model;
         this.userIO = userIO;
     }
+
+
 
     public boolean fieldAcceptTest(Model model) {
         System.out.println("Running");
@@ -38,6 +42,7 @@ public class BuyableController {
         int currenPosition = model.getPlayerCurrentTurn().getPosition();
         if (fieldAcceptTest(model)) {
             if (!model.gameBoard().isOwned(currenPosition)) {
+
                 userIO.moveCar(model);
                 userIO.updateView(model);
                 String userInput = userIO.getUserButtonPressed("Vil du købe dette felt", "ja", "nej");
@@ -50,6 +55,7 @@ public class BuyableController {
                         userIO.setOwnerBorder(currenPosition, currentPlayer);
                         return;
                     case "nej":
+                        auctionFunction(currenPosition);
                 }
             } else {
                 payrent(currenPosition);
@@ -57,6 +63,82 @@ public class BuyableController {
         }
     }
 
+
+    public void auctionFunction(int fieldOnAuction){
+        int[] playerIndexInAuction = new int[model.getTotalPlayerCount()];
+        int auctionPrice = 0;
+        int currentPlayerIndex = 0;
+
+        List<Integer> playerIndex = new ArrayList<>();
+
+        for (int i = 0; i < model.getTotalPlayerCount(); i++){
+            if (!model.getPlayerByIndex(i).getHasLost()){
+                playerIndex.add(model.getPlayerByIndex(i).getPlayerID());
+            }
+        }
+
+
+        userIO.showMessage("Grunden er røget på auktion!");
+
+        while (true){
+            if (currentPlayerIndex >= playerIndex.size()){
+                currentPlayerIndex = 0;
+            }
+            System.out.println(currentPlayerIndex + " is current playerindex" + playerIndex.get(currentPlayerIndex) + " is other number");
+            if (true) {
+
+                String choice = userIO.getUserButtonPressed(model.getPlayerByIndex(playerIndex.get(currentPlayerIndex)).getName() + "'s turn. Current price is " + auctionPrice + ". Either raise the bid by shown amounts or leave the auction : ", "100", "200", "300", "400", "500", "600", "700", "800", "900", "1000", "Leave auction");
+
+                switch (choice) {
+                    case "100":
+                        auctionPrice += 100;
+                        break;
+                    case "200":
+                        auctionPrice += 200;
+                        break;
+                    case "300":
+                        auctionPrice += 300;
+                        break;
+                    case "400":
+                        auctionPrice += 400;
+                        break;
+                    case "500":
+                        auctionPrice += 500;
+                        break;
+                    case "600":
+                        auctionPrice += 600;
+                        break;
+                    case "700":
+                        auctionPrice += 700;
+                        break;
+                    case "800":
+                        auctionPrice += 800;
+                        break;
+                    case "900":
+                        auctionPrice += 900;
+                        break;
+                    case "1000":
+                        auctionPrice += 1000;
+                        break;
+                    case "Leave auction":
+
+                        playerIndex.removeAll(Arrays.asList(currentPlayerIndex));
+                        System.out.println(playerIndex.size() + " is new size of list");
+
+                        if(playerIndex.size() == 1){
+                            userIO.showMessage(model.getPlayerByIndex(playerIndex.get(0)).getName() + " har vundet auktionen!" + " han betalte " + auctionPrice + "kr");
+                            model.gameBoard().buyField(fieldOnAuction, playerIndex.get(0));
+                            userIO.setOwnerBorder(fieldOnAuction, playerIndex.get(0));
+                            return;
+                        }
+
+
+                }
+                currentPlayerIndex += 1;
+            }
+
+        }
+    }
 
     private void payrent(int currentPosition) {
         int rentToPay = model.gameBoard().getFieldCurrentRent(currentPosition);
