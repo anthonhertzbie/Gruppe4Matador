@@ -46,6 +46,7 @@ public class View extends Notifier {
             setGuiTotalPlayers(model);
             for (int i = 0; i < model.getTotalPlayerCount(); i++) {
                 makePlayers(i, model);
+                model.getPlayerByIndex(i).setPlayerID(i);
             }
         }
         updateView(model);

@@ -10,6 +10,7 @@ public class Player {
     private boolean hasJailCard = false;
     private int inJailTurn;
     private boolean hasLost = false;
+    private int playerID;
 
     private Account account = new Account();
 
@@ -99,5 +100,13 @@ public class Player {
 
     public void setDoubleTurn(int doubleTurn){
         this.doubleTurn = doubleTurn;
+    }
+
+    public int getPlayerID() {
+        return playerID;
+    }
+
+    public void setPlayerID(int playerID) {
+        this.playerID = playerID;
     }
 }

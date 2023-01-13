@@ -3,6 +3,8 @@ package controller;
 import model.Model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Game_Controller {
     private final Model model = new Model();
@@ -124,14 +126,24 @@ public class Game_Controller {
         int[] playerIndexInAuction = new int[model.getTotalPlayerCount()];
         int auctionPrice = 100;
 
+        List<Integer> playerIndex = new ArrayList<>();
+
         for (int i = 0; i < model.getTotalPlayerCount(); i++){
-            playerIndexInAuction[i] = i;
+            if (!model.getPlayerByIndex(i).getHasLost()){
+                playerIndex.add(model.getPlayerByIndex(i).getPlayerID());
+            }
         }
+
 
         userIO.showMessage("Grunden er røget på auktion!");
 
         while (true){
-            int currentPlayerIndex;
+            int currentPlayerIndex = 0;
+            if (currentPlayerIndex == playerIndex.size()){
+                currentPlayerIndex = 0;
+            }
+
+
             String choice = userIO.getUserButtonPressed("Current price is " + auctionPrice + ". Either raise the bid by shown amounts or leave the auction : ", "100", "200", "300", "400", "500", "600", "700", "800", "900", "1000", "Leave auction");
 
             switch (choice){
@@ -157,10 +169,13 @@ public class Game_Controller {
                     auctionPrice += 200;
                 case "Leave auction":
                     if (playerIndexInAuction.length > 1) {
-                        for (int i = 0; i < playerIndexInAuction.length - 1; i++){
-                        }
+                        playerIndex.removeAll(Arrays.asList(currentPlayerIndex));
+                    }
+                    else {
+                        userIO.showMessage("You have won the auction!");
                     }
             }
+            currentPlayerIndex += 1;
         }
     }
 
