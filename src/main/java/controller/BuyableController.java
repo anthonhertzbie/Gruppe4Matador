@@ -76,6 +76,12 @@ public class BuyableController {
                 ownedP.add(model.gameBoard().getFieldName(i));
             }
         }
+        ownedP.remove("Helsingør - Helsingborg");
+        ownedP.remove("Mols-Linjen");
+        ownedP.remove("Tuborg Squash");
+        ownedP.remove("Gedser - Rostock");
+        ownedP.remove("Coca Cola");
+        ownedP.remove("Rødby - Puttgarden");
         String message = "Hvor vil du gerne bygge et hus?";
         String choice = tooBigSwitchStatement(ownedP, message);
 
