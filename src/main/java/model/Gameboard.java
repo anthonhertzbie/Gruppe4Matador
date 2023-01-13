@@ -6,7 +6,7 @@ public class Gameboard {
     private Helper helper = new Helper();
     private Field[] fields = new Field[40];
     private int[][] prices = new int[40][8];
-    private boolean[][] ownerTable = new boolean[40][6];
+    private int[] ownerTable = new int[40];
     private String[] fieldType = new String[40];
     private int[] ownerOfFieldgroups = new int[8];
     private int[] ownerOfField = new int[40];
@@ -29,9 +29,7 @@ public class Gameboard {
      */
     private void initOwner(){
         for (int i = 0; i < 40; i++) {
-            for (int j = 0; j < 6; j++) {
-                ownerTable[i][j] = false;
-            }
+            ownerTable[i] = -1;
             System.out.println(ownerOfField[i]);
         }
     }
@@ -39,7 +37,7 @@ public class Gameboard {
 
 
 
-
+/*
     public boolean ownerOfAll(int playerIndex, int field){
         boolean ownerOfAll = false;
         switch (field) {
@@ -79,6 +77,8 @@ public class Gameboard {
         }
         return ownerOfAll;
     }
+
+ */
     /*
     blue = 1,3
     yellow = 6, 8, 9
@@ -93,28 +93,19 @@ public class Gameboard {
 
     public boolean isOwned(int fieldIndex) {
         boolean isOwned = false;
-        for (int i = 0; i < 6; i++) {
-            if (ownerTable[fieldIndex][i]) {
-                isOwned = ownerTable[fieldIndex][i];
-                break;
-            }
+        if (fieldIndex != -1){
+            isOwned = true;
         }
         return isOwned;
     }
     public int whoOwnsThis(int fieldIndex){
-        int playerIndex = 7;
-        for (int i = 0; i < 6; i++) {
-            if(ownerTable[fieldIndex][i]){
-                playerIndex = i;
-            }
-        }
-        return playerIndex;
+        return ownerTable[fieldIndex];
     }
     public void buyField(int fieldIndex, int playerIndex){
-        ownerTable[fieldIndex][playerIndex] = true;
+        ownerTable[fieldIndex] = playerIndex;
     }
     public void sellField(int fieldIndex, int playerIndex){
-        ownerTable[fieldIndex][playerIndex] = false;
+        ownerTable[fieldIndex] = -1;
     }
 
 
