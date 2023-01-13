@@ -3,6 +3,8 @@ package controller;
 import model.Model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Game_Controller {
     private final Model model = new Model();
@@ -59,22 +61,36 @@ public class Game_Controller {
         }
     }
     private void normalTurn(){
-        int currentPosition = model.getPlayerCurrentTurn().getPosition();
         String currentName = model.getPlayerCurrentTurn().getName();
-        String choice = userIO.getUserButtonPressed(currentName + "'s tur.", "Rull med tærningerne", "Byg huse");
-        switch(choice){
-            case "Rull med tærningerne":
-                return;
-            case "Byg huse":
-                buyableLogic.purchaseHouse();
-                System.out.println(model.getCurrentTurn());
-                for (int i = 0; i < 40; i++) {
-                    System.out.println(model.gameBoard().getFieldName(i) + " " + model.gameBoard().whoOwnsThis(i));
-                }
-                break;
+        String choice;
+        int currentPosition = model.getPlayerCurrentTurn().getPosition();
+        boolean isOwnerOfGroup = false;
+        List<Integer> ownedGroups = new ArrayList<>();
+
+        for (int i = 0; i < model.gameBoard().getOwnerOfFieldGroups().length; i++){
+            if (model.gameBoard().getOwnerOfFieldGroups()[i] == model.getCurrentTurn()){
+                isOwnerOfGroup = true;
+                ownedGroups.add(i);
+            }
+        }
+        if (isOwnerOfGroup){
+            choice = userIO.getUserButtonPressed(currentName + "'s tur.", "Rull med tærningerne", "Byg huse");
+            switch(choice) {
+                case "Rull med tærningerne":
+                    return;
+                case "Byg huse":
+                    buyableLogic.purchaseHouse();
+                    System.out.println(model.getCurrentTurn());
+                    for (int i = 0; i < 40; i++) {
+                        System.out.println(model.gameBoard().getFieldName(i) + " " + model.gameBoard().whoOwnsThis(i));
+                    }
+                    break;
+            }
+
+        } else if (!isOwnerOfGroup){
+            choice = userIO.getUserButtonPressed(currentName + "'s tur.", "Rull med tærningerne");
         }
 
-        userIO.waitForUserInput(currentName + "'s turn: Press ok to roll dice");
         userIO.updateView(model);
     }
 
