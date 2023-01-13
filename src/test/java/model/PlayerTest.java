@@ -29,7 +29,7 @@ class PlayerTest {
     void inJail(){
         Player player = new Player();
         player.setInJail(true);
-        assertEquals(true, player.getInJail());
+        assertTrue(player.isInJail());
     }
 
     @Test
