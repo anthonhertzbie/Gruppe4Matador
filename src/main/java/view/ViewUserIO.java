@@ -25,10 +25,6 @@ public class ViewUserIO extends UserIO {
         view.gui.showMessage(message);
     }
 
-    @Override
-    public void moveCar(Model model) {
-        view.moveCar(model);
-    }
 
 
     @Override
@@ -47,6 +43,11 @@ public class ViewUserIO extends UserIO {
 
     public void setOwnerBorder(int index, int player){
         view.setBorder(index, player);
+    }
+
+    @Override
+    public void viewPlayers(Model model) {
+        view.viewPlayers(model);
     }
     /*
     public void setHouses(int houses){

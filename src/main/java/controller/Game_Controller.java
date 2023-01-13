@@ -5,15 +5,16 @@ import model.Model;
 import java.util.ArrayList;
 
 public class Game_Controller {
-    private final Model model = new Model();
+    private final Model model;
     private UserIO userIO;
     private final ArrayList<Notifier> notifiers = new ArrayList<>();
 
     private Fieldlogic_Controller fieldlogic;
 
     private BuyableController buyableLogic;
-    public Game_Controller(UserIO userIO){
+    public Game_Controller(UserIO userIO, Model model){
         this.userIO = userIO;
+        this.model = model;
         fieldlogic = new Fieldlogic_Controller(model, userIO);
         buyableLogic = new BuyableController(model, userIO);
     }
@@ -30,19 +31,19 @@ public class Game_Controller {
 
     public void notifyEverything(){
         for (Notifier n:notifiers) {
-            n.startGame(model);
+            n.notifyModel(model);
         }
     }
     public void getUserButtonPressed(String message, String ... userOptions){
         userIO.getUserButtonPressed(message, userOptions);
     }
 
-    public void startGame(){
-        model.setStartGUI(true);
-        notifyEverything();
-        model.setStartGUI(false);
+    public void startGame(boolean runGameTurn){
         model.setNormalTurn(true);
-        gameTurn();
+        if(runGameTurn){
+            gameTurn();
+        }
+
     }
 
     public void gameTurn(){
@@ -68,7 +69,7 @@ public class Game_Controller {
                 userIO.waitForUserInput(currentName + "'s turn: Press ok to roll dice");
                 playerMoves();
                 booleanReset();
-                userIO.moveCar(model);
+
                 notifierWithLogic();
             } else{
                 booleanReset();
@@ -84,11 +85,11 @@ public class Game_Controller {
             model.getPlayerCurrentTurn().addDoubleTurn(1);
             model.addCurrentTurn(-1);
         } else if (model.getCup().getDice1() == model.getCup().getDice2() && model.getPlayerCurrentTurn().getDoubleTurn() == 2){
-            userIO.moveCar(model);
+            //userIO.moveCar(model);
             userIO.showMessage("You're too lucky with the dices... 3rd double in a row... You have been put in jail!");
             model.setPrison(true);
             model.getPlayerCurrentTurn().setPosition(10);
-            userIO.moveCar(model);
+            //userIO.moveCar(model);
             model.getPlayerCurrentTurn().setDoubleTurn(0);
         }
     }
@@ -99,6 +100,7 @@ public class Game_Controller {
     }
 
     public void notifierWithLogic(){
+        notifyEverything();
         fieldlogic.specialField();
         buyableLogic.buyableLogic(model, userIO);
         notifyEverything();
@@ -163,10 +165,12 @@ public class Game_Controller {
 
     public void diceRoll(){
         model.getCup().rollDices();
+        notifyEverything();
     }
 
     public void setName(int index, String name){
         model.setPlayerName(index, name);
+        notifyEverything();
     }
 
 }
