@@ -50,23 +50,21 @@ public class ViewUserIO extends UserIO {
         view.viewPlayers(model);
     }
 
-    public void setHouses(int houses){
-        view.setHouses();
+    public void setHouses(int index, int houses) {
+        view.setHouses(index, houses);
+    }
 
     @Override
     public void updateView(Model model) {
         view.updateView(model);
-        view.moveCar(model);
     }
+
 
     @Override
     public int getUserInteger(String message, int min, int max) {
         return view.gui.getUserInteger(message,min,max);
     }
 
-    public void setHouses(int fieldIndex, int houses){
-        view.setHouses(fieldIndex, houses);
-    }
 
 
 

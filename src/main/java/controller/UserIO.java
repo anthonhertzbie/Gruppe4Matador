@@ -21,5 +21,8 @@ public abstract class UserIO {
 
     public abstract void viewPlayers(Model model);
 
-    //public abstract void setHouses(int houses);
+    public abstract void setHouses(int index, int houses);
+
+    public abstract void updateView(Model model);
+    public abstract int getUserInteger(String message, int min, int max);
 }
