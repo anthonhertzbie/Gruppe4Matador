@@ -91,7 +91,7 @@ public class Gameboard {
         return isOwned;
     }
     public int whoOwnsThis(int fieldIndex){
-        int playerIndex = 0;
+        int playerIndex = 7;
         for (int i = 0; i < 6; i++) {
             if(ownerTable[fieldIndex][i]){
                 playerIndex = i;

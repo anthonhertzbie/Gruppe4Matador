@@ -51,6 +51,7 @@ public class Game_Controller {
                 model.changeTurn();
             } else if (!model.getPlayerCurrentTurn().isInJail()) {
                 normalTurn();
+                playerMoves();
             }
             booleanReset();
             notifierWithLogic();
@@ -60,19 +61,21 @@ public class Game_Controller {
     private void normalTurn(){
         int currentPosition = model.getPlayerCurrentTurn().getPosition();
         String currentName = model.getPlayerCurrentTurn().getName();
-        if (model.gameBoard().whoOwnsThis(currentPosition) != model.getCurrentTurn() && !model.gameBoard().ownerOfAll(model.gameBoard().whoOwnsThis(currentPosition), currentPosition)){
-            String choice = userIO.getUserButtonPressed(currentName + "'s tur.", "Rull med tærningerne", "Byg huse");
-            switch(choice){
-                case "Rull med tærningerne":
-                    break;
-                case "Byg huse":
-                    buyableLogic.purchaseHouse();
-                    break;
-            }
+        String choice = userIO.getUserButtonPressed(currentName + "'s tur.", "Rull med tærningerne", "Byg huse");
+        switch(choice){
+            case "Rull med tærningerne":
+                return;
+            case "Byg huse":
+                buyableLogic.purchaseHouse();
+                System.out.println(model.getCurrentTurn());
+                for (int i = 0; i < 40; i++) {
+                    System.out.println(model.gameBoard().getFieldName(i) + " " + model.gameBoard().whoOwnsThis(i));
+                }
+                break;
         }
+
         userIO.waitForUserInput(currentName + "'s turn: Press ok to roll dice");
         userIO.updateView(model);
-        playerMoves();
     }
 
     public void checkForDoubleDices(){
