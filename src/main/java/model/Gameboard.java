@@ -1,13 +1,19 @@
 package model;
 
+import java.util.Arrays;
+
 public class Gameboard {
     private Helper helper = new Helper();
     private Field[] fields = new Field[40];
     private int[][] prices = new int[40][8];
     private boolean[][] ownerTable = new boolean[40][6];
     private String[] fieldType = new String[40];
+    private int[] ownerOfFieldgroups = new int[8];
+    private int[] ownerOfField = new int[40];
 
     public Gameboard(){
+        Arrays.fill(ownerOfFieldgroups, -1);
+        Arrays.fill(ownerOfField, -1);
         copyFieldInformation();
         initFieldPrice();
         initHousePrice();
@@ -26,8 +32,10 @@ public class Gameboard {
             for (int j = 0; j < 6; j++) {
                 ownerTable[i][j] = false;
             }
+            System.out.println(ownerOfField[i]);
         }
     }
+
 
     public boolean ownerOfAll(int playerIndex, int field){
         boolean ownerOfAll = false;

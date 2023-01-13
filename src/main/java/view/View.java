@@ -96,6 +96,7 @@ public class View extends Notifier {
          */
     }
 
+
     public void setHouses(int fieldIndex, int numberOfHouses){
         GUI_Field f = gui.getFields()[fieldIndex];
         if(f instanceof GUI_Ownable){

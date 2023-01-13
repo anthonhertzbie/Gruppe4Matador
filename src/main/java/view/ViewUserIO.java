@@ -54,6 +54,12 @@ public class ViewUserIO extends UserIO {
         view.updateView(model);
         view.moveCar(model);
     }
+
+    @Override
+    public int getUserInteger(String message, int min, int max) {
+        return view.gui.getUserInteger(message,min,max);
+    }
+
     public void setHouses(int fieldIndex, int houses){
         view.setHouses(fieldIndex, houses);
     }

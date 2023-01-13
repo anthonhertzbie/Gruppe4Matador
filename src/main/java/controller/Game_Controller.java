@@ -120,6 +120,50 @@ public class Game_Controller {
         model.setBooleans();
     }
 
+    public void auctionFunction(int fieldOnAuction){
+        int[] playerIndexInAuction = new int[model.getTotalPlayerCount()];
+        int auctionPrice = 100;
+
+        for (int i = 0; i < model.getTotalPlayerCount(); i++){
+            playerIndexInAuction[i] = i;
+        }
+
+        userIO.showMessage("Grunden er røget på auktion!");
+
+        while (true){
+            int currentPlayerIndex;
+            String choice = userIO.getUserButtonPressed("Current price is " + auctionPrice + ". Either raise the bid by shown amounts or leave the auction : ", "100", "200", "300", "400", "500", "600", "700", "800", "900", "1000", "Leave auction");
+
+            switch (choice){
+                case "100":
+                    auctionPrice += 100;
+                case "200":
+                    auctionPrice += 200;
+                case "300":
+                    auctionPrice += 100;
+                case "400":
+                    auctionPrice += 200;
+                case "500":
+                    auctionPrice += 100;
+                case "600":
+                    auctionPrice += 200;
+                case "700":
+                    auctionPrice += 100;
+                case "800":
+                    auctionPrice += 200;
+                case "900":
+                    auctionPrice += 100;
+                case "1000":
+                    auctionPrice += 200;
+                case "Leave auction":
+                    if (playerIndexInAuction.length > 1) {
+                        for (int i = 0; i < playerIndexInAuction.length - 1; i++){
+                        }
+                    }
+            }
+        }
+    }
+
     public void loseCondition(){
         int playerInGame = 0;
         String winner = "";
