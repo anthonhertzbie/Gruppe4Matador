@@ -109,12 +109,14 @@ public class Helper {
         gameboard.buyField(1, 1);
         gameboard.buyField(3, 1);
 
-         */
+
 
 
         if(gameboard.ownerOfAll(1,3)){
             System.out.println("true");
         }
+
+ */
 
     }
 

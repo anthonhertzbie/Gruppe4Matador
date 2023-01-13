@@ -20,6 +20,108 @@ public class Gameboard {
         initRent();
         initOwner();
     }
+
+    public void setOwnerOfFieldgroups(int playerIndex, int group){
+        this.ownerOfFieldgroups[group] = playerIndex;
+    }
+
+    public int[] getOwnerOfFieldGroups(){
+        return ownerOfFieldgroups;
+    }
+
+    public boolean checkIfFieldGroupOwned(int fieldIndex){
+        boolean fieldGroupOwned = false;
+        switch (fieldIndex){
+            case 1, 3 -> {
+                if (ownerOfFieldgroups[0] != -1){fieldGroupOwned = true;}
+                return fieldGroupOwned;
+            }
+            case 6, 8, 9 -> {
+                if (ownerOfFieldgroups[1] != -1){fieldGroupOwned = true;}
+                return fieldGroupOwned;
+            }
+            case 11, 13, 14 -> {
+                if (ownerOfFieldgroups[2] != -1){fieldGroupOwned = true;}
+                return fieldGroupOwned;
+            }
+
+            case 16, 18, 19 -> {
+                if (ownerOfFieldgroups[3] != -1){fieldGroupOwned = true;}
+                return fieldGroupOwned;
+            }
+            case 21, 23, 24 -> {
+                if (ownerOfFieldgroups[4] != -1){fieldGroupOwned = true;}
+                return fieldGroupOwned;
+            }
+            case 26, 27, 29 -> {
+                if (ownerOfFieldgroups[5] != -1){fieldGroupOwned = true;}
+                return fieldGroupOwned;
+            }
+            case 31, 32, 34 -> {
+                if (ownerOfFieldgroups[6] != -1){fieldGroupOwned = true;}
+                return fieldGroupOwned;
+            }
+            case 37, 39 -> {
+                if (ownerOfFieldgroups[7] != -1){fieldGroupOwned = true;}
+                return fieldGroupOwned;
+            }
+        }
+        return fieldGroupOwned;
+
+    }
+
+
+    public void updateFieldGroupsOwned(){
+        for (int i = 0; i < getOwnerOfFieldGroups().length; i ++) {
+                    if (whoOwnsThis(1) == whoOwnsThis(3) && whoOwnsThis(1) == i) {
+                        setOwnerOfFieldgroups(i, 0);
+                    } if (whoOwnsThis(1) != whoOwnsThis(3)){
+                        setOwnerOfFieldgroups(-1, 0);
+                    }
+                    if (whoOwnsThis(6) == whoOwnsThis(8) && whoOwnsThis(8) == whoOwnsThis(9) && whoOwnsThis(6) == i) {
+                        setOwnerOfFieldgroups(i, 1);
+                    }
+                    if (whoOwnsThis(6) != whoOwnsThis(8) || whoOwnsThis(8) != whoOwnsThis(9)){
+                        setOwnerOfFieldgroups(-1, 1);
+                    }
+                    if (whoOwnsThis(11) == whoOwnsThis(13) && whoOwnsThis(13) == whoOwnsThis(14) && whoOwnsThis(11) == i) {
+                        setOwnerOfFieldgroups(i, 2);
+                    }
+                    if (whoOwnsThis(11) != whoOwnsThis(13) || whoOwnsThis(13) != whoOwnsThis(14)){
+                        setOwnerOfFieldgroups(-1, 2);
+                    }
+                    if (whoOwnsThis(16) == whoOwnsThis(18) && whoOwnsThis(18) == whoOwnsThis(19) && whoOwnsThis(16) == i) {
+                        setOwnerOfFieldgroups(i, 3);
+                    } if (whoOwnsThis(16) != whoOwnsThis(18) || whoOwnsThis(18) != whoOwnsThis(19)){
+                        setOwnerOfFieldgroups(-1, 3);
+                    }
+                    if (whoOwnsThis(21) == whoOwnsThis(23) && whoOwnsThis(23) == whoOwnsThis(24) && whoOwnsThis(21) == i) {
+                        setOwnerOfFieldgroups(i, 4);
+                    }  if (whoOwnsThis(21) != whoOwnsThis(23) || whoOwnsThis(23) != whoOwnsThis(24)){
+                        setOwnerOfFieldgroups(-1, 4);
+                    }
+                    if (whoOwnsThis(26) == whoOwnsThis(27) && whoOwnsThis(27) == whoOwnsThis(29) && whoOwnsThis(26) == i) {
+                        setOwnerOfFieldgroups(i, 5);
+                    }  if (whoOwnsThis(26) != whoOwnsThis(27) || whoOwnsThis(27) != whoOwnsThis(29)){
+                        setOwnerOfFieldgroups(-1, 5);
+                    }
+                    if (whoOwnsThis(31) == whoOwnsThis(32) && whoOwnsThis(32) == whoOwnsThis(34) && whoOwnsThis(31) == i) {
+                        setOwnerOfFieldgroups(i, 6);
+                    }  if (whoOwnsThis(31) != whoOwnsThis(32) || whoOwnsThis(32) != whoOwnsThis(34)){
+                        setOwnerOfFieldgroups(-1, 6);
+                    }
+                    if (whoOwnsThis(37) == whoOwnsThis(39) && whoOwnsThis(37) == i) {
+                        setOwnerOfFieldgroups(i, 7);
+                    }  if (whoOwnsThis(37) != whoOwnsThis(38)){
+                        setOwnerOfFieldgroups(-1, 7);
+                    }
+                    return;
+                }
+            }
+
+
+
+
     public Field getField(int index){
         return fields[index];
     }
@@ -33,6 +135,7 @@ public class Gameboard {
             System.out.println(ownerOfField[i]);
         }
     }
+
 
 
 
@@ -93,7 +196,7 @@ public class Gameboard {
 
     public boolean isOwned(int fieldIndex) {
         boolean isOwned = false;
-        if (fieldIndex != -1){
+        if (ownerTable[fieldIndex] != -1){
             isOwned = true;
         }
         return isOwned;

@@ -65,7 +65,6 @@ public class BuyableController {
 
 
     public void auctionFunction(int fieldOnAuction){
-        int[] playerIndexInAuction = new int[model.getTotalPlayerCount()];
         int auctionPrice = 0;
         int currentPlayerIndex = 0;
 
@@ -140,14 +139,22 @@ public class BuyableController {
         }
     }
 
+    public void setOwnedGroups(){
+
+    }
+
+
+
     private void payrent(int currentPosition) {
         int rentToPay = model.gameBoard().getFieldCurrentRent(currentPosition);
-        if (model.gameBoard().whoOwnsThis(currentPosition) != model.getCurrentTurn() && !model.gameBoard().ownerOfAll(model.gameBoard().whoOwnsThis(currentPosition), currentPosition)) {
-            userIO.showMessage(model.getPlayerCurrentTurn().getName() + "! DU skal sgu betale rente kammerat!");
-            model.getPlayerCurrentTurn().addPlayerBalance(-rentToPay);
-        } else if (model.gameBoard().ownerOfAll(model.gameBoard().whoOwnsThis(currentPosition), currentPosition)) {
-            userIO.showMessage(model.getPlayerCurrentTurn().getName() + "! DU skal sgu betale DOBBELT rente kammerat!");
-            model.getPlayerCurrentTurn().addPlayerBalance(-rentToPay * 2);
+        if(model.gameBoard().isOwned(currentPosition)) {
+            if (model.gameBoard().whoOwnsThis(currentPosition) != model.getCurrentTurn() && !model.gameBoard().checkIfFieldGroupOwned(currentPosition)) {
+                userIO.showMessage(model.getPlayerCurrentTurn().getName() + "! DU skal sgu betale rente kammerat!");
+                model.getPlayerCurrentTurn().addPlayerBalance(-rentToPay);
+            } else if (model.gameBoard().checkIfFieldGroupOwned(currentPosition)) {
+                userIO.showMessage(model.getPlayerCurrentTurn().getName() + "! DU skal sgu betale DOBBELT rente kammerat!");
+                model.getPlayerCurrentTurn().addPlayerBalance(-rentToPay * 2);
+            }
         }
     }
 
