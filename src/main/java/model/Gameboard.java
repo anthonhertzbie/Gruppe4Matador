@@ -37,6 +37,9 @@ public class Gameboard {
     }
 
 
+
+
+
     public boolean ownerOfAll(int playerIndex, int field){
         boolean ownerOfAll = false;
         switch (field) {
