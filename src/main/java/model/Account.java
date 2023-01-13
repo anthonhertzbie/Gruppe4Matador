@@ -7,11 +7,12 @@ public class Account {
     public int getBalance(){
         return this.Balance;
     }
-
-    // only for test/game start
-    public void setBalance(int newPlayerBallance){
-        this.Balance = newPlayerBallance;
-        this.AssetsValue = newPlayerBallance;
+    public void setBalance(int newPlayerBalance){
+        if (newPlayerBalance < 0) {
+            throw new UnsupportedOperationException("Expected the new balance to be positive");
+        }
+        this.Balance = newPlayerBalance;
+        this.AssetsValue = newPlayerBalance;
     }
     // works when you buy a field or pays rent
     public void addBalance(int amount){

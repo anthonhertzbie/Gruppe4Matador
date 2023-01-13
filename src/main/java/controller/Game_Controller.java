@@ -48,35 +48,36 @@ public class Game_Controller {
 
     public void gameTurn(){
         while (true){
-            int currentPosition = model.getPlayerCurrentTurn().getPosition();
-            String currentName = model.getPlayerCurrentTurn().getName();
             int player = model.getCurrentTurn();
             if (model.getPlayerCurrentTurn().getHasLost()){
                 model.changeTurn();
             } else if (!model.getPlayerCurrentTurn().isInJail()) {
-
-                // Coming up....?
-                if (model.gameBoard().whoOwnsThis(currentPosition) != model.getCurrentTurn() && !model.gameBoard().ownerOfAll(model.gameBoard().whoOwnsThis(currentPosition), currentPosition)){
-                    String choice = userIO.getUserButtonPressed(currentName + "'s tur.", "Rull med tærningerne", "Byg huse");
-                    switch(choice){
-                        case "Rull med tærningerne":
-                            break;
-                        case "Byg huse":
-                            buyableLogic.purchaseHouse();
-                            break;
-                    }
-                }
-                userIO.waitForUserInput(currentName + "'s turn: Press ok to roll dice");
+                normalTurn();
                 playerMoves();
-                booleanReset();
-
-                notifierWithLogic();
-            } else{
-                booleanReset();
-                notifierWithLogic();
             }
+            booleanReset();
+            notifierWithLogic();
 
         }
+    }
+    private void normalTurn(){
+        int currentPosition = model.getPlayerCurrentTurn().getPosition();
+        String currentName = model.getPlayerCurrentTurn().getName();
+        String choice = userIO.getUserButtonPressed(currentName + "'s tur.", "Rull med tærningerne", "Byg huse");
+        switch(choice){
+            case "Rull med tærningerne":
+                return;
+            case "Byg huse":
+                buyableLogic.purchaseHouse();
+                System.out.println(model.getCurrentTurn());
+                for (int i = 0; i < 40; i++) {
+                    System.out.println(model.gameBoard().getFieldName(i) + " " + model.gameBoard().whoOwnsThis(i));
+                }
+                break;
+        }
+
+        userIO.waitForUserInput(currentName + "'s turn: Press ok to roll dice");
+        userIO.updateView(model);
     }
 
     public void checkForDoubleDices(){
@@ -119,6 +120,50 @@ public class Game_Controller {
     public void booleanReset(){
         model.resetBooleans();
         model.setBooleans();
+    }
+
+    public void auctionFunction(int fieldOnAuction){
+        int[] playerIndexInAuction = new int[model.getTotalPlayerCount()];
+        int auctionPrice = 100;
+
+        for (int i = 0; i < model.getTotalPlayerCount(); i++){
+            playerIndexInAuction[i] = i;
+        }
+
+        userIO.showMessage("Grunden er røget på auktion!");
+
+        while (true){
+            int currentPlayerIndex;
+            String choice = userIO.getUserButtonPressed("Current price is " + auctionPrice + ". Either raise the bid by shown amounts or leave the auction : ", "100", "200", "300", "400", "500", "600", "700", "800", "900", "1000", "Leave auction");
+
+            switch (choice){
+                case "100":
+                    auctionPrice += 100;
+                case "200":
+                    auctionPrice += 200;
+                case "300":
+                    auctionPrice += 100;
+                case "400":
+                    auctionPrice += 200;
+                case "500":
+                    auctionPrice += 100;
+                case "600":
+                    auctionPrice += 200;
+                case "700":
+                    auctionPrice += 100;
+                case "800":
+                    auctionPrice += 200;
+                case "900":
+                    auctionPrice += 100;
+                case "1000":
+                    auctionPrice += 200;
+                case "Leave auction":
+                    if (playerIndexInAuction.length > 1) {
+                        for (int i = 0; i < playerIndexInAuction.length - 1; i++){
+                        }
+                    }
+            }
+        }
     }
 
     public void loseCondition(){

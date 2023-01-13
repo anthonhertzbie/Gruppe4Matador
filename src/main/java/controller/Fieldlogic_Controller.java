@@ -15,10 +15,9 @@ public class Fieldlogic_Controller {
     public void specialField(){
         if(model.isChanceCard()){
             chanceCardField(model);
-        }
-        else if (model.isPrison()){
+        }else if (model.isPrison()){
             jailField(model);
-        } else if(model.isTax()){
+        }else if(model.isTax()){
             taxFields(model);
         }
     }
