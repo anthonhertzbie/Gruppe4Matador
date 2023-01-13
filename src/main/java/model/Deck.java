@@ -17,6 +17,7 @@ public class Deck {
     }
 
     public Card getFirstCard(){
+        System.out.println(deck[0] + " loook here <------------------------------------------------------------------");
         return deck[0];
     }
 
@@ -31,11 +32,11 @@ public class Deck {
         }
         deck[deck.length - 1] = lastCard;
 
-
         return lastCard;
     }
 
     public void shuffle() {
+
         Random random = new Random();
         for (int i = 0; i < 10000; i++) {
             int a = random.nextInt(0, 45);
@@ -43,6 +44,9 @@ public class Deck {
             Card savedcard = deck[a];
             deck[a] = deck[b];
             deck[b] = savedcard;
+        }
+        for (int i = 0; i < 45; i++){
+            System.out.println(deck[i]);
         }
     }
 

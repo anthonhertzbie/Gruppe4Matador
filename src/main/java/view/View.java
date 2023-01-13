@@ -4,11 +4,13 @@ import controller.Game_Controller;
 import controller.Notifier;
 import gui_fields.*;
 import gui_main.GUI;
+import model.Cup;
 import model.Helper;
 import model.Model;
 import model.Player;
 
 import java.awt.*;
+import java.util.Objects;
 
 
 public class View extends Notifier {
@@ -20,7 +22,7 @@ public class View extends Notifier {
     GUI_Car[] gui_cars;
     // Gameboard
     GUI_Field[] gui_fields = new GUI_Field[40];
-    GUI_Street[] gui_streets = new GUI_Street[5];
+    GUI_Ownable[] gui_ownables = new GUI_Street[40];
     GUI_Jail gui_jail;
     GUI_Chance gui_chance;
     GUI_Tax gui_taxes;
@@ -39,7 +41,6 @@ public class View extends Notifier {
     @Override
     public void startGame(Model model) {
         if (model.getStartGUI()) {
-
             setGui_start();
             gameController.setTotalPlayerCount(setTotalPlayers());
             setGuiTotalPlayers(model);
@@ -49,129 +50,21 @@ public class View extends Notifier {
         }
         updateView(model);
     }
-
     public void removePlayerLost(Model model){
-        if (model.getPlayerCurrentTurn().getHasLost()) {
-            gui.addPlayer(gui_players[model.getCurrentTurn()]);
-        }
+        gui_players[model.getCurrentTurn()].setName(model.getPlayerCurrentTurn().getName() + " has lost");
+        gui_players[model.getCurrentTurn()].setBalance(model.getPlayerCurrentTurn().getPlayerBalance());
+        gui_fields[model.getPlayerCurrentTurn().getPosition()].setCar(gui_players[model.getCurrentTurn()], false);
     }
 
     public void updateView(Model model) {
-        if (model.getNormalTurn()) {
-            System.out.println("Normal view");
-            setDice(model);
-            moveCar(model);
-            updateAccounts(model);
-        } else if (model.isPrison()) {
-            System.out.println("Prison view");
-            prison(model);
-            moveCar(model);
-            updateAccounts(model);
-        } else if (model.isChanceCard()) {
-            System.out.println("Chance card view");
-            setDice(model);
-            showChancecard(model);
-            if (model.getDeck().getFirstCard().getIndex() == 43 || model.getDeck().getFirstCard().getIndex() == 44) {
-                gui_fields[model.getPlayerCurrentTurn().getPreviousPosition()].setCar(gui_players[model.getCurrentTurn()], false);
-                gui_fields[model.getPlayerCurrentTurn().getPreviousPositionChanceCard()].setCar(gui_players[model.getCurrentTurn()], true);
-                gui.showMessage("You have been put in jail :(");
-                gui_fields[model.getPlayerCurrentTurn().getPreviousPositionChanceCard()].setCar(gui_players[model.getCurrentTurn()], false);
-            }
-
-            moveCar(model);
-            updateAccounts(model);
-        } else if (model.isBrewery()) {
-            setDice(model);
-            moveCar(model);
-            updateAccounts(model);
-        } else if (model.isTax()) {
-            setDice(model);
-            moveCar(model);
-            showTax(model);
-            updateAccounts(model);
-        } else if (model.isShipping()) {
-            setDice(model);
-            moveCar(model);
-            updateAccounts(model);
-        } else if (model.isParking()) {
-            setDice(model);
-            moveCar(model);
-            updateAccounts(model);
+        if (model.isGameIsOver())
+        {
+            gui.close();
         }
-    }
-
-    public void chanceCardGoToPrison(Model model){
-
-    }
-
-    public void prison(Model model){
         Player currentPlayer = model.getPlayerCurrentTurn();
-        System.out.println("Am i running?");
-        if (currentPlayer.getInJail() && currentPlayer.getInJailTurn() == 0){
-            // Doing a little trickery here to circumvent the fact that the model knows you are in jail before the view does.
-            gui.showMessage(currentPlayer.getName() + " Press OK to roll the dices : ");
-            gui_fields[model.getPlayerCurrentTurn().getPreviousPosition()].setCar(gui_players[model.getCurrentTurn()], false);
-            gui_fields[30].setCar(gui_players[model.getCurrentTurn()], true);
-            gui.showMessage("You have been put in jail!");
-            gui_fields[30].setCar(gui_players[model.getCurrentTurn()], false);
-        }
-        else if (currentPlayer.getInJail() && currentPlayer.getInJailTurn() < 2){
-            String options[] = {"Pay 1000$ to get out", "Roll the dices", "Use get outta jail card"};
-            String option;
-
-            if (currentPlayer.getHasJailCard()){
-                option = gui.getUserButtonPressed(currentPlayer.getName() + " you are still in jail.", "Pay 1000$ to get out", "Roll the dices", "Use get outta jail card");
-            } else{
-                option = gui.getUserButtonPressed(currentPlayer.getName() + " you are still in jail.", "Pay 1000$ to get out", "Roll the dices");}
-
-
-            if (option.equals(options[0])){
-                gui.showMessage("You have paid 1000$ to get out. ");
-                gameController.addPlayerBalance(-1000);
-                gameController.setJailFalseCurrentTurn();
-                gameController.editTurn(-1);
-            }else if (option.equals(options[1])){
-                gameController.diceRoll();
-                if (model.getCup().getDice1() == model.getCup().getDice2()){
-                    gui.showMessage("You are free!");
-                    gameController.setJailFalseCurrentTurn();
-                    gameController.editTurn(-1);
-                }
-            }else if (option.equals(options[2])){
-                gui.showMessage("You used teh good card :(");
-                gameController.setJailFalseCurrentTurn();
-                gameController.editTurn(-1);
-            }
-        }
-        else if(currentPlayer.getInJail() && currentPlayer.getInJailTurn() == 2){
-            gui.showMessage("You're free... For now...");
-            gameController.setJailFalseCurrentTurn();
-            gameController.gameTurn();
-        }
-    }
-
-
-    private void showChancecard(Model model){
-        gui.setChanceCard(model.getDeck().drawCard().toString());
-        gui.displayChanceCard();
-    }
-
-    public void showTax(Model model) {
-        Player currentPlayer = model.getPlayerCurrentTurn();
-        if (currentPlayer.getPosition() == 4) {
-            String[] options = {"10%", "4000$"};
-            String option = gui.getUserButtonPressed("Income tax: Pay 10% of your total assets or 4000$", "10%", "4000$");
-            if (option.equals(options[0])){
-                int tempBalance = (int) Math.round(currentPlayer.getValueOfAllAssets() * 0.9);
-                tempBalance = tempBalance - (tempBalance % 100);
-                currentPlayer.addPlayerBalance(tempBalance - currentPlayer.getValueOfAllAssets());
-            }
-            else {
-                currentPlayer.addPlayerBalance(-4000);
-                gui.showMessage("You have paid 4000$");
-            }
-        }else { gui.showMessage("Special-tax, press OK to pay 2000$");
-        }
+        setDice(model.getCup());
+        moveCar(model);
+        updateAccounts(model);
     }
 
     public void updateAccounts(Model model){
@@ -181,64 +74,109 @@ public class View extends Notifier {
     }
 
     public void moveCar(Model model){
-        gui_fields[model.getPlayerCurrentTurn().getPreviousPosition()].setCar(gui_players[model.getCurrentTurn()], false);
+        for(int i = 0; i < 40; i++){
+            if (gui_fields[i].hasCar(gui_players[model.getCurrentTurn()])){
+                gui_fields[i].setCar(gui_players[model.getCurrentTurn()], false);
+            }
+        }
+
         gui_fields[model.getPlayerCurrentTurn().getPosition()].setCar(gui_players[model.getCurrentTurn()], true);
+
+
+
+        /*
+        gui_fields[oldPosition].setCar(gui_players[currentTurn], false);
+        gui_fields[newPosition].setCar(gui_players[currentTurn], true);
+
+
+        /*
+        gui_fields[oldPosition].setCar(gui_players[currentTurn], false);
+        gui_fields[newPosition].setCar(gui_players[currentTurn], true);
+
+         */
+    }
+
+    public void setHouses(int fieldIndex, int numberOfHouses){
+        GUI_Field f = gui.getFields()[fieldIndex];
+        if(f instanceof GUI_Ownable){
+            GUI_Street s = (GUI_Street) f;
+            s.setHouses(numberOfHouses);
+        }
     }
 
     public GUI_Field[] gameBoardFields(){
-        helper.getFieldData(0,0);
 
-        gui_fields[0] = new GUI_Start("Start", "$$$$$", "Recieve much gold if you pass", Color.RED, Color.BLACK);
-        gui_fields[1] = new GUI_Street("Rødovrevej","","","2000",Color.BLUE,Color.black);
+        gui_fields[0] = new GUI_Start(helper.getFieldData(1,0), "$$$$$", "Recieve much gold if you pass", Color.RED, Color.BLACK);
+        gui_fields[1] = new GUI_Street(helper.getFieldData(2,0),helper.getFieldData(2,3) + "kr","","",new Color(114,109,232),Color.black);
         gui_fields[2] = new GUI_Chance();gui_fields[2].setSubText("Chance card");
-        gui_fields[3] = new GUI_Street("Hvidovrevej","st","d","20",Color.BLUE,Color.black);
+        gui_fields[3] = new GUI_Street(helper.getFieldData(4,0),helper.getFieldData(4,3) + "kr","d","",new Color(114,109,232),Color.black);
         gui_fields[4] = new GUI_Tax();gui_fields[4].setTitle("Tax!");gui_fields[4].setSubText("Pay up!");gui_fields[4].setDescription("Choose to either pay 4.000$ or 10% of your total assets.");
-        gui_fields[5] = new GUI_Shipping("default","Helsingør","d","","20",Color.BLUE,Color.black);
-        gui_fields[6] = new GUI_Street("Roskildevej","st","d","20",Color.ORANGE,Color.black);
+        gui_fields[5] = new GUI_Shipping("default",helper.getFieldData(1,0),"Ferry","","",new Color(107,251,255),Color.black);
+        gui_fields[6] = new GUI_Street(helper.getFieldData(7,0),helper.getFieldData(7,3) + "kr","d","20",new Color(120,80,50),Color.black);
         gui_fields[7] = new GUI_Chance();gui_fields[7].setSubText("Chance card");
-        gui_fields[8] = new GUI_Street("Valby Langgade","st","d","20",Color.ORANGE,Color.black);
-        gui_fields[9] = new GUI_Street("Allégade","st","d","20",Color.ORANGE,Color.black);
+        gui_fields[8] = new GUI_Street(helper.getFieldData(9,0),helper.getFieldData(9,3) + "kr","d","20",new Color(120,80,50),Color.black);
+        gui_fields[9] = new GUI_Street(helper.getFieldData(10,0),helper.getFieldData(10,3) + "kr","d","20",new Color(120,80,50),Color.black);
         gui_fields[10] = new GUI_Jail();gui_fields[10].setSubText("Visiting");
-        gui_fields[11] = new GUI_Street("Frederiksberg Allé","st","d","20",Color.YELLOW,Color.black);
-        gui_fields[12] = new GUI_Brewery("default","Tuborg Squash","d","","20",Color.ORANGE,Color.black);
-        gui_fields[13] = new GUI_Street("Bülowsvej","st","d","20",Color.YELLOW,Color.black);
-        gui_fields[14] = new GUI_Street("t","st","d","20",Color.YELLOW,Color.black);
-        gui_fields[15] = new GUI_Shipping("default","st","d","","20",Color.RED,Color.black);
-        gui_fields[16] = new GUI_Street("t","st","d","20",Color.GRAY,Color.black);
+        gui_fields[11] = new GUI_Street(helper.getFieldData(12,0),helper.getFieldData(12,3) + "kr","d","20",Color.YELLOW,Color.black);
+        gui_fields[12] = new GUI_Brewery("default",helper.getFieldData(13,3) + "kr","Brewery","","20",Color.lightGray,Color.BLACK);
+        gui_fields[13] = new GUI_Street(helper.getFieldData(14,0),helper.getFieldData(14,3) + "kr","d","20",Color.YELLOW,Color.black);
+        gui_fields[14] = new GUI_Street(helper.getFieldData(15,0),helper.getFieldData(15,3) + "kr","d","20",Color.YELLOW,Color.black);
+        gui_fields[15] = new GUI_Shipping("default",helper.getFieldData(16,3) + "kr","Ferry","","20",new Color(107,251,255),Color.black);
+        gui_fields[16] = new GUI_Street(helper.getFieldData(17,0),helper.getFieldData(17,3) + "kr","d","20",Color.GRAY,Color.black);
         gui_fields[17] = new GUI_Chance();gui_fields[17].setSubText("Chance card");
-        gui_fields[18] = new GUI_Street("t","st","d","20",Color.GRAY,Color.black);
-        gui_fields[19] = new GUI_Street("t","st","d","20",Color.GRAY,Color.black);
+        gui_fields[18] = new GUI_Street(helper.getFieldData(19,0),helper.getFieldData(19,3) + "kr","d","20",Color.GRAY,Color.black);
+        gui_fields[19] = new GUI_Street(helper.getFieldData(20,0),helper.getFieldData(20,3) + "kr","d","20",Color.GRAY,Color.black);
         gui_fields[20] = new GUI_Refuge();gui_fields[20].setSubText("Free parking");
-        gui_fields[21] = new GUI_Street("t","st","d","20",Color.RED,Color.black);
+        gui_fields[21] = new GUI_Street(helper.getFieldData(22,0),helper.getFieldData(22,3) + "kr","d","20",new Color(255,43,43),Color.black);
         gui_fields[22] = new GUI_Chance();gui_fields[22].setSubText("Chance card");
-        gui_fields[23] = new GUI_Street("t","st","d","20",Color.RED,Color.black);
-        gui_fields[24] = new GUI_Street("t","st","d","20",Color.RED,Color.black);
-        gui_fields[25] = new GUI_Shipping("default","st","d","","20",Color.BLUE,Color.BLACK);
-        gui_fields[26] = new GUI_Street("t","st","d","20",Color.LIGHT_GRAY,Color.black);
-        gui_fields[27] = new GUI_Street("t","st","d","20",Color.LIGHT_GRAY,Color.black);
-        gui_fields[28] = new GUI_Brewery("default","st","d","","20",Color.RED,Color.WHITE);
-        gui_fields[29] = new GUI_Street("t","st","d","20",Color.LIGHT_GRAY,Color.black);
+        gui_fields[23] = new GUI_Street(helper.getFieldData(24,0),helper.getFieldData(24,3) + "kr","d","20",new Color(255,43,43),Color.black);
+        gui_fields[24] = new GUI_Street(helper.getFieldData(25,0),helper.getFieldData(25,3) + "kr","d","20",new Color(255,43,43),Color.black);
+        gui_fields[25] = new GUI_Shipping("default",helper.getFieldData(26,3) + "kr","Ferry","","20",new Color(107,251,255),Color.BLACK);
+        gui_fields[26] = new GUI_Street(helper.getFieldData(27,0),helper.getFieldData(27,3) + "kr","d","20",new Color(255,135,244),Color.black);
+        gui_fields[27] = new GUI_Street(helper.getFieldData(28,0),helper.getFieldData(28,3) + "kr","d","20",new Color(255,135,244),Color.black);
+        gui_fields[28] = new GUI_Brewery("default",helper.getFieldData(29,3) + "kr","Brewery","","20",Color.lightGray,Color.BLACK);
+        gui_fields[29] = new GUI_Street(helper.getFieldData(30,0),helper.getFieldData(30,3) + "kr","d","20",new Color(255,135,244),Color.black);
         gui_fields[30] = new GUI_Jail();gui_fields[30].setSubText("Go to jail!");
-        gui_fields[31] = new GUI_Street("t","st","d","20",Color.YELLOW,Color.black);
-        gui_fields[32] = new GUI_Street("t","st","d","20",Color.YELLOW,Color.black);
+        gui_fields[31] = new GUI_Street(helper.getFieldData(32,0),helper.getFieldData(32,3) + "kr","d","20",new Color(106, 176, 95),Color.black);
+        gui_fields[32] = new GUI_Street(helper.getFieldData(33,0),helper.getFieldData(33,3) + "kr","d","20",new Color(106, 176, 95),Color.black);
         gui_fields[33] = new GUI_Chance();gui_fields[33].setSubText("Chance card");
-        gui_fields[34] = new GUI_Street("t","st","d","20",Color.YELLOW,Color.black);
-        gui_fields[35] = new GUI_Shipping("default","st","d","","20",Color.BLUE,Color.black);
+        gui_fields[34] = new GUI_Street(helper.getFieldData(35,0),helper.getFieldData(35,3) + "kr","d","20",new Color(106, 176, 95),Color.black);
+        gui_fields[35] = new GUI_Shipping("default",helper.getFieldData(36,3) + "kr","Ferry","","20",new Color(107,251,255),Color.black);
         gui_fields[36] = new GUI_Chance();gui_fields[36].setSubText("Chance card");
-        gui_fields[37] = new GUI_Street("t","st","d","20",Color.magenta,Color.black);
+        gui_fields[37] = new GUI_Street(helper.getFieldData(38,0),helper.getFieldData(38,3) + "kr","d","20",new Color(171,52,175),Color.black);
         gui_fields[38] = new GUI_Tax();gui_fields[38].setTitle("Tax!");gui_fields[38].setSubText("Pay up!");gui_fields[38].setDescription("Pay  2000$");
-        gui_fields[39] = new GUI_Street("t","st","d","20",Color.magenta,Color.black);
-
+        gui_fields[39] = new GUI_Street(helper.getFieldData(40,0),helper.getFieldData(40,3) + "kr","d","20",new Color(171,52,175),Color.black);
         return gui_fields;
     }
-    public void setGui_start(){
-        gui = new GUI(gameBoardFields(), Color.ORANGE);
+
+    public void setBorder(int index,int player){
+        int red = helper.getCarColour(player, 2);
+        int green = helper.getCarColour(player, 3);
+        int blue = helper.getCarColour(player, 4);
+        GUI_Field f = gui.getFields()[index];
+        if(f instanceof GUI_Ownable){
+            GUI_Ownable o = (GUI_Ownable) f;
+            o.setBorder(new Color(red, green, blue));
+        }
+    }
+    public void startBorder(){
+        for (int i = 0; i < gui_fields.length; i++) {
+            GUI_Field f = gui.getFields()[i];
+            if(f instanceof GUI_Ownable){
+                GUI_Ownable o = (GUI_Ownable) f;
+                o.setBorder(new Color(0,0,0), new Color(255,255,255));
+            }
+        }
     }
 
-    public void setDice(Model model){
-        gui.showMessage(model.getPlayerCurrentTurn().getName() + " press ok to roll the dices : ");
-        gui.setDice(model.getCup().getDice1(), model.getCup().getDice2());
 
+    public void setGui_start(){
+        gui = new GUI(gameBoardFields(), Color.ORANGE);
+        startBorder();
+    }
+
+    public void setDice(Cup cup){
+        gui.setDice(cup.getDice1(), cup.getDice2());
     }
 
     public void makePlayers(int index, Model model){
@@ -247,6 +185,10 @@ public class View extends Notifier {
         Color[] colors = {Color.RED, Color.BLUE, Color.YELLOW, Color.ORANGE, Color.GRAY, Color.magenta};
         gameController.setName(index, playerName);
         gui_cars[index] = new GUI_Car();
+        int red = helper.getCarColour(index, 2);
+        int green = helper.getCarColour(index, 3);
+        int blue = helper.getCarColour(index, 4);
+        gui_cars[index].setPrimaryColor(new Color(red, green, blue));
         gui_players[index] = new GUI_Player(playerName, model.getPlayerBalance(index), gui_cars[index]);
         gui.addPlayer(gui_players[index]);
         gui_fields[0].setCar(gui_players[index], true);

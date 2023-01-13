@@ -1,12 +1,11 @@
 package model;
 
-import java.util.Arrays;
-
 public class Player {
     private String name;
     private int position = 0;
     private int previousPosition = 0;
     private int previousPositionChanceCard;
+    private int doubleTurn = 0;
     private boolean inJail = false;
     private boolean hasJailCard = false;
     private int inJailTurn;
@@ -22,9 +21,13 @@ public class Player {
     }
     public void setPosition(int position){
         this.previousPositionChanceCard = this.position;
-        System.out.println(previousPosition + "This is the previous position after setPosition");
         this.position = position;
     }
+
+    public Account getAccount() {
+        return account;
+    }
+
     public int getPreviousPositionChanceCard(){
         return previousPositionChanceCard;
     }
@@ -50,7 +53,7 @@ public class Player {
     public void setInJail(boolean isInJail){
         this.inJail = isInJail;
     }
-    public boolean getInJail(){
+    public boolean isInJail(){
         return this.inJail;
     }
     public void setHasJailCard(boolean hasJailCard){
@@ -75,7 +78,6 @@ public class Player {
     }
 
     public void setInJailTurn(int inJailTurn) {
-        System.out.println("injailTurn is : " + this.inJailTurn + " inJailTurn sat to : " + inJailTurn);
         this.inJailTurn = inJailTurn;
     }
 
@@ -85,5 +87,17 @@ public class Player {
 
     public void setHasLost(boolean hasLost) {
         this.hasLost = hasLost;
+    }
+
+    public int getDoubleTurn() {
+        return doubleTurn;
+    }
+
+    public void addDoubleTurn(int doubleTurn) {
+        this.doubleTurn += doubleTurn;
+    }
+
+    public void setDoubleTurn(int doubleTurn){
+        this.doubleTurn = doubleTurn;
     }
 }
