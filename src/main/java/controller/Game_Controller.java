@@ -79,13 +79,22 @@ public class Game_Controller {
                 case "Rull med tærningerne":
                     return;
                 case "Byg huse":
-                    buyableLogic.purchaseHouse();
-                    model.getPlayerCurrentTurn().setTotalHouses(model.getPlayerCurrentTurn().getTotalHouses() + 1);
-                    System.out.println(model.getCurrentTurn());
-                    for (int i = 0; i < 40; i++) {
-                        System.out.println(model.gameBoard().getFieldName(i) + " " + model.gameBoard().whoOwnsThis(i));
+                    while (true) {
+                        buyableLogic.purchaseHouse();
+                        model.getPlayerCurrentTurn().setTotalHouses(model.getPlayerCurrentTurn().getTotalHouses() + 1);
+                        System.out.println(model.getCurrentTurn());
+                        for (int i = 0; i < 40; i++) {
+                            System.out.println(model.gameBoard().getFieldName(i) + " " + model.gameBoard().whoOwnsThis(i));
+                        }
+                        choice = userIO.getUserButtonPressed("Vil du bygge flere huse?", "Ja", "Nej");
+
+
+                        if (choice.equals("Nej")) {
+                            userIO.showMessage("Rul terningerne!");
+                            break;
+                        }
+
                     }
-                    break;
             }
 
 
@@ -96,23 +105,33 @@ public class Game_Controller {
                 case "Rull med tærningerne":
                     return;
                 case "Byg huse":
-                    buyableLogic.purchaseHouse();
-                    model.getPlayerCurrentTurn().setTotalHouses(model.getPlayerCurrentTurn().getTotalHouses() + 1);
-                    System.out.println(model.getCurrentTurn());
-                    for (int i = 0; i < 40; i++) {
-                        System.out.println(model.gameBoard().getFieldName(i) + " " + model.gameBoard().whoOwnsThis(i));
+                    while (true) {
+                        buyableLogic.purchaseHouse();
+                        model.getPlayerCurrentTurn().setTotalHouses(model.getPlayerCurrentTurn().getTotalHouses() + 1);
+                        System.out.println(model.getCurrentTurn());
+                        for (int i = 0; i < 40; i++) {
+                            System.out.println(model.gameBoard().getFieldName(i) + " " + model.gameBoard().whoOwnsThis(i));
+                        }
+                        choice = userIO.getUserButtonPressed("Vil du bygge flere huse?", "Ja", "Nej");
+                        if (choice.equals("Nej")) {
+                            userIO.showMessage("Rul terningerne!");
+                            break;
+                        }
                     }
-                    break;
                 case "Sælg huse":
-                    buyableLogic.sellHouse();
-                    model.getPlayerCurrentTurn().setTotalHouses(model.getPlayerCurrentTurn().getTotalHouses() - 1);
-                    System.out.println(model.getCurrentTurn());
-                    for (int i = 0; i < 40; i++) {
-                        System.out.println(model.gameBoard().getFieldName(i) + " " + model.gameBoard().whoOwnsThis(i));
+                    while (true) {
+                        buyableLogic.sellHouse();
+                        model.getPlayerCurrentTurn().setTotalHouses(model.getPlayerCurrentTurn().getTotalHouses() - 1);
+                        System.out.println(model.getCurrentTurn());
+                        for (int i = 0; i < 40; i++) {
+                            System.out.println(model.gameBoard().getFieldName(i) + " " + model.gameBoard().whoOwnsThis(i));
+                        }
+                        choice = userIO.getUserButtonPressed("Vil du sælge flere huse?", "Ja", "Nej");
+                        if (choice.equals("Nej")) {
+                            userIO.showMessage("Rul terningerne!");
+                            break;
+                        }
                     }
-                    break;
-
-
             }
         }
         else if (!isOwnerOfGroup){

@@ -182,8 +182,9 @@ public class BuyableController {
             if (choice.equals(model.gameBoard().getFieldName(i))) {
                 model.getPlayerCurrentTurn().getAccount().payForHouse((model.gameBoard().getSpecificPrice(i, 4)));
                 int houses = model.gameBoard().getField(i).getNumOfHouses() + 1;
+                model.gameBoard().rentIncrease(i);
                 model.gameBoard().getField(i).setNumOfHouses(houses);
-                userIO.setHouses(i, houses, model.gameBoard().getFieldCurrentRent(i + 2));
+                userIO.setHouses(i, houses, model.gameBoard().getFieldCurrentRent(i));
 
             }
         }
@@ -209,6 +210,7 @@ public class BuyableController {
             if (choice.equals(model.gameBoard().getFieldName(i))) {
                 model.getPlayerCurrentTurn().getAccount().sellHouse((model.gameBoard().getSpecificPrice(i, 4)));
                 int houses = model.gameBoard().getField(i).getNumOfHouses() - 1;
+                model.gameBoard().rentIncrease(-i);
                 model.gameBoard().getField(i).setNumOfHouses(houses);
                 userIO.setHouses(i, houses, model.gameBoard().getFieldCurrentRent(i + 2));
             }
