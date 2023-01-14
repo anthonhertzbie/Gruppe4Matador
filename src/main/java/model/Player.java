@@ -11,6 +11,7 @@ public class Player {
     private int inJailTurn;
     private boolean hasLost = false;
     private int playerID;
+    private int totalHouses = 0;
 
     private Account account = new Account();
 
@@ -24,6 +25,7 @@ public class Player {
         this.previousPositionChanceCard = this.position;
         this.position = position;
     }
+
 
     public Account getAccount() {
         return account;
@@ -108,5 +110,14 @@ public class Player {
 
     public void setPlayerID(int playerID) {
         this.playerID = playerID;
+    }
+
+
+    public int getTotalHouses() {
+        return totalHouses;
+    }
+
+    public void setTotalHouses(int totalHouses) {
+        this.totalHouses = totalHouses;
     }
 }

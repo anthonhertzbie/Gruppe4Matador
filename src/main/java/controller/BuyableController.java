@@ -86,7 +86,7 @@ public class BuyableController {
             System.out.println(currentPlayerIndex + " is current playerindex" + playerIndex.get(currentPlayerIndex) + " is other number");
             if (true) {
 
-                String choice = userIO.getUserButtonPressed(model.getPlayerByIndex(playerIndex.get(currentPlayerIndex)).getName() + "'s turn. Current price is " + auctionPrice + ". Either raise the bid by shown amounts or leave the auction : ", "100", "200", "300", "400", "500", "600", "700", "800", "900", "1000", "Leave auction");
+                String choice = userIO.getUserButtonPressed(model.getPlayerByIndex(playerIndex.get(currentPlayerIndex)).getName() + "'s tur. Nuværende pris er: " + auctionPrice + ". Hæv beløbet med et beløb eller forlad auktionen: ", "100", "200", "300", "400", "500", "600", "700", "800", "900", "1000", "Leave auction");
 
                 switch (choice) {
                     case "100":
@@ -122,10 +122,12 @@ public class BuyableController {
                     case "Leave auction":
 
                         playerIndex.removeAll(Arrays.asList(currentPlayerIndex));
+                        currentPlayerIndex -= 1;
                         System.out.println(playerIndex.size() + " is new size of list");
 
                         if(playerIndex.size() == 1){
                             userIO.showMessage(model.getPlayerByIndex(playerIndex.get(0)).getName() + " har vundet auktionen!" + " han betalte " + auctionPrice + "kr");
+                            model.getPlayerByIndex(playerIndex.get(0)).addPlayerBalance(-auctionPrice);
                             model.gameBoard().buyField(fieldOnAuction, playerIndex.get(0));
                             userIO.setOwnerBorder(fieldOnAuction, playerIndex.get(0));
                             return;
@@ -139,9 +141,7 @@ public class BuyableController {
         }
     }
 
-    public void setOwnedGroups(){
 
-    }
 
 
 
@@ -179,7 +179,35 @@ public class BuyableController {
                 model.getPlayerCurrentTurn().getAccount().payForHouse((model.gameBoard().getSpecificPrice(i, 4)));
                 int houses = model.gameBoard().getField(i).getNumOfHouses() + 1;
                 model.gameBoard().getField(i).setNumOfHouses(houses);
-                userIO.setHouses(i, houses);
+                userIO.setHouses(i, houses, model.gameBoard().getFieldCurrentRent(i + 2));
+
+            }
+        }
+    }
+
+    public void sellHouse() {
+        ArrayList<String> ownedP = new ArrayList<>(0);
+        for (int i = 0; i < 40; i++) {
+            if (model.gameBoard().whoOwnsThis(i) == model.getCurrentTurn()) {
+                ownedP.add(model.gameBoard().getFieldName(i));
+            }
+        }
+        ownedP.remove("Helsingør - Helsingborg");
+        ownedP.remove("Mols-Linjen");
+        ownedP.remove("Tuborg Squash");
+        ownedP.remove("Gedser - Rostock");
+        ownedP.remove("Coca Cola");
+        ownedP.remove("Rødby - Puttgarden");
+        String message = "Hvor vil du gerne bygge et hus?";
+        String choice = tooBigSwitchStatement(ownedP, message);
+
+        for (int i = 0; i < 40; i++) {
+            if (choice.equals(model.gameBoard().getFieldName(i))) {
+                model.getPlayerCurrentTurn().getAccount().payForHouse((model.gameBoard().getSpecificPrice(i, 4)));
+                int houses = model.gameBoard().getField(i).getNumOfHouses() + 1;
+                model.gameBoard().getField(i).setNumOfHouses(houses);
+                userIO.setHouses(i, houses, model.gameBoard().getFieldCurrentRent(i + 2));
+
             }
         }
     }

@@ -59,9 +59,9 @@ public class ViewUserIO extends UserIO {
     public int getUserInteger(String message, int min, int max) {
         return view.gui.getUserInteger(message,min,max);
     }
-
-    public void setHouses(int fieldIndex, int houses){
-        view.setHouses(fieldIndex, houses);
+    @Override
+    public void setHouses(int fieldIndex, int houses, int currentRent){
+        view.setHouses(fieldIndex, houses, currentRent);
     }
 
 

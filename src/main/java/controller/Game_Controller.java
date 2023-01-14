@@ -73,13 +73,14 @@ public class Game_Controller {
                 ownedGroups.add(i);
             }
         }
-        if (isOwnerOfGroup){
+        if (isOwnerOfGroup && model.getPlayerCurrentTurn().getTotalHouses() == 0){
             choice = userIO.getUserButtonPressed(currentName + "'s tur.", "Rull med tærningerne", "Byg huse");
             switch(choice) {
                 case "Rull med tærningerne":
                     return;
                 case "Byg huse":
                     buyableLogic.purchaseHouse();
+                    model.getPlayerCurrentTurn().setTotalHouses(model.getPlayerCurrentTurn().getTotalHouses() + 1);
                     System.out.println(model.getCurrentTurn());
                     for (int i = 0; i < 40; i++) {
                         System.out.println(model.gameBoard().getFieldName(i) + " " + model.gameBoard().whoOwnsThis(i));
@@ -87,12 +88,34 @@ public class Game_Controller {
                     break;
             }
 
-        } else if (!isOwnerOfGroup){
+
+        }
+        else if(isOwnerOfGroup && model.getPlayerCurrentTurn().getTotalHouses() != 0){
+            choice = userIO.getUserButtonPressed(currentName + "'s tur.", "Rull med tærningerne", "Byg huse", "Sælg huse");
+            switch(choice) {
+                case "Rull med tærningerne":
+                    return;
+                case "Byg huse":
+                    buyableLogic.purchaseHouse();
+                    model.getPlayerCurrentTurn().setTotalHouses(model.getPlayerCurrentTurn().getTotalHouses() + 1);
+                    System.out.println(model.getCurrentTurn());
+                    for (int i = 0; i < 40; i++) {
+                        System.out.println(model.gameBoard().getFieldName(i) + " " + model.gameBoard().whoOwnsThis(i));
+                    }
+                    break;
+                case "Sælg huse":
+
+            }
+        }
+        else if (!isOwnerOfGroup){
             choice = userIO.getUserButtonPressed(currentName + "'s tur.", "Rull med tærningerne");
         }
 
         userIO.updateView(model);
     }
+
+
+
 
     public void checkForDoubleDices(){
         if (model.getCup().getDice1() == model.getCup().getDice2() && model.getPlayerCurrentTurn().getDoubleTurn() < 2){
