@@ -207,12 +207,16 @@ public class BuyableController {
         String choice = tooBigSwitchStatement(ownedP, message);
 
         for (int i = 0; i < 40; i++) {
-            if (choice.equals(model.gameBoard().getFieldName(i))) {
-                model.getPlayerCurrentTurn().getAccount().sellHouse((model.gameBoard().getSpecificPrice(i, 4)));
-                int houses = model.gameBoard().getField(i).getNumOfHouses() - 1;
-                model.gameBoard().rentIncrease(-i);
-                model.gameBoard().getField(i).setNumOfHouses(houses);
-                userIO.setHouses(i, houses, model.gameBoard().getFieldCurrentRent(i + 2));
+            try {
+                if (choice.equals(model.gameBoard().getFieldName(i))) {
+                    model.gameBoard().rentIncrease(-i);
+                    model.getPlayerCurrentTurn().getAccount().sellHouse((model.gameBoard().getSpecificPrice(i, 4)));
+                    int houses = model.gameBoard().getField(i).getNumOfHouses() - 1;
+                    model.gameBoard().getField(i).setNumOfHouses(houses);
+                    userIO.setHouses(i, houses, model.gameBoard().getFieldCurrentRent(i + 2));
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                userIO.showMessage("You don't have any houses on that field");
             }
         }
     }
