@@ -96,7 +96,7 @@ public class Fieldlogic_Controller {
         userIO.moveCar(model);
         userIO.showChanceCard(model.getDeck().drawCard().toString());
         userIO.showMessage("You have drawn a chance card!");
-        /*
+
         switch(model.getDeck().getLastCard().getIndex() + 1){
             case 1:
                 return;
@@ -230,7 +230,7 @@ public class Fieldlogic_Controller {
 
         }
 
-         */
+
     }
 
 
