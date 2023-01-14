@@ -209,6 +209,12 @@ public class Gameboard {
         ownerTable[fieldIndex] = -1;
     }
 
+    public boolean checkForHouse(int fieldIndex){
+        if (fields[fieldIndex].getNumOfHouses() != 0){
+            return true;
+        }
+        return false;
+    }
 
     public void rentIncrease(int fieldIndex){
         for (int i = 2; i < 7; i++) {

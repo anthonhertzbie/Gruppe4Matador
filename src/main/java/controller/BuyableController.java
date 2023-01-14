@@ -151,9 +151,13 @@ public class BuyableController {
             if (model.gameBoard().whoOwnsThis(currentPosition) != model.getCurrentTurn() && !model.gameBoard().checkIfFieldGroupOwned(currentPosition)) {
                 userIO.showMessage(model.getPlayerCurrentTurn().getName() + "! DU skal sgu betale rente kammerat!");
                 model.getPlayerCurrentTurn().addPlayerBalance(-rentToPay);
-            } else if (model.gameBoard().checkIfFieldGroupOwned(currentPosition)) {
+            } else if (model.gameBoard().checkIfFieldGroupOwned(currentPosition) && !model.gameBoard().checkForHouse(currentPosition)) {
                 userIO.showMessage(model.getPlayerCurrentTurn().getName() + "! DU skal sgu betale DOBBELT rente kammerat!");
                 model.getPlayerCurrentTurn().addPlayerBalance(-rentToPay * 2);
+            } else if (model.gameBoard().checkIfFieldGroupOwned(currentPosition) && model.gameBoard().checkForHouse(currentPosition)){
+                userIO.showMessage(model.getPlayerCurrentTurn().getName() + "! DU skal sgu betale HUS rente kammerat!");
+                model.getPlayerCurrentTurn().addPlayerBalance(-rentToPay);
+
             }
         }
     }
