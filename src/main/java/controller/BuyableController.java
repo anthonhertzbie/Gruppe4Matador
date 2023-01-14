@@ -76,7 +76,6 @@ public class BuyableController {
             }
         }
 
-
         userIO.showMessage("Grunden er røget på auktion!");
 
         while (true){
@@ -121,7 +120,7 @@ public class BuyableController {
                         break;
                     case "Leave auction":
 
-                        playerIndex.removeAll(Arrays.asList(currentPlayerIndex));
+                        playerIndex.removeAll(Arrays.asList(playerIndex.get(currentPlayerIndex)));
                         currentPlayerIndex -= 1;
                         System.out.println(playerIndex.size() + " is new size of list");
 
