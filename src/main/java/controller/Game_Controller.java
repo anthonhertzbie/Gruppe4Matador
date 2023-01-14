@@ -104,6 +104,14 @@ public class Game_Controller {
                     }
                     break;
                 case "Sælg huse":
+                    buyableLogic.sellHouse();
+                    model.getPlayerCurrentTurn().setTotalHouses(model.getPlayerCurrentTurn().getTotalHouses() - 1);
+                    System.out.println(model.getCurrentTurn());
+                    for (int i = 0; i < 40; i++) {
+                        System.out.println(model.gameBoard().getFieldName(i) + " " + model.gameBoard().whoOwnsThis(i));
+                    }
+                    break;
+
 
             }
         }

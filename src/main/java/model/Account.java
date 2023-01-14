@@ -25,6 +25,11 @@ public class Account {
         this.AssetsValue += houseCost;
     }
 
+    public void sellHouse(int houseCost){
+        this.Balance += 0.5*houseCost;
+        this.AssetsValue -= houseCost;
+    }
+
 
 
 

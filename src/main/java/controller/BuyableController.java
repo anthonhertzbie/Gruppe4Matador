@@ -198,16 +198,15 @@ public class BuyableController {
         ownedP.remove("Gedser - Rostock");
         ownedP.remove("Coca Cola");
         ownedP.remove("Rødby - Puttgarden");
-        String message = "Hvor vil du gerne bygge et hus?";
+        String message = "Hvor vil du gerne sælge et hus?";
         String choice = tooBigSwitchStatement(ownedP, message);
 
         for (int i = 0; i < 40; i++) {
             if (choice.equals(model.gameBoard().getFieldName(i))) {
-                model.getPlayerCurrentTurn().getAccount().payForHouse((model.gameBoard().getSpecificPrice(i, 4)));
-                int houses = model.gameBoard().getField(i).getNumOfHouses() + 1;
+                model.getPlayerCurrentTurn().getAccount().sellHouse((model.gameBoard().getSpecificPrice(i, 4)));
+                int houses = model.gameBoard().getField(i).getNumOfHouses() - 1;
                 model.gameBoard().getField(i).setNumOfHouses(houses);
                 userIO.setHouses(i, houses, model.gameBoard().getFieldCurrentRent(i + 2));
-
             }
         }
     }
