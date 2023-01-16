@@ -92,12 +92,12 @@ public class Fieldlogic_Controller {
 
 
     private void chanceCardField(Model model){
-        /*
+
         Player currentplayer = model.getPlayerCurrentTurn();
         userIO.moveCar(model);
         userIO.showChanceCard(model.getDeck().drawCard().toString());
         userIO.showMessage("You have drawn a chance card!");
-
+        System.out.println(model.getDeck().getLastCard().getIndex() + " is index");
 
         switch(model.getDeck().getLastCard().getIndex() + 1){
             case 1:
@@ -161,17 +161,20 @@ public class Fieldlogic_Controller {
             case 31:
                 currentplayer.addPosition(3);
                 userIO.moveCar(model);
+                return;
             case 32:
             case 33:
                 currentplayer.addPosition(-3);
                 userIO.moveCar(model);
+                return;
             case 34:
+            case 35:
                 if(currentplayer.getPosition() > 11){
                     currentplayer.addPlayerBalance(4000);
                 }
                 currentplayer.setPosition(11);
                 userIO.moveCar(model);
-            case 35:
+                return;
             case 36:
                 return;
             case 37:
@@ -228,13 +231,14 @@ public class Fieldlogic_Controller {
                 currentplayer.setPosition(10);
                 currentplayer.setInJailTurn(0);
                 userIO.moveCar(model);
+                return;
 
 
 
 
         }
 
-         */
+
     }
 
 

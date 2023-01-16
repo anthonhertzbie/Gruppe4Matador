@@ -10,7 +10,7 @@ public class Card {
 
     public Card(int lineNo) {
         this.cardDescription = helper.getChancecards(lineNo);
-        this.lineNo = lineNo;
+        this.lineNo = lineNo + 1;
     }
     public int getIndex(){
         return lineNo;
