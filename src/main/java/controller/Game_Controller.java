@@ -51,9 +51,11 @@ public class Game_Controller {
     public void gameTurn(){
         while (true){
             int player = model.getCurrentTurn();
+            System.out.println(model.getPlayerCurrentTurn().getName() + "is name current turn");
             if (model.getPlayerCurrentTurn().getHasLost()){
+                System.out.println("Player has lost : " + model.getPlayerCurrentTurn().getName());
                 model.changeTurn();
-            } else if (!model.getPlayerCurrentTurn().isInJail()) {
+            } if (!model.getPlayerCurrentTurn().isInJail()) {
                 normalTurn();
                 playerMoves();
             }
@@ -161,7 +163,12 @@ public class Game_Controller {
         model.gameBoard().updateFieldGroupsOwned();
         loseCondition();
         checkForDoubleDices();
+        notifyEverything();
         model.changeTurn();
+    }
+
+    public void fielLogic(){
+
     }
 
     public void setPlayerFreeFromJail(){
@@ -210,6 +217,7 @@ public class Game_Controller {
                     buyableLogic.auctionFunction(listOfOwnedFields.get(j));
                 }
                 userIO.removePlayerLost(model);
+                notifyEverything();
             }
         }
 
@@ -226,6 +234,7 @@ public class Game_Controller {
     // Rolls the dices and updates the view
     public void diceRoll(){
         model.getCup().rollDices();
+        notifyEverything();
     }
     // Sets the name and index of a given player
     public void setName(int index, String name){
