@@ -1,7 +1,6 @@
 package controller;
 
 import model.Model;
-import model.Player;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,19 +18,40 @@ public class BuyableController {
     public void checkForAllOwned(int i){
         System.out.println("Check for all is running");
 
-            if(model.gameBoard().checkIfFieldGroupOwned(i)){
+            if(model.gameBoard().checkIfFieldGroupOwned(i) && fieldAcceptTestStreet()){
                 System.out.println("Check for all is running 2");
                 for(int j = 0; j < model.gameBoard().getFieldGroup(i).length; j++){
                     userIO.setRentPrice(model.gameBoard().getFieldGroup(i)[j], "Leje: " + model.gameBoard().getFieldCurrentRent(model.gameBoard().getFieldGroup(i)[j])*2);
                 }
+
+
+            } else if(!model.gameBoard().checkIfFieldGroupOwned(i) && fieldAcceptTestStreet()) {
+                System.out.println("is running");
+                if (model.gameBoard().getFieldCurrentRent(i) > model.gameBoard().getSpecificPrice(i, 5)) {
+                    System.out.println("is running 2");
+                    for (int j = 0; j < model.gameBoard().getFieldGroup(i).length; j++) {
+                        userIO.setRentPrice(model.gameBoard().getFieldGroup(i)[j], "Leje: " + model.gameBoard().getFieldCurrentRent(model.gameBoard().getFieldGroup(i)[j]) / 2);
+                    }
+                }
             }
+
         }
+    public boolean fieldAcceptTestStreet() {
+
+
+            if (model.gameBoard().getFieldType(model.getPlayerCurrentTurn().getPosition()).equals(acceptAbleFieldTypes[0])) {
+                return true;
+            }
+
+        return false;
+    }
 
 
 
 
 
-        public boolean fieldAcceptTest(Model model) {
+
+    public boolean fieldAcceptTestAllBuyable(Model model) {
         System.out.println("Running");
         for (int i = 0; i < acceptAbleFieldTypes.length; i++) {
             System.out.println(model.gameBoard().getFieldType(model.getPlayerCurrentTurn().getPosition()) + " field type");
@@ -52,7 +72,7 @@ public class BuyableController {
     private void purchaseField(Model model, UserIO userIO) {
         int currentPlayer = model.getCurrentTurn();
         int currenPosition = model.getPlayerCurrentTurn().getPosition();
-        if (fieldAcceptTest(model)) {
+        if (fieldAcceptTestAllBuyable(model)) {
             if (!model.gameBoard().isOwned(currenPosition)) {
 
                 userIO.moveCar(model);
@@ -150,6 +170,7 @@ public class BuyableController {
                             userIO.setOwnerBorder(fieldOnAuction, playerIndex.get(0));
                             model.gameBoard().updateFieldGroupsOwned();
                             checkForAllOwned(fieldOnAuction);
+                            model.gameBoard().updateFieldGroupsOwned();
                             return;
                         }
 
