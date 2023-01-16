@@ -148,7 +148,6 @@ public class Gameboard {
                     }  if (whoOwnsThis(37) != whoOwnsThis(38)){
                         setOwnerOfFieldgroups(-1, 7);
                     }
-                    return;
                 }
             }
 

@@ -62,9 +62,9 @@ public class Game_Controller {
             }
             booleanReset();
             notifierWithLogic();
-
         }
     }
+
     private void normalTurn(){
         String currentName = model.getPlayerCurrentTurn().getName();
         String choice;
@@ -78,6 +78,7 @@ public class Game_Controller {
                 ownedGroups.add(i);
             }
         }
+
         if (isOwnerOfGroup && model.getPlayerCurrentTurn().getTotalHouses() == 0){
             choice = userIO.getUserButtonPressed(currentName + "'s tur.", "Rull med tærningerne", "Byg huse");
             switch(choice) {

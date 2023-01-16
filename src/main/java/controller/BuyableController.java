@@ -15,22 +15,25 @@ public class BuyableController {
         this.model = model;
         this.userIO = userIO;
     }
-    public void checkForAllOwned(int i){
+    public void increaseRentOnField(int i){
 
-            if(model.gameBoard().checkIfFieldGroupOwned(i) && fieldAcceptTestStreet(i)){
-                for(int j = 0; j < model.gameBoard().getFieldGroup(i).length; j++){
-                    userIO.setRentPrice(model.gameBoard().getFieldGroup(i)[j], "Leje: " + model.gameBoard().getFieldCurrentRent(model.gameBoard().getFieldGroup(i)[j])*2);
-                }
+        if(model.gameBoard().checkIfFieldGroupOwned(i) && fieldAcceptTestStreet(i)){
+            for(int j = 0; j < model.gameBoard().getFieldGroup(i).length; j++){
+                userIO.setRentPrice(model.gameBoard().getFieldGroup(i)[j], "Leje: " + model.gameBoard().getFieldCurrentRent(model.gameBoard().getFieldGroup(i)[j])*2);
+            }
+        }
+    }
 
-            } else if(!model.gameBoard().checkIfFieldGroupOwned(i) && fieldAcceptTestStreet(i)) {
-                if (model.gameBoard().getFieldCurrentRent(i)*2 > model.gameBoard().getSpecificPrice(i, 2)) {
-                    for (int j = 0; j < model.gameBoard().getFieldGroup(i).length; j++) {
-                        userIO.setRentPrice(model.gameBoard().getFieldGroup(i)[j], "Leje: " + model.gameBoard().getFieldCurrentRent(model.gameBoard().getFieldGroup(i)[j]) / 2);
-                    }
+    public void decreaseRentOnField(int i){
+        if(!model.gameBoard().checkIfFieldGroupOwned(i) && fieldAcceptTestStreet(i)) {
+            if (model.gameBoard().getFieldCurrentRent(i)*2 > model.gameBoard().getSpecificPrice(i, 2)) {
+                for (int j = 0; j < model.gameBoard().getFieldGroup(i).length; j++) {
+                    userIO.setRentPrice(model.gameBoard().getFieldGroup(i)[j], "Leje: " + model.gameBoard().getFieldCurrentRent(model.gameBoard().getFieldGroup(i)[j]));
                 }
             }
-
         }
+    }
+
     public boolean fieldAcceptTestStreet(int i) {
             if (model.gameBoard().getFieldType(i).equals(acceptAbleFieldTypes[0])) {
                 return true;
@@ -60,12 +63,20 @@ public class BuyableController {
     private void purchaseField(Model model, UserIO userIO) {
         int currentPlayer = model.getCurrentTurn();
         int currenPosition = model.getPlayerCurrentTurn().getPosition();
+        String userInput;
         if (fieldAcceptTestAllBuyable(model)) {
             if (!model.gameBoard().isOwned(currenPosition)) {
 
                 userIO.moveCar(model);
                 userIO.updateView(model);
-                String userInput = userIO.getUserButtonPressed("Vil du købe dette felt", "ja", "nej");
+
+                if (model.getPlayerCurrentTurn().getPlayerBalance() - model.gameBoard().getSpecificPrice(currenPosition, 0) < 0){
+                    userIO.showMessage("Du har ikke penge nok til at købe feltet.");
+                    userInput = "nej";
+                } else{
+                    userInput = userIO.getUserButtonPressed("Vil du købe dette felt", "ja", "nej");
+                }
+
                 switch (userInput) {
                     case "ja":
                         //the amount that needs to be added.
@@ -75,7 +86,7 @@ public class BuyableController {
                         userIO.setOwnerBorder(currenPosition, currentPlayer);
                         userIO.setRentPrice(currenPosition, "Leje: " + model.gameBoard().getFieldCurrentRent(currenPosition));
                         model.gameBoard().updateFieldGroupsOwned();
-                        checkForAllOwned(currenPosition);
+                        increaseRentOnField(currenPosition);
                         return;
                     case "nej":
                         auctionFunction(currenPosition);
@@ -153,8 +164,9 @@ public class BuyableController {
                             model.gameBoard().buyField(fieldOnAuction, playerIndex.get(0));
                             userIO.setOwnerBorder(fieldOnAuction, playerIndex.get(0));
                             model.gameBoard().updateFieldGroupsOwned();
-                            checkForAllOwned(fieldOnAuction);
+                            decreaseRentOnField(fieldOnAuction);
                             model.gameBoard().updateFieldGroupsOwned();
+                            increaseRentOnField(fieldOnAuction);
                             return;
                         }
 
