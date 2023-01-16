@@ -67,14 +67,18 @@ public class BuyableController {
     public void auctionFunction(int fieldOnAuction){
         int auctionPrice = 0;
         int currentPlayerIndex = 0;
+        String sssss = model.getPlayerByIndex(0).getName();
+        System.out.println(sssss + " is a name?");
 
         List<Integer> playerIndex = new ArrayList<>();
 
         for (int i = 0; i < model.getTotalPlayerCount(); i++){
+            System.out.println("player by index: " + model.getPlayerByIndex(i).getName() + "   " + model.getPlayerByIndex(i).getPlayerID());
             if (!model.getPlayerByIndex(i).getHasLost()){
                 playerIndex.add(model.getPlayerByIndex(i).getPlayerID());
             }
         }
+        System.out.println(playerIndex.get(2));
 
         userIO.showMessage("Grunden er røget på auktion!");
 

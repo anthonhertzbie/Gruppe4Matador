@@ -240,6 +240,7 @@ public class Game_Controller {
 
     public void setName(int index, String name){
         model.setPlayerName(index, name);
+        model.getPlayerByIndex(index).setPlayerID(index);
         notifyEverything();
     }
 
