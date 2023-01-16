@@ -311,7 +311,6 @@ public class Gameboard {
     private void copyFieldType(){
         for (int i = 0; i < 40; i++) {
             fieldType[i] = helper.getFieldData(i + 1, 2);
-            System.out.println(fieldType[i]);
         }
     }
 

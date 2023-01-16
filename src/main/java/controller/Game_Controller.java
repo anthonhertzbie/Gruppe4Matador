@@ -84,22 +84,14 @@ public class Game_Controller {
                     while (true) {
                         buyableLogic.purchaseHouse();
                         model.getPlayerCurrentTurn().setTotalHouses(model.getPlayerCurrentTurn().getTotalHouses() + 1);
-                        System.out.println(model.getCurrentTurn());
-                        for (int i = 0; i < 40; i++) {
-                            System.out.println(model.gameBoard().getFieldName(i) + " " + model.gameBoard().whoOwnsThis(i));
-                        }
                         choice = userIO.getUserButtonPressed("Vil du bygge flere huse?", "Ja", "Nej");
-
 
                         if (choice.equals("Nej")) {
                             userIO.showMessage("Rul terningerne!");
                             break;
                         }
-
                     }
             }
-
-
         }
         else if(isOwnerOfGroup && model.getPlayerCurrentTurn().getTotalHouses() != 0){
             choice = userIO.getUserButtonPressed(currentName + "'s tur.", "Rull med tærningerne", "Byg huse", "Sælg huse");
@@ -110,9 +102,7 @@ public class Game_Controller {
                     while (true) {
                         buyableLogic.purchaseHouse();
                         model.getPlayerCurrentTurn().setTotalHouses(model.getPlayerCurrentTurn().getTotalHouses() + 1);
-                        System.out.println(model.getCurrentTurn());
                         for (int i = 0; i < 40; i++) {
-                            System.out.println(model.gameBoard().getFieldName(i) + " " + model.gameBoard().whoOwnsThis(i));
                         }
                         choice = userIO.getUserButtonPressed("Vil du bygge flere huse?", "Ja", "Nej");
                         if (choice.equals("Nej")) {
@@ -124,9 +114,7 @@ public class Game_Controller {
                     while (true) {
                         buyableLogic.sellHouse();
                         model.getPlayerCurrentTurn().setTotalHouses(model.getPlayerCurrentTurn().getTotalHouses() - 1);
-                        System.out.println(model.getCurrentTurn());
                         for (int i = 0; i < 40; i++) {
-                            System.out.println(model.gameBoard().getFieldName(i) + " " + model.gameBoard().whoOwnsThis(i));
                         }
                         choice = userIO.getUserButtonPressed("Vil du sælge flere huse?", "Ja", "Nej");
                         if (choice.equals("Nej")) {
@@ -171,8 +159,6 @@ public class Game_Controller {
         fieldlogic.specialField();
         buyableLogic.buyableLogic(model, userIO);
         model.gameBoard().updateFieldGroupsOwned();
-        System.out.println(model.gameBoard().getOwnerOfFieldGroups()[0]);
-        notifyEverything();
         loseCondition();
         checkForDoubleDices();
         model.changeTurn();
@@ -190,74 +176,58 @@ public class Game_Controller {
         model.setBooleans();
     }
 
-
+    /**
+     * Sets the lose-condition for the game. Also auctions away all the losing players property.
+     */
     public void loseCondition(){
-        int playerInGame = 0;
+        int totalPlayers = 0;
         String winner = "";
         List<Integer> listOfOwnedFields = new ArrayList<>();
+
+        for (int i = 0; i < model.getTotalPlayerCount(); i++){
+            if (model.getPlayerByIndex(i).getHasLost() == false){
+                totalPlayers += 1;
+                winner = model.getPlayerByIndex(i).getName();
+            }
+        }
+        if (totalPlayers == 1){
+            userIO.waitForUserInput("Game is over. " + winner + " has won!");
+            model.setGameIsOver(true);
+            notifyEverything();
+        }
+
         for (int i = 0; i < model.getTotalPlayerCount(); i++){
             if (model.getPlayerByIndex(i).getValueOfAllAssets() < 0){
                 model.getPlayerByIndex(i).setHasLost(true);
                 model.getPlayerByIndex(i).getAccount().setBalance(0);
                 userIO.showMessage("You have lost :(. You will be removed.");
-
-
-
                 for(int k = 0; k < 40; k++){
                     if(model.gameBoard().whoOwnsThis(k)== i){
                         listOfOwnedFields.add(k);
-
                     }
-
                 }
                 for(int j = 0; j < listOfOwnedFields.size(); j++){
                     buyableLogic.auctionFunction(listOfOwnedFields.get(j));
                 }
-
-
-
-
                 userIO.removePlayerLost(model);
             }
         }
-        for (int i = 0; i < model.getTotalPlayerCount(); i++){
-            if (model.getPlayerByIndex(i).getHasLost() == false){
-                playerInGame += 1;
-                winner = model.getPlayerByIndex(i).getName();
-            }
-        }
-        if (playerInGame == 1){
-            userIO.waitForUserInput("Game is over. " + winner + " has won!");
-            model.setGameIsOver(true);
-            notifyEverything();
-        }
+
     }
 
 
 
-    public void playerOutOfGame(){
-        if (model.getPlayerCurrentTurn().getHasLost() == true){
-            model.changeTurn();
-        }
-    }
-
-    public void editTurn(int number){
-        model.addCurrentTurn(number);
-    }
-
+    // Sets the total amounts of playeres allowed in the current game
     public void setTotalPlayerCount(String totalPlayerCount){
         model.setTotalPlayerCount(Integer.parseInt(totalPlayerCount));
     }
 
-    public void addPlayerBalance(int balance){
-        model.getPlayerCurrentTurn().addPlayerBalance(balance);
-    }
 
+    // Rolls the dices and updates the view
     public void diceRoll(){
         model.getCup().rollDices();
-        notifyEverything();
     }
-
+    // Sets the name and index of a given player
     public void setName(int index, String name){
         model.setPlayerName(index, name);
         model.getPlayerByIndex(index).setPlayerID(index);

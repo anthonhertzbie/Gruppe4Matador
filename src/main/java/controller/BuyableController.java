@@ -16,20 +16,14 @@ public class BuyableController {
         this.userIO = userIO;
     }
     public void checkForAllOwned(int i){
-        System.out.println("Check for all is running");
 
-        System.out.println(model.gameBoard().checkIfFieldGroupOwned(i) + " is gameboard true?" + " " + fieldAcceptTestStreet(i) + " is street good?");
             if(model.gameBoard().checkIfFieldGroupOwned(i) && fieldAcceptTestStreet(i)){
-                System.out.println("Check for all is running 2");
                 for(int j = 0; j < model.gameBoard().getFieldGroup(i).length; j++){
                     userIO.setRentPrice(model.gameBoard().getFieldGroup(i)[j], "Leje: " + model.gameBoard().getFieldCurrentRent(model.gameBoard().getFieldGroup(i)[j])*2);
                 }
 
             } else if(!model.gameBoard().checkIfFieldGroupOwned(i) && fieldAcceptTestStreet(i)) {
-                System.out.println("is running");
-                System.out.println(model.gameBoard().getFieldCurrentRent(i) + ": is field current rent" + " " + model.gameBoard().getSpecificPrice(i,2) + ": is wishing price");
                 if (model.gameBoard().getFieldCurrentRent(i)*2 > model.gameBoard().getSpecificPrice(i, 2)) {
-                    System.out.println("is running 2");
                     for (int j = 0; j < model.gameBoard().getFieldGroup(i).length; j++) {
                         userIO.setRentPrice(model.gameBoard().getFieldGroup(i)[j], "Leje: " + model.gameBoard().getFieldCurrentRent(model.gameBoard().getFieldGroup(i)[j]) / 2);
                     }
@@ -51,12 +45,7 @@ public class BuyableController {
 
 
     public boolean fieldAcceptTestAllBuyable(Model model) {
-        System.out.println("Running");
         for (int i = 0; i < acceptAbleFieldTypes.length; i++) {
-            System.out.println(model.gameBoard().getFieldType(model.getPlayerCurrentTurn().getPosition()) + " field type");
-            System.out.println(acceptAbleFieldTypes[i]);
-            System.out.println(model.gameBoard().getFieldType(model.getPlayerCurrentTurn().getPosition()).equals(acceptAbleFieldTypes[i]));
-            System.out.println();
             if (model.gameBoard().getFieldType(model.getPlayerCurrentTurn().getPosition()).equals(acceptAbleFieldTypes[i])) {
                 return true;
             }
@@ -102,12 +91,10 @@ public class BuyableController {
         int auctionPrice = 0;
         int currentPlayerIndex = 0;
         String sssss = model.getPlayerByIndex(0).getName();
-        System.out.println(sssss + " is a name?");
 
         List<Integer> playerIndex = new ArrayList<>();
 
         for (int i = 0; i < model.getTotalPlayerCount(); i++){
-            System.out.println("player by index: " + model.getPlayerByIndex(i).getName() + "   " + model.getPlayerByIndex(i).getPlayerID());
             if (!model.getPlayerByIndex(i).getHasLost()){
                 playerIndex.add(model.getPlayerByIndex(i).getPlayerID());
             }
@@ -120,7 +107,6 @@ public class BuyableController {
             if (currentPlayerIndex >= playerIndex.size()){
                 currentPlayerIndex = 0;
             }
-            System.out.println(currentPlayerIndex + " is current playerindex" + playerIndex.get(currentPlayerIndex) + " is other number");
             if (true) {
 
                 String choice = userIO.getUserButtonPressed(model.getPlayerByIndex(playerIndex.get(currentPlayerIndex)).getName() + "'s tur. Nuværende pris er: " + auctionPrice + ". Hæv beløbet med et beløb eller forlad auktionen: ", "100", "200", "300", "400", "500", "600", "700", "800", "900", "1000", "Leave auction");
@@ -160,7 +146,6 @@ public class BuyableController {
 
                         playerIndex.removeAll(Arrays.asList(playerIndex.get(currentPlayerIndex)));
                         currentPlayerIndex -= 1;
-                        System.out.println(playerIndex.size() + " is new size of list");
 
                         if(playerIndex.size() == 1){
                             userIO.showMessage(model.getPlayerByIndex(playerIndex.get(0)).getName() + " har vundet auktionen!" + " han betalte " + auctionPrice + "kr");

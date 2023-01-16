@@ -17,7 +17,6 @@ public class Deck {
     }
 
     public Card getFirstCard(){
-        System.out.println(deck[0] + " loook here <------------------------------------------------------------------");
         return deck[0];
     }
 
@@ -44,9 +43,6 @@ public class Deck {
             Card savedcard = deck[a];
             deck[a] = deck[b];
             deck[b] = savedcard;
-        }
-        for (int i = 0; i < 45; i++){
-            System.out.println(deck[i]);
         }
     }
 
