@@ -16,11 +16,13 @@ public class Main {
 
     public static void main(String[] args){
 
-        Game_Controller gameController = new Game_Controller(null);
+        Model model = new Model();
+        Game_Controller gameController = new Game_Controller(null, model);
         View view = new View(gameController);
         gameController.addNotifier(view);
         gameController.setUserIO(new ViewUserIO(view));
-        gameController.startGame();
+        view.setupGUI(model);
+        gameController.startGame(true);
 
     }
 

@@ -37,18 +37,17 @@ public class View extends Notifier {
     }
 
 
+    public void setupGUI(Model model) {
+        setGui_start();
+        gameController.setTotalPlayerCount(setTotalPlayers());
+        setGuiTotalPlayers(model);
+        for (int i = 0; i < model.getTotalPlayerCount(); i++) {
+            makePlayers(i, model);
+        }
+    }
 
     @Override
-    public void startGame(Model model) {
-        if (model.getStartGUI()) {
-            setGui_start();
-            gameController.setTotalPlayerCount(setTotalPlayers());
-            setGuiTotalPlayers(model);
-            for (int i = 0; i < model.getTotalPlayerCount(); i++) {
-                makePlayers(i, model);
-                model.getPlayerByIndex(i).setPlayerID(i);
-            }
-        }
+    public void notifyModel(Model model) {
         updateView(model);
     }
     public void removePlayerLost(Model model){
@@ -57,45 +56,47 @@ public class View extends Notifier {
         gui_fields[model.getPlayerCurrentTurn().getPosition()].setCar(gui_players[model.getCurrentTurn()], false);
     }
 
+    public void viewPlayers(Model model) {
+        for (int i = 0; i < model.getTotalPlayerCount(); i++) {
+            if (!model.hasPlayer(i)) continue;
+            if (gui_players[i] == null) {
+                GUI_Car gui_car = new GUI_Car();
+                int red = helper.getCarColour(i, 2);
+                int green = helper.getCarColour(i, 3);
+                int blue = helper.getCarColour(i, 4);
+                gui_car.setPrimaryColor(new Color(red, green, blue));
+                gui_players[i] = new GUI_Player(model.getPlayerName(i), model.getPlayerBalance(i), gui_car);
+                gui.addPlayer(gui_players[i]);
+            }
+            // Reset all fields
+            for (int j = 0; j < 40; j++) {
+                gui_fields[j].setCar(gui_players[i], false);
+            }
+            int pos = model.getPlayerByIndex(i).getPosition();
+            gui_fields[pos].setCar(gui_players[i], true);
+        }
+
+    }
+
     public void updateView(Model model) {
+
+        viewPlayers(model);
         if (model.isGameIsOver())
         {
             gui.close();
         }
         Player currentPlayer = model.getPlayerCurrentTurn();
         setDice(model.getCup());
-        moveCar(model);
         updateAccounts(model);
     }
 
     public void updateAccounts(Model model){
         for(int i  = 0; i < model.getTotalPlayerCount(); i++){
+            if (!model.hasPlayer(i)) continue;
             gui_players[i].setBalance(model.getPlayerBalance(i));
         }
     }
 
-    public void moveCar(Model model){
-        for(int i = 0; i < 40; i++){
-            if (gui_fields[i].hasCar(gui_players[model.getCurrentTurn()])){
-                gui_fields[i].setCar(gui_players[model.getCurrentTurn()], false);
-            }
-        }
-
-        gui_fields[model.getPlayerCurrentTurn().getPosition()].setCar(gui_players[model.getCurrentTurn()], true);
-
-
-
-        /*
-        gui_fields[oldPosition].setCar(gui_players[currentTurn], false);
-        gui_fields[newPosition].setCar(gui_players[currentTurn], true);
-
-
-        /*
-        gui_fields[oldPosition].setCar(gui_players[currentTurn], false);
-        gui_fields[newPosition].setCar(gui_players[currentTurn], true);
-
-         */
-    }
 
 
     public void setHouses(int fieldIndex, int numberOfHouses, int currentRent){
@@ -189,16 +190,7 @@ public class View extends Notifier {
     public void makePlayers(int index, Model model){
         int player = index + 1;
         String playerName = gui.getUserString("Enter name of player " + player + " : ");
-        Color[] colors = {Color.RED, Color.BLUE, Color.YELLOW, Color.ORANGE, Color.GRAY, Color.magenta};
         gameController.setName(index, playerName);
-        gui_cars[index] = new GUI_Car();
-        int red = helper.getCarColour(index, 2);
-        int green = helper.getCarColour(index, 3);
-        int blue = helper.getCarColour(index, 4);
-        gui_cars[index].setPrimaryColor(new Color(red, green, blue));
-        gui_players[index] = new GUI_Player(playerName, model.getPlayerBalance(index), gui_cars[index]);
-        gui.addPlayer(gui_players[index]);
-        gui_fields[0].setCar(gui_players[index], true);
     }
 
 
@@ -211,7 +203,6 @@ public class View extends Notifier {
     public void setGuiTotalPlayers(Model model){
         // Sets the number of cars and players participating in the game.
         gui_players = new GUI_Player[model.getTotalPlayerCount()];
-        gui_cars = new GUI_Car[model.getTotalPlayerCount()];
     }
 
 

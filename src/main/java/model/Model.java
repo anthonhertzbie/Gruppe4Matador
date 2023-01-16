@@ -197,4 +197,8 @@ public class Model {
     public void setGameIsOver(boolean gameIsOver) {
         this.gameIsOver = gameIsOver;
     }
+
+    public boolean hasPlayer(int i) {
+        return players[i] != null;
+    }
 }
