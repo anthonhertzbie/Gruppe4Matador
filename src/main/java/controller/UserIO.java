@@ -26,6 +26,6 @@ public abstract class UserIO {
     public abstract void setHouses(int fieldIndex, int houses, int currentRent);
 
     public abstract void updateView(Model model);
-
+    public abstract void setRentPrice(int fieldIndex, String rentIncrease);
     public abstract int getUserInteger(String message, int min, int max);
 }

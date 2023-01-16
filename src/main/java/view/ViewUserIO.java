@@ -37,6 +37,9 @@ public class ViewUserIO extends UserIO {
 
  */
 
+    public void setRentPrice(int fieldIndex, String rentIncrease){
+        view.setRentPrice(fieldIndex, rentIncrease);
+    }
 
     @Override
     public void getUserSelection(String message, String... userOptions) {

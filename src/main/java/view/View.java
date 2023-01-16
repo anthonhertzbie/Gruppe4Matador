@@ -119,7 +119,7 @@ public class View extends Notifier {
         gui_fields[2] = new GUI_Chance();gui_fields[2].setSubText("Chance card");
         gui_fields[3] = new GUI_Street(helper.getFieldData(4,0),"køb: " + helper.getFieldData(4,3) + "kr","","",new Color(114,109,232),Color.black);
         gui_fields[4] = new GUI_Tax();gui_fields[4].setTitle("Tax!");gui_fields[4].setSubText("Pay up!");gui_fields[4].setDescription("Choose to either pay 4.000$ or 10% of your total assets.");
-        gui_fields[5] = new GUI_Shipping("default",helper.getFieldData(1,0) + "kr","Ferry","","",new Color(107,251,255),Color.black);
+        gui_fields[5] = new GUI_Shipping("default",helper.getFieldData(6,3) + "kr","Ferry","","",new Color(107,251,255),Color.black);
         gui_fields[6] = new GUI_Street(helper.getFieldData(7,0),"køb: " + helper.getFieldData(7,3) + "kr","","",new Color(120,80,50),Color.black);
         gui_fields[7] = new GUI_Chance();gui_fields[7].setSubText("Chance card");
         gui_fields[8] = new GUI_Street(helper.getFieldData(9,0),"køb: " + helper.getFieldData(9,3) + "kr","","",new Color(120,80,50),Color.black);
@@ -175,6 +175,9 @@ public class View extends Notifier {
                 o.setBorder(new Color(0,0,0), new Color(255,255,255));
             }
         }
+    }
+    public void setRentPrice(int fieldIndex, String rentIncrease){
+        gui_fields[fieldIndex].setSubText(rentIncrease);
     }
 
 

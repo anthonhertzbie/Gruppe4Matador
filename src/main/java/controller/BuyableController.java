@@ -53,6 +53,7 @@ public class BuyableController {
                         model.gameBoard().buyField(currenPosition, currentPlayer);
                         model.getPlayerCurrentTurn().addPlayerBalance(-price);
                         userIO.setOwnerBorder(currenPosition, currentPlayer);
+                        userIO.setRentPrice(currenPosition, "Leje: " + model.gameBoard().getFieldCurrentRent(currenPosition));
                         return;
                     case "nej":
                         auctionFunction(currenPosition);

@@ -215,6 +215,8 @@ public class Game_Controller {
         }
     }
 
+
+
     public void playerOutOfGame(){
         if (model.getPlayerCurrentTurn().getHasLost() == true){
             model.changeTurn();

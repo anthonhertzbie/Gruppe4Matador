@@ -29,6 +29,37 @@ public class Gameboard {
         return ownerOfFieldgroups;
     }
 
+    public int[] getFieldGroup(int fieldIndex){
+        switch (fieldIndex){
+            case 1, 3 -> {
+                return new int[] {1,3};
+            }
+            case 6, 8, 9 -> {
+                return new int[]{6,8,9};
+            }
+            case 11, 13, 14 -> {
+                return new int[]{11,13,14};
+            }
+            case 16, 18, 19 -> {
+                return new int[]{16,18,19};
+            }
+            case 21, 23, 24 -> {
+                return new int[]{21,23,24};
+            }
+            case 26, 27, 29 -> {
+                return new int[]{26,27,29};
+            }
+            case 31, 32, 34 -> {
+                return new int[]{31,32,34};
+            }
+            case 37, 39 -> {
+                return new int[]{37,39};
+            }
+        }
+        return new int[]{};
+
+    }
+
     public boolean checkIfFieldGroupOwned(int fieldIndex){
         boolean fieldGroupOwned = false;
         switch (fieldIndex){
@@ -182,7 +213,7 @@ public class Gameboard {
  */
     /*
     blue = 1,3
-    yellow = 6, 8, 9
+    yellofw = 6, 8, 9
     other yellow = 11, 13, 14
     gray = 16, 18, 19
     red = 21, 23, 24
