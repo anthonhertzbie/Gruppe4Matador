@@ -1,6 +1,7 @@
 package controller;
 
 
+import model.Gameboard;
 import model.Model;
 
 public abstract class UserIO {
@@ -23,7 +24,7 @@ public abstract class UserIO {
 
     public abstract void viewPlayers(Model model);
 
-    public abstract void setHouses(int fieldIndex, int houses, int currentRent);
+    public abstract void setHouses(int fieldIndex, int houses, int currentRent, Gameboard gameboard);
 
     public abstract void updateView(Model model);
     public abstract void setRentPrice(int fieldIndex, String rentIncrease);

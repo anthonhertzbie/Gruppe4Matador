@@ -1,6 +1,7 @@
 package view;
 
 import controller.UserIO;
+import model.Gameboard;
 import model.Model;
 
 public class ViewUserIO extends UserIO {
@@ -76,8 +77,8 @@ public class ViewUserIO extends UserIO {
         return view.gui.getUserInteger(message,min,max);
     }
     @Override
-    public void setHouses(int fieldIndex, int houses, int currentRent){
-        view.setHouses(fieldIndex, houses, currentRent);
+    public void setHouses(int fieldIndex, int houses, int currentRent, Gameboard gameboard){
+        view.setHouses(fieldIndex, houses, currentRent, gameboard);
     }
 
 

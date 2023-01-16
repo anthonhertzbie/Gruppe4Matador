@@ -4,10 +4,7 @@ import controller.Game_Controller;
 import controller.Notifier;
 import gui_fields.*;
 import gui_main.GUI;
-import model.Cup;
-import model.Helper;
-import model.Model;
-import model.Player;
+import model.*;
 
 import java.awt.*;
 import java.util.Objects;
@@ -100,13 +97,21 @@ public class View extends Notifier {
 
 
 
-    public void setHouses(int fieldIndex, int numberOfHouses, int currentRent){
+    public void setHouses(int fieldIndex, int numberOfHouses, int currentRent, Gameboard gameboard){
+
         GUI_Field f = gui.getFields()[fieldIndex];
         if(f instanceof GUI_Ownable){
             GUI_Street s = (GUI_Street) f;
-            s.setHouses(numberOfHouses);
-            s.setSubText("leje: " + currentRent);
-            s.setRent(Integer.toString(currentRent));
+            if (gameboard.getFieldCurrentRent(fieldIndex) <= gameboard.getSpecificPrice(fieldIndex, 6)){
+                s.setHouses(numberOfHouses);
+                s.setSubText("leje: " + currentRent);
+                s.setRent(Integer.toString(currentRent));
+            }
+            else if(gameboard.getFieldCurrentRent(fieldIndex) <= gameboard.getSpecificPrice(fieldIndex, 7)) {
+                s.setHotel(true);
+                s.setSubText("leje: " + currentRent);
+                s.setRent(Integer.toString(currentRent));
+            }
         }
     }
 
