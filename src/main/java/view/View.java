@@ -103,11 +103,15 @@ public class View extends Notifier {
         if(f instanceof GUI_Ownable){
             GUI_Street s = (GUI_Street) f;
             if (gameboard.getFieldCurrentRent(fieldIndex) <= gameboard.getSpecificPrice(fieldIndex, 6)){
+                System.out.println("Im in house mode");
+                s.setHotel(false);
                 s.setHouses(numberOfHouses);
                 s.setSubText("leje: " + currentRent);
                 s.setRent(Integer.toString(currentRent));
             }
-            else if(gameboard.getFieldCurrentRent(fieldIndex) <= gameboard.getSpecificPrice(fieldIndex, 7)) {
+            else if(gameboard.getFieldCurrentRent(fieldIndex) == gameboard.getSpecificPrice(fieldIndex, 7)) {
+                System.out.println(gameboard.getFieldCurrentRent(fieldIndex));
+                System.out.println("Im in hotel mode");
                 s.setHotel(true);
                 s.setSubText("leje: " + currentRent);
                 s.setRent(Integer.toString(currentRent));

@@ -222,10 +222,9 @@ public class BuyableController {
         for (int i = 0; i < 40; i++) {
             if (choice.equals(model.gameBoard().getFieldName(i))) {
                 model.getPlayerCurrentTurn().getAccount().payForHouse((model.gameBoard().getSpecificPrice(i, 4)));
-                houses = model.gameBoard().getField(i).getNumOfHouses() + 1;
-                model.getPlayerCurrentTurn().setTotalHouses(1);
+                model.getPlayerCurrentTurn().setTotalHouses(5);
                 model.gameBoard().rentIncrease(i);
-                model.gameBoard().getField(i).setNumOfHouses(houses);
+                houses = model.gameBoard().getField(i).getNumOfHouses();
                 userIO.setHouses(i, houses, model.gameBoard().getFieldCurrentRent(i), model.gameBoard());
 
             }
@@ -252,13 +251,26 @@ public class BuyableController {
         for (int i = 0; i < 40; i++) {
             try {
                 if (choice.equals(model.gameBoard().getFieldName(i))) {
-                    System.out.println("Actually selling");
-                    model.gameBoard().rentIncrease(-i);
-                    model.getPlayerCurrentTurn().getAccount().sellHouse((model.gameBoard().getSpecificPrice(i, 4)));
-                    int houses = model.gameBoard().getField(i).getNumOfHouses() - 1;
-                    model.gameBoard().getField(i).setNumOfHouses(houses);
-                    userIO.setHouses(1, 1, model.gameBoard().getFieldCurrentRent(i + 2), model.gameBoard());
+                    System.out.println("Actually selling " + model.gameBoard().getFieldCurrentRent(i));
+                    System.out.println(model.gameBoard().getFieldCurrentRent(i) + " this is it " + model.gameBoard().getSpecificPrice(i, 2));
+                    if (model.gameBoard().getFieldCurrentRent(i) == model.gameBoard().getSpecificPrice(i, 2)){
+                        userIO.showMessage("Du har ingen huse på feltet.");
+                    }
+                    else {
+                        model.getPlayerCurrentTurn().getAccount().sellHouse((model.gameBoard().getSpecificPrice(i, 4)));
+                        model.gameBoard().rentDecrease(i);
+                        int houses = model.gameBoard().getField(i).getNumOfHouses();
+                        userIO.setHouses(i, houses, model.gameBoard().getFieldCurrentRent(i), model.gameBoard());
+                        System.out.println(model.gameBoard().getFieldCurrentRent(i) + " first is currentRen " + model.gameBoard().getSpecificPrice(i, 2));
+                        if (model.gameBoard().getFieldCurrentRent(i) == model.gameBoard().getSpecificPrice(i, 2)) {
+                            userIO.setHouses(i, houses, model.gameBoard().getFieldCurrentRent(i) * 2, model.gameBoard());
+                        }
+                    }
+
+
                 }
+
+
             } catch (ArrayIndexOutOfBoundsException e) {
                 userIO.showMessage("You don't have any houses on that field");
             }

@@ -259,8 +259,8 @@ public class Gameboard {
         }
     }
 
-    private void rentDecrease(int fieldIndex){
-        for (int i = 2; i < 7; i++) {
+    public void rentDecrease(int fieldIndex){
+        for (int i = 2; i < 8; i++) {
             if (fields[fieldIndex].getCurrentRent() == prices[fieldIndex][i]) {
                 fields[fieldIndex].setCurrentRent(prices[fieldIndex][i - 1]);
                 fields[fieldIndex].setNumOfHouses(fields[fieldIndex].getNumOfHouses() - 1);
