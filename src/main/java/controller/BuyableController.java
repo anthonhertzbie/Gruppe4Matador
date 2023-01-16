@@ -18,16 +18,17 @@ public class BuyableController {
     public void checkForAllOwned(int i){
         System.out.println("Check for all is running");
 
-            if(model.gameBoard().checkIfFieldGroupOwned(i) && fieldAcceptTestStreet()){
+        System.out.println(model.gameBoard().checkIfFieldGroupOwned(i) + " is gameboard true?" + " " + fieldAcceptTestStreet(i) + " is street good?");
+            if(model.gameBoard().checkIfFieldGroupOwned(i) && fieldAcceptTestStreet(i)){
                 System.out.println("Check for all is running 2");
                 for(int j = 0; j < model.gameBoard().getFieldGroup(i).length; j++){
                     userIO.setRentPrice(model.gameBoard().getFieldGroup(i)[j], "Leje: " + model.gameBoard().getFieldCurrentRent(model.gameBoard().getFieldGroup(i)[j])*2);
                 }
 
-
-            } else if(!model.gameBoard().checkIfFieldGroupOwned(i) && fieldAcceptTestStreet()) {
+            } else if(!model.gameBoard().checkIfFieldGroupOwned(i) && fieldAcceptTestStreet(i)) {
                 System.out.println("is running");
-                if (model.gameBoard().getFieldCurrentRent(i) > model.gameBoard().getSpecificPrice(i, 5)) {
+                System.out.println(model.gameBoard().getFieldCurrentRent(i) + ": is field current rent" + " " + model.gameBoard().getSpecificPrice(i,2) + ": is wishing price");
+                if (model.gameBoard().getFieldCurrentRent(i)*2 > model.gameBoard().getSpecificPrice(i, 2)) {
                     System.out.println("is running 2");
                     for (int j = 0; j < model.gameBoard().getFieldGroup(i).length; j++) {
                         userIO.setRentPrice(model.gameBoard().getFieldGroup(i)[j], "Leje: " + model.gameBoard().getFieldCurrentRent(model.gameBoard().getFieldGroup(i)[j]) / 2);
@@ -36,10 +37,8 @@ public class BuyableController {
             }
 
         }
-    public boolean fieldAcceptTestStreet() {
-
-
-            if (model.gameBoard().getFieldType(model.getPlayerCurrentTurn().getPosition()).equals(acceptAbleFieldTypes[0])) {
+    public boolean fieldAcceptTestStreet(int i) {
+            if (model.gameBoard().getFieldType(i).equals(acceptAbleFieldTypes[0])) {
                 return true;
             }
 
