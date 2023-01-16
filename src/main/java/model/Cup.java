@@ -24,6 +24,6 @@ public class Cup {
 
     public int getSum() {
         int sum = getDice2() + getDice1();
-        return sum;
+        return 1;
     }
 }

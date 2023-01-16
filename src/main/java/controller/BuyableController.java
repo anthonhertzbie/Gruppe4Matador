@@ -16,10 +16,22 @@ public class BuyableController {
         this.model = model;
         this.userIO = userIO;
     }
+    public void checkForAllOwned(int i){
+        System.out.println("Check for all is running");
+
+            if(model.gameBoard().checkIfFieldGroupOwned(i)){
+                System.out.println("Check for all is running 2");
+                for(int j = 0; j < model.gameBoard().getFieldGroup(i).length; j++){
+                    userIO.setRentPrice(model.gameBoard().getFieldGroup(i)[j], "Leje: " + model.gameBoard().getFieldCurrentRent(model.gameBoard().getFieldGroup(i)[j])*2);
+                }
+            }
+        }
 
 
 
-    public boolean fieldAcceptTest(Model model) {
+
+
+        public boolean fieldAcceptTest(Model model) {
         System.out.println("Running");
         for (int i = 0; i < acceptAbleFieldTypes.length; i++) {
             System.out.println(model.gameBoard().getFieldType(model.getPlayerCurrentTurn().getPosition()) + " field type");
@@ -54,6 +66,8 @@ public class BuyableController {
                         model.getPlayerCurrentTurn().addPlayerBalance(-price);
                         userIO.setOwnerBorder(currenPosition, currentPlayer);
                         userIO.setRentPrice(currenPosition, "Leje: " + model.gameBoard().getFieldCurrentRent(currenPosition));
+                        model.gameBoard().updateFieldGroupsOwned();
+                        checkForAllOwned(currenPosition);
                         return;
                     case "nej":
                         auctionFunction(currenPosition);
@@ -79,7 +93,7 @@ public class BuyableController {
                 playerIndex.add(model.getPlayerByIndex(i).getPlayerID());
             }
         }
-        System.out.println(playerIndex.get(2));
+
 
         userIO.showMessage("Grunden er røget på auktion!");
 
@@ -134,6 +148,8 @@ public class BuyableController {
                             model.getPlayerByIndex(playerIndex.get(0)).addPlayerBalance(-auctionPrice);
                             model.gameBoard().buyField(fieldOnAuction, playerIndex.get(0));
                             userIO.setOwnerBorder(fieldOnAuction, playerIndex.get(0));
+                            model.gameBoard().updateFieldGroupsOwned();
+                            checkForAllOwned(fieldOnAuction);
                             return;
                         }
 
