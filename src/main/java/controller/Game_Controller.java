@@ -198,11 +198,29 @@ public class Game_Controller {
     public void loseCondition(){
         int playerInGame = 0;
         String winner = "";
+        List<Integer> listOfOwnedFields = new ArrayList<>();
         for (int i = 0; i < model.getTotalPlayerCount(); i++){
             if (model.getPlayerByIndex(i).getValueOfAllAssets() < 0){
                 model.getPlayerByIndex(i).setHasLost(true);
                 model.getPlayerByIndex(i).getAccount().setBalance(0);
                 userIO.showMessage("You have lost :(. You will be removed.");
+
+
+
+                for(int k = 0; k < 40; k++){
+                    if(model.gameBoard().whoOwnsThis(k)== i){
+                        listOfOwnedFields.add(k);
+
+                    }
+
+                }
+                for(int j = 0; j < listOfOwnedFields.size(); j++){
+                    buyableLogic.auctionFunction(listOfOwnedFields.get(j));
+                }
+
+
+
+
                 userIO.removePlayerLost(model);
             }
         }
@@ -249,6 +267,8 @@ public class Game_Controller {
         model.getPlayerByIndex(index).setPlayerID(index);
         notifyEverything();
     }
+
+
 
 
 

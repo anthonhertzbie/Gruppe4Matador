@@ -10,7 +10,7 @@ public class Gameboard {
     private final String[] fieldType = new String[40];
     private final int[] ownerOfFieldgroups = new int[8];
 
-    public Gameboard() {
+    public Gameboard(){
         Arrays.fill(ownerOfFieldgroups, -1);
         copyFieldInformation();
         initFieldPrice();

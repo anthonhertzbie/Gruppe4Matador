@@ -1,6 +1,7 @@
 package controller;
 
 import model.Model;
+import model.Player;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,11 +16,39 @@ public class BuyableController {
         this.model = model;
         this.userIO = userIO;
     }
+    public void checkForAllOwned(int i){
+        System.out.println("Check for all is running");
+
+        System.out.println(model.gameBoard().checkIfFieldGroupOwned(i) + " is gameboard true?" + " " + fieldAcceptTestStreet(i) + " is street good?");
+            if(model.gameBoard().checkIfFieldGroupOwned(i) && fieldAcceptTestStreet(i)){
+                System.out.println("Check for all is running 2");
+                for(int j = 0; j < model.gameBoard().getFieldGroup(i).length; j++){
+                    userIO.setRentPrice(model.gameBoard().getFieldGroup(i)[j], "Leje: " + model.gameBoard().getFieldCurrentRent(model.gameBoard().getFieldGroup(i)[j])*2);
+                }
+
+            } else if(!model.gameBoard().checkIfFieldGroupOwned(i) && fieldAcceptTestStreet(i)) {
+                System.out.println("is running");
+                System.out.println(model.gameBoard().getFieldCurrentRent(i) + ": is field current rent" + " " + model.gameBoard().getSpecificPrice(i,2) + ": is wishing price");
+                if (model.gameBoard().getFieldCurrentRent(i)*2 > model.gameBoard().getSpecificPrice(i, 2)) {
+                    System.out.println("is running 2");
+                    for (int j = 0; j < model.gameBoard().getFieldGroup(i).length; j++) {
+                        userIO.setRentPrice(model.gameBoard().getFieldGroup(i)[j], "Leje: " + model.gameBoard().getFieldCurrentRent(model.gameBoard().getFieldGroup(i)[j]) / 2);
+                    }
+                }
+            }
+
+        }
+    public boolean fieldAcceptTestStreet(int i) {
+            if (model.gameBoard().getFieldType(i).equals(acceptAbleFieldTypes[0])) {
+                return true;
+            }
+
+        return false;
+    }
 
 
-
-    public boolean  fieldOwnableCheck(Model model) {
-        System.out.println("Running1");
+    public boolean fieldOwnableCheck(Model model) {
+        System.out.println("Running");
         for (int i = 0; i < acceptAbleFieldTypes.length; i++) {
             System.out.println(model.gameBoard().getFieldType(model.getPlayerCurrentTurn().getPosition()) + " field type");
             System.out.println(acceptAbleFieldTypes[i]);
@@ -53,6 +82,8 @@ public class BuyableController {
                         model.getPlayerCurrentTurn().addPlayerBalance(-price);
                         userIO.setOwnerBorder(currenPosition, currentPlayer);
                         userIO.setRentPrice(currenPosition, "Leje: " + model.gameBoard().getFieldCurrentRent(currenPosition));
+                        model.gameBoard().updateFieldGroupsOwned();
+                        checkForAllOwned(currenPosition);
                         return;
                     case "nej":
                         auctionFunction(currenPosition);
@@ -133,6 +164,9 @@ public class BuyableController {
                             model.getPlayerByIndex(playerIndex.get(0)).addPlayerBalance(-auctionPrice);
                             model.gameBoard().buyField(fieldOnAuction, playerIndex.get(0));
                             userIO.setOwnerBorder(fieldOnAuction, playerIndex.get(0));
+                            model.gameBoard().updateFieldGroupsOwned();
+                            checkForAllOwned(fieldOnAuction);
+                            model.gameBoard().updateFieldGroupsOwned();
                             return;
                         }
 
