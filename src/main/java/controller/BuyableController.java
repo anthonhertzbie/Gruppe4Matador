@@ -1,7 +1,6 @@
 package controller;
 
 import model.Model;
-import model.Player;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,8 +18,8 @@ public class BuyableController {
 
 
 
-    public boolean fieldAcceptTest(Model model) {
-        System.out.println("Running");
+    public boolean  fieldOwnableCheck(Model model) {
+        System.out.println("Running1");
         for (int i = 0; i < acceptAbleFieldTypes.length; i++) {
             System.out.println(model.gameBoard().getFieldType(model.getPlayerCurrentTurn().getPosition()) + " field type");
             System.out.println(acceptAbleFieldTypes[i]);
@@ -40,7 +39,7 @@ public class BuyableController {
     private void purchaseField(Model model, UserIO userIO) {
         int currentPlayer = model.getCurrentTurn();
         int currenPosition = model.getPlayerCurrentTurn().getPosition();
-        if (fieldAcceptTest(model)) {
+        if (fieldOwnableCheck(model)) {
             if (!model.gameBoard().isOwned(currenPosition)) {
 
                 userIO.moveCar(model);
@@ -155,12 +154,16 @@ public class BuyableController {
             if (model.gameBoard().whoOwnsThis(currentPosition) != model.getCurrentTurn() && !model.gameBoard().checkIfFieldGroupOwned(currentPosition)) {
                 userIO.showMessage(model.getPlayerCurrentTurn().getName() + "! DU skal sgu betale rente kammerat!");
                 model.getPlayerCurrentTurn().addPlayerBalance(-rentToPay);
+                model.getPlayerByIndex(model.gameBoard().whoOwnsThis(currentPosition)).getAccount().addBalance(rentToPay);
             } else if (model.gameBoard().checkIfFieldGroupOwned(currentPosition) && !model.gameBoard().checkForHouse(currentPosition)) {
                 userIO.showMessage(model.getPlayerCurrentTurn().getName() + "! DU skal sgu betale DOBBELT rente kammerat!");
                 model.getPlayerCurrentTurn().addPlayerBalance(-rentToPay * 2);
+                model.getPlayerByIndex(model.gameBoard().whoOwnsThis(currentPosition)).getAccount().addBalance(rentToPay * 2);
             } else if (model.gameBoard().checkIfFieldGroupOwned(currentPosition) && model.gameBoard().checkForHouse(currentPosition)){
                 userIO.showMessage(model.getPlayerCurrentTurn().getName() + "! DU skal sgu betale HUS rente kammerat!");
                 model.getPlayerCurrentTurn().addPlayerBalance(-rentToPay);
+                model.getPlayerByIndex(model.gameBoard().whoOwnsThis(currentPosition)).getAccount().addBalance(rentToPay);
+
 
             }
         }

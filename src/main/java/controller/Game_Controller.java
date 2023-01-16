@@ -21,6 +21,10 @@ public class Game_Controller {
         buyableLogic = new BuyableController(model, userIO);
     }
 
+    public BuyableController getBuyableLogic() {
+        return this.buyableLogic;
+    }
+
     public void setUserIO(UserIO userIO) {
         this.userIO = userIO;
         fieldlogic = new Fieldlogic_Controller(model, userIO);
