@@ -55,7 +55,8 @@ public class Game_Controller {
             if (model.getPlayerCurrentTurn().getHasLost()){
                 System.out.println("Player has lost : " + model.getPlayerCurrentTurn().getName());
                 model.changeTurn();
-            } if (!model.getPlayerCurrentTurn().isInJail()) {
+            }
+            if (!model.getPlayerCurrentTurn().isInJail()) {
                 normalTurn();
                 playerMoves();
             }
