@@ -92,7 +92,7 @@ public class Fieldlogic_Controller {
 
 
     private void chanceCardField(Model model){
-        /*
+
         Player currentplayer = model.getPlayerCurrentTurn();
         userIO.moveCar(model);
         userIO.showChanceCard(model.getDeck().drawCard().toString());
@@ -234,7 +234,7 @@ public class Fieldlogic_Controller {
 
         }
 
-         */
+
     }
 
 
