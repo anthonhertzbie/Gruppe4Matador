@@ -72,10 +72,11 @@ public class View extends Notifier {
             for (int j = 0; j < 40; j++) {
                 gui_fields[j].setCar(gui_players[i], false);
             }
-            int pos = model.getPlayerByIndex(i).getPosition();
-            gui_fields[pos].setCar(gui_players[i], true);
+            if (!model.getPlayerByIndex(i).getHasLost()) {
+                int pos = model.getPlayerByIndex(i).getPosition();
+                gui_fields[pos].setCar(gui_players[i], true);
+            }
         }
-
     }
 
     public void updateView(Model model) {
