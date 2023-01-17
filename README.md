@@ -1,13 +1,9 @@
 # Gruppe4Matador
-//TODO tilføj beskrivelse til hvordan man starter projektet.
-
-For at starte projektet, skal man finde package AppStart og start programmet fra Main-klassen.
-
 
 // To start the program:
 To start the program go to package "AppStart" and then start the program from the Main class.
 
 // To run the tests:
-Tests is split into two, Accept
-
-
+Tests is split into two packages, "AcceptTests" containing some gameplay-driven tests and "tests" containing model tests.
+"tests" can either be run individually, or as a group.
+"AcceptTests" need to be run as a whole. Furthermore ID11 needs to run in a specific sequence.
