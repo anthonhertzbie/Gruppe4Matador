@@ -83,7 +83,7 @@ public class Id11 {
 
         // Fourth turn
         model.changeTurn();
-        userIO.getUserButtonPressed(model.getPlayerCurrentTurn().getName() + " you are still in jail.", "Pay 1000$ to get out", "Roll the dices", "Use get outta jail card");
+        userIO.getUserButtonPressed(model.getPlayerCurrentTurn().getName() + " du er stadig i fængsel.", "Betal 1000$ for at komme ud", "Rull med terningerne", "Brug fængselskortet");
         model.getCup().getActualDice1().setFace(5);
         model.getCup().getActualDice2().setFace(5);
         if(model.getCup().getDice1() == model.getCup().getDice2()) {
