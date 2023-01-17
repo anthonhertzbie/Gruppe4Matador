@@ -94,8 +94,8 @@ public class Fieldlogic_Controller {
         Player currentplayer = model.getPlayerCurrentTurn();
         userIO.showChanceCard(model.getDeck().drawCard().toString());
         userIO.showMessage("You have drawn a chance card!");
-        System.out.println(model.getDeck().getLastCard().getIndex() + " is index");
-        switch(model.getDeck().getLastCard().getIndex()){
+        System.out.println(model.getDeck().getLastCard().getCardNumber() + " is index");
+        switch(model.getDeck().getLastCard().getCardNumber()){
             case 1:
                 return;
             case 2:
