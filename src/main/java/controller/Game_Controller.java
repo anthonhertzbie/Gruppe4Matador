@@ -4,6 +4,7 @@ import model.Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Game_Controller {
     private final Model model;
@@ -22,6 +23,9 @@ public class Game_Controller {
 
     public BuyableController getBuyableLogic() {
         return this.buyableLogic;
+    }
+    public Fieldlogic_Controller getFieldlogic() {
+        return this.fieldlogic;
     }
 
     public void setUserIO(UserIO userIO) {
@@ -63,7 +67,7 @@ public class Game_Controller {
         }
     }
 
-    private void normalTurn(){
+    public void normalTurn(){
         String currentName = model.getPlayerCurrentTurn().getName();
         String choice = "";
         boolean isOwnerOfGroup = false;
@@ -75,7 +79,7 @@ public class Game_Controller {
                 ownedGroups.add(i);
             }
         }
-        while(choice != "Rull med tærningerne") {
+        while(!Objects.equals(choice, "Rull med tærningerne")) {
             if (isOwnerOfGroup && model.getPlayerCurrentTurn().getTotalHouses() == 0) {
                     choice = userIO.getUserButtonPressed(currentName + "'s tur.", "Rull med tærningerne", "Byg huse");
                     switch (choice) {

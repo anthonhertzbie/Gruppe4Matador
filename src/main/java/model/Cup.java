@@ -24,12 +24,19 @@ public class Cup {
         return dice1.getFace();
     }
 
+    public Dice getActualDice1() {
+        return dice1;
+    }
+
     /**
      * @return the second die from the cup
      */
     public int getDice2() {
         return dice2.getFace();
 
+    }
+    public Dice getActualDice2() {
+        return dice2;
     }
 
     /**

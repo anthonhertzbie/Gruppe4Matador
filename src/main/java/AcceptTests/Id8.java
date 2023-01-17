@@ -39,7 +39,7 @@ public class Id8 {
         for (int i = 0; i < 40; i++) {
             model.getPlayerByIndex(0).setPosition(i);
             int currentPos = model.getPlayerByIndex(0).getPosition();
-            if (buyableLogic.fieldOwnableCheck(model)) {
+            if (buyableLogic.fieldAcceptTestAllBuyable(model)){
                 model.gameBoard().buyField(i, 0);
                 buyableLogic.buyableLogic(model,userIO);
                 userIO.setOwnerBorder(currentPos,0);

@@ -22,6 +22,15 @@ public class Deck {
         return deck[0];
     }
 
+    public void setFirstCard(int firstCard){
+        Card savedcard = deck[0];
+        for (Card card : deck) {
+            if (firstCard == card.getCardNumber()) {
+                savedcard = card;
+            }
+        }
+        deck[0] = savedcard;
+    }
     /**
      * @return the card in the bottom of the deck
      */

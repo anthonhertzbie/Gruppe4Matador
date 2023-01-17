@@ -22,9 +22,10 @@ public class Model {
 
     public void addCurrentTurn(int plusminus){
         if (this.currentTurn + plusminus < 0){
-            this.currentTurn = totalPlayerCount;
-        }
+            this.currentTurn += plusminus + totalPlayerCount;
+        }else {
         this.currentTurn += plusminus;
+        }
     }
 
     public void setBooleans(){
