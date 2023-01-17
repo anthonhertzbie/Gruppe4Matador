@@ -10,6 +10,9 @@ public class Gameboard {
     private String[] fieldType = new String[40];
     private int[] ownerOfFieldgroups = new int[8];
 
+    /**
+     * gameboard constructor that initializes the fields and sorts the information
+     */
     public Gameboard(){
         Arrays.fill(ownerOfFieldgroups, -1);
         copyFieldInformation();
@@ -156,7 +159,7 @@ public class Gameboard {
     }
 
     /**
-     * Sells all property
+     * Sells all property / sets all property to be owned by no one
      */
     private void initOwner(){
         for (int i = 0; i < 40; i++) {
@@ -164,14 +167,15 @@ public class Gameboard {
         }
     }
 
-
     public boolean isOwned(int fieldIndex) {
-        boolean isOwned = false;
-        if (ownerTable[fieldIndex] != -1){
-            isOwned = true;
-        }
-        return isOwned;
+        return ownerTable[fieldIndex] != -1;
     }
+
+    /**
+     * gets the playerIndex of the owner of that particular field
+     * @param fieldIndex
+     * @return the index of the owner
+     */
     public int whoOwnsThis(int fieldIndex){
         return ownerTable[fieldIndex];
     }
@@ -186,6 +190,10 @@ public class Gameboard {
         return false;
     }
 
+    /**
+     * method that lets you buy one house at a time and adjusts the rent appropriately
+     * @param fieldIndex
+     */
     public void rentIncrease(int fieldIndex){
         for (int i = 2; i < 7; i++) {
             if (fields[fieldIndex].getCurrentRent() == prices[fieldIndex][i]) {
@@ -196,6 +204,10 @@ public class Gameboard {
         }
     }
 
+    /**
+     * method that lets you sell one house at a time and adjusts the rent appropriately
+     * @param fieldIndex
+     */
     public void rentDecrease(int fieldIndex){
         for (int i = 2; i < 8; i++) {
             if (fields[fieldIndex].getCurrentRent() == prices[fieldIndex][i]) {
@@ -205,11 +217,16 @@ public class Gameboard {
             }
         }
     }
+
+    /**
+     * initialices the house prices for all the fields
+     */
     private void initHousePrice(){
         for (int i = 0; i < fields.length - 1; i++) {
-            fields[i].setPropertyValue(prices[i][1]);
+            fields[i].setPropertyValue(prices[i][0]);
         }
     }
+
     private void initRent(){
         for (int i = 0; i < fields.length - 1; i++) {
             if (fields[i].getPropertyValue() != 0) {
