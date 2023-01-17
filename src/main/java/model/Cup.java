@@ -28,7 +28,8 @@ public class Cup {
      * @return the second die from the cup
      */
     public int getDice2() {
-        return dice2.getFace();
+        //return dice2.getFace();
+        return -1;
     }
 
     /**
@@ -36,6 +37,6 @@ public class Cup {
      */
     public int getSum() {
         int sum = getDice2() + getDice1();
-        return sum;
+        return 5;
     }
 }
