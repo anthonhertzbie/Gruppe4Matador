@@ -18,7 +18,6 @@ public class Id3 {
         gameController.addNotifier(view);
         gameController.setUserIO(new ViewUserIO(view));
         view.setGui_start();
-
         // Used parameters
         gameController.setTotalPlayerCount("2");
         view.setGuiTotalPlayers(model);
