@@ -59,9 +59,10 @@ public class Fieldlogic_Controller {
             }
             currentPlayer.setInJailTurn(currentPlayer.getInJailTurn() + 1);
         } else if (position == 10 && jailTurn == 2){
+            userIO.showMessage("Du slap ud af fængsel");
             currentPlayer.setInJail(false);
             currentPlayer.setInJailTurn(0);
-            userIO.showMessage("Du slap ud af fængsel");
+            currentPlayer.getAccount().addBalance(-1000);
         } else if (position == 30){
             userIO.showMessage("You have been put in jail :(");
             currentPlayer.setPosition(10);

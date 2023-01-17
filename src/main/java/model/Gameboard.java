@@ -151,9 +151,6 @@ public class Gameboard {
                 }
             }
 
-
-
-
     public Field getField(int index){
         return fields[index];
     }
@@ -208,9 +205,6 @@ public class Gameboard {
             }
         }
     }
-
-
-
     private void initHousePrice(){
         for (int i = 0; i < fields.length - 1; i++) {
             fields[i].setPropertyValue(prices[i][1]);

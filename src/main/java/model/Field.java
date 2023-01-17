@@ -4,8 +4,6 @@ public class Field {
     private String titleOf;
     private int currentRent;
     private int propertyValue;
-
-    private int housePrice;
     private int numOfHouses;
     public Field(String titleOf){
         this.titleOf = titleOf;
@@ -20,10 +18,6 @@ public class Field {
     public String getTitleOf() {
         return titleOf;
     }
-
-
-
-
 
     public int getCurrentRent() {
         return currentRent;

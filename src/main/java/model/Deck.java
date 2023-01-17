@@ -15,24 +15,38 @@ public class Deck {
         shuffle();
     }
 
+    /**
+     * @return the card that's on top of the deck
+     */
     public Card getFirstCard(){
         return deck[0];
     }
 
+    /**
+     * @return the card in the bottom of the deck
+     */
     public Card getLastCard(){
         return deck[44];
     }
+
+    /**
+     * the takes the first card of the deck returns it and puts it last
+     * @return the first card
+     */
     public Card drawCard(){
-        Card lastCard = getFirstCard();
+        Card firstCard = getFirstCard();
 
         for (int i = 0; i < deck.length - 1; i++) {
             deck[i] = deck[i+1];
         }
-        deck[deck.length - 1] = lastCard;
+        deck[deck.length - 1] = firstCard;
 
-        return lastCard;
+        return firstCard;
     }
 
+    /**
+     * Shuffles the cards by taking two random cards and switching them 10000 times.
+     */
     public void shuffle() {
 
         Random random = new Random();
