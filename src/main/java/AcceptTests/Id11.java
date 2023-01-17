@@ -6,6 +6,7 @@ import view.*;
 import java.util.ArrayList;
 
 public class Id11 {
+
     private final Model model = new Model();
     private final Gameboard gameboard = new Gameboard();
     private UserIO userIO;
@@ -19,14 +20,14 @@ public class Id11 {
         new Id11().run();
     }
     private void run(){
-        Game_Controller gameController = new Game_Controller(null, model);
+        Game_Controller gameController = new Game_Controller(model);
         View view = new View(gameController);
         gameController.diceRoll();
         gameController.addNotifier(view);
         userIO = new ViewUserIO(view);
+        buyableLogic = new BuyableController(model, userIO);
+        fieldlogic = new Fieldlogic_Controller(model, userIO);
         gameController.setUserIO(userIO);
-        this.fieldlogic = gameController.getFieldlogic();
-        this.buyableLogic = gameController.getBuyableLogic();
         view.setGui_start();
         model.setNormalTurn(true);
         gameController.setTotalPlayerCount("3");
@@ -98,6 +99,7 @@ public class Id11 {
         model.changeTurn();
         model.getCup().getActualDice1().setFace(4);
         model.getCup().getActualDice2().setFace(6);
-        gameController.gameTurn();
+        gameController.mainGameLoop();
         }
+
     }

@@ -6,6 +6,7 @@ import view.*;
 import java.util.ArrayList;
 
 public class Id8 {
+
     private final Model model = new Model();
     private final Gameboard gameboard = new Gameboard();
     private UserIO userIO;
@@ -19,12 +20,12 @@ public class Id8 {
         new Id8().run();
     }
     private void run(){
-        Game_Controller gameController = new Game_Controller(null, model);
+        Game_Controller gameController = new Game_Controller(model);
         View view = new View(gameController);
         gameController.addNotifier(view);
         userIO = new ViewUserIO(view);
+        buyableLogic = new BuyableController(model, userIO);
         gameController.setUserIO(userIO);
-        this.buyableLogic = gameController.getBuyableLogic();
         view.setGui_start();
         model.setNormalTurn(true);
         gameController.setTotalPlayerCount("2");
@@ -43,7 +44,7 @@ public class Id8 {
                 model.gameBoard().buyField(i, 0);
                 buyableLogic.buyableLogic(model,userIO);
                 userIO.setOwnerBorder(currentPos,0);
-                userIO.setRentPrice(i, "Leje: " + model.gameBoard().getFieldCurrentRent(i));
+                userIO.setRentPrice(i, "Leje: " + model.gameBoard().getFieldCurrentRent(i) * 2);
             }
         }
         for (int i = 0; i < 8; i++) {
@@ -54,7 +55,9 @@ public class Id8 {
 
 
         view.notifyModel(model);
-        gameController.gameTurn();
+        gameController.mainGameLoop();
     }
+
+
 
 }
