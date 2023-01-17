@@ -67,7 +67,7 @@ public class Game_Controller {
 
     private void normalTurn(){
         String currentName = model.getPlayerCurrentTurn().getName();
-        String choice;
+        String choice = "";
         int currentPosition = model.getPlayerCurrentTurn().getPosition();
         boolean isOwnerOfGroup = false;
         List<Integer> ownedGroups = new ArrayList<>();
@@ -78,62 +78,56 @@ public class Game_Controller {
                 ownedGroups.add(i);
             }
         }
-
-        if (isOwnerOfGroup && model.getPlayerCurrentTurn().getTotalHouses() == 0){
-            choice = userIO.getUserButtonPressed(currentName + "'s tur.", "Rull med tærningerne", "Byg huse");
-            switch(choice) {
-                case "Rull med tærningerne":
-                    userIO.showMessage("Rul tærningerne!");
-                    return;
-                case "Byg huse":
-                    while (true) {
-                        buyableLogic.purchaseHouse();
-                        model.getPlayerCurrentTurn().setTotalHouses(model.getPlayerCurrentTurn().getTotalHouses() + 1);
-                        choice = userIO.getUserButtonPressed("Vil du bygge flere huse?", "Ja", "Nej");
-
-                        if (choice.equals("Nej")) {
-                            userIO.showMessage("Rul terningerne!");
-                            break;
-                        }
+        while(choice != "Rull med tærningerne") {
+            if (isOwnerOfGroup && model.getPlayerCurrentTurn().getTotalHouses() == 0) {
+                //while (true) {
+                    choice = userIO.getUserButtonPressed(currentName + "'s tur.", "Rull med tærningerne", "Byg huse");
+                    switch (choice) {
+                        case "Rull med tærningerne":
+                            userIO.showMessage("Rul tærningerne!");
+                            return;
+                        case "Byg huse":
+                            while (true) {
+                                buyableLogic.purchaseHouse();
+                                model.getPlayerCurrentTurn().setTotalHouses(model.getPlayerCurrentTurn().getTotalHouses() + 1);
+                                choice = userIO.getUserButtonPressed("Vil du bygge flere huse?", "Ja", "Nej");
+                                if (choice.equals("Nej")) {
+                                    break;
+                                }
+                            }
                     }
+                //}
+            } else if (isOwnerOfGroup && model.getPlayerCurrentTurn().getTotalHouses() != 0) {
+                //while (true) {
+                    choice = userIO.getUserButtonPressed(currentName + "'s tur.", "Rull med tærningerne", "Byg huse", "Sælg huse");
+                    switch (choice) {
+                        case "Rull med tærningerne":
+                            userIO.showMessage("Rul tærningerne!");
+                            return;
+                        case "Byg huse":
+                            while (!choice.equals("Nej")) {
+                                buyableLogic.purchaseHouse();
+                                model.getPlayerCurrentTurn().setTotalHouses(model.getPlayerCurrentTurn().getTotalHouses() + 1);
+                                choice = userIO.getUserButtonPressed("Vil du bygge flere huse?", "Ja", "Nej");
+                                System.out.println(choice + " <.-----------------");
+                            }
+                            break;
+                        case "Sælg huse":
+                            while (true) {
+                                buyableLogic.sellHouse();
+                                model.getPlayerCurrentTurn().setTotalHouses(model.getPlayerCurrentTurn().getTotalHouses() - 1);
+
+                                choice = userIO.getUserButtonPressed("Vil du sælge flere huse?", "Ja", "Nej");
+                                if (choice.equals("Nej")) {
+                                    break;
+                                }
+                            }
+                    }
+                //}
+            } else if (!isOwnerOfGroup) {
+                choice = userIO.getUserButtonPressed(currentName + "'s tur.", "Rull med tærningerne");
             }
         }
-        else if(isOwnerOfGroup && model.getPlayerCurrentTurn().getTotalHouses() != 0){
-            choice = userIO.getUserButtonPressed(currentName + "'s tur.", "Rull med tærningerne", "Byg huse", "Sælg huse");
-            switch(choice) {
-                case "Rull med tærningerne":
-                    userIO.showMessage("Rul tærningerne!");
-                    return;
-                case "Byg huse":
-                    while (true) {
-                        buyableLogic.purchaseHouse();
-                        model.getPlayerCurrentTurn().setTotalHouses(model.getPlayerCurrentTurn().getTotalHouses() + 1);
-                        for (int i = 0; i < 40; i++) {
-                        }
-                        choice = userIO.getUserButtonPressed("Vil du bygge flere huse?", "Ja", "Nej");
-                        if (choice.equals("Nej")) {
-                            userIO.showMessage("Rul terningerne!");
-                            break;
-                        }
-                    }
-                case "Sælg huse":
-                    while (true) {
-                        buyableLogic.sellHouse();
-                        model.getPlayerCurrentTurn().setTotalHouses(model.getPlayerCurrentTurn().getTotalHouses() - 1);
-                        for (int i = 0; i < 40; i++) {
-                        }
-                        choice = userIO.getUserButtonPressed("Vil du sælge flere huse?", "Ja", "Nej");
-                        if (choice.equals("Nej")) {
-                            userIO.showMessage("Rul terningerne!");
-                            break;
-                        }
-                    }
-            }
-        }
-        else if (!isOwnerOfGroup){
-            choice = userIO.getUserButtonPressed(currentName + "'s tur.", "Rull med tærningerne");
-        }
-
         userIO.updateView(model);
     }
 
