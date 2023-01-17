@@ -30,10 +30,6 @@ public class Account {
         this.AssetsValue -= houseCost;
     }
 
-
-
-
-
     public int getAssetsValue(){
         return this.AssetsValue;
     }

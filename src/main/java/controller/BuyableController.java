@@ -101,7 +101,6 @@ public class BuyableController {
     public void auctionFunction(int fieldOnAuction){
         int auctionPrice = 0;
         int currentPlayerIndex = 0;
-        String sssss = model.getPlayerByIndex(0).getName();
 
         List<Integer> playerIndex = new ArrayList<>();
 

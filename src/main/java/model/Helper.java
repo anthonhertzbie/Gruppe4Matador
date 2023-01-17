@@ -79,39 +79,6 @@ public class Helper {
     }
 
 
-    public static void main(String[] args) throws IOException {
 
-
-
-        Helper helper = new Helper();
-        helper.fieldsPrint();
-        System.out.println(helper.getFieldData(40,3));
-        System.out.println(helper.getFieldData(2,3));
-
-
-    }
-
-    public void fieldsPrint(){
-        for (int i = 0; i < 41; i++) {
-            for (int j = 0; j < 11; j++) {
-                System.out.print(fieldData[i][j] + ", ");
-            }
-            System.out.println();
-        }
-    }
-
-    public void chancecardsPrint(){
-        for (int i = 0; i < chancecards.length; i++) {
-            System.out.println(chancecards[i]);
-        }
-    }
-    public void carColourPrint(){
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 5; j++) {
-                System.out.print(carColour[i][j] + ", ");
-            }
-            System.out.println();
-        }
-    }
 
 }

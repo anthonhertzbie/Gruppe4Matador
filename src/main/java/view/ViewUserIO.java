@@ -30,13 +30,6 @@ public class ViewUserIO extends UserIO {
     public void moveCar(Model model) {
 
     }
-/*
-    @Override
-    public void moveCar(Model model) {
-        view.moveCar(model);
-    }
-
- */
 
     public void setRentPrice(int fieldIndex, String rentIncrease){
         view.setRentPrice(fieldIndex, rentIncrease);
@@ -68,7 +61,6 @@ public class ViewUserIO extends UserIO {
     @Override
     public void updateView(Model model) {
         view.updateView(model);
-    //    view.moveCar(model);
     }
 
 

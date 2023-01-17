@@ -19,12 +19,12 @@ public class Cup {
     }
 
     public int getDice2() {
-        //return dice2.getFace();
-        return -1;
+        return dice2.getFace();
+
     }
 
     public int getSum() {
         int sum = getDice2() + getDice1();
-        return 1;
+        return sum;
     }
 }

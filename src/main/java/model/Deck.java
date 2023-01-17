@@ -35,7 +35,7 @@ public class Deck {
     }
 
     public void shuffle() {
-/*
+
         Random random = new Random();
         for (int i = 0; i < 10000; i++) {
             int a = random.nextInt(0, 45);
@@ -44,7 +44,7 @@ public class Deck {
             deck[a] = deck[b];
             deck[b] = savedcard;
         }
- */
+
         for (int i = 0; i < 45; i++){
             System.out.println(deck[i]);
         }

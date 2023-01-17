@@ -11,23 +11,11 @@ import java.util.Objects;
 
 
 public class View extends Notifier {
-    // Loading relevant classes from GUI
+    // Loading relevant classes from GUI and other classes
     GUI gui;
-    // Players
     GUI_Player[] gui_players;
-    // Cars
-    GUI_Car[] gui_cars;
-    // Gameboard
     GUI_Field[] gui_fields = new GUI_Field[40];
-    GUI_Ownable[] gui_ownables = new GUI_Street[40];
-    GUI_Jail gui_jail;
-    GUI_Chance gui_chance;
-    GUI_Tax gui_taxes;
-    GUI_Start gui_start;
-    GUI_Brewery gui_brewery;
-    GUI_Board gui_board;
     Helper helper = new Helper();
-    private Notifier notifier;
     private Game_Controller gameController;
     public View(Game_Controller gameController){
         this.gameController = gameController;
@@ -83,7 +71,6 @@ public class View extends Notifier {
         {
             gui.close();
         }
-        Player currentPlayer = model.getPlayerCurrentTurn();
         setDice(model.getCup());
         updateAccounts(model);
     }
@@ -208,9 +195,6 @@ public class View extends Notifier {
 
 
 
-    public void setGui_close(){
-        gui.close();
-    }
 
 
     public void setGuiTotalPlayers(Model model){

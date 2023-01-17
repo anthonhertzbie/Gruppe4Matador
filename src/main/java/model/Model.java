@@ -9,9 +9,6 @@ public class Model {
     private Gameboard gameBoard = new Gameboard();
     private boolean startGUI, normalTurn, isChanceCard, isPrison, isShipping, isBrewery, isParking, isTax, gameIsOver;
 
-    public void setStartGUI(boolean startGUI){
-        this.startGUI = startGUI;
-    }
 
 
     public Gameboard gameBoard(){
@@ -70,9 +67,6 @@ public class Model {
     }
 
 
-    public boolean getStartGUI(){
-        return startGUI;
-    }
 
     public int getCurrentTurn(){
         return this.currentTurn;
@@ -115,10 +109,6 @@ public class Model {
     }
 
 
-    public boolean getNormalTurn() {
-        return normalTurn;
-    }
-
     public String getPlayerName(int index){
         return players[index].getName();
     }
@@ -133,20 +123,9 @@ public class Model {
     public Deck getDeck(){
         return deck;
     }
-    public boolean isStartGUI() {
-        return startGUI;
-    }
-
-    public boolean isNormalTurn() {
-        return normalTurn;
-    }
 
     public boolean isChanceCard() {
         return isChanceCard;
-    }
-
-    public void setChanceCard(boolean chanceCard) {
-        isChanceCard = chanceCard;
     }
 
     public boolean isPrison() {
@@ -157,37 +136,9 @@ public class Model {
         isPrison = prison;
     }
 
-    public boolean isShipping() {
-        return isShipping;
-    }
-
-    public void setShipping(boolean shipping) {
-        isShipping = shipping;
-    }
-
-    public boolean isBrewery() {
-        return isBrewery;
-    }
-
-    public void setBrewery(boolean brewery) {
-        isBrewery = brewery;
-    }
-
-    public boolean isParking() {
-        return isParking;
-    }
-
-    public void setParking(boolean parking) {
-        isParking = parking;
-    }
-
 
     public boolean isTax() {
         return isTax;
-    }
-
-    public void setTax(boolean tax) {
-        isTax = tax;
     }
 
     public boolean isGameIsOver() {
