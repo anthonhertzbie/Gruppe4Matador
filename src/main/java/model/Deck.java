@@ -5,7 +5,6 @@ import java.util.Random;
 public class Deck {
 
     private Card[] deck = new Card[45];
-    private Helper helper = new Helper();
 
 
 
@@ -43,10 +42,6 @@ public class Deck {
             Card savedcard = deck[a];
             deck[a] = deck[b];
             deck[b] = savedcard;
-        }
-
-        for (int i = 0; i < 45; i++){
-            System.out.println(deck[i]);
         }
     }
 

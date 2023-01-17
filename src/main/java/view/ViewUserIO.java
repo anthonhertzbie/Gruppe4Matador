@@ -21,10 +21,6 @@ public class ViewUserIO extends UserIO {
         view.gui.showMessage(message);
     }
 
-    @Override
-    public void moveCar(Model model) {
-
-    }
 
     public void setRentPrice(int fieldIndex, String rentIncrease){
         view.setRentPrice(fieldIndex, rentIncrease);

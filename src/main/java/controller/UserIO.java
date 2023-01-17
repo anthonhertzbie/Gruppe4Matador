@@ -10,8 +10,6 @@ public abstract class UserIO {
 
     public abstract void showMessage(String Message);
 
-    public abstract void moveCar(Model model);
-
     public abstract void showChanceCard(String description);
 
 

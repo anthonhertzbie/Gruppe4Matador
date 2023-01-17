@@ -67,7 +67,6 @@ public class BuyableController {
         if (fieldAcceptTestAllBuyable(model)) {
             if (!model.gameBoard().isOwned(currenPosition)) {
 
-                userIO.moveCar(model);
                 userIO.updateView(model);
 
                 if (model.getPlayerCurrentTurn().getPlayerBalance() - model.gameBoard().getSpecificPrice(currenPosition, 0) < 0){
