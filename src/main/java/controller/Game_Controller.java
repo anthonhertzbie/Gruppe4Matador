@@ -143,11 +143,11 @@ public class Game_Controller {
      */
     public void checkForDoubleDices(){
         if (model.getCup().getDice1() == model.getCup().getDice2() && model.getPlayerCurrentTurn().getDoubleTurn() < 2){
-            userIO.showMessage("Congrats, you get another turn!");
+            userIO.showMessage("Tillykke, du har fået en tur til!");
             model.getPlayerCurrentTurn().addDoubleTurn(1);
             model.addCurrentTurn(-1);
         } else if (model.getCup().getDice1() == model.getCup().getDice2() && model.getPlayerCurrentTurn().getDoubleTurn() == 2){
-            userIO.showMessage("You're too lucky with the dices... 3rd double in a row... You have been put in jail!");
+            userIO.showMessage("Du er for heldig med terningerne... tre dobbelt slag i streg... Du er røget i spjældet!");
             model.setPrison(true);
             model.getPlayerCurrentTurn().setPosition(10);
             model.getPlayerCurrentTurn().setDoubleTurn(0);
@@ -205,7 +205,7 @@ public class Game_Controller {
             }
         }
         if (totalPlayers == 1){
-            userIO.showMessage("Game is over. " + winner + " has won!");
+            userIO.showMessage("Spillet er slut. " + winner + " Har vundet!");
             model.setGameIsOver(true);
             notifyEverything();
         }
@@ -214,7 +214,7 @@ public class Game_Controller {
                 model.getPlayerByIndex(i).setHasLost(true);
                 totalPlayers -= 1;
                 model.getPlayerByIndex(i).getAccount().setBalance(0);
-                userIO.showMessage("You have lost :(. You will be removed.");
+                userIO.showMessage("Du har tabt :(. Så du bliver nu fjernet fra spillet.");
                 for(int k = 0; k < 40; k++){
                     if(model.gameBoard().whoOwnsThis(k)== i){
                         listOfOwnedFields.add(k);

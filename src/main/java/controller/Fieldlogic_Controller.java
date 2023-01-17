@@ -30,18 +30,18 @@ public class Fieldlogic_Controller {
         // the case when you've sat in prison for 2 rounds
         if (position == 10 && currentPlayer.isInJail() && jailTurn < 2) {
             if (currentPlayer.getHasJailCard()) {
-                output = userIO.getUserButtonPressed(currentPlayer.getName() + " you are still in jail.", "Pay 1000$ to get out", "Roll the dices", "Use get outta jail card");
+                output = userIO.getUserButtonPressed(currentPlayer.getName() + " du er stadig i fængsel.", "Betal 1000$ for at komme ud", "Rull med terningerne", "Brug fængselskortet");
             } else {
-                output = userIO.getUserButtonPressed(currentPlayer.getName() + " you are still in jail.", "Pay 1000$ to get out", "Roll the dices");
+                output = userIO.getUserButtonPressed(currentPlayer.getName() + " du er stadig i fængsel.", "Betal 1000$ for at komme ud", "Rull med terningerne");
             }
 
             switch (output) {
-                case "Pay 1000$ to get out":
+                case "Betal 1000$ for at komme ud":
                     currentPlayer.setInJail(false);
                     currentPlayer.addPlayerBalance(-1000);
                     model.addCurrentTurn(-1);
                     break;
-                case "Roll the dices":
+                case "Rull med terningerne":
                     model.getCup().rollDices();
                     if(model.getCup().getDice1() == model.getCup().getDice2()) {
                         userIO.showMessage("Tillykke du er fri");
@@ -51,7 +51,7 @@ public class Fieldlogic_Controller {
                         userIO.showMessage("too bad... du slog ikke to ens ");
                     }
                     break;
-                case "Use get outta jail card":
+                case "Brug fængselskortet":
                     currentPlayer.setInJail(false);
                     userIO.removeJailcard(model);
                     model.addCurrentTurn(-1);
@@ -65,7 +65,7 @@ public class Fieldlogic_Controller {
             currentPlayer.getAccount().addBalance(-1000);
             model.addCurrentTurn(-1);
         } else if (position == 30){
-            userIO.showMessage("You have been put in jail :(");
+            userIO.showMessage("Du er røget i fængsel.");
             currentPlayer.setPosition(10);
             currentPlayer.setInJail(true);
             currentPlayer.setInJailTurn(0);
@@ -76,17 +76,17 @@ public class Fieldlogic_Controller {
         Player currentPlayer = model.getPlayerCurrentTurn();
         if (currentPlayer.getPosition() == 4) {
             String[] options = {"10%", "4000$"};
-            String option = userIO.getUserButtonPressed("Income tax: Pay 10% of your total assets or 4000$", "10%", "4000$");
+            String option = userIO.getUserButtonPressed("Indkomstskat: betal 10% af din samlede pengebeholdning eller 4000$", "10%", "4000$");
             if (option.equals(options[0])){
                 int tempBalance = (int) Math.round(currentPlayer.getPlayerBalance() * 0.9);
                 tempBalance = tempBalance - (tempBalance % 100);
                 currentPlayer.addPlayerBalance(tempBalance - currentPlayer.getPlayerBalance());
             }
             else {
-                userIO.showMessage("You have paid 4000$");
+                userIO.showMessage("Du har betalt 4000$");
                 currentPlayer.addPlayerBalance(-4000);
             }
-        }else { userIO.showMessage("Special-tax, press OK to pay 2000$");
+        }else { userIO.showMessage("Ekstraordinær statsskat, tryk OK for at betale 2000$");
         }
     }
 
@@ -100,7 +100,7 @@ public class Fieldlogic_Controller {
             chanceCardField(model);
         }
         userIO.showChanceCard(message);
-        userIO.showMessage("You have drawn a chance card!");
+        userIO.showMessage("Du har trukket et chancekort!");
         System.out.println(model.getDeck().getLastCard().getCardNumber() + " is index");
         switch(model.getDeck().getLastCard().getCardNumber()){
             case 1:

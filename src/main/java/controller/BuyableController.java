@@ -240,7 +240,7 @@ public class BuyableController {
     }
 
     public void sellHouse() {
-        System.out.println("Selling houses");
+        System.out.println("Sælger Huse");
         ArrayList<String> ownedP = new ArrayList<>(0);
         for (int i = 0; i < 40; i++) {
             if (model.gameBoard().whoOwnsThis(i) == model.getCurrentTurn()) {
@@ -280,7 +280,7 @@ public class BuyableController {
 
 
             } catch (ArrayIndexOutOfBoundsException e) {
-                userIO.showMessage("You don't have any houses on that field");
+                userIO.showMessage("Du har ikke nogle huse på dette felt");
             }
         }
     }
