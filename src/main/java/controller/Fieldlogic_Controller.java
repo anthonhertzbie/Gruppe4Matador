@@ -94,7 +94,12 @@ public class Fieldlogic_Controller {
     private void chanceCardField(Model model){
 
         Player currentplayer = model.getPlayerCurrentTurn();
-        userIO.showChanceCard(model.getDeck().drawCard().toString());
+        String message = model.getDeck().drawCard().toString();
+        int cardNo = model.getDeck().getLastCard().getCardNumber();
+        if(cardNo == 1 || cardNo == 2 || cardNo == 26){
+            chanceCardField(model);
+        }
+        userIO.showChanceCard(message);
         userIO.showMessage("You have drawn a chance card!");
         System.out.println(model.getDeck().getLastCard().getCardNumber() + " is index");
         switch(model.getDeck().getLastCard().getCardNumber()){
