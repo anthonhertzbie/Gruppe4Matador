@@ -160,6 +160,14 @@ public class BuyableController {
                         userIO.setOwnerBorder(fieldOnAuction, playerIndex.get(0));
                         userIO.setRentPrice(fieldOnAuction, "Leje: " + model.gameBoard().getFieldCurrentRent(fieldOnAuction));
                         model.gameBoard().updateFieldGroupsOwned();
+
+                        if (model.gameBoard().checkIfFieldGroupOwned(fieldOnAuction)) {
+                            for (int i = 0; i < model.gameBoard().getFieldGroup(fieldOnAuction).length; i++) {
+                                userIO.setRentPrice(model.gameBoard().getFieldGroup(fieldOnAuction)[i], "Leje: " + model.gameBoard().getFieldCurrentRent(fieldOnAuction) * 2);
+
+                            }
+                        }
+
                         return;
                     }
                 }
