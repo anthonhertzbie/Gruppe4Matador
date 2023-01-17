@@ -59,7 +59,7 @@ public class Game_Controller {
         }
     }
 
-    private void normalTurn(){
+    public void normalTurn(){
         String currentName = model.getPlayerCurrentTurn().getName();
         String choice = "";
         boolean isOwnerOfGroup = false;

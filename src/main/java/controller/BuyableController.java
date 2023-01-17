@@ -133,6 +133,17 @@ public class BuyableController {
                     playerIndex.removeAll(Arrays.asList(playerIndex.get(currentPlayerIndex)));
                     currentPlayerIndex -= 1;
                     if (playerIndex.size() == 1) {
+
+                        if(model.gameBoard().getField(fieldOnAuction).getNumOfHouses() > 0){
+                            int[] fieldGroup = model.gameBoard().getFieldGroup(fieldOnAuction);
+                            for (int i = 0; i < fieldGroup.length; i++){
+                                System.out.println("Im here");
+                                model.gameBoard().getField(fieldGroup[i]).setCurrentRent(model.gameBoard().getSpecificPrice(fieldOnAuction, 2));
+                                model.gameBoard().getField(fieldGroup[i]).setNumOfHouses(0);
+                                userIO.setHouses(fieldGroup[i], 0, model.gameBoard().getFieldCurrentRent(fieldGroup[i]), model.gameBoard());
+                            }
+                        }
+
                         userIO.showMessage(model.getPlayerByIndex(playerIndex.get(0)).getName() + " har vundet auktionen!" + " han betalte " + auctionPrice + "kr");
                         model.getPlayerByIndex(playerIndex.get(0)).addPlayerBalance(-auctionPrice);
                         model.gameBoard().buyField(fieldOnAuction, playerIndex.get(0));
