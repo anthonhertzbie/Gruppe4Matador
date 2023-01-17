@@ -96,7 +96,8 @@ public class Id11 {
         model.setPlayerPosition(model.getCup().getDice1() + model.getCup().getDice2());
         view.updateView(model);
         model.changeTurn();
-
+        model.getCup().getActualDice1().setFace(4);
+        model.getCup().getActualDice2().setFace(6);
         gameController.gameTurn();
         }
     }
