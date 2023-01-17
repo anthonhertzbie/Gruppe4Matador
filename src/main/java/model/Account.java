@@ -1,7 +1,7 @@
 package model;
 
 public class Account {
-    private int Balance = 4000;
+    private int Balance = 40000;
     public int getBalance(){
         return this.Balance;
     }
