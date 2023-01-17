@@ -15,8 +15,8 @@ public class BuyableController {
         this.model = model;
         this.userIO = userIO;
     }
-    public void increaseRentOnField(int i){
 
+    public void increaseRentOnField(int i){
         if(model.gameBoard().checkIfFieldGroupOwned(i) && fieldAcceptTestStreet(i)){
             for(int j = 0; j < model.gameBoard().getFieldGroup(i).length; j++){
                 userIO.setRentPrice(model.gameBoard().getFieldGroup(i)[j], "Leje: " + model.gameBoard().getFieldCurrentRent(model.gameBoard().getFieldGroup(i)[j])*2);
@@ -41,11 +41,6 @@ public class BuyableController {
 
         return false;
     }
-
-
-
-
-
 
     public boolean fieldAcceptTestAllBuyable(Model model) {
         for (int i = 0; i < acceptAbleFieldTypes.length; i++) {
