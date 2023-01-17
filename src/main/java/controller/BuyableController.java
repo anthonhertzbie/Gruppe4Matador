@@ -107,19 +107,23 @@ public class BuyableController {
             }
         }
 
-        if (playerIndex.size() <= 0){
-            return;
-        }
+
+
+
 
         userIO.showMessage("Grunden er røget på auktion!");
 
         while (true) {
-            if (playerIndex.size() <= 0){
-                return;
-            }
-            if (currentPlayerIndex >= playerIndex.size()) {
-                currentPlayerIndex = 0;
-            }
+
+
+
+                if (currentPlayerIndex >= playerIndex.size()) {
+                    currentPlayerIndex = 0;
+                }
+
+            if (model.getPlayerByIndex(playerIndex.get(currentPlayerIndex)).getPlayerBalance() + 1000 > auctionPrice){
+
+
             String choice = userIO.getUserButtonPressed(model.getPlayerByIndex(playerIndex.get(currentPlayerIndex)).getName() +
                     "'s tur. Nuværende pris er: " + auctionPrice + ". Hæv beløbet med et beløb eller forlad auktionen: ",
                     "100", "200", "300", "400", "500", "600", "700", "800", "900", "1000", "Leave auction");
@@ -140,9 +144,9 @@ public class BuyableController {
                     currentPlayerIndex -= 1;
                     if (playerIndex.size() == 1) {
 
-                        if(model.gameBoard().getField(fieldOnAuction).getNumOfHouses() > 0){
+                        if (model.gameBoard().getField(fieldOnAuction).getNumOfHouses() > 0) {
                             int[] fieldGroup = model.gameBoard().getFieldGroup(fieldOnAuction);
-                            for (int i = 0; i < fieldGroup.length; i++){
+                            for (int i = 0; i < fieldGroup.length; i++) {
                                 System.out.println("Im here");
                                 model.gameBoard().getField(fieldGroup[i]).setCurrentRent(model.gameBoard().getSpecificPrice(fieldOnAuction, 2));
                                 model.gameBoard().getField(fieldGroup[i]).setNumOfHouses(0);
@@ -159,6 +163,15 @@ public class BuyableController {
                         return;
                     }
                 }
+                }
+            } else{
+                playerIndex.removeAll(Arrays.asList(playerIndex.get(currentPlayerIndex)));
+                currentPlayerIndex -= 1;
+                userIO.showMessage("Du er for fattig");
+                if (playerIndex.size() == 0){
+                    return;
+                }
+
             }
             currentPlayerIndex += 1;
 

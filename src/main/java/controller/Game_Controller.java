@@ -209,10 +209,10 @@ public class Game_Controller {
             model.setGameIsOver(true);
             notifyEverything();
         }
-
         for (int i = 0; i < model.getTotalPlayerCount(); i++){
-            if (model.getPlayerByIndex(i).getPlayerBalance() < 0){
+            if (model.getPlayerByIndex(i).getPlayerBalance() < 0 && totalPlayers != 1){
                 model.getPlayerByIndex(i).setHasLost(true);
+                totalPlayers -= 1;
                 model.getPlayerByIndex(i).getAccount().setBalance(0);
                 userIO.showMessage("You have lost :(. You will be removed.");
                 for(int k = 0; k < 40; k++){
