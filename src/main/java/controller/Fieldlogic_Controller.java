@@ -231,7 +231,6 @@ public class Fieldlogic_Controller {
                 currentplayer.setPosition(10);
                 currentplayer.setInJailTurn(0);
                 userIO.moveCar(model);
-                return;
 
 
 

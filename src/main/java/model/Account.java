@@ -40,7 +40,4 @@ public class Account {
     public void setAssetsValue(int newTotalAssets){
         this.AssetsValue = newTotalAssets;
     }
-    public void addAssetsValue(int amount){
-        this.AssetsValue += amount;
-    }
 }

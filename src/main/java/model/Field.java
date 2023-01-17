@@ -10,13 +10,6 @@ public class Field {
     public Field(String titleOf){
         this.titleOf = titleOf;
     }
-    public int getHousePrice() {
-        return housePrice;
-    }
-
-    public void setHousePrice(int housePrice) {
-        this.housePrice = housePrice;
-    }
     public int getPropertyValue() {
         return propertyValue;
     }
@@ -28,9 +21,6 @@ public class Field {
         return titleOf;
     }
 
-    public void setTitleOf(String titleOf) {
-        this.titleOf = titleOf;
-    }
 
 
 
