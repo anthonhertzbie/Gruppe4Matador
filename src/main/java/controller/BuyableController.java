@@ -107,7 +107,6 @@ public class BuyableController {
                 playerIndex.add(model.getPlayerByIndex(i).getPlayerID());
             }
         }
-        System.out.println(playerIndex.get(2));
 
 
 

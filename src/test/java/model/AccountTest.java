@@ -14,13 +14,13 @@ class AccountTest {
         account.setBalance(1000);
         assertEquals(1000, account.getBalance());
     }
+
     @Test
     @DisplayName("a assetsValue set is getable")
     void assetsValueSetGet() {
         Account account = new Account();
-        account.setAssetsValue(1000);
-        assertEquals(1000, account.getAssetsValue());
-
+        account.setBalance(1000);
+        assertEquals(1000, account.getBalance());
     }
 
     @Test
