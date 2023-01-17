@@ -121,6 +121,11 @@ public class BuyableController {
                     currentPlayerIndex = 0;
                 }
 
+                if (playerIndex.size() == 0){
+                    userIO.showMessage("Auction is over");
+                    return;
+                }
+
             if (model.getPlayerByIndex(playerIndex.get(currentPlayerIndex)).getPlayerBalance() + 1000 > auctionPrice){
 
 
