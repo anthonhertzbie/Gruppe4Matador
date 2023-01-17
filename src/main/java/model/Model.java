@@ -20,6 +20,10 @@ public class Model {
         players[currentTurn].addPosition(diceThrow);
     }
 
+    /**
+     * Method for keeping track of the current turn.
+     * @param plusminus the number of turns that you want to add.
+     */
     public void addCurrentTurn(int plusminus){
         if (this.currentTurn + plusminus < 0){
             this.currentTurn += plusminus + totalPlayerCount;
@@ -28,6 +32,9 @@ public class Model {
         }
     }
 
+    /**
+     * depending on where your position (as a player) is on the board then the state gets updated appropriately
+     */
     public void setBooleans(){
         int position = players[currentTurn].getPosition();
         if (position == 2 || position == 7 || position == 17 || position == 22 || position == 33 || position == 36) {
@@ -56,6 +63,10 @@ public class Model {
         }
         normalTurn = true;
     }
+
+    /**
+     * Resets all booleans and helps keep track of the game state, so that we don't have multiple states at once
+     */
     public void resetBooleans(){
         startGUI = false;
         normalTurn = false;

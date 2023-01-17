@@ -16,24 +16,27 @@ public class Helper {
             carColourReader();
     }
 
+    /**
+     * The txt reader reads the text file "chancecards" and saves it to the chancecards array as strings
+     */
     public void txtReader(){
+        //https://stackoverflow.com/questions/20389255/reading-a-resource-file-from-within-jar
         try (InputStream in = getClass().getResourceAsStream("/chancecards.txt");
             BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
             for (int i = 0; i < 45; i++) {
                 chancecards[i] = reader.readLine();
             }
-            /*
-            for (int i = 0; i < chancecards.length; i++) {
-                System.out.println(chancecards[i]);
-            }
-             */
-            // Use resource
+
         } catch (IOException e){
             e.printStackTrace();
         }
 
-
     }
+
+    /**
+     * The csv reader reads and copys the data from the csv file "fields" to the
+     * 2 dimentional array field data and stores it there for later use
+     */
     private void csvReader(){
         //https://stackoverflow.com/questions/20389255/reading-a-resource-file-from-within-jar
         try (InputStream in = getClass().getResourceAsStream("/fields.csv");
@@ -51,6 +54,10 @@ public class Helper {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Also reads a csv file and stores it in the car color variable
+     */
     private void carColourReader(){
         //https://stackoverflow.com/questions/20389255/reading-a-resource-file-from-within-jar
         try (InputStream in = getClass().getResourceAsStream("/Car-colour.csv");
