@@ -31,9 +31,6 @@ public class Player {
         return account;
     }
 
-    public int getPreviousPositionChanceCard(){
-        return previousPositionChanceCard;
-    }
     public void addPosition(int addPosition){
         previousPosition = position;
         if(position + addPosition > 39){
@@ -46,9 +43,6 @@ public class Player {
             position += addPosition;
         }
 
-    }
-    public int getPreviousPosition(){
-        return previousPosition;
     }
     public int getPosition(){
         return position;
@@ -65,10 +59,6 @@ public class Player {
     public boolean getHasJailCard(){
         return this.hasJailCard;
     }
-    public int getValueOfAllAssets(){
-        return account.getAssetsValue();
-    }
-
     public int getPlayerBalance(){
         return account.getBalance();
     }

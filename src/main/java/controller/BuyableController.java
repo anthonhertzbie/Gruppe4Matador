@@ -16,28 +16,25 @@ public class BuyableController {
         this.model = model;
         this.userIO = userIO;
     }
-    public void checkForAllOwned(int i){
-        System.out.println("Check for all is running");
 
-        System.out.println(model.gameBoard().checkIfFieldGroupOwned(i) + " is gameboard true?" + " " + fieldAcceptTestStreet(i) + " is street good?");
-            if(model.gameBoard().checkIfFieldGroupOwned(i) && fieldAcceptTestStreet(i)){
-                System.out.println("Check for all is running 2");
-                for(int j = 0; j < model.gameBoard().getFieldGroup(i).length; j++){
-                    userIO.setRentPrice(model.gameBoard().getFieldGroup(i)[j], "Leje: " + model.gameBoard().getFieldCurrentRent(model.gameBoard().getFieldGroup(i)[j])*2);
-                }
+    public void increaseRentOnField(int i){
+        if(model.gameBoard().checkIfFieldGroupOwned(i) && fieldAcceptTestStreet(i)){
+            for(int j = 0; j < model.gameBoard().getFieldGroup(i).length; j++){
+                userIO.setRentPrice(model.gameBoard().getFieldGroup(i)[j], "Leje: " + model.gameBoard().getFieldCurrentRent(model.gameBoard().getFieldGroup(i)[j])*2);
+            }
+        }
+    }
 
-            } else if(!model.gameBoard().checkIfFieldGroupOwned(i) && fieldAcceptTestStreet(i)) {
-                System.out.println("is running");
-                System.out.println(model.gameBoard().getFieldCurrentRent(i) + ": is field current rent" + " " + model.gameBoard().getSpecificPrice(i,2) + ": is wishing price");
-                if (model.gameBoard().getFieldCurrentRent(i)*2 > model.gameBoard().getSpecificPrice(i, 2)) {
-                    System.out.println("is running 2");
-                    for (int j = 0; j < model.gameBoard().getFieldGroup(i).length; j++) {
-                        userIO.setRentPrice(model.gameBoard().getFieldGroup(i)[j], "Leje: " + model.gameBoard().getFieldCurrentRent(model.gameBoard().getFieldGroup(i)[j]) / 2);
-                    }
+    public void decreaseRentOnField(int i){
+        if(!model.gameBoard().checkIfFieldGroupOwned(i) && fieldAcceptTestStreet(i)) {
+            if (model.gameBoard().getFieldCurrentRent(i)*2 > model.gameBoard().getSpecificPrice(i, 2)) {
+                for (int j = 0; j < model.gameBoard().getFieldGroup(i).length; j++) {
+                    userIO.setRentPrice(model.gameBoard().getFieldGroup(i)[j], "Leje: " + model.gameBoard().getFieldCurrentRent(model.gameBoard().getFieldGroup(i)[j]));
                 }
             }
-
         }
+    }
+
     public boolean fieldAcceptTestStreet(int i) {
             if (model.gameBoard().getFieldType(i).equals(acceptAbleFieldTypes[0])) {
                 return true;
@@ -46,14 +43,8 @@ public class BuyableController {
         return false;
     }
 
-
-    public boolean fieldOwnableCheck(Model model) {
-        System.out.println("Running");
+    public boolean fieldAcceptTestAllBuyable(Model model) {
         for (int i = 0; i < acceptAbleFieldTypes.length; i++) {
-            System.out.println(model.gameBoard().getFieldType(model.getPlayerCurrentTurn().getPosition()) + " field type");
-            System.out.println(acceptAbleFieldTypes[i]);
-            System.out.println(model.gameBoard().getFieldType(model.getPlayerCurrentTurn().getPosition()).equals(acceptAbleFieldTypes[i]));
-            System.out.println();
             if (model.gameBoard().getFieldType(model.getPlayerCurrentTurn().getPosition()).equals(acceptAbleFieldTypes[i])) {
                 return true;
             }
@@ -68,12 +59,19 @@ public class BuyableController {
     private void purchaseField(Model model, UserIO userIO) {
         int currentPlayer = model.getCurrentTurn();
         int currenPosition = model.getPlayerCurrentTurn().getPosition();
-        if (fieldOwnableCheck(model)) {
+        String userInput;
+        if (fieldAcceptTestAllBuyable(model)) {
             if (!model.gameBoard().isOwned(currenPosition)) {
 
-                userIO.moveCar(model);
                 userIO.updateView(model);
-                String userInput = userIO.getUserButtonPressed("Vil du købe dette felt", "ja", "nej");
+
+                if (model.getPlayerCurrentTurn().getPlayerBalance() - model.gameBoard().getSpecificPrice(currenPosition, 0) < 0){
+                    userIO.showMessage("Du har ikke penge nok til at købe feltet.");
+                    userInput = "nej";
+                } else{
+                    userInput = userIO.getUserButtonPressed("Vil du købe dette felt", "ja", "nej");
+                }
+
                 switch (userInput) {
                     case "ja":
                         //the amount that needs to be added.
@@ -83,7 +81,7 @@ public class BuyableController {
                         userIO.setOwnerBorder(currenPosition, currentPlayer);
                         userIO.setRentPrice(currenPosition, "Leje: " + model.gameBoard().getFieldCurrentRent(currenPosition));
                         model.gameBoard().updateFieldGroupsOwned();
-                        checkForAllOwned(currenPosition);
+                        increaseRentOnField(currenPosition);
                         return;
                     case "nej":
                         auctionFunction(currenPosition);
@@ -98,13 +96,10 @@ public class BuyableController {
     public void auctionFunction(int fieldOnAuction){
         int auctionPrice = 0;
         int currentPlayerIndex = 0;
-        String sssss = model.getPlayerByIndex(0).getName();
-        System.out.println(sssss + " is a name?");
 
         List<Integer> playerIndex = new ArrayList<>();
 
         for (int i = 0; i < model.getTotalPlayerCount(); i++){
-            System.out.println("player by index: " + model.getPlayerByIndex(i).getName() + "   " + model.getPlayerByIndex(i).getPlayerID());
             if (!model.getPlayerByIndex(i).getHasLost()){
                 playerIndex.add(model.getPlayerByIndex(i).getPlayerID());
             }
@@ -117,7 +112,6 @@ public class BuyableController {
             if (currentPlayerIndex >= playerIndex.size()){
                 currentPlayerIndex = 0;
             }
-            System.out.println(currentPlayerIndex + " is current playerindex" + playerIndex.get(currentPlayerIndex) + " is other number");
             if (true) {
 
                 String choice = userIO.getUserButtonPressed(model.getPlayerByIndex(playerIndex.get(currentPlayerIndex)).getName() + "'s tur. Nuværende pris er: " + auctionPrice + ". Hæv beløbet med et beløb eller forlad auktionen: ", "100", "200", "300", "400", "500", "600", "700", "800", "900", "1000", "Leave auction");
@@ -157,7 +151,6 @@ public class BuyableController {
 
                         playerIndex.removeAll(Arrays.asList(playerIndex.get(currentPlayerIndex)));
                         currentPlayerIndex -= 1;
-                        System.out.println(playerIndex.size() + " is new size of list");
 
                         if(playerIndex.size() == 1){
                             userIO.showMessage(model.getPlayerByIndex(playerIndex.get(0)).getName() + " har vundet auktionen!" + " han betalte " + auctionPrice + "kr");
@@ -165,8 +158,9 @@ public class BuyableController {
                             model.gameBoard().buyField(fieldOnAuction, playerIndex.get(0));
                             userIO.setOwnerBorder(fieldOnAuction, playerIndex.get(0));
                             model.gameBoard().updateFieldGroupsOwned();
-                            checkForAllOwned(fieldOnAuction);
+                            decreaseRentOnField(fieldOnAuction);
                             model.gameBoard().updateFieldGroupsOwned();
+                            increaseRentOnField(fieldOnAuction);
                             return;
                         }
 
@@ -188,22 +182,22 @@ public class BuyableController {
             if (model.gameBoard().whoOwnsThis(currentPosition) != model.getCurrentTurn() && !model.gameBoard().checkIfFieldGroupOwned(currentPosition)) {
                 userIO.showMessage(model.getPlayerCurrentTurn().getName() + "! DU skal sgu betale rente kammerat!");
                 model.getPlayerCurrentTurn().addPlayerBalance(-rentToPay);
-                model.getPlayerByIndex(model.gameBoard().whoOwnsThis(currentPosition)).getAccount().addBalance(rentToPay);
+                model.getPlayerByIndex(model.gameBoard().whoOwnsThis(currentPosition)).addPlayerBalance(rentToPay);
             } else if (model.gameBoard().checkIfFieldGroupOwned(currentPosition) && !model.gameBoard().checkForHouse(currentPosition)) {
                 userIO.showMessage(model.getPlayerCurrentTurn().getName() + "! DU skal sgu betale DOBBELT rente kammerat!");
                 model.getPlayerCurrentTurn().addPlayerBalance(-rentToPay * 2);
-                model.getPlayerByIndex(model.gameBoard().whoOwnsThis(currentPosition)).getAccount().addBalance(rentToPay * 2);
+                model.getPlayerByIndex(model.gameBoard().whoOwnsThis(currentPosition)).addPlayerBalance(rentToPay * 2);
             } else if (model.gameBoard().checkIfFieldGroupOwned(currentPosition) && model.gameBoard().checkForHouse(currentPosition)){
                 userIO.showMessage(model.getPlayerCurrentTurn().getName() + "! DU skal sgu betale HUS rente kammerat!");
                 model.getPlayerCurrentTurn().addPlayerBalance(-rentToPay);
-                model.getPlayerByIndex(model.gameBoard().whoOwnsThis(currentPosition)).getAccount().addBalance(rentToPay);
-
+                model.getPlayerByIndex(model.gameBoard().whoOwnsThis(currentPosition)).addPlayerBalance(rentToPay);
 
             }
         }
     }
 
     public void purchaseHouse() {
+        int houses;
         ArrayList<String> ownedP = new ArrayList<>(0);
         for (int i = 0; i < 40; i++) {
             if (model.gameBoard().whoOwnsThis(i) == model.getCurrentTurn()) {
@@ -222,16 +216,17 @@ public class BuyableController {
         for (int i = 0; i < 40; i++) {
             if (choice.equals(model.gameBoard().getFieldName(i))) {
                 model.getPlayerCurrentTurn().getAccount().payForHouse((model.gameBoard().getSpecificPrice(i, 4)));
-                int houses = model.gameBoard().getField(i).getNumOfHouses() + 1;
+                model.getPlayerCurrentTurn().setTotalHouses(5);
                 model.gameBoard().rentIncrease(i);
-                model.gameBoard().getField(i).setNumOfHouses(houses);
-                userIO.setHouses(i, houses, model.gameBoard().getFieldCurrentRent(i));
+                houses = model.gameBoard().getField(i).getNumOfHouses();
+                userIO.setHouses(i, houses, model.gameBoard().getFieldCurrentRent(i), model.gameBoard());
 
             }
         }
     }
 
     public void sellHouse() {
+        System.out.println("Selling houses");
         ArrayList<String> ownedP = new ArrayList<>(0);
         for (int i = 0; i < 40; i++) {
             if (model.gameBoard().whoOwnsThis(i) == model.getCurrentTurn()) {
@@ -250,12 +245,26 @@ public class BuyableController {
         for (int i = 0; i < 40; i++) {
             try {
                 if (choice.equals(model.gameBoard().getFieldName(i))) {
-                    model.gameBoard().rentIncrease(-i);
-                    model.getPlayerCurrentTurn().getAccount().sellHouse((model.gameBoard().getSpecificPrice(i, 4)));
-                    int houses = model.gameBoard().getField(i).getNumOfHouses() - 1;
-                    model.gameBoard().getField(i).setNumOfHouses(houses);
-                    userIO.setHouses(i, houses, model.gameBoard().getFieldCurrentRent(i + 2));
+                    System.out.println("Actually selling " + model.gameBoard().getFieldCurrentRent(i));
+                    System.out.println(model.gameBoard().getFieldCurrentRent(i) + " this is it " + model.gameBoard().getSpecificPrice(i, 2));
+                    if (model.gameBoard().getFieldCurrentRent(i) == model.gameBoard().getSpecificPrice(i, 2)){
+                        userIO.showMessage("Du har ingen huse på feltet.");
+                    }
+                    else {
+                        model.getPlayerCurrentTurn().getAccount().sellHouse((model.gameBoard().getSpecificPrice(i, 4)));
+                        model.gameBoard().rentDecrease(i);
+                        int houses = model.gameBoard().getField(i).getNumOfHouses();
+                        userIO.setHouses(i, houses, model.gameBoard().getFieldCurrentRent(i), model.gameBoard());
+                        System.out.println(model.gameBoard().getFieldCurrentRent(i) + " first is currentRen " + model.gameBoard().getSpecificPrice(i, 2));
+                        if (model.gameBoard().getFieldCurrentRent(i) == model.gameBoard().getSpecificPrice(i, 2)) {
+                            userIO.setHouses(i, houses, model.gameBoard().getFieldCurrentRent(i) * 2, model.gameBoard());
+                        }
+                    }
+
+
                 }
+
+
             } catch (ArrayIndexOutOfBoundsException e) {
                 userIO.showMessage("You don't have any houses on that field");
             }

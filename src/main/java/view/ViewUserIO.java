@@ -1,6 +1,7 @@
 package view;
 
 import controller.UserIO;
+import model.Gameboard;
 import model.Model;
 
 public class ViewUserIO extends UserIO {
@@ -8,11 +9,6 @@ public class ViewUserIO extends UserIO {
 
     public ViewUserIO(View view) {
         this.view = view;
-    }
-
-    @Override
-    public void waitForUserInput(String message) {
-        view.gui.showMessage(message);
     }
 
     @Override
@@ -25,26 +21,11 @@ public class ViewUserIO extends UserIO {
         view.gui.showMessage(message);
     }
 
-    @Override
-    public void moveCar(Model model) {
-
-    }
-/*
-    @Override
-    public void moveCar(Model model) {
-        view.moveCar(model);
-    }
-
- */
 
     public void setRentPrice(int fieldIndex, String rentIncrease){
         view.setRentPrice(fieldIndex, rentIncrease);
     }
 
-    @Override
-    public void getUserSelection(String message, String... userOptions) {
-        view.gui.getUserSelection(message, userOptions);
-    }
 
     @Override
     public void removePlayerLost(Model model) {
@@ -59,26 +40,24 @@ public class ViewUserIO extends UserIO {
         view.setBorder(index, player);
     }
 
-    @Override
-    public void viewPlayers(Model model) {
-        view.viewPlayers(model);
-    }
 
     @Override
     public void updateView(Model model) {
         view.updateView(model);
-    //    view.moveCar(model);
     }
 
 
     @Override
-    public int getUserInteger(String message, int min, int max) {
-        return view.gui.getUserInteger(message,min,max);
+    public void setHouses(int fieldIndex, int houses, int currentRent, Gameboard gameboard){
+        view.setHouses(fieldIndex, houses, currentRent, gameboard);
     }
-    @Override
-    public void setHouses(int fieldIndex, int houses, int currentRent){
-        view.setHouses(fieldIndex, houses, currentRent);
+    public void addJailCard(Model model){
+        view.addJailcard(model);
     }
+    public void removeJailcard(Model model){
+        view.removeJailcard(model);
+    }
+
 
 
 

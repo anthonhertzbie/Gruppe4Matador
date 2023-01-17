@@ -4,18 +4,9 @@ public class Field {
     private String titleOf;
     private int currentRent;
     private int propertyValue;
-
-    private int housePrice;
     private int numOfHouses;
     public Field(String titleOf){
         this.titleOf = titleOf;
-    }
-    public int getHousePrice() {
-        return housePrice;
-    }
-
-    public void setHousePrice(int housePrice) {
-        this.housePrice = housePrice;
     }
     public int getPropertyValue() {
         return propertyValue;
@@ -27,13 +18,6 @@ public class Field {
     public String getTitleOf() {
         return titleOf;
     }
-
-    public void setTitleOf(String titleOf) {
-        this.titleOf = titleOf;
-    }
-
-
-
 
     public int getCurrentRent() {
         return currentRent;
