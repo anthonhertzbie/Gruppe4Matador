@@ -59,10 +59,6 @@ public class Player {
     public boolean getHasJailCard(){
         return this.hasJailCard;
     }
-    public int getValueOfAllAssets(){
-        return account.getAssetsValue();
-    }
-
     public int getPlayerBalance(){
         return account.getBalance();
     }

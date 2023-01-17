@@ -41,6 +41,13 @@ public class View extends Notifier {
         gui_fields[model.getPlayerCurrentTurn().getPosition()].setCar(gui_players[model.getCurrentTurn()], false);
     }
 
+    public void addJailcard(Model model){
+        gui_players[model.getCurrentTurn()].setName(model.getPlayerCurrentTurn().getName() + " [Fængsels kort]");
+    }
+    public void removeJailcard(Model model){
+        gui_players[model.getCurrentTurn()].setName(model.getPlayerCurrentTurn().getName());
+    }
+
     public void viewPlayers(Model model) {
         for (int i = 0; i < model.getTotalPlayerCount(); i++) {
             if (!model.hasPlayer(i)) continue;

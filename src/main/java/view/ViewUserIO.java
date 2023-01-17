@@ -51,6 +51,13 @@ public class ViewUserIO extends UserIO {
     public void setHouses(int fieldIndex, int houses, int currentRent, Gameboard gameboard){
         view.setHouses(fieldIndex, houses, currentRent, gameboard);
     }
+    public void addJailCard(Model model){
+        view.addJailcard(model);
+    }
+    public void removeJailcard(Model model){
+        view.removeJailcard(model);
+    }
+
 
 
 

@@ -22,4 +22,8 @@ public abstract class UserIO {
 
     public abstract void updateView(Model model);
     public abstract void setRentPrice(int fieldIndex, String rentIncrease);
+
+    public abstract void addJailCard(Model model);
+
+    public abstract void removeJailcard(Model model);
 }

@@ -53,6 +53,7 @@ public class Fieldlogic_Controller {
                     break;
                 case "Use get outta jail card":
                     currentPlayer.setInJail(false);
+                    userIO.removeJailcard(model);
                     model.addCurrentTurn(-1);
                     break;
             }
@@ -75,9 +76,9 @@ public class Fieldlogic_Controller {
             String[] options = {"10%", "4000$"};
             String option = userIO.getUserButtonPressed("Income tax: Pay 10% of your total assets or 4000$", "10%", "4000$");
             if (option.equals(options[0])){
-                int tempBalance = (int) Math.round(currentPlayer.getValueOfAllAssets() * 0.9);
+                int tempBalance = (int) Math.round(currentPlayer.getPlayerBalance() * 0.9);
                 tempBalance = tempBalance - (tempBalance % 100);
-                currentPlayer.addPlayerBalance(tempBalance - currentPlayer.getValueOfAllAssets());
+                currentPlayer.addPlayerBalance(tempBalance - currentPlayer.getPlayerBalance());
             }
             else {
                 userIO.showMessage("You have paid 4000$");
@@ -94,7 +95,6 @@ public class Fieldlogic_Controller {
         userIO.showChanceCard(model.getDeck().drawCard().toString());
         userIO.showMessage("You have drawn a chance card!");
         System.out.println(model.getDeck().getLastCard().getIndex() + " is index");
-
         switch(model.getDeck().getLastCard().getIndex()){
             case 1:
                 return;
@@ -141,7 +141,7 @@ public class Fieldlogic_Controller {
                 currentplayer.addPlayerBalance(200);
                 return;
             case 25:
-                if(currentplayer.getValueOfAllAssets() > 15000){
+                if(currentplayer.getPlayerBalance() > 15000){
                     return;
                 } else {
                     currentplayer.addPlayerBalance(40000);
@@ -210,6 +210,7 @@ public class Fieldlogic_Controller {
                 return;
             case 43:
                 currentplayer.setHasJailCard(true);
+                userIO.addJailCard(model);
                 return;
             case 44:
             case 45:

@@ -181,7 +181,7 @@ public class Game_Controller {
         }
 
         for (int i = 0; i < model.getTotalPlayerCount(); i++){
-            if (model.getPlayerByIndex(i).getValueOfAllAssets() < 0){
+            if (model.getPlayerByIndex(i).getPlayerBalance() < 0){
                 model.getPlayerByIndex(i).setHasLost(true);
                 model.getPlayerByIndex(i).getAccount().setBalance(0);
                 userIO.showMessage("You have lost :(. You will be removed.");
@@ -198,7 +198,11 @@ public class Game_Controller {
             }
         }
     }
-    // Sets the total amounts of playeres allowed in the current game
+
+    /**
+     * Sets the total amounts of playeres allowed in the current game
+     * @param totalPlayerCount the amount of players that will be in the game
+     */
     public void setTotalPlayerCount(String totalPlayerCount){
         model.setTotalPlayerCount(Integer.parseInt(totalPlayerCount));
     }
