@@ -25,10 +25,13 @@ public class BuyableController {
     }
 
     public void decreaseRentOnField(int i){
-        if(!model.gameBoard().checkIfFieldGroupOwned(i) && fieldAcceptTestStreet(i)) {
-            if (model.gameBoard().getFieldCurrentRent(i)*2 > model.gameBoard().getSpecificPrice(i, 2)) {
-                for (int j = 0; j < model.gameBoard().getFieldGroup(i).length; j++) {
-                    userIO.setRentPrice(model.gameBoard().getFieldGroup(i)[j], "Leje: " + model.gameBoard().getFieldCurrentRent(model.gameBoard().getFieldGroup(i)[j]));
+        int currentPos = model.getPlayerCurrentTurn().getPosition();
+        if (model.gameBoard().checkIfFieldGroupOwned(currentPos)) {
+            if (!model.gameBoard().checkIfFieldGroupOwned(i) && fieldAcceptTestStreet(i)) {
+                if (model.gameBoard().getFieldCurrentRent(i) * 2 > model.gameBoard().getSpecificPrice(i, 2)) {
+                    for (int j = 0; j < model.gameBoard().getFieldGroup(i).length; j++) {
+                        userIO.setRentPrice(model.gameBoard().getFieldGroup(i)[j], "Leje: " + model.gameBoard().getFieldCurrentRent(model.gameBoard().getFieldGroup(i)[j]));
+                    }
                 }
             }
         }
@@ -107,66 +110,41 @@ public class BuyableController {
 
         userIO.showMessage("Grunden er røget på auktion!");
 
-        while (true){
-            if (currentPlayerIndex >= playerIndex.size()){
+        while (true) {
+            if (currentPlayerIndex >= playerIndex.size()) {
                 currentPlayerIndex = 0;
             }
-            if (true) {
+            String choice = userIO.getUserButtonPressed(model.getPlayerByIndex(playerIndex.get(currentPlayerIndex)).getName() +
+                    "'s tur. Nuværende pris er: " + auctionPrice + ". Hæv beløbet med et beløb eller forlad auktionen: ",
+                    "100", "200", "300", "400", "500", "600", "700", "800", "900", "1000", "Leave auction");
 
-                String choice = userIO.getUserButtonPressed(model.getPlayerByIndex(playerIndex.get(currentPlayerIndex)).getName() + "'s tur. Nuværende pris er: " + auctionPrice + ". Hæv beløbet med et beløb eller forlad auktionen: ", "100", "200", "300", "400", "500", "600", "700", "800", "900", "1000", "Leave auction");
-
-                switch (choice) {
-                    case "100":
-                        auctionPrice += 100;
-                        break;
-                    case "200":
-                        auctionPrice += 200;
-                        break;
-                    case "300":
-                        auctionPrice += 300;
-                        break;
-                    case "400":
-                        auctionPrice += 400;
-                        break;
-                    case "500":
-                        auctionPrice += 500;
-                        break;
-                    case "600":
-                        auctionPrice += 600;
-                        break;
-                    case "700":
-                        auctionPrice += 700;
-                        break;
-                    case "800":
-                        auctionPrice += 800;
-                        break;
-                    case "900":
-                        auctionPrice += 900;
-                        break;
-                    case "1000":
-                        auctionPrice += 1000;
-                        break;
-                    case "Leave auction":
-
-                        playerIndex.removeAll(Arrays.asList(playerIndex.get(currentPlayerIndex)));
-                        currentPlayerIndex -= 1;
-
-                        if(playerIndex.size() == 1){
-                            userIO.showMessage(model.getPlayerByIndex(playerIndex.get(0)).getName() + " har vundet auktionen!" + " han betalte " + auctionPrice + "kr");
-                            model.getPlayerByIndex(playerIndex.get(0)).addPlayerBalance(-auctionPrice);
-                            model.gameBoard().buyField(fieldOnAuction, playerIndex.get(0));
-                            userIO.setOwnerBorder(fieldOnAuction, playerIndex.get(0));
-                            model.gameBoard().updateFieldGroupsOwned();
-                            decreaseRentOnField(fieldOnAuction);
-                            model.gameBoard().updateFieldGroupsOwned();
-                            increaseRentOnField(fieldOnAuction);
-                            return;
-                        }
-
-
+            switch (choice) {
+                case "100" -> auctionPrice += 100;
+                case "200" -> auctionPrice += 200;
+                case "300" -> auctionPrice += 300;
+                case "400" -> auctionPrice += 400;
+                case "500" -> auctionPrice += 500;
+                case "600" -> auctionPrice += 600;
+                case "700" -> auctionPrice += 700;
+                case "800" -> auctionPrice += 800;
+                case "900" -> auctionPrice += 900;
+                case "1000" -> auctionPrice += 1000;
+                case "Leave auction" -> {
+                    playerIndex.removeAll(Arrays.asList(playerIndex.get(currentPlayerIndex)));
+                    currentPlayerIndex -= 1;
+                    if (playerIndex.size() == 1) {
+                        userIO.showMessage(model.getPlayerByIndex(playerIndex.get(0)).getName() + " har vundet auktionen!" + " han betalte " + auctionPrice + "kr");
+                        model.getPlayerByIndex(playerIndex.get(0)).addPlayerBalance(-auctionPrice);
+                        model.gameBoard().buyField(fieldOnAuction, playerIndex.get(0));
+                        increaseRentOnField(fieldOnAuction);
+                        userIO.setOwnerBorder(fieldOnAuction, playerIndex.get(0));
+                        userIO.setRentPrice(fieldOnAuction, "Leje: " + model.gameBoard().getFieldCurrentRent(fieldOnAuction));
+                        model.gameBoard().updateFieldGroupsOwned();
+                        return;
+                    }
                 }
-                currentPlayerIndex += 1;
             }
+            currentPlayerIndex += 1;
 
         }
     }

@@ -227,6 +227,9 @@ public class Gameboard {
         }
     }
 
+    /**
+     * sets the rent
+     */
     private void initRent(){
         for (int i = 0; i < fields.length - 1; i++) {
             if (fields[i].getPropertyValue() != 0) {
