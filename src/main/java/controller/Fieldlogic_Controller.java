@@ -12,6 +12,9 @@ public class Fieldlogic_Controller {
         this.userIO = userIO;
     }
 
+    /**
+     * Decides which method to use depending on the information stored in the model
+     */
     public void specialField(){
         if(model.isChanceCard()){
             chanceCardField(model);
@@ -22,6 +25,9 @@ public class Fieldlogic_Controller {
         }
     }
 
+    /*
+    Decides what to do if a plyer lands on a jail field
+     */
     public void jailField(Model model){
         Player currentPlayer = model.getPlayerCurrentTurn();
         int position = currentPlayer.getPosition();
@@ -72,6 +78,10 @@ public class Fieldlogic_Controller {
         }
     }
 
+    /**
+     *  Decides what to do if player lands on a tax field
+     * @param model
+     */
     public void taxFields(Model model) {
         Player currentPlayer = model.getPlayerCurrentTurn();
         if (currentPlayer.getPosition() == 4) {
@@ -90,6 +100,10 @@ public class Fieldlogic_Controller {
         }
     }
 
+    /**
+     * Chance card effects
+     * @param model
+     */
 
     public void chanceCardField(Model model){
 
