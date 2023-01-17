@@ -12,11 +12,6 @@ public class ViewUserIO extends UserIO {
     }
 
     @Override
-    public void showMessage(String message) {
-        view.gui.showMessage(message);
-    }
-
-    @Override
     public String getUserButtonPressed(String message, String ... userOptions) {
         return view.gui.getUserButtonPressed(message, userOptions);
     }
@@ -35,10 +30,6 @@ public class ViewUserIO extends UserIO {
         view.setRentPrice(fieldIndex, rentIncrease);
     }
 
-    @Override
-    public void getUserSelection(String message, String... userOptions) {
-        view.gui.getUserSelection(message, userOptions);
-    }
 
     @Override
     public void removePlayerLost(Model model) {
@@ -53,10 +44,6 @@ public class ViewUserIO extends UserIO {
         view.setBorder(index, player);
     }
 
-    @Override
-    public void viewPlayers(Model model) {
-        view.viewPlayers(model);
-    }
 
     @Override
     public void updateView(Model model) {
@@ -64,10 +51,6 @@ public class ViewUserIO extends UserIO {
     }
 
 
-    @Override
-    public int getUserInteger(String message, int min, int max) {
-        return view.gui.getUserInteger(message,min,max);
-    }
     @Override
     public void setHouses(int fieldIndex, int houses, int currentRent, Gameboard gameboard){
         view.setHouses(fieldIndex, houses, currentRent, gameboard);
