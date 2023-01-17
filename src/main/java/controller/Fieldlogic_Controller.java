@@ -44,11 +44,11 @@ public class Fieldlogic_Controller {
                 case "Roll the dices":
                     model.getCup().rollDices();
                     if(model.getCup().getDice1() == model.getCup().getDice2()) {
-                        userIO.waitForUserInput("Tillykke du er fri");
+                        userIO.showMessage("Tillykke du er fri");
                         currentPlayer.setInJail(false);
                         currentPlayer.setInJailTurn(0);
                     } else{
-                        userIO.waitForUserInput("too bad... du slog ikke to ens ");
+                        userIO.showMessage("too bad... du slog ikke to ens ");
                     }
                     break;
                 case "Use get outta jail card":

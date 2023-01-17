@@ -3,7 +3,6 @@ package controller;
 import model.Model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Game_Controller {
@@ -176,7 +175,7 @@ public class Game_Controller {
             }
         }
         if (totalPlayers == 1){
-            userIO.waitForUserInput("Game is over. " + winner + " has won!");
+            userIO.showMessage("Game is over. " + winner + " has won!");
             model.setGameIsOver(true);
             notifyEverything();
         }

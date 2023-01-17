@@ -12,7 +12,7 @@ public class ViewUserIO extends UserIO {
     }
 
     @Override
-    public void waitForUserInput(String message) {
+    public void showMessage(String message) {
         view.gui.showMessage(message);
     }
 
