@@ -173,7 +173,7 @@ public class Game_Controller {
         // Checks what kind of field the player has landed on and acts accordingly
         fieldlogic.specialField();
         // If the player landed on a field which can be bought, it will be handled in here.
-        buyableLogic.buyableLogic(model, userIO);
+        buyableLogic.purchaseField(model, userIO);
         // Checks
         model.gameBoard().updateFieldGroupsOwned();
         loseCondition();

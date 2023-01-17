@@ -42,7 +42,7 @@ public class Id8 {
             int currentPos = model.getPlayerByIndex(0).getPosition();
             if (buyableLogic.fieldAcceptTestAllBuyable(model)){
                 model.gameBoard().buyField(i, 0);
-                buyableLogic.buyableLogic(model,userIO);
+                buyableLogic.purchaseField(model,userIO);
                 userIO.setOwnerBorder(currentPos,0);
                 userIO.setRentPrice(i, "Leje: " + model.gameBoard().getFieldCurrentRent(i) * 2);
             }

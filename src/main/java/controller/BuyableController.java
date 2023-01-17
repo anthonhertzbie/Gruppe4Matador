@@ -12,11 +12,21 @@ public class BuyableController {
     private UserIO userIO;
     public String[] acceptAbleFieldTypes = {"street", "ferry", "brewery"};
 
+    /**
+     * Gets model and UserIO from GameController
+     * @param model
+     * @param userIO
+     */
     public BuyableController(Model model, UserIO userIO) {
         this.model = model;
         this.userIO = userIO;
     }
 
+    /**
+     * Increases the rent on a field with index of the gameboard.
+     * Is limited such rent only can be increased if the player owns all the fields in the same color
+     * @param i
+     */
     public void increaseRentOnField(int i){
         if(model.gameBoard().checkIfFieldGroupOwned(i) && fieldAcceptTestStreet(i)){
             for(int j = 0; j < model.gameBoard().getFieldGroup(i).length; j++){
@@ -25,19 +35,12 @@ public class BuyableController {
         }
     }
 
-    public void decreaseRentOnField(int i){
-        int currentPos = model.getPlayerCurrentTurn().getPosition();
-        if (model.gameBoard().checkIfFieldGroupOwned(currentPos)) {
-            if (!model.gameBoard().checkIfFieldGroupOwned(i) && fieldAcceptTestStreet(i)) {
-                if (model.gameBoard().getFieldCurrentRent(i) * 2 > model.gameBoard().getSpecificPrice(i, 2)) {
-                    for (int j = 0; j < model.gameBoard().getFieldGroup(i).length; j++) {
-                        userIO.setRentPrice(model.gameBoard().getFieldGroup(i)[j], "Leje: " + model.gameBoard().getFieldCurrentRent(model.gameBoard().getFieldGroup(i)[j]));
-                    }
-                }
-            }
-        }
-    }
 
+    /**
+     * Helping class for increaseRentOnField. Checks if a field is a street.
+     * @param i
+     * @return
+     */
     public boolean fieldAcceptTestStreet(int i) {
             if (model.gameBoard().getFieldType(i).equals(acceptAbleFieldTypes[0])) {
                 return true;
@@ -46,6 +49,11 @@ public class BuyableController {
         return false;
     }
 
+    /**
+     * Checks if a field can be bought
+     * @param model
+     * @return
+     */
     public boolean fieldAcceptTestAllBuyable(Model model) {
         for (int i = 0; i < acceptAbleFieldTypes.length; i++) {
             if (model.gameBoard().getFieldType(model.getPlayerCurrentTurn().getPosition()).equals(acceptAbleFieldTypes[i])) {
@@ -55,11 +63,12 @@ public class BuyableController {
         return false;
     }
 
-    public void buyableLogic(Model model, UserIO userIO) {
-        purchaseField(model, userIO);
-    }
-
-    private void purchaseField(Model model, UserIO userIO) {
+    /**
+     * Purchasing a field if possible. Auctioning it off if not.
+     * @param model
+     * @param userIO
+     */
+    public void purchaseField(Model model, UserIO userIO) {
         int currentPlayer = model.getCurrentTurn();
         int currenPosition = model.getPlayerCurrentTurn().getPosition();
         String userInput;
@@ -96,6 +105,10 @@ public class BuyableController {
     }
 
 
+    /**
+     * Controls the flow of an auction.
+     * @param fieldOnAuction
+     */
     public void auctionFunction(int fieldOnAuction){
         int auctionPrice = 0;
         int currentPlayerIndex = 0;
@@ -107,28 +120,16 @@ public class BuyableController {
                 playerIndex.add(model.getPlayerByIndex(i).getPlayerID());
             }
         }
-
-
-
-
         userIO.showMessage("Grunden er røget på auktion!");
-
         while (true) {
-
-
-
                 if (currentPlayerIndex >= playerIndex.size()) {
                     currentPlayerIndex = 0;
                 }
-
                 if (playerIndex.size() == 0){
                     userIO.showMessage("Auction is over");
                     return;
                 }
-
             if (model.getPlayerByIndex(playerIndex.get(currentPlayerIndex)).getPlayerBalance() + 1000 > auctionPrice){
-
-
             String choice = userIO.getUserButtonPressed(model.getPlayerByIndex(playerIndex.get(currentPlayerIndex)).getName() +
                     "'s tur. Nuværende pris er: " + auctionPrice + ". Hæv beløbet med et beløb eller forlad auktionen: ",
                     "100", "200", "300", "400", "500", "600", "700", "800", "900", "1000", "Leave auction");
@@ -192,9 +193,10 @@ public class BuyableController {
     }
 
 
-
-
-
+    /**
+     * Makes people pay rent depending on field
+     * @param currentPosition
+     */
     private void payrent(int currentPosition) {
         int rentToPay = model.gameBoard().getFieldCurrentRent(currentPosition);
         if(model.gameBoard().isOwned(currentPosition)) {
@@ -215,6 +217,9 @@ public class BuyableController {
         }
     }
 
+    /**
+     * Allows you to purchase a house
+     */
     public void purchaseHouse() {
         int houses;
         ArrayList<String> ownedP = new ArrayList<>(0);
@@ -234,7 +239,7 @@ public class BuyableController {
 
         for (int i = 0; i < 40; i++) {
             if (choice.equals(model.gameBoard().getFieldName(i))) {
-                model.getPlayerCurrentTurn().getAccount().payForHouse((model.gameBoard().getSpecificPrice(i, 4)));
+                model.getPlayerCurrentTurn().getAccount().payForHouse((model.gameBoard().getSpecificPrice(i, 1)));
                 model.getPlayerCurrentTurn().setTotalHouses(5);
                 model.gameBoard().rentIncrease(i);
                 houses = model.gameBoard().getField(i).getNumOfHouses();
@@ -244,6 +249,9 @@ public class BuyableController {
         }
     }
 
+    /**
+     * Allows you to sell a house, if you have a house.
+     */
     public void sellHouse() {
         System.out.println("Sælger Huse");
         ArrayList<String> ownedP = new ArrayList<>(0);
@@ -270,7 +278,7 @@ public class BuyableController {
                         userIO.showMessage("Du har ingen huse på feltet.");
                     }
                     else {
-                        model.getPlayerCurrentTurn().getAccount().sellHouse((model.gameBoard().getSpecificPrice(i, 4)));
+                        model.getPlayerCurrentTurn().getAccount().sellHouse((model.gameBoard().getSpecificPrice(i, 1)));
                         model.gameBoard().rentDecrease(i);
                         int houses = model.gameBoard().getField(i).getNumOfHouses();
                         userIO.setHouses(i, houses, model.gameBoard().getFieldCurrentRent(i), model.gameBoard());
@@ -279,17 +287,19 @@ public class BuyableController {
                             userIO.setHouses(i, houses, model.gameBoard().getFieldCurrentRent(i) * 2, model.gameBoard());
                         }
                     }
-
-
                 }
-
-
             } catch (ArrayIndexOutOfBoundsException e) {
                 userIO.showMessage("Du har ikke nogle huse på dette felt");
             }
         }
     }
 
+    /**
+     * Copied from GUI
+     * @param ownedP
+     * @param message
+     * @return
+     */
     private String tooBigSwitchStatement(ArrayList<String> ownedP, String message) {
         String choice = "";
         switch (ownedP.size()) {
