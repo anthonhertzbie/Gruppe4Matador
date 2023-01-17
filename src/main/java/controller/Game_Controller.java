@@ -13,23 +13,38 @@ public class Game_Controller {
     private Fieldlogic_Controller fieldlogic;
 
     private BuyableController buyableLogic;
-    public Game_Controller(UserIO userIO, Model model){
-        this.userIO = userIO;
+
+    /**
+     * Saves the model created in Main
+     * @param model
+     */
+    public Game_Controller(Model model){
         this.model = model;
-        fieldlogic = new Fieldlogic_Controller(model, userIO);
-        buyableLogic = new BuyableController(model, userIO);
     }
 
+    /**
+     * Saves the userIO created in Main.
+     * Instantiate the related controllers
+     * @param userIO
+     */
     public void setUserIO(UserIO userIO) {
         this.userIO = userIO;
         fieldlogic = new Fieldlogic_Controller(model, userIO);
         buyableLogic = new BuyableController(model, userIO);
     }
 
+    /**
+     * Updates the View with the current model
+     * @param notifier
+     */
     public void addNotifier(Notifier notifier){
         this.notifiers.add(notifier);
     }
 
+    /**
+     * Updates the list of notifiers. Theres only one here.
+     * Updates the View with the current model
+     */
     public void notifyEverything(){
         for (Notifier n:notifiers) {
             n.notifyModel(model);
@@ -37,15 +52,11 @@ public class Game_Controller {
     }
 
 
-    public void startGame(boolean runGameTurn){
-        model.setNormalTurn(true);
-        if(runGameTurn){
-            gameTurn();
-        }
-
-    }
-
-    public void gameTurn(){
+    /**
+     * Loops the game main methods to be run.
+     *
+     */
+    public void mainGameLoop(){
         while (true){
             if (model.getPlayerCurrentTurn().getHasLost()){
                 model.changeTurn();
@@ -59,6 +70,11 @@ public class Game_Controller {
         }
     }
 
+    /**
+     * Determines the game flow in case the player is not in jail.
+     * Takes input from the user (View) in regards to the current turn and saves them in the model
+     * Is dynamic suchsuch building/selling houses only appears if it is possible
+     */
     public void normalTurn(){
         String currentName = model.getPlayerCurrentTurn().getName();
         String choice = "";
@@ -73,23 +89,24 @@ public class Game_Controller {
         }
         while(choice != "Rull med tærningerne") {
             if (isOwnerOfGroup && model.getPlayerCurrentTurn().getTotalHouses() == 0) {
-                    choice = userIO.getUserButtonPressed(currentName + "'s tur.", "Rull med tærningerne", "Byg huse");
-                    switch (choice) {
-                        case "Rull med tærningerne":
-                            userIO.showMessage("Rul tærningerne!");
-                            return;
-                        case "Byg huse":
-                            while (true) {
-                                buyableLogic.purchaseHouse();
-                                model.getPlayerCurrentTurn().setTotalHouses(model.getPlayerCurrentTurn().getTotalHouses() + 1);
-                                choice = userIO.getUserButtonPressed("Vil du bygge flere huse?", "Ja", "Nej");
-                                if (choice.equals("Nej")) {
-                                    break;
-                                }
-                            }
-                    }
+                choice = userIO.getUserButtonPressed(currentName + "'s tur.", "Rull med tærningerne", "Byg huse");
+                switch (choice) {
+                    case "Rull med tærningerne":
+                        userIO.showMessage("Rul tærningerne!");
+                        return;
 
-            } else if (isOwnerOfGroup && model.getPlayerCurrentTurn().getTotalHouses() != 0) {
+                    case "Byg huse":
+                        while (true) {
+                            buyableLogic.purchaseHouse();
+                            model.getPlayerCurrentTurn().setTotalHouses(model.getPlayerCurrentTurn().getTotalHouses() + 1);
+                            choice = userIO.getUserButtonPressed("Vil du bygge flere huse?", "Ja", "Nej");
+                            if (choice.equals("Nej")) {
+                                break;
+                            }
+                        }
+                    }
+                }
+            else if (isOwnerOfGroup && model.getPlayerCurrentTurn().getTotalHouses() != 0) {
                     choice = userIO.getUserButtonPressed(currentName + "'s tur.", "Rull med tærningerne", "Byg huse", "Sælg huse");
                     switch (choice) {
                         case "Rull med tærningerne":
@@ -121,8 +138,9 @@ public class Game_Controller {
     }
 
 
-
-
+    /**
+     * Checks how many times a player has thrown the same dice in a row, and throws him in jail if it is his 3rd double.
+     */
     public void checkForDoubleDices(){
         if (model.getCup().getDice1() == model.getCup().getDice2() && model.getPlayerCurrentTurn().getDoubleTurn() < 2){
             userIO.showMessage("Congrats, you get another turn!");
@@ -133,18 +151,30 @@ public class Game_Controller {
             model.setPrison(true);
             model.getPlayerCurrentTurn().setPosition(10);
             model.getPlayerCurrentTurn().setDoubleTurn(0);
+        } else{
+            model.getPlayerCurrentTurn().setDoubleTurn(0);
         }
     }
 
+    /**
+     * Rolles the dices and moves the player accordingly
+     */
     public void playerMoves(){
         diceRoll();
         model.setPlayerPosition(model.getCup().getSum());
     }
 
+    /**
+     * Does a lot.... Read:
+     */
     public void notifierWithLogic(){
+        // Updates View (UI)
         notifyEverything();
+        // Checks what kind of field the player has landed on and acts accordingly
         fieldlogic.specialField();
+        // If the player landed on a field which can be bought, it will be handled in here.
         buyableLogic.buyableLogic(model, userIO);
+        // Checks
         model.gameBoard().updateFieldGroupsOwned();
         loseCondition();
         checkForDoubleDices();

@@ -13,7 +13,7 @@ public class Id3 {
     }
     private void run(){
         // setup and start
-        Game_Controller gameController = new Game_Controller(null, model);
+        Game_Controller gameController = new Game_Controller(model);
         View view = new View(gameController);
         gameController.addNotifier(view);
         gameController.setUserIO(new ViewUserIO(view));

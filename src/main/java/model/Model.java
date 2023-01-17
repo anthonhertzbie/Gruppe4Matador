@@ -7,7 +7,7 @@ public class Model {
     private Deck deck = new Deck();
     private Cup cup = new Cup();
     private Gameboard gameBoard = new Gameboard();
-    private boolean startGUI, normalTurn, isChanceCard, isPrison, isShipping, isBrewery, isParking, isTax, gameIsOver;
+    private boolean startGUI, normalTurn = true, isChanceCard, isPrison, isShipping, isBrewery, isParking, isTax, gameIsOver;
 
 
 

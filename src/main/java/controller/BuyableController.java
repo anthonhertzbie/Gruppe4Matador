@@ -107,10 +107,16 @@ public class BuyableController {
             }
         }
 
+        if (playerIndex.size() <= 0){
+            return;
+        }
 
         userIO.showMessage("Grunden er røget på auktion!");
 
         while (true) {
+            if (playerIndex.size() <= 0){
+                return;
+            }
             if (currentPlayerIndex >= playerIndex.size()) {
                 currentPlayerIndex = 0;
             }
@@ -143,7 +149,6 @@ public class BuyableController {
                                 userIO.setHouses(fieldGroup[i], 0, model.gameBoard().getFieldCurrentRent(fieldGroup[i]), model.gameBoard());
                             }
                         }
-
                         userIO.showMessage(model.getPlayerByIndex(playerIndex.get(0)).getName() + " har vundet auktionen!" + " han betalte " + auctionPrice + "kr");
                         model.getPlayerByIndex(playerIndex.get(0)).addPlayerBalance(-auctionPrice);
                         model.gameBoard().buyField(fieldOnAuction, playerIndex.get(0));

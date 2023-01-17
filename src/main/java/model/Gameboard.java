@@ -105,12 +105,12 @@ public class Gameboard {
 
 
     public void updateFieldGroupsOwned(){
+
+
+
         for (int i = 0; i < getOwnerOfFieldGroups().length; i ++) {
                     if (whoOwnsThis(1) == whoOwnsThis(3) && whoOwnsThis(1) == i) {
                         setOwnerOfFieldgroups(i, 0);
-                        if (whoOwnsThis(1) != whoOwnsThis(3) && whoOwnsThis(1) != i) {
-                            setOwnerOfFieldgroups(-1, 0);
-                        }
                     } if (whoOwnsThis(1) != whoOwnsThis(3)){
                         setOwnerOfFieldgroups(-1, 0);
                     }
