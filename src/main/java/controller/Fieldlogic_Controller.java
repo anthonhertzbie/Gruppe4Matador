@@ -91,7 +91,7 @@ public class Fieldlogic_Controller {
     }
 
 
-    private void chanceCardField(Model model){
+    public void chanceCardField(Model model){
 
         Player currentplayer = model.getPlayerCurrentTurn();
         String message = model.getDeck().drawCard().toString();

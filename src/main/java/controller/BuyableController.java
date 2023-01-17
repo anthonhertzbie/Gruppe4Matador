@@ -1,6 +1,7 @@
 package controller;
 
 import model.Model;
+import model.Player;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -106,7 +107,7 @@ public class BuyableController {
                 playerIndex.add(model.getPlayerByIndex(i).getPlayerID());
             }
         }
-
+        System.out.println(playerIndex.get(2));
 
 
 
