@@ -96,7 +96,7 @@ public class Fieldlogic_Controller {
         Player currentplayer = model.getPlayerCurrentTurn();
         String message = model.getDeck().drawCard().toString();
         int cardNo = model.getDeck().getLastCard().getCardNumber();
-        if(cardNo == 1 || cardNo == 2 || cardNo == 26){
+        if(cardNo == 1 || cardNo == 2 || cardNo == 26 || cardNo == 27 || cardNo == 36){
             chanceCardField(model);
         }
         userIO.showChanceCard(message);
