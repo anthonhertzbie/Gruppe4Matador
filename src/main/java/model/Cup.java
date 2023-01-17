@@ -29,7 +29,6 @@ public class Cup {
      */
     public int getDice2() {
         return dice2.getFace();
-
     }
 
     /**

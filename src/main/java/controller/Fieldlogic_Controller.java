@@ -63,6 +63,7 @@ public class Fieldlogic_Controller {
             currentPlayer.setInJail(false);
             currentPlayer.setInJailTurn(0);
             currentPlayer.getAccount().addBalance(-1000);
+            model.addCurrentTurn(-1);
         } else if (position == 30){
             userIO.showMessage("You have been put in jail :(");
             currentPlayer.setPosition(10);
